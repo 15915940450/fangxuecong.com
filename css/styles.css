@@ -1,0 +1,13 @@
+@charset 'utf-8';
+
+.work{
+  background: red;
+}
+.work_item{
+  border: 1px solid blue;
+  padding: 0;
+}
+.work_item img{
+  max-width: 100%;
+  max-height: 100%;
+}
