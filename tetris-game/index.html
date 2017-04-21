@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tetris--俄罗斯方块,最经典游戏之俄罗斯方块</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="author" content="Thilina Fong" />
+    <meta name="description" content="I,J,L,O,S,T,Z" />
+    <link rel="shortcut icon" href="../img/favicon.png" type="image/x-icon" />
+    <link rel="stylesheet" href="../css/reset.css" />
+    <link rel="stylesheet" href="../css/grid_fee300.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <script src="../js/modernizr.js"></script>
+</head>
+<body>
+  <section class="white_mask"></section>
+  <a href="http://www.fangxuecong.com/" id="logo">
+    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="50px"
+	 height="50px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
+      <g id="logo_svg">
+      	<g>
+      		<polygon fill="#FFFFFF" points="95.995,74.668 23.674,2.347 20.302,5.719 20.302,70.215 11.829,70.215 4.005,78.039
+      			20.302,78.039 20.302,94.337 28.126,86.513 28.126,78.039 92.624,78.04 		"/>
+      		<path fill="#E7BE20" d="M46.23,53.5C35.777,43.472,30.146,28.464,29.096,7.77l-5.422-5.422c0.3,25.037,6.495,43.025,18.919,54.944
+      			c11.883,11.4,29.367,17.091,53.402,17.377l-5.422-5.422C70.762,68.247,56.207,63.071,46.23,53.5z"/>
+      	</g>
+      </g>
+      <g id="图层_2">
+      </g>
+    </svg>
+    <i class="up"></i>
+    <span>fang<code class="x">x</code>ue<code class="c">c</code>ong.com</span>
+    <i class="down"></i>
+  </a>
+  <div id="tetris_wrap">
+    <canvas id="tetris_canvas" width="301" height="541"></canvas>
+    <canvas id="upcoming_canvas" width="121" height="121"></canvas>
+    <div id="score">
+      <p>第<i id="level">1</i>关 ღ 得分：<strong>0</strong></p>
+    </div>
+
+    <div id="introductions">
+      <p>你是第 <span>0</span> 位玩家</p>
+      <a href="javascript:;" title="点击查看怎么操作游戏">游戏说明</a>
+    </div>
+
+    <div id="top">
+      <table>
+        <thead>
+          <tr>
+            <th colspan="3">排行榜</th>
+          </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <footer>
+    <div class="footer">
+      © 2017 fangxuecong（聪）&nbsp;&nbsp;|&nbsp;&nbsp;
+      <a href="javascript:;">广告投放<strong>发送email到15915940450@139.com</strong></a>
+    </div>
+  </footer>
+  <section class="black_mask"></section>
+  <div class="introductions_mask">
+    <table>
+      <tbody>
+        <tr>
+          <td>↑</td>
+          <td>变形</td>
+        </tr>
+        <tr>
+          <td>↓</td>
+          <td>快速下落</td>
+        </tr>
+        <tr>
+          <td>←</td>
+          <td>左移</td>
+        </tr>
+        <tr>
+          <td>→</td>
+          <td>右移</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>暂停/开始</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>
+      <a href="javascript:;">返回游戏</a>
+    </p>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

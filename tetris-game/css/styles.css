@@ -1,0 +1,278 @@
+@charset 'utf-8';
+body{
+  background: url("../img/TitanicBelfast_ZH-CN7528306628_1920x1080.jpg") no-repeat center center;
+  background-size: cover;
+}
+/*mask*/
+.white_mask,.black_mask,.introductions_mask{
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+/*white_mask zInit*/
+.white_mask{
+  background: #EEE;
+  opacity: 0.6;
+}
+html.rgba .white_mask{
+  background: rgba(255,255,255,0.6);
+  opacity: 1;
+}
+/*keyframes rideonrails*/
+@-webkit-keyframes rideonrails {
+  0%{
+    -webkit-transform: translate(0,0);
+  }
+  100%{
+    -webkit-transform: translate(115px,0);
+  }
+}
+@keyframes rideonrails {
+  0%{
+    transform: translate(0,0);
+  }
+  100%{
+    transform: translate(115px,0);
+  }
+}
+/*logo*/
+a#logo{
+  position: absolute;
+  left: 90px;
+  top: 30px;
+  height: 50px;
+  display: block;
+  /*background: url("../../img/logo.svg") no-repeat 0 center;*/
+  /*background-size: 50px 50px;*/
+  z-index: 9;
+  padding-left: 55px;
+  line-height: 50px;
+  color: #0E0E0E;
+  font-size: 13px;
+}
+a#logo svg{
+  position: absolute;
+  left: 0;
+  top:0;
+  -webkit-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+  -webkit-transform: rotate(0deg);
+  transform: rotate(0deg);
+}
+a:hover#logo svg{
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+a#logo span{
+  border-top: 1px solid #0E0E0E;
+  border-bottom: 1px solid #0E0E0E;
+  display: block;
+  height: 30px;
+  line-height: 28px;
+  margin-top:10px;
+}
+a#logo span code{
+  font-family: "微软雅黑",Ubuntu,Arial,"libra sans",sans-serif;
+  margin-left: 0px;
+  margin-right: 0px;
+  color:#0e0e0e;
+  -webkit-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+}
+a#logo:hover span code{
+  margin-left: 3px;
+  margin-right: 3px;
+  font-weight: 900;
+}
+a#logo:hover span code.x{
+  color:#FFF;
+}
+a#logo:hover span code.c{
+  color:#E7BE20;
+}
+/*keyframes*/
+a#logo i{
+  opacity: 0;
+  position: absolute;
+  left:55px;
+  -webkit-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+  -webkit-transform: translate(0,0);
+  transform: translate(0,0);
+  border-top: 1px solid #FEE300;
+  width: 10px;
+  display: block;
+}
+a#logo i.up{
+  top:10px;
+}
+a#logo i.down{
+  bottom:10px;
+}
+/*动画*/
+a:hover#logo i,a.anim#logo i{
+  opacity: 1;
+  -webkit-animation:rideonrails .9s linear infinite;
+  animation:rideonrails .9s linear infinite;
+}
+/*俄羅斯方塊*/
+#tetris_wrap{
+  padding-top: 30px;
+  position: relative;
+  min-width: 1000px;
+  min-height: 575px;
+}
+#tetris_canvas{
+  border: 2px solid #0E0E0E;
+  background: #999;
+  margin: 0px auto;
+  display: block;
+}
+#upcoming_canvas,#score,#introductions{
+  display: block;
+  position: absolute;
+  left: 50%;
+  margin-left: 153px;
+  padding:10px;
+}
+#upcoming_canvas{
+  top:30px;
+}
+#score{
+  top:220px;
+}
+#score p strong{
+  font-size:5.5em;
+  color: #F2F2F2;
+  text-shadow: 2px 2px 5px rgba(0,0,0,.9);
+  border-bottom: 1px solid #333;
+}
+#level{
+  color:#000;
+  margin: 0 5px;
+  font-size: 1.5em;
+}
+#top{
+  /*display: none;*/
+  bottom:0px;
+  width: 220px;
+  min-height: 100px;
+  max-height: 300px;
+  position: absolute;
+  left:121px;
+  top: 200px;
+  background: rgba(255,255,255,.1);
+  padding: 10px;
+  border-radius: 3px;
+}
+#top table{
+  width: 100%;
+}
+/*length:8*/
+#top table td,#top table th{
+  color: #1FB60A;
+  font-size: 13px;
+  padding: 5px 10px;
+}
+#top table td:first-child{
+  width: 20px;
+}
+#top table td:last-child{
+  text-align: right;
+}
+#introductions{
+  top:490px;
+}
+#introductions p{
+  margin-bottom: 5px;
+}
+#introductions a{
+  text-decoration: underline;
+  color: #1231EE;
+}
+/*頁腳*/
+footer{
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background: #333;
+  height: 30px;
+  line-height: 30px;
+  width: 100%;
+}
+.footer{
+  color: #AAA;
+  text-align: right;
+  font-size: 11px;
+  padding-right: 10px;
+}
+.footer a{
+  color: #AAA;
+  position: relative;
+}
+.footer a:hover{
+  color: #FFF;
+}
+.footer a strong{
+  position: absolute;
+  right: 0;
+  bottom: 30px;
+  padding: 5px 10px;
+  border: 1px solid #333;
+  font-size: 15px;
+  display: block;
+  text-align: left;
+  line-height: 25px;
+  background: rgba(0,0,0,.33);
+  font-weight: 500;
+  display: none;
+}
+.footer a:hover strong{
+  display: block;
+}
+
+/*black_mask 初始不顯示 z100*/
+.black_mask{
+  display: none;
+  background:#0E0E0E;
+  opacity: 0.8;
+  z-index: 100;
+}
+html.rgba .black_mask{
+  background: rgba(0,0,0,.86);
+  opacity: 1;
+}
+/*introductions_mask 初始不顯示*/
+.introductions_mask{
+  display: none;
+  z-index:101;
+}
+.introductions_mask table{
+  width: 300px;
+  margin: 5% auto 0;
+}
+.introductions_mask table td{
+  font-size: 20px;
+  color: #FFF;
+}
+.introductions_mask table td:first-child{
+  width: 90px;
+  padding: 10px 5px;
+  text-align: center;
+}
+.introductions_mask p{
+  text-align: center;
+  margin-top: 30px;
+}
+.introductions_mask p a{
+  font-size: 18px;
+  color: #FEE300;
+  border: 1px solid #FEE300;
+  display: inline-block;
+  padding: 10px 20px;
+  margin-left: -100px;
+}
+
+/*end*/
