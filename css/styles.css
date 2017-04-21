@@ -2,6 +2,7 @@
 
 .work{
   background: red;
+  display: none;
 }
 .work_item{
   border: 1px solid blue;
@@ -10,4 +11,38 @@
 .work_item img{
   max-width: 100%;
   max-height: 100%;
+}
+
+.comming_soon{
+  padding-top: 90px;
+}
+.comming_soon .head{
+  width: 100px;
+  height: 100px;
+  background:#000 url("../img/logo.svg") no-repeat center center;
+  background-size: 90px 90px;
+  overflow: hidden;
+  position: relative;
+  margin: 0 auto;
+}
+.comming_soon .head img{
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: none;
+}
+
+/*.comming_soon img:nth-child(1){
+  display: block;
+}*/
+.comming_soon h2{
+  text-align: center;
+  font-weight: 300;
+  font-size: 15px;
+  margin-top: 20px;
+}
+.comming_soon h2 span{
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 30px;
 }

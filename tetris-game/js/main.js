@@ -1,4 +1,3 @@
-
 window.onload=function(){
   //分辨率過低
   var numClientWidth=document.documentElement.clientWidth || document.body.clientWidth;
@@ -37,7 +36,7 @@ window.onload=function(){
     left:37,
     right:39,
     down:40,
-    start:53,
+    arrStart:[53,101],
     F5:116
   };
 
@@ -396,8 +395,8 @@ func:setEleTopTbodyInnerHTML
           // console.log(ev.keyCode);
       }
     }
-    //開始，暫停(數字5)
-    if(ev.keyCode===objKeys.start){
+    //開始，暫停(數字5,小键盘5)
+    if(objKeys.arrStart.includes(ev.keyCode)){
       if(!bIng){
         if(bOver){
           initTetris();
@@ -436,3 +435,57 @@ func:setEleTopTbodyInnerHTML
 
 //end of window onload
 };
+
+//=======================
+//Polyfill:Array.prototype.includes
+//=======================
+if (!Array.prototype.includes) {
+  Object.defineProperty(Array.prototype, 'includes', {
+    value: function(searchElement, fromIndex) {
+
+      // 1. Let O be ? ToObject(this value).
+      if (this == null) {
+        throw new TypeError('"this" is null or not defined');
+      }
+
+      var o = Object(this);
+
+      // 2. Let len be ? ToLength(? Get(O, "length")).
+      var len = o.length >>> 0;
+
+      // 3. If len is 0, return false.
+      if (len === 0) {
+        return false;
+      }
+
+      // 4. Let n be ? ToInteger(fromIndex).
+      //    (If fromIndex is undefined, this step produces the value 0.)
+      var n = fromIndex | 0;
+
+      // 5. If n ≥ 0, then
+      //  a. Let k be n.
+      // 6. Else n < 0,
+      //  a. Let k be len + n.
+      //  b. If k < 0, let k be 0.
+      var k = Math.max(n >= 0 ? n : len - Math.abs(n), 0);
+
+      function sameValueZero(x, y) {
+        return x === y || (typeof x === 'number' && typeof y === 'number' && isNaN(x) && isNaN(y));
+      }
+
+      // 7. Repeat, while k < len
+      while (k < len) {
+        // a. Let elementK be the result of ? Get(O, ! ToString(k)).
+        // b. If SameValueZero(searchElement, elementK) is true, return true.
+        // c. Increase k by 1.
+        if (sameValueZero(o[k], searchElement)) {
+          return true;
+        }
+        k++;
+      }
+
+      // 8. Return false
+      return false;
+    }
+  });
+}
