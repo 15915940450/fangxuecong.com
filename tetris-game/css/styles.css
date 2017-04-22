@@ -2,6 +2,8 @@
 body{
   background: url("../img/TitanicBelfast_ZH-CN7528306628_1920x1080.jpg") no-repeat center center;
   background-size: cover;
+  min-width: 1000px;
+  min-height: 550px;
 }
 /*mask*/
 .white_mask,.black_mask,.introductions_mask{
@@ -10,6 +12,8 @@ body{
   top: 0;
   width: 100%;
   height: 100%;
+  min-width: 1000px;
+  min-height: 550px;
 }
 /*white_mask zInit*/
 .white_mask{
@@ -201,6 +205,7 @@ footer{
   height: 30px;
   line-height: 30px;
   width: 100%;
+  min-width: 1000px;
 }
 .footer{
   color: #AAA;

@@ -3,14 +3,7 @@ window.onload=function(){
   var numClientWidth=document.documentElement.clientWidth || document.body.clientWidth;
   var numClientHeight=document.documentElement.clientHeight || document.body.clientHeight;
   if(numClientWidth<1000 || numClientHeight<550){
-    document.write('分辨率過低!不支持手機端。');
-    return false;
-  }else{
-    if(numClientHeight<606){
-      document.querySelector('footer').style.display='none';
-      document.querySelector('#tetris_wrap').style.padding='1px';
-      document.querySelector('#tetris_wrap').style.minHeight='540px';
-    }
+    window.alert('分辨率過低!不支持手機端。请在电脑端查看。');
   }
   //======================================tetris
   /*
