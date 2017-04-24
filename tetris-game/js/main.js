@@ -16,10 +16,7 @@ window.onload=function(){
     xmlhttp.open("GET",url,true);
     xmlhttp.send();
   }
-  //PV
-  ajaxMini('pv.php',function(data){
-    document.getElementById('pv').innerHTML=data;
-  });
+
   //======================================tetris
   /*
   *jsonAll
@@ -56,12 +53,12 @@ window.onload=function(){
   var eleScore=document.querySelector('#score p strong');
   var eleLevel=document.getElementById('level');
   var eleTopTbody=document.querySelector('#top table tbody');
-  var elePlayTimes=document.querySelector('#introductions p span');
+  var elePV=document.getElementById('pv');
 
 /*
-*全局變量 Timer,strLetter,TF,strNextLetter,numNextTF,unitX,unitY,arr2Dcontainer,bIng,bOver,numScore,numLevel,jsonTop,numPlayTimes;
+*全局變量 Timer,strLetter,TF,strNextLetter,numNextTF,unitX,unitY,arr2Dcontainer,bIng,bOver,numScore,numLevel,jsonTop;
 */
-var Timer,strLetter,TF,strNextLetter,numNextTF,unitX,unitY,arr2Dcontainer,bIng,bOver,numScore,numLevel,jsonTop,numPlayTimes;
+var Timer,strLetter,TF,strNextLetter,numNextTF,unitX,unitY,arr2Dcontainer,bIng,bOver,numScore,numLevel,jsonTop;
 
 
 //=======================================functions
@@ -96,7 +93,8 @@ function initTetris(){
     {"name":"author","score":109500},
     {"name":"想你夜能寐","score":300}
   ];
-  numPlayTimes=29;
+
+
 
   /*
   *初始繪製FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
@@ -109,7 +107,10 @@ function initTetris(){
   eleScore.innerHTML=numScore;
   eleLevel.innerHTML=1;
   setEleTopTbodyInnerHTML();
-  elePlayTimes.innerHTML=(numPlayTimes?numPlayTimes:1);
+  //PV
+  ajaxMini('pv.php',function(data){
+    elePV.innerHTML=data;
+  });
 
   start();
 }
