@@ -5,6 +5,21 @@ window.onload=function(){
   if(numClientWidth<1000 || numClientHeight<550){
     window.alert('分辨率過低!不支持手機端。请在电脑端查看。');
   }
+
+  function ajaxMini(url,callback){
+    var xmlhttp=new XMLHttpRequest();
+    xmlhttp.onreadystatechange=function(){
+      if(xmlhttp.readyState===4 && xmlhttp.status===200){
+        callback(xmlhttp.responseText);
+      }
+    };
+    xmlhttp.open("GET",url,true);
+    xmlhttp.send();
+  }
+  //PV
+  ajaxMini('pv.php',function(data){
+    document.getElementById('pv').innerHTML=data;
+  });
   //======================================tetris
   /*
   *jsonAll
