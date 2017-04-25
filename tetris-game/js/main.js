@@ -52,8 +52,12 @@ window.onload=function(){
   var ctxUpcoming=eleUpcomingCanvas.getContext('2d');
   var eleScore=document.querySelector('#score p strong');
   var eleLevel=document.getElementById('level');
+  var eleUser=document.getElementById('user');
+  var eleTop=document.getElementById('top');
   var eleTopTbody=document.querySelector('#top table tbody');
   var elePV=document.getElementById('pv');
+  var eleCloseUser=document.querySelector('.close_user');
+  var eleNickName=document.querySelector('.nn_wrap input');
 
 /*
 *全局變量 Timer,strLetter,TF,strNextLetter,numNextTF,unitX,unitY,arr2Dcontainer,bIng,bOver,numScore,numLevel,jsonTop;
@@ -111,6 +115,8 @@ function initTetris(){
   ajaxMini('pv.php',function(data){
     elePV.innerHTML=data;
   });
+  eleUser.style.display='none';
+  eleTop.style.backgroundColor='rgba(109,28,243,.1)';
 
   start();
 }
@@ -374,6 +380,9 @@ func:setEleTopTbodyInnerHTML
     window.clearInterval(Timer);
     bIng=false;
     bOver=true;
+    eleUser.style.display='block';
+    eleTop.style.backgroundColor='rgba(255,255,255,1)';
+    eleNickName.focus();
   }
 //=============================events
   /*
@@ -434,6 +443,10 @@ func:setEleTopTbodyInnerHTML
     }else{
       start();
     }
+  };
+  eleCloseUser.onclick=function(){
+    eleUser.style.display='none';
+    eleTop.style.backgroundColor='rgba(109,28,243,.1)';
   };
 //=============================end of events
 

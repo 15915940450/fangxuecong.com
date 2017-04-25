@@ -21,7 +21,7 @@ body{
   opacity: 0.6;
 }
 html.rgba .white_mask{
-  background: rgba(255,255,255,0.6);
+  background: rgba(255,255,255,0.9);
   opacity: 1;
 }
 /*keyframes rideonrails*/
@@ -164,8 +164,61 @@ a:hover#logo i,a.anim#logo i{
   position: absolute;
   left:0px;
   top: 200px;
-  background: rgba(0,0,0,.77);
+  background: rgba(93,84,108,1);
+  display: none;
+  border-top: 5px solid #FEE300;
+  border-bottom: 5px solid #FEE300;
 }
+
+.user_wrap{
+  color: #FFF;
+  padding-left: 400px;
+  padding-top: 10px;
+}
+.user_wrap h3{
+  font-size: 22px;
+  color:#FFF;
+}
+.user_wrap p{
+  margin-top:26px;
+  color: #EEE;
+}
+.nn_wrap{
+  position: relative;
+  background: #999;
+  margin-top:50px;
+  width: 390px;
+  height: 60px;
+  line-height: 60px;
+}
+.nn_wrap input{
+  position: absolute;
+  height: 60px;
+  line-height: 60px;
+  left: 0;
+  top: 0;
+  background: #888;
+  width: 100%;
+  padding-left: 20px;
+  font-size: 16px;
+  color: #EEE;
+  border: none;
+}
+.nn_wrap a{
+  position: absolute;
+  right:6px;
+  top:20px;
+  height: 20px;
+  line-height: 20px;
+  color: #FFF;
+}
+.close_user{
+  position: absolute;
+  right: 30px;
+  top: 10px;
+}
+
+
 #top{
   /*display: none;*/
   width: 220px;
@@ -173,7 +226,7 @@ a:hover#logo i,a.anim#logo i{
   position: absolute;
   left:121px;
   top: 200px;
-  background: rgba(255,255,255,.9);
+  background:rgba(109,28,243,.1);
   padding: 10px;
 }
 #top table{
@@ -181,7 +234,7 @@ a:hover#logo i,a.anim#logo i{
 }
 /*length:8*/
 #top table td,#top table th{
-  color: #1FB60A;
+  color: #999;
   font-size: 13px;
   padding: 5px 10px;
 }
