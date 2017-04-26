@@ -132,9 +132,9 @@ func:setEleTopTbodyInnerHTML
 */
   function setEleTopTbodyInnerHTML(){
     var arrTr=[];
-    jsonTop.sort(function(p1,p2){
-      return -(p1.Score-p2.Score);
-    });
+    // jsonTop.sort(function(p1,p2){
+    //   return -(p1.Score-p2.Score);
+    // });
     if(jsonTop.length>8){
       jsonTop.length=8;
     }
@@ -455,6 +455,10 @@ func:setEleTopTbodyInnerHTML
   eleCloseUser.onclick=function(){
     eleUser.style.display='none';
     eleTop.style.backgroundColor='rgba(109,28,243,.1)';
+    ajaxMini('score.php?nickname='+(eleNickNameFormNickName.value?eleNickNameFormNickName.value:'未命名玩家')+'&score='+numScore,function(data){
+      jsonTop=JSON.parse(data);
+      setEleTopTbodyInnerHTML();
+    });
   };
 
   // 用户昵称提交
@@ -466,6 +470,16 @@ func:setEleTopTbodyInnerHTML
 
   function sumbitNickName(ev){
     ev.preventDefault();
+    var numTopNumber=0;
+    for(var i=0;i<jsonTop.length;i++){
+      if(Number(jsonTop[i].Score)>=numScore){
+        numTopNumber++;
+      }
+    }
+    window.alert('您的排名是：'+numTopNumber);
+
+    eleUser.style.display='none';
+    eleTop.style.backgroundColor='rgba(109,28,243,.1)';
     ajaxMini('score.php?nickname='+(eleNickNameFormNickName.value?eleNickNameFormNickName.value:'未命名玩家')+'&score='+numScore,function(data){
       jsonTop=JSON.parse(data);
       setEleTopTbodyInnerHTML();
