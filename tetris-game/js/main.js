@@ -16,6 +16,24 @@ window.onload=function(){
     xmlhttp.open("GET",url,true);
     xmlhttp.send();
   }
+  //elements
+  //ctx  CanvasRenderingContext2D
+  var eleCanvas=document.getElementById('tetris_canvas');
+  var ctx=eleCanvas.getContext('2d');
+  var eleUpcomingCanvas=document.getElementById('upcoming_canvas');
+  var ctxUpcoming=eleUpcomingCanvas.getContext('2d');
+  var eleScore=document.querySelector('#score p strong');
+  var eleLevel=document.getElementById('level');
+  var eleUser=document.getElementById('user');
+  var eleTop=document.getElementById('top');
+  var eleTopTbody=document.querySelector('#top table tbody');
+  var elePV=document.getElementById('pv');
+
+  var eleNickName=document.querySelector('.nn_wrap input');
+  var eleUserScore=document.querySelector('.user_wrap p');
+
+  var eleBlackMask=document.querySelector('.black_mask');
+  var eleIntroMask=document.querySelector('.introductions_mask');
 
   //======================================tetris
   /*
@@ -44,20 +62,6 @@ window.onload=function(){
     arrStart:[53,101],
     F5:116
   };
-
-  //ctx  CanvasRenderingContext2D
-  var eleCanvas=document.getElementById('tetris_canvas');
-  var ctx=eleCanvas.getContext('2d');
-  var eleUpcomingCanvas=document.getElementById('upcoming_canvas');
-  var ctxUpcoming=eleUpcomingCanvas.getContext('2d');
-  var eleScore=document.querySelector('#score p strong');
-  var eleLevel=document.getElementById('level');
-  var eleUser=document.getElementById('user');
-  var eleTop=document.getElementById('top');
-  var eleTopTbody=document.querySelector('#top table tbody');
-  var elePV=document.getElementById('pv');
-  var eleCloseUser=document.querySelector('.close_user');
-  var eleNickName=document.querySelector('.nn_wrap input');
 
 /*
 *全局變量 Timer,strLetter,TF,strNextLetter,numNextTF,unitX,unitY,arr2Dcontainer,bIng,bOver,numScore,numLevel,jsonTop;
@@ -92,11 +96,15 @@ function initTetris(){
   numScore=0;
   numLevel=2;
   //排行榜
-  jsonTop=[
-    {"name":"fangxuecong","score":71500},
-    {"name":"author","score":109500},
-    {"name":"想你夜能寐","score":300}
-  ];
+  // jsonTop=[
+  //   {"NickName":"fangxuecong","Score":71500},
+  //   {"NickName":"author","Score":109500},
+  //   {"NickName":"想你夜能寐","Score":300}
+  // ];
+  ajaxMini('score.php',function(data){
+    jsonTop=JSON.parse(data);
+    setEleTopTbodyInnerHTML();
+  });
 
 
 
@@ -110,7 +118,6 @@ function initTetris(){
   //DOM
   eleScore.innerHTML=numScore;
   eleLevel.innerHTML=1;
-  setEleTopTbodyInnerHTML();
   //PV
   ajaxMini('pv.php',function(data){
     elePV.innerHTML=data;
@@ -126,13 +133,13 @@ func:setEleTopTbodyInnerHTML
   function setEleTopTbodyInnerHTML(){
     var arrTr=[];
     jsonTop.sort(function(p1,p2){
-      return -(p1.score-p2.score);
+      return -(p1.Score-p2.Score);
     });
     if(jsonTop.length>8){
       jsonTop.length=8;
     }
     for(var i=0;i<jsonTop.length;i++){
-      arrTr[i]='<tr><td>'+(i)+'</td><td>'+jsonTop[i].name+'</td><td>'+jsonTop[i].score+'</td></tr>';
+      arrTr[i]='<tr><td>'+(i)+'</td><td>'+jsonTop[i].NickName+'</td><td>'+jsonTop[i].Score+'</td></tr>';
     }
     eleTopTbody.innerHTML=arrTr.join('');
   }
@@ -382,6 +389,7 @@ func:setEleTopTbodyInnerHTML
     bOver=true;
     eleUser.style.display='block';
     eleTop.style.backgroundColor='rgba(255,255,255,1)';
+    eleUserScore.innerHTML='您的得分是'+numScore+'。';
     eleNickName.focus();
   }
 //=============================events
@@ -430,13 +438,11 @@ func:setEleTopTbodyInnerHTML
   };
   // 游戏说明
   var eleIntroA=document.querySelector('#introductions a');
-  var eleBlackMask=document.querySelector('.black_mask');
-  var eleIntroMask=document.querySelector('.introductions_mask');
-  var eleIntroBackToGame=document.querySelector('.introductions_mask p a');
-
   eleIntroA.onclick=function(){
     pause();
   };
+
+  var eleIntroBackToGame=document.querySelector('.introductions_mask p a');
   eleIntroBackToGame.onclick=function(){
     if(bOver){
       initTetris();
@@ -444,10 +450,27 @@ func:setEleTopTbodyInnerHTML
       start();
     }
   };
+  //关闭用户昵称弹窗
+  var eleCloseUser=document.querySelector('.close_user');
   eleCloseUser.onclick=function(){
     eleUser.style.display='none';
     eleTop.style.backgroundColor='rgba(109,28,243,.1)';
   };
+
+  // 用户昵称提交
+  var eleNickNameForm=document.querySelector('#user .nn_wrap form');
+  var eleNickNameFormSubmitA=document.querySelector('#user .nn_wrap form a');
+  var eleNickNameFormNickName=document.querySelector('#user .nn_wrap input');
+  eleNickNameForm.onsubmit=sumbitNickName;
+  eleNickNameFormSubmitA.onclick=sumbitNickName;
+
+  function sumbitNickName(ev){
+    ev.preventDefault();
+    ajaxMini('score.php?nickname='+(eleNickNameFormNickName.value?eleNickNameFormNickName.value:'未命名玩家')+'&score='+numScore,function(data){
+      jsonTop=JSON.parse(data);
+      setEleTopTbodyInnerHTML();
+    });
+  }
 //=============================end of events
 
   initTetris();
