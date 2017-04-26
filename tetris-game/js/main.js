@@ -30,7 +30,7 @@ window.onload=function(){
   var elePV=document.getElementById('pv');
 
   var eleNickName=document.querySelector('.nn_wrap input');
-  var eleUserScore=document.querySelector('.user_wrap p');
+  var eleUserScore=document.querySelector('.user_wrap p strong');
 
   var eleBlackMask=document.querySelector('.black_mask');
   var eleIntroMask=document.querySelector('.introductions_mask');
@@ -64,9 +64,9 @@ window.onload=function(){
   };
 
 /*
-*全局變量 Timer,strLetter,TF,strNextLetter,numNextTF,unitX,unitY,arr2Dcontainer,bIng,bOver,numScore,numLevel,jsonTop;
+*全局變量 Timer,strLetter,TF,strNextLetter,numNextTF,unitX,unitY,arr2Dcontainer,bIng,bOver,numScore,numLevel,jsonTop,numTopNumber,strNickName;
 */
-var Timer,strLetter,TF,strNextLetter,numNextTF,unitX,unitY,arr2Dcontainer,bIng,bOver,numScore,numLevel,jsonTop;
+var Timer,strLetter,TF,strNextLetter,numNextTF,unitX,unitY,arr2Dcontainer,bIng,bOver,numScore,numLevel,jsonTop,numTopNumber,strNickName;
 
 
 //=======================================functions
@@ -95,6 +95,10 @@ function initTetris(){
   //計分
   numScore=0;
   numLevel=2;
+  // 第几名
+  numTopNumber=Number.MAX_VALUE;
+  // 游戏昵称
+  strNickName='';
   //排行榜
   // jsonTop=[
   //   {"NickName":"fangxuecong","Score":71500},
@@ -135,8 +139,8 @@ func:setEleTopTbodyInnerHTML
     // jsonTop.sort(function(p1,p2){
     //   return -(p1.Score-p2.Score);
     // });
-    if(jsonTop.length>8){
-      jsonTop.length=8;
+    if(jsonTop.length>10){
+      jsonTop.length=10;
     }
     for(var i=0;i<jsonTop.length;i++){
       arrTr[i]='<tr><td>'+(i)+'</td><td>'+jsonTop[i].NickName+'</td><td>'+jsonTop[i].Score+'</td></tr>';
@@ -389,8 +393,36 @@ func:setEleTopTbodyInnerHTML
     bOver=true;
     eleUser.style.display='block';
     eleTop.style.backgroundColor='rgba(255,255,255,1)';
-    eleUserScore.innerHTML='您的得分是'+numScore+'。';
+    eleUserScore.innerHTML=numScore;
     eleNickName.focus();
+  }
+  /*
+*func:closeUserModal,sumbitNickName
+  */
+  function closeUserModal(){
+    eleUser.style.display='none';
+    eleTop.style.backgroundColor='rgba(109,28,243,.1)';
+    strNickName=eleNickNameFormNickName.value?eleNickNameFormNickName.value:'<未命名>玩家';
+    ajaxMini('score.php?nickname='+strNickName+'&score='+numScore,function(data){
+      jsonTop=JSON.parse(data);
+      setEleTopTbodyInnerHTML();
+      if(numTopNumber<10 && strNickName){
+        window.alert('恭喜'+strNickName+'！！您的排名是：'+numTopNumber+'。欢迎联系管理员领取红包（微信号：hokcung）。');
+      }
+    });
+  }
+  function sumbitNickName(ev){
+    ev.preventDefault();
+    numTopNumber=0;
+    for(var i=0;i<jsonTop.length;i++){
+      if(Number(jsonTop[i].Score)>=numScore){
+        numTopNumber++;
+      }
+    }
+    if(numTopNumber>=10){
+      window.alert('您的排名是：'+numTopNumber);
+    }
+    closeUserModal();
   }
 //=============================events
   /*
@@ -452,14 +484,7 @@ func:setEleTopTbodyInnerHTML
   };
   //关闭用户昵称弹窗
   var eleCloseUser=document.querySelector('.close_user');
-  eleCloseUser.onclick=function(){
-    eleUser.style.display='none';
-    eleTop.style.backgroundColor='rgba(109,28,243,.1)';
-    ajaxMini('score.php?nickname='+(eleNickNameFormNickName.value?eleNickNameFormNickName.value:'未命名玩家')+'&score='+numScore,function(data){
-      jsonTop=JSON.parse(data);
-      setEleTopTbodyInnerHTML();
-    });
-  };
+  eleCloseUser.onclick=closeUserModal;
 
   // 用户昵称提交
   var eleNickNameForm=document.querySelector('#user .nn_wrap form');
@@ -468,23 +493,7 @@ func:setEleTopTbodyInnerHTML
   eleNickNameForm.onsubmit=sumbitNickName;
   eleNickNameFormSubmitA.onclick=sumbitNickName;
 
-  function sumbitNickName(ev){
-    ev.preventDefault();
-    var numTopNumber=0;
-    for(var i=0;i<jsonTop.length;i++){
-      if(Number(jsonTop[i].Score)>=numScore){
-        numTopNumber++;
-      }
-    }
-    window.alert('您的排名是：'+numTopNumber);
 
-    eleUser.style.display='none';
-    eleTop.style.backgroundColor='rgba(109,28,243,.1)';
-    ajaxMini('score.php?nickname='+(eleNickNameFormNickName.value?eleNickNameFormNickName.value:'未命名玩家')+'&score='+numScore,function(data){
-      jsonTop=JSON.parse(data);
-      setEleTopTbodyInnerHTML();
-    });
-  }
 //=============================end of events
 
   initTetris();
@@ -498,53 +507,4 @@ func:setEleTopTbodyInnerHTML
 //=======================
 //Polyfill:Array.prototype.includes
 //=======================
-if (!Array.prototype.includes) {
-  Object.defineProperty(Array.prototype, 'includes', {
-    value: function(searchElement, fromIndex) {
-
-      // 1. Let O be ? ToObject(this value).
-      if (this == null) {
-        throw new TypeError('"this" is null or not defined');
-      }
-
-      var o = Object(this);
-
-      // 2. Let len be ? ToLength(? Get(O, "length")).
-      var len = o.length >>> 0;
-
-      // 3. If len is 0, return false.
-      if (len === 0) {
-        return false;
-      }
-
-      // 4. Let n be ? ToInteger(fromIndex).
-      //    (If fromIndex is undefined, this step produces the value 0.)
-      var n = fromIndex | 0;
-
-      // 5. If n ≥ 0, then
-      //  a. Let k be n.
-      // 6. Else n < 0,
-      //  a. Let k be len + n.
-      //  b. If k < 0, let k be 0.
-      var k = Math.max(n >= 0 ? n : len - Math.abs(n), 0);
-
-      function sameValueZero(x, y) {
-        return x === y || (typeof x === 'number' && typeof y === 'number' && isNaN(x) && isNaN(y));
-      }
-
-      // 7. Repeat, while k < len
-      while (k < len) {
-        // a. Let elementK be the result of ? Get(O, ! ToString(k)).
-        // b. If SameValueZero(searchElement, elementK) is true, return true.
-        // c. Increase k by 1.
-        if (sameValueZero(o[k], searchElement)) {
-          return true;
-        }
-        k++;
-      }
-
-      // 8. Return false
-      return false;
-    }
-  });
-}
+if(!Array.prototype.includes){Object.defineProperty(Array.prototype,"includes",{value:function(d,e){if(this==null){throw new TypeError('"this" is null or not defined')}var f=Object(this);var a=f.length>>>0;if(a===0){return false}var g=e|0;var c=Math.max(g>=0?g:a-Math.abs(g),0);function b(h,i){return h===i||(typeof h==="number"&&typeof i==="number"&&isNaN(h)&&isNaN(i))}while(c<a){if(b(f[c],d)){return true}c++}return false}})};
