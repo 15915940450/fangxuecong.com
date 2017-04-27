@@ -2,17 +2,17 @@
   //设置时间时区
   // date_default_timezone_set('prc');
 
-  // echo $_GET['nickname'].$_GET['score'];
-// echo '[{"name":"fangxuecong","score":71500},{"name":"author","score":109500},{"name":"想你夜能寐","score":300}]';
+  // echo $_POST["nickname"];
+  
   $MSQL=new MySQLi('localhost','root','','fxc',3306);
   if($MSQL->connect_errno){
     die('数据库连接失败'.$MSQL->connect_error);
   }
   $MSQL->set_charset('utf8');
   //============================
-  if(isset($_GET['nickname']) && isset($_GET['score'])){
-    $NickName=$_GET['nickname'];
-    $Score=$_GET['score'];
+  if(isset($_POST['nickname']) && isset($_POST['score'])){
+    $NickName=$_POST['nickname'];
+    $Score=$_POST['score'];
     $sql1="INSERT INTO TetrisScore(NickName,Score,PlayTime) VALUES ('$NickName','$Score',now())";
     $res=$MSQL->query($sql1);
   }

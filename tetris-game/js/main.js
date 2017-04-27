@@ -6,16 +6,44 @@ window.onload=function(){
     window.alert('分辨率過低!不支持手機端。请在电脑端查看。');
   }
 
-  function ajaxMini(url,callback){
+  function ajaxGET(url,callback){
     var xmlhttp=new XMLHttpRequest();
     xmlhttp.onreadystatechange=function(){
       if(xmlhttp.readyState===4 && xmlhttp.status===200){
         callback(xmlhttp.responseText);
       }
     };
-    xmlhttp.open("GET",url,true);
+    xmlhttp.open('GET',url,true);
     xmlhttp.send();
   }
+  function ajaxPOST(url,strPostString,callback){
+    var xmlhttp=new XMLHttpRequest();
+    xmlhttp.onreadystatechange=function(){
+      if(xmlhttp.readyState===4 && xmlhttp.status===200){
+        callback(xmlhttp.responseText);
+      }
+    };
+    xmlhttp.open('POST',url,true);
+    xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+    xmlhttp.send(strPostString);
+  }
+
+  // function ajaxMini(url,GorP,callback,strPostString){
+  //   var xmlhttp=new XMLHttpRequest();
+  //   xmlhttp.onreadystatechange=function(){
+  //     if(xmlhttp.readyState===4 && xmlhttp.status===200){
+  //       callback(xmlhttp.responseText);
+  //     }
+  //   };
+  //   xmlhttp.open(GorP,url,true);
+  //   if(strPostString===undefined){
+  //     xmlhttp.send();
+  //   }else{
+  //     xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+  //     xmlhttp.send(strPostString);
+  //   }
+  // }
+
   //elements
   //ctx  CanvasRenderingContext2D
   var eleCanvas=document.getElementById('tetris_canvas');
@@ -105,7 +133,11 @@ function initTetris(){
   //   {"NickName":"author","Score":109500},
   //   {"NickName":"想你夜能寐","Score":300}
   // ];
-  ajaxMini('score.php',function(data){
+  // ajaxMini('score.php','GET',function(data){
+  //   jsonTop=JSON.parse(data);
+  //   setEleTopTbodyInnerHTML();
+  // });
+  ajaxGET('score.php',function(data){
     jsonTop=JSON.parse(data);
     setEleTopTbodyInnerHTML();
   });
@@ -123,7 +155,10 @@ function initTetris(){
   eleScore.innerHTML=numScore;
   eleLevel.innerHTML=1;
   //PV
-  ajaxMini('pv.php',function(data){
+  // ajaxMini('pv.php','GET',function(data){
+  //   elePV.innerHTML=data;
+  // });
+  ajaxGET('pv.php',function(data){
     elePV.innerHTML=data;
   });
   eleUser.style.display='none';
@@ -403,7 +438,14 @@ func:setEleTopTbodyInnerHTML
     eleUser.style.display='none';
     eleTop.style.backgroundColor='rgba(109,28,243,.1)';
     strNickName=eleNickNameFormNickName.value?eleNickNameFormNickName.value:'<未命名>玩家';
-    ajaxMini('score.php?nickname='+strNickName+'&score='+numScore,function(data){
+    // ajaxMini('score.php','POST',function(data){
+    //   jsonTop=JSON.parse(data);
+    //   setEleTopTbodyInnerHTML();
+    //   if(numTopNumber<10 && strNickName){
+    //     window.alert('恭喜'+strNickName+'！！您的排名是：'+numTopNumber+'。欢迎联系管理员领取红包（微信号：hokcung）。');
+    //   }
+    // },'nickname='+strNickName+'&score='+numScore);
+    ajaxPOST('score.php','nickname='+strNickName+'&score='+numScore,function(data){
       jsonTop=JSON.parse(data);
       setEleTopTbodyInnerHTML();
       if(numTopNumber<10 && strNickName){
