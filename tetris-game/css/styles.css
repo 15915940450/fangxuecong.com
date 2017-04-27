@@ -387,4 +387,9 @@ html.rgba .black_mask{
   -webkit-transform: scale3d(1,1,1);
   transform: scale3d(1,1,1);
 }
+.donate p{
+  position: absolute;
+  left: 10px;
+  top: 50px;
+}
 /*end*/
