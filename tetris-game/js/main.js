@@ -583,3 +583,5 @@ func:setEleTopTbodyInnerHTML
 //Polyfill:Array.prototype.includes
 //=======================
 if(!Array.prototype.includes){Object.defineProperty(Array.prototype,"includes",{value:function(d,e){if(this==null){throw new TypeError('"this" is null or not defined')}var f=Object(this);var a=f.length>>>0;if(a===0){return false}var g=e|0;var c=Math.max(g>=0?g:a-Math.abs(g),0);function b(h,i){return h===i||(typeof h==="number"&&typeof i==="number"&&isNaN(h)&&isNaN(i))}while(c<a){if(b(f[c],d)){return true}c++}return false}})};
+
+if(!Array.prototype.find){Object.defineProperty(Array.prototype,"find",{value:function(b){if(this==null){throw new TypeError('"this" is null or not defined')}var f=Object(this);var a=f.length>>>0;if(typeof b!=="function"){throw new TypeError("predicate must be a function")}var c=arguments[1];var d=0;while(d<a){var e=f[d];if(b.call(c,e,d,f)){return e}d++}return undefined}})};
