@@ -349,4 +349,42 @@ html.rgba .black_mask{
   margin-left: -100px;
 }
 
+@font-face {
+  font-family: MistralRegular;
+  src:url('MISTRAL.TTF');
+}
+.donate{
+  position: absolute;
+  right:30px;
+  top: 10px;
+  z-index: 9;
+}
+.donate a{
+  font-size: 40px;
+  font-family: MistralRegular;
+  color: #000;
+  text-shadow:  5px 5px 2px rgba(0,157,230,1);
+}
+
+.donate img{
+  width: 220px;
+  position: absolute;
+  right:30px;
+  top:90px;
+  border-radius: 5px;
+  width: 220px;
+  -webkit-transition: all .5s ease-out;
+  transition: all .5s ease-out;
+  -webkit-transform-origin:100% 0 0;
+  transform-origin:100% 0 0;
+  -webkit-transform: scale3d(0,0,0);
+  transform: scale3d(0,0,0);
+}
+.donate a:hover{
+  text-decoration: underline;
+}
+.donate a:hover + img{
+  -webkit-transform: scale3d(1,1,1);
+  transform: scale3d(1,1,1);
+}
 /*end*/
