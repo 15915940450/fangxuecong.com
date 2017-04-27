@@ -213,6 +213,12 @@ a:hover#logo i,a.anim#logo i{
   line-height: 20px;
   color: #FFF;
 }
+.nn_wrap p{
+  position: absolute;
+  top:50px;
+  left:0;
+  color:#FF6B53;
+}
 .close_user{
   position: absolute;
   right: 30px;

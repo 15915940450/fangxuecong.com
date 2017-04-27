@@ -92,9 +92,9 @@ window.onload=function(){
   };
 
 /*
-*全局變量 Timer,strLetter,TF,strNextLetter,numNextTF,unitX,unitY,arr2Dcontainer,bIng,bOver,numScore,numLevel,jsonTop,numTopNumber,strNickName;
+*全局變量 Timer,strLetter,TF,strNextLetter,numNextTF,unitX,unitY,arr2Dcontainer,bIng,bOver,numScore,numLevel,jsonTop,numTopNumber,strNickName,bCanSubmit;
 */
-var Timer,strLetter,TF,strNextLetter,numNextTF,unitX,unitY,arr2Dcontainer,bIng,bOver,numScore,numLevel,jsonTop,numTopNumber,strNickName;
+var Timer,strLetter,TF,strNextLetter,numNextTF,unitX,unitY,arr2Dcontainer,bIng,bOver,numScore,numLevel,jsonTop,numTopNumber,strNickName,bCanSubmit;
 
 
 //=======================================functions
@@ -127,6 +127,7 @@ function initTetris(){
   numTopNumber=Number.MAX_VALUE;
   // 游戏昵称
   strNickName='';
+  bCanSubmit=false;
   //排行榜
   // jsonTop=[
   //   {"NickName":"fangxuecong","Score":71500},
@@ -174,10 +175,10 @@ func:setEleTopTbodyInnerHTML
     // jsonTop.sort(function(p1,p2){
     //   return -(p1.Score-p2.Score);
     // });
-    if(jsonTop.length>10){
-      jsonTop.length=10;
-    }
-    for(var i=0;i<jsonTop.length;i++){
+    // if(jsonTop.length>10){
+    //   jsonTop.length=10;
+    // }
+    for(var i=0;i<10;i++){  //jsonTop.length
       arrTr[i]='<tr><td>'+(i)+'</td><td>'+jsonTop[i].NickName+'</td><td>'+jsonTop[i].Score+'</td></tr>';
     }
     eleTopTbody.innerHTML=arrTr.join('');
@@ -429,6 +430,7 @@ func:setEleTopTbodyInnerHTML
     eleUser.style.display='block';
     eleTop.style.backgroundColor='rgba(255,255,255,1)';
     eleUserScore.innerHTML=numScore;
+    eleNickName.value='';
     eleNickName.focus();
   }
   /*
@@ -437,35 +439,41 @@ func:setEleTopTbodyInnerHTML
   function closeUserModal(){
     eleUser.style.display='none';
     eleTop.style.backgroundColor='rgba(109,28,243,.1)';
-    strNickName=eleNickNameFormNickName.value?eleNickNameFormNickName.value:'<未命名>玩家';
-    // ajaxMini('score.php','POST',function(data){
-    //   jsonTop=JSON.parse(data);
-    //   setEleTopTbodyInnerHTML();
-    //   if(numTopNumber<10 && strNickName){
-    //     window.alert('恭喜'+strNickName+'！！您的排名是：'+numTopNumber+'。欢迎联系管理员领取红包（微信号：hokcung）。');
-    //   }
-    // },'nickname='+strNickName+'&score='+numScore);
-    ajaxPOST('score.php','nickname='+strNickName+'&score='+numScore,function(data){
-      jsonTop=JSON.parse(data);
-      setEleTopTbodyInnerHTML();
-      if(numTopNumber<10 && strNickName){
-        window.alert('恭喜'+strNickName+'！！您的排名是：'+numTopNumber+'。欢迎联系管理员领取红包（微信号：hokcung）。');
-      }
-    });
+    eleNickName.value='';
+  }
+  function double_09(num){
+    return (num<10?('0'+num):num);
+  }
+  function suggestANickNamePostfix(){
+    var today=new Date();
+    var tmp=''+double_09(today.getMonth()+1)+double_09(today.getDate())+''+(Math.random().toString().substring(2,4));
+    return tmp;
   }
   function sumbitNickName(ev){
     ev.preventDefault();
-    numTopNumber=0;
-    for(var i=0;i<jsonTop.length;i++){
-      if(Number(jsonTop[i].Score)>=numScore){
-        numTopNumber++;
+    if(bCanSubmit){
+      numTopNumber=0;
+      for(var i=0;i<jsonTop.length;i++){
+        if(Number(jsonTop[i].Score)>=numScore){
+          numTopNumber++;
+        }
       }
+      if(numTopNumber<10){
+        window.alert('恭喜'+strNickName+'！！您的排名是：'+numTopNumber+'。欢迎联系管理员领取红包（微信号：hokcung）。');
+      }else{
+        window.alert('您的排名是：'+numTopNumber);
+      }
+
+      eleNickNameHint.innerHTML='';
+      ajaxPOST('score.php','nickname='+strNickName+'&score='+numScore,function(data){
+        jsonTop=JSON.parse(data);
+        setEleTopTbodyInnerHTML();
+      });
+      closeUserModal();
     }
-    if(numTopNumber>=10){
-      window.alert('您的排名是：'+numTopNumber);
-    }
-    closeUserModal();
+
   }
+
 //=============================events
   /*
   *事件
@@ -495,7 +503,7 @@ func:setEleTopTbodyInnerHTML
           // console.log(ev.keyCode);
       }
     }
-    //開始，暫停(數字5,小键盘5)
+    //開始，暫停(數字5,小键盘5),注意表單輸入
     if(objKeys.arrStart.includes(ev.keyCode)){
       if(!bIng){
         if(bOver){
@@ -506,10 +514,9 @@ func:setEleTopTbodyInnerHTML
       }else{
         pause();
       }
-
-
     }
   };
+
   // 游戏说明
   var eleIntroA=document.querySelector('#introductions a');
   eleIntroA.onclick=function(){
@@ -532,8 +539,34 @@ func:setEleTopTbodyInnerHTML
   var eleNickNameForm=document.querySelector('#user .nn_wrap form');
   var eleNickNameFormSubmitA=document.querySelector('#user .nn_wrap form a');
   var eleNickNameFormNickName=document.querySelector('#user .nn_wrap input');
+  var eleNickNameHint=document.querySelector('#user .nn_wrap p');
   eleNickNameForm.onsubmit=sumbitNickName;
   eleNickNameFormSubmitA.onclick=sumbitNickName;
+  eleNickNameFormNickName.onkeydown=function(ev){
+    ev.stopPropagation();
+  };
+  eleNickNameFormNickName.oninput=function(){
+    strNickName=eleNickNameFormNickName.value.trim();
+    // console.log(strNickName);
+
+    if(!strNickName){
+      eleNickNameHint.innerHTML='不能為空';
+      bCanSubmit=false;
+    }else{
+      var res=jsonTop.find(function(ele){
+        return ele.NickName===strNickName;
+      });
+      if(res){  //重複
+        eleNickNameHint.innerHTML='已存在，你可以使用 '+strNickName+'_'+suggestANickNamePostfix();
+        bCanSubmit=false;
+      }else{
+        eleNickNameHint.innerHTML='√';
+        bCanSubmit=true;
+      }
+    }
+  };
+
+
 
 
 //=============================end of events
