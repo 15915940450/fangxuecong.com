@@ -2,8 +2,6 @@
   //设置时间时区
   // date_default_timezone_set('prc');
 
-  // echo $_POST["nickname"];
-  
   $MSQL=new MySQLi('localhost','root','','fxc',3306);
   if($MSQL->connect_errno){
     die('数据库连接失败'.$MSQL->connect_error);
@@ -21,11 +19,11 @@
 
   $sql2="SELECT * FROM tetrisscore ORDER BY Score DESC,PlayTime ASC";
   $res=$MSQL->query($sql2);
-  $arr = [];
+  $arrTop=array();
   while($row=$res->fetch_object()){
-    $arr[] = $row;
+    $arrTop[]=$row;
   }
-  echo json_encode($arr);
+  echo json_encode($arrTop);
   //============================
   $res->free();
   $MSQL->close();
