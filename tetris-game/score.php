@@ -17,7 +17,7 @@
 
 
 
-  $sql2="SELECT * FROM tetrisscore ORDER BY Score DESC,PlayTime ASC";
+  $sql2="SELECT * FROM TetrisScore ORDER BY Score DESC,PlayTime ASC";
   $res=$MSQL->query($sql2);
   $arrTop=array();
   while($row=$res->fetch_object()){

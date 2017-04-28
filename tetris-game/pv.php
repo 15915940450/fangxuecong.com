@@ -14,7 +14,7 @@
   //发送sql语句并执行，如果是select语句，返回的是一个对象，其他的返回来一个boolean.
   $res = $mySQLi -> query($sql1);
 
-  $sql2 = "SELECT * FROM pv WHERE ID=0";
+  $sql2 = "SELECT * FROM PV WHERE ID=0";
   $res = $mySQLi -> query($sql2);
   //使用fetch_object();
   while($row = $res -> fetch_object()){
