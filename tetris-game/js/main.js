@@ -240,7 +240,7 @@ func:setEleTopTbodyInnerHTML
 function setEleTopTbodyInnerHTML(){
   var arrTr=[];
   /*jsonTop.sort(function(p1,p2){
-    return -(p1.Score-p2.Score);
+    return -(p1.score-p2.score);
   });*/
   /*if(jsonTop.length>10){
     jsonTop.length=10;
@@ -526,7 +526,7 @@ function sumbitNickName(ev){
   if(bCanSubmit){
     numTopNumber=0;
     for(var i=0;i<jsonTop.length;i++){
-      if(Number(jsonTop[i].Score)>=numScore){
+      if(Number(jsonTop[i].score)>=numScore){
         numTopNumber++;
       }
     }
