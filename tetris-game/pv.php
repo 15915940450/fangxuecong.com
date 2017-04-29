@@ -7,10 +7,10 @@
   }
   $MSQL->set_charset('utf8');
   //============================
-  $sql1="UPDATE pv SET pv=pv+1 WHERE id=$pageid";
+  $sql1="UPDATE pv SET pv=pv+1 WHERE id='$pageid'";
   $res=$MSQL->query($sql1);
 
-  $sql2="SELECT * FROM pv WHERE id=$pageid";
+  $sql2="SELECT * FROM pv WHERE id='$pageid'";
   $res=$MSQL->query($sql2);
   $pv=array();
   while($row=$res->fetch_object()){

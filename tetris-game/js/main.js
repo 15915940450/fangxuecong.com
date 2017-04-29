@@ -246,7 +246,7 @@ function setEleTopTbodyInnerHTML(){
     jsonTop.length=10;
   }*/
   for(var i=0;i<(jsonTop.length<10?jsonTop.length:10);i++){  //jsonTop.length
-    arrTr[i]='<tr><td>'+(i)+'</td><td>'+jsonTop[i].NickName+'</td><td>'+jsonTop[i].Score+'</td></tr>';
+    arrTr[i]='<tr><td>'+(i)+'</td><td>'+jsonTop[i].nickname+'</td><td>'+jsonTop[i].score+'</td></tr>';
   }
   eleTopTbody.innerHTML=arrTr.join('');
 }
