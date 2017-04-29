@@ -115,8 +115,8 @@ function initTetris(){
   eleScore.innerHTML=numScore;
   eleLevel.innerHTML=1;
 //PV
-  ajaxGET('pv.php',function(data){
-    elePV.innerHTML=data;
+  ajaxGET('pv.php?pageid=1',function(data){
+    elePV.innerHTML=JSON.parse(data)[0].pv;
   });
   eleUser.style.display='none';
   eleTop.style.backgroundColor='rgba(109,28,243,.1)';
