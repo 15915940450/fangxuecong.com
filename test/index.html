@@ -1,33 +1,56 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <title>http://localhost/fangxuecong.com/test/</title>
     <meta charset="utf-8">
-    <title>pv</title>
+    <meta name="viewport" content="width=device-width" />
   </head>
   <body>
-    <script src="../js/jquery-3.0.0.min.js" charset="utf-8"></script>
 <script type="text/javascript">
-$.ajax({
-  url:'pv.php',
-  success:function(data){
-    console.log(data);
+var arr=[];
+for(var i=0;i<7e+7;i++){
+  arr.push(i);
+}
+var i=0;
+Array.prototype.bSearch=function(num,L,H){
+  i++;
+  L=L || 0;
+  if(H===undefined){
+    H=this.length-1;
   }
-});
+  if(L<=H){
+    if(this[L]===num){
+      return L;
+    }
+    if(this[H]===num){
+      return H;
+    }
+    if(this[L]>num || this[H]<num){
+      return -1;
+    }
+    var M=Math.ceil((L+H)/2);
+    if(this[M]===num){
+      return M;
+    }else if(this[M]>num){
+      H=M-1;
+      return this.bSearch(num,L,H);
+    }else if(this[M]<num){
+      L=M+1;
+      return this.bSearch(num,L,H);
+    }
+  }
+  return -1;
+}
+
+
+console.time("indexOf");
+console.log(arr.indexOf(0.5)); //indexOf: 113.035888671875ms
+console.timeEnd("indexOf");
+
+console.time("bSearch");
+console.log(arr.bSearch(0.5)); //bSearch: 1.1298828125ms
+console.timeEnd("bSearch");
+console.log('循环次数:'+i);
 </script>
   </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-end
