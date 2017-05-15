@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>datetime</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content="YYYY-MM-DDThh:mm:ssTZD">
+    <link rel="stylesheet" href="mobiscroll.custom-2.17.0.min.css">
+    <script src="../js/jquery-3.0.0.min.js" charset="utf-8"></script>
+    <script src="mobiscroll.custom-2.17.0.min.js" charset="utf-8"></script>
+  </head>
+  <body>
+    <div class="">
+      <h2>ISO 8601</h2>
+      <p>北京时间2004年5月3日下午5点30分8秒</p>
+      <p>2004-05-03T17:30:08+08:00</p>
+      <p>20040503T173008+08</p>
+      <p>时间戳是指格林威治时间1970年01月01日00时00分00秒(北京时间1970年01月01日08时00分00秒)起至现在的总秒数。</p>
+    </div>
+<form id="dt_form" method="post">
+名字：<input id="nm_input" type="text" name="nm" value="" placeholder="" />
+<br />
+生日：<input id="dt_input" type="text" name="dt" value="" placeholder="請點選一個日期" />
+<br />
+<input type="submit" value="提交" />
+</form>
+<script type="text/javascript">
+$(function(){
+    $('#dt_input').mobiscroll().date({
+        theme: 'mobiscroll',
+        dateFormat:'yyyy-mm-dd',
+        display: 'top',
+        lang:'zh'
+    });
+});
+</script>
+  </body>
+</html>
