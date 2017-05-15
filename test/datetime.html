@@ -32,6 +32,36 @@ $(function(){
         display: 'top',
         lang:'zh'
     });
+    $('#dt_form').on('submit',function(ev){
+      ev.preventDefault();
+
+//=======================timestamp秒
+var strDtInputVal=$('#dt_input').val();
+var timestamp=new Date(strDtInputVal).getTime()/1000;
+$('#dt_input').val(timestamp);
+// var postData=$('#dt_form').serializeArray();  //[{"name":"nm","value":""},{"name":"dt","value":"2017-05-15"}]
+var postData=$('#dt_form').serialize();  //nm=%E8%BD%AF&dt=2017-05-15
+$('#dt_input').val(strDtInputVal);
+// console.log(postData);
+//=======================timestamp
+
+      // console.log(JSON.stringify(postData));
+      // return false;
+      $.ajax({
+        url:'datetime.php',
+        method:'POST',
+        async:true,
+        data:postData,
+        // dataType:'json',
+        success:function(data){
+          console.log(data);
+        },
+        error:function(err){
+          console.log(err);
+        }
+      })
+    });
+
 });
 </script>
   </body>
