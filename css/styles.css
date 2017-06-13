@@ -1,5 +1,130 @@
 @charset 'utf-8';
 
+/*header*/
+.header{
+  background: #021023;
+  height: 50px;
+  line-height: 50px;
+  overflow: hidden;
+}
+.logo{
+  float: left;
+  width: 190px;
+  margin-left: -15px;
+}
+.logo a{
+}
+.logo img{
+}
+.nav{
+  float: right;
+}
+.nav li{}
+.nav a{}
+/*keyframes rideonrails*/
+@-webkit-keyframes rideonrails {
+  0%{
+    -webkit-transform: translate(0,0);
+  }
+  60%{
+    -webkit-transform: translate(130px,0);
+  }
+  100%{
+    -webkit-transform: translate(130px,0);
+  }
+}
+@keyframes rideonrails {
+  0%{
+    transform: translate(0,0);
+  }
+  60%{
+    transform: translate(130px,0);
+  }
+  100%{
+    transform: translate(130px,0);
+  }
+}
+/*logo*/
+a#logo{
+  position: relative;
+  /*left: -25px;*/
+  /*top: 30px;*/
+  height: 50px;
+  display: block;
+  z-index: 9;
+  padding-left: 50px;
+  line-height: 50px;
+  color: #EEE;
+  font-size: 13px;
+}
+a#logo svg{
+  position: absolute;
+  left: 0px;
+  top: 5px;
+  -webkit-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+  -webkit-transform: rotate(0deg);
+  transform: rotate(0deg);
+  height: 40px;
+}
+a:hover#logo svg{
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+a#logo span{
+  border-top: 1px solid #EEE;
+  border-bottom: 1px solid #EEE;
+  display: block;
+  height: 30px;
+  line-height: 28px;
+  position: absolute;
+  top: 10px;
+}
+a#logo span code{
+  font-family: "微软雅黑",Ubuntu,Arial,"libra sans",sans-serif;
+  margin-left: 0px;
+  margin-right: 0px;
+  color:#EEE;
+  -webkit-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+}
+a#logo:hover span code{
+  margin-left: 3px;
+  margin-right: 3px;
+  font-weight: 900;
+}
+a#logo:hover span code.x{
+  color:#FFF;
+}
+a#logo:hover span code.c{
+  color:#E7BE20;
+}
+a#logo i{
+  opacity: 0;
+  position: absolute;
+  left:50px;
+  -webkit-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+  -webkit-transform: translate(0,0);
+  transform: translate(0,0);
+  border-top: 1px solid #000;
+  width: 10px;
+  display: block;
+  z-index: 10;
+}
+a#logo i.up{
+  top:10px;
+}
+a#logo i.down{
+  bottom:10px;
+}
+/*动画*/
+a:hover#logo i,a.anim#logo i{
+  opacity: 1;
+  -webkit-animation:rideonrails 1.9s linear infinite;
+  animation:rideonrails 1.9s linear infinite;
+}
+/*工作*/
 .work{
   background: #FFF;
   /*display: none;*/
