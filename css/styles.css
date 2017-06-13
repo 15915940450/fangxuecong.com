@@ -1,16 +1,58 @@
 @charset 'utf-8';
 
 .work{
-  background: red;
-  display: none;
+  background: #FFF;
+  /*display: none;*/
 }
 .work_item{
-  border: 1px solid blue;
+  /*border: 1px solid #FFF;*/
   padding: 0;
+  position: relative;
+  overflow: hidden;
 }
 .work_item img{
   max-width: 100%;
   max-height: 100%;
+}
+.illustrate{
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  text-align: center;
+  width: 100%;
+  background:rgba(0,0,0,.69);
+  color: #FFF;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.6s ease-out;
+}
+.illustrate h3{
+  font-size: 20px;
+  color: #FFF;
+  font-weight: 500;
+  padding: 20px 0 10px;
+}
+.illustrate p{
+  color: #FFF;
+  font-weight: 300;
+}
+.illustrate ul{
+  margin-top: 20px;
+}
+.illustrate ul li{
+  color: #FFF;
+  font-size: 13px;
+  line-height: 2em;
+}
+.work_item:hover .illustrate{
+  opacity: 1;
+}
+/*手机不显示详细内容*/
+@media (max-width:480px) {
+  .work_item .illustrate ol{
+    display: none;
+  }
 }
 
 .comming_soon{
