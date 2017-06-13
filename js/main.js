@@ -45,5 +45,13 @@ $(function(){
   function generateRandomNumber(min,max){
     return (Math.random()*(max-min)+min);
   }
+// resize
+  window.onresize=function(){
+    var numW=$('.col-md-3.work_item').width();
+    $('.work_item').each(function(i){
+      // console.log(numW);
+      $(this).height(numW);
+    });
+  };
 
 });//ready
