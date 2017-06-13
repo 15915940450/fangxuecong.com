@@ -97,3 +97,8 @@
 .comming_soon ul li a{
   text-decoration: underline ;
 }
+footer p{
+  color: #999;
+  text-align: center;
+  padding: 20px 0 10px;
+}
