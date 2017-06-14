@@ -38,6 +38,64 @@
   top:166px;
   margin-left: -1000px;
 }
+.banner .dingwei{
+  float: right;
+}
+.banner h1{
+  font-size: 60px;
+  color: #FFF;
+  margin-top: 80px;
+  margin-bottom: 30px;
+  font-weight: 500;
+  position: relative;
+}
+.banner h1 span{
+  position: absolute;
+  left:-100px;
+  top: -20px;
+  font-size: 90px;
+  font-family: serif;
+}
+.banner h3{
+  font-size: 30px;
+  color: #b5a1a1;
+  font-weight: 100;
+}
+.banner ul{
+  margin-top: 30px;
+}
+.banner ul li{
+  float: left;
+  width: 80px;
+  height: 80px;
+  line-height: 80px;
+  margin-right: 30px;
+}
+.banner ul li:last-child{
+  margin-right: 0;
+}
+.banner ul a{
+  display: block;
+  text-indent: -999em;
+  overflow: hidden;
+  border-radius:200px;
+}
+.banner ul a.wechat{
+  background: url(../img/wechat.svg) no-repeat center center;
+  background-size: cover;
+}
+.banner ul a.weibo{
+  background: url(../img/weibo.svg) no-repeat center center;
+  background-size: cover;
+}
+.banner ul a.zhihu{
+  background: url(../img/zhihu.svg) no-repeat center center;
+  background-size: cover;
+}
+.banner ul a.github{
+  background: url(../img/github.svg) no-repeat center center;
+  background-size: cover;
+}
 /*.nav li i{
   position: absolute;
   left: 0;
