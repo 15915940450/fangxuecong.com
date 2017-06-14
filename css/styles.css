@@ -40,6 +40,8 @@
 }
 .banner .dingwei{
   float: right;
+  position: relative;
+  z-index: 10;
 }
 .banner h1{
   font-size: 60px;
@@ -79,6 +81,8 @@
   text-indent: -999em;
   overflow: hidden;
   border-radius:200px;
+  /*transform: rotate(0deg);*/
+  /*transition: all .2s ease-out;*/
 }
 .banner ul a.wechat{
   background: url(../img/wechat.svg) no-repeat center center;
@@ -95,6 +99,10 @@
 .banner ul a.github{
   background: url(../img/github.svg) no-repeat center center;
   background-size: cover;
+}
+.banner ul a:hover{
+  /*transform: rotate(360deg);*/
+  /*opacity: 1;*/
 }
 /*.nav li i{
   position: absolute;
