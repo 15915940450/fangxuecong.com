@@ -41,20 +41,26 @@
   /*border: 1px solid red;*/
   padding-left:20px;
   font-size: 13px;
+  text-transform: uppercase;
 }
-.nav a:before{
+.nav a::before{
   content: "i";
   position: absolute;
   left: 0;
-  top: 26px;
+  top: 24px;
   display: block;
   width: 10px;
   height: 2px;
   overflow: hidden;
   background: #E7BE20;
+  -webkit-transition: width .2s ease-out;
+  transition: width .2s ease-out;
 }
 .nav a:hover{
   color: #E7BE20;
+}
+.nav a:hover::before{
+  width: 15px;
 }
 /*keyframes rideonrails*/
 @-webkit-keyframes rideonrails {
