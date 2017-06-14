@@ -91,6 +91,7 @@
   transform: scale(0);
   -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
+  cursor: crosshair;
 }
 .banner ul a:hover #wechat_code{
   -webkit-transform: scale(1);
@@ -99,6 +100,7 @@
 .banner ul a.wechat{
   background: url(../img/wechat.svg) no-repeat center center;
   background-size: cover;
+  cursor: crosshair;
 }
 .banner ul a.weibo{
   background: url(../img/weibo.svg) no-repeat center center;
