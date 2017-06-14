@@ -29,6 +29,14 @@
 .banner{
   height: 466px;
   background: url(../img/banner.jpg) no-repeat center 0;
+  overflow: hidden;
+  position: relative;
+}
+.banner canvas{
+  position: absolute;
+  left:50%;
+  top:166px;
+  margin-left: -1000px;
 }
 /*.nav li i{
   position: absolute;
