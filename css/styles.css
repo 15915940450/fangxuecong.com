@@ -18,9 +18,44 @@
 }
 .nav{
   float: right;
+  margin-right: -9px;
 }
-.nav li{}
-.nav a{}
+.nav li{
+  float: left;
+  margin-left: 35px;
+  position: relative;
+}
+
+/*.nav li i{
+  position: absolute;
+  left: 0;
+  top: 24px;
+  display: block;
+  width: 10px;
+  height: 2px;
+  background: #E7BE20;
+}*/
+.nav a{
+  color: #FFF;
+  display: block;
+  /*border: 1px solid red;*/
+  padding-left:20px;
+  font-size: 13px;
+}
+.nav a:before{
+  content: "i";
+  position: absolute;
+  left: 0;
+  top: 26px;
+  display: block;
+  width: 10px;
+  height: 2px;
+  overflow: hidden;
+  background: #E7BE20;
+}
+.nav a:hover{
+  color: #E7BE20;
+}
 /*keyframes rideonrails*/
 @-webkit-keyframes rideonrails {
   0%{
@@ -157,8 +192,8 @@ a:hover#logo i,a.anim#logo i{
   height: 100%;
   -webkit-transition: all 0.3s ease-out;
   transition: all 0.3s ease-out;
-  -webkit-transform: scale(0,0);
-  transform: scale(0,0);
+  /*-webkit-transform: scale(0,0);*/
+  /*transform: scale(0,0);*/
 }
 .illustrate h3{
   font-size: 20px;
@@ -185,8 +220,8 @@ a:hover#logo i,a.anim#logo i{
   opacity: 1;
 }
 .work_item:hover .illustrate{
-  -webkit-transform: scale(1,1);
-  transform: scale(1,1);
+  /*-webkit-transform: scale(1,1);*/
+  /*transform: scale(1,1);*/
 }
 /*手机不显示详细内容*/
 @media (max-width:992px) {
