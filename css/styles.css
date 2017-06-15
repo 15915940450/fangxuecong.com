@@ -44,14 +44,16 @@
   z-index: 10;
 }
 .banner h1{
-  font-size: 60px;
+  font-size: 50px;
+  line-height: 50px;
   color: #FFF;
   margin-top: 80px;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
   font-weight: 500;
   position: relative;
-  height: 80px;
+  height: 100px;
   width: 550px;
+  /*border: 1px solid blue;*/
 }
 .banner h1 span{
   position: absolute;
