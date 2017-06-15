@@ -266,7 +266,9 @@ a:hover#logo i,a.anim#logo i{
 }
 /*工作*/
 .work{
-  background: #FFF;
+  background: #F2F2F2;
+  padding-top: 30px;
+  padding-bottom: 30px;
 }
 .work_item{
   /*border: 1px solid #FFF;*/
@@ -331,7 +333,10 @@ a:hover#logo i,a.anim#logo i{
 
 
 .comming_soon{
+  /*margin-top: 50px;*/
   padding-top: 90px;
+  padding-bottom: 60px;
+  /*background: #EEE;*/
 }
 .comming_soon .head{
   width: 100px;
@@ -341,6 +346,7 @@ a:hover#logo i,a.anim#logo i{
   overflow: hidden;
   position: relative;
   margin: 0 auto;
+  border-radius: 200px;
 }
 .comming_soon .head img{
   position: absolute;
@@ -369,12 +375,100 @@ a:hover#logo i,a.anim#logo i{
 .comming_soon ul li a{
   text-decoration: underline ;
 }
+footer{
+  margin-top: 30px;
+}
 footer p{
   color: #999;
   text-align: center;
-  padding: 20px 0 10px;
+  height: 30px;
+  line-height: 30px;
 }
 
+/*技能*/
+.tech{
+  padding-top: 50px;
+  background: #055861;
+}
+.tech .readme{
+  margin: 60px 0;
+}
+.tech .readme p{
+  color: #FFF;
+  font-size: 15px;
+  line-height: 1.9em;
+  margin-bottom: 15px;
+  /*text-indent: 2em;*/
+  letter-spacing: 2px;
+}
+.tech .readme p a{
+  color: #E7BE20;
+  border-bottom: 1px solid #E7BE20;
+  margin-left: 3px;
+  margin-right: 3px;
+}
+.tech .readme p a:hover{
+  /*border-bottom:none;*/
+}
+.progress_bar .pro-bar {
+  background: hsl(0, 0%, 97%);
+  box-shadow: 0 1px 2px hsla(0, 0%, 0%, 0.1) inset;
+  height:4px;
+  margin-bottom: 12px;
+  margin-top: 50px;
+  position: relative;
+}
+.progress_bar .progress_bar_title{
+  /*color: hsl(218, 4%, 50%);*/
+  color: #D5D6E2;
+  font-size: 15px;
+  font-weight: 300;
+  position: relative;
+  top: -28px;
+  z-index: 1;
+}
+.progress_bar .progress_number{
+  float: right;
+  margin-top: -24px;
+}
+.progress_bar .progress-bar-inner {
+  background-color: hsl(0, 0%, 88%);
+  display: block;
+  width: 0;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: width 1s linear 0s;
+  animation: animate-positive 2s;
+}
+.progress_bar .progress-bar-inner:before {
+  content: "";
+  background-color: hsl(0, 0%, 100%);
+  border-radius: 50%;
+  width: 4px;
+  height: 4px;
+  position: absolute;
+  right: 1px;
+  top: 0;
+  z-index: 1;
+}
+.progress_bar .progress-bar-inner:after {
+  content: "";
+  width: 14px;
+  height: 14px;
+  background-color: inherit;
+  border-radius: 50%;
+  position: absolute;
+  right: -4px;
+  top: -5px;
+}
+@-webkit-keyframes animate-positive{
+  0% { width: 0%; }
+}
+@keyframes animate-positive{
+  0% { width: 0%; }
+}
 
 /*手机不显示详细内容*/
 @media (max-width:992px) {

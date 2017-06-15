@@ -44,7 +44,8 @@ article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {
 
 a {
     transition: all .2s ease-out;
-    text-decoration: none
+    text-decoration: none;
+    color:#E7BE20;
 }
 
 a:focus,input,select,textarea {
