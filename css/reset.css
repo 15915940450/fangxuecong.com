@@ -18,7 +18,6 @@ article,aside,body,details,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,heade
     font-size: 12px;
     margin: 0;
     padding: 0;
-    color: #333;
 }
 
 p {
@@ -35,7 +34,8 @@ li {
 }
 
 img {
-    border: none
+    border: none;
+    max-width: 100%;
 }
 
 article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {

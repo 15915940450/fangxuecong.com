@@ -258,7 +258,7 @@ a#logo i.up{
 a#logo i.down{
   bottom:10px;
 }
-/*动画*/
+/*logo动画*/
 a:hover#logo i,a.anim#logo i{
   opacity: 1;
   -webkit-animation:rideonrails 1.9s linear infinite;
@@ -271,7 +271,6 @@ a:hover#logo i,a.anim#logo i{
   padding-bottom: 30px;
 }
 .work_item{
-  /*border: 1px solid #FFF;*/
   padding: 0;
   position: relative;
   overflow: hidden;
@@ -331,7 +330,7 @@ a:hover#logo i,a.anim#logo i{
   /*transform: scale(1,1);*/
 }
 
-
+/*頁腳*/
 .comming_soon{
   /*margin-top: 50px;*/
   padding-top: 90px;
@@ -392,6 +391,7 @@ footer p{
 }
 .tech .readme{
   margin: 60px 0;
+  /*overflow: hidden;*/
 }
 .tech .readme p{
   color: #FFF;
@@ -404,8 +404,6 @@ footer p{
 .tech .readme p a{
   color: #E7BE20;
   border-bottom: 1px solid #E7BE20;
-  margin-left: 3px;
-  margin-right: 3px;
 }
 .tech .readme p a:hover{
   /*border-bottom:none;*/
@@ -470,12 +468,55 @@ footer p{
   0% { width: 0%; }
 }
 
+/*mycode代碼*/
+.mycode{
+  background: #3a3a42;
+  color: #FFF;
+}
+.mycode h3{
+  font-size: 36px;
+  font-weight: 500;
+  padding-top: 100px;
+  margin-left: 50px;
+}
+.mycode p{
+  margin-left: 50px;
+  margin-top: 30px;
+  font-size: 18px;
+  color: #B1B1B1;
+}
+.mycode ul{
+  margin-left: 50px;
+  margin-top: 20px;
+}
+.mycode li{
+  color: #B1B1B1;
+  font-size: 16px;
+  list-style: circle;
+}
+.mycode img{
+  margin-top: 40px;
+  margin-bottom: 60px;
+}
+
+
 /*手机不显示详细内容*/
 @media (max-width:992px) {
+  .work{
+    padding-top: 0;
+    padding-bottom: 0;
+  }
   .work_item .illustrate ul{
     display: none;
   }
   .nav{
     display: none;
+  }
+
+  .mycode h3,.mycode p{
+    margin-left: 0;
+  }
+  .mycode ul{
+    margin-left: 20px;
   }
 }
