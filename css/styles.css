@@ -92,6 +92,7 @@
 }
 #wechat_code{
   width: 100px;
+  max-width: 100px;
   margin-left: -10px;
   margin-top: -10px;
   -webkit-transform: scale(0);
@@ -266,7 +267,7 @@ a:hover#logo i,a.anim#logo i{
 }
 /*工作*/
 .work{
-  background: #F2F2F2;
+  background: #F0EFEB;
   padding-top: 30px;
   padding-bottom: 30px;
 }
@@ -383,6 +384,9 @@ footer p{
   height: 30px;
   line-height: 30px;
 }
+footer a{
+  color: #696969;
+}
 
 /*技能*/
 .tech{
@@ -469,36 +473,53 @@ footer p{
 }
 
 /*mycode代碼*/
-.mycode{
+.mycode,.thought{
   background: #3a3a42;
   color: #FFF;
 }
-.mycode h3{
+.mycode h3,.thought h3{
   font-size: 36px;
   font-weight: 500;
   padding-top: 100px;
-  margin-left: 50px;
+  /*margin-left: 50px;*/
 }
-.mycode p{
-  margin-left: 50px;
+.mycode p,.thought p{
+  /*margin-left: 50px;*/
   margin-top: 30px;
-  font-size: 18px;
+  font-size: 16px;
   color: #B1B1B1;
 }
 .mycode ul{
-  margin-left: 50px;
-  margin-top: 20px;
+  margin-left: 20px;
+  margin-top: 10px;
 }
 .mycode li{
   color: #B1B1B1;
   font-size: 16px;
   list-style: circle;
+  line-height: 1.6em;
 }
-.mycode img{
+.mycode img,.thought img{
   margin-top: 40px;
   margin-bottom: 60px;
+  display: block;
+  float: right;
 }
-
+/*thought思维*/
+.thought{
+  background: #ff6b43;
+}
+.thought p{
+  color: #fff6f4;
+  margin-bottom: 30px;
+}
+.thought p a{
+  color: #EFD8AF;
+  border-bottom: 1px solid #EFD8AF;
+}
+.thought img{
+  float: left;
+}
 
 /*手机不显示详细内容*/
 @media (max-width:992px) {
@@ -511,12 +532,5 @@ footer p{
   }
   .nav{
     display: none;
-  }
-
-  .mycode h3,.mycode p{
-    margin-left: 0;
-  }
-  .mycode ul{
-    margin-left: 20px;
   }
 }
