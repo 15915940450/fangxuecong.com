@@ -2,44 +2,52 @@ $(function(){
   /*
   *履歷圖片等寬高
   */
-  var numW=$('.col-md-3.work_item').width();
-  $('.work_item').each(function(i){
-    // console.log(numW);
-    $(this).height(numW);
-  });
+  function setHeightEqualWidth(){
+    if($('.work').length>0){
+      var numW=$('.col-md-3.work_item').width();
+      $('.work_item').each(function(i){
+        // console.log(numW);
+        $(this).height(numW);
+      });
+    }
+  }
+  setHeightEqualWidth();
+
 
   /*
   *theater
   */
-  var theater = theaterJS()
+  if($('#theater').length>0){
+    var theater = theaterJS();
 
-  theater
-    .on('type:start, erase:start', function () {
-      // add a class to actor's dom element when he starts typing/erasing
-      var actor = theater.getCurrentActor()
-      actor.$element.classList.add('is-typing')
-    })
-    .on('type:end, erase:end', function () {
-      // and then remove it when he's done
-      var actor = theater.getCurrentActor()
-      actor.$element.classList.remove('is-typing')
-    })
+    theater
+      .on('type:start, erase:start', function () {
+        // add a class to actor's dom element when he starts typing/erasing
+        var actor = theater.getCurrentActor();
+        actor.$element.classList.add('is-typing');
+      })
+      .on('type:end, erase:end', function () {
+        // and then remove it when he's done
+        var actor = theater.getCurrentActor();
+        actor.$element.classList.remove('is-typing');
+      });
 
-  theater
-    .addActor('theater',{ accuracy: 1, speed: 0.6 })
+    theater
+      .addActor('theater',{ accuracy: 1, speed: 0.6 });
 
-  theater
-    .addScene('theater:大家好，我是学聪...', 1000)
-    .addScene('theater:现居住在深圳', 200, '.', 200, '.', 200, '. ',1000)
-    .addScene('theater:2011年毕业于广东工业大学', 200, '.', 200, '.', 200, '. ')
-    .addScene('theater:我努力做出好看的、美丽大方的界面', 200, '.', 200, '.', 200, '. ',1000)
-    .addScene('theater:我注重网站性能', 200, '.', 200, '.', 200, '. ',1000)
-    .addScene('theater:我编写高质量的前端代码', 200, '.', 200, '.', 200, '. ',3000)
-    .addScene('theater:愿我们成为好朋友',500,' ^_^',5000)
-    .addScene(theater.replay)
+    theater
+      .addScene('theater:大家好，我是学聪...', 1000)
+      .addScene('theater:现居住在深圳', 200, '.', 200, '.', 200, '. ',1000)
+      .addScene('theater:2011年毕业于广东工业大学', 200, '.', 200, '.', 200, '. ')
+      .addScene('theater:我努力做出好看的、美丽大方的界面', 200, '.', 200, '.', 200, '. ',1000)
+      .addScene('theater:我注重网站性能', 200, '.', 200, '.', 200, '. ',1000)
+      .addScene('theater:我编写高质量的前端代码', 200, '.', 200, '.', 200, '. ',3000)
+      .addScene('theater:愿我们成为好朋友',500,' ^_^',5000)
+      .addScene(theater.replay);
+  }
 
   /*
-  *head
+  *head随机变换的头像
   */
   // return;
   var x1=0;
@@ -77,11 +85,7 @@ $(function(){
   }
 // resize
   window.onresize=function(){
-    var numW=$('.col-md-3.work_item').width();
-    $('.work_item').each(function(i){
-      // console.log(numW);
-      $(this).height(numW);
-    });
+    setHeightEqualWidth();
   };
 
 });//ready
