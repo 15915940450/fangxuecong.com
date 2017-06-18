@@ -1,0 +1,252 @@
+@charset 'utf-8';
+
+html,body{
+  background:#00fee3;
+}
+a{
+  color:#e300fe;
+}
+#container{
+  width: 100%;
+  height: 100%;
+  padding-top: 50px;
+  padding-left: 10px;
+  position: relative;
+}
+#container section{
+  height: 100%;
+}
+/*h2唯一*/
+h2{
+  position: absolute;
+  left: 0;
+  top: 10px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #666;
+  margin-left: 10px;
+  text-decoration: underline;
+  display: none;
+}
+/*remember包裹標籤*/
+.remember{
+  background: #FFF;
+  width: 700px;
+  height: 100%;
+  border-radius:5px 5px 0 0;
+  overflow: hidden;
+}
+/*完成與未完成*/
+.tab{
+  border-bottom:1px dotted #EAEAEA;
+  height: 50px;
+  line-height: 72px;
+  text-align: right;
+  padding-right: 50px;
+  position: relative;
+}
+.tab a{
+  display: inline-block;
+  width: 90px;
+  text-align: center;
+  height: 30px;
+  line-height: 30px;
+  border: 1px dotted #FFF;
+  border-bottom: 1px dotted #EAEAEA;
+  border-radius: 3px 3px 0 0;
+  background: #FFF;
+}
+.tab a.active{
+  border: 1px dotted #EAEAEA;
+  border-bottom: 1px dotted #FFF;
+  font-weight: bold;
+  color: #222;
+}
+/*選擇與刪除*/
+.global_operate{
+  height: 60px;
+  line-height: 60px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-bottom: 1px dotted #EAEAEA;
+}
+.global_operate p,.delete,.complete{
+  display: inline-block;
+  border: 1px solid #EAEAEA;
+  height: 26px;
+  line-height: 24px;
+  text-align: center;
+  border-radius: 3px;
+  background: #FFF;
+  margin-right: 15px;
+}
+.select{
+  padding-top: 2px;
+  position: relative;
+  top:2px;
+}
+/*.select input{
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+}*/
+
+.delete,.complete{
+  color: #666;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+a.complete:hover{
+  color: #000;
+  border: 1px solid #000;
+}
+a.delete:hover{
+  color: #FFF;
+  background: #fe6400;
+  border: 1px solid #fe6400;
+}
+/*添加任務*/
+.add{
+  border-bottom:1px dotted #EAEAEA;
+  padding: 10px 20px;
+  text-align: right;
+}
+/*.add p{
+  padding: 5px 10px;
+  border:1px solid #E1E1E1;
+  border-radius: 3px;
+}*/
+.add input{
+  display: block;
+  padding: 6px 10px;
+  border:1px solid #E1E1E1;
+  border-radius: 3px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+.add input:focus{
+  border: 1px solid #e300fe;
+  color: #000;
+}
+.add button{
+  display: inline-block;
+  color: #FFF;
+  background: #e300fe;
+  padding: 6px 20px;
+  /*border: 2px solid #2e8ceb;*/
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.add button:hover{
+  box-shadow: 0px -2px 0px rgba(0,0,0,.3) inset;
+}
+.add button:disabled{
+  opacity: 0.39;
+  cursor: default;
+  box-shadow:none;
+}
+/*任務列表*/
+.task_list{
+  /*background: red;*/
+  position: relative;
+}
+.bg_line p{
+  border-bottom:1px dotted #EAEAEA;
+  height: 33px;
+  line-height: 33px;
+}
+.task_list ul{
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+}
+.task_list ul li{
+  padding-top: 2px;
+  padding-bottom: 2px;
+  margin-bottom: 1px;
+}
+
+.task_list ul li:hover,.task_list ul li.active{
+  background: #fffbd7;
+}
+.task_list ul li p{
+  height: 28px;
+  line-height: 28px;
+  margin-left: 20px;
+  display: block;
+  border-left:3px solid #D1D1D1;
+  padding-left: 4px;
+  padding-right: 20px;
+}
+.task_list ul li input{
+  margin-right: 6px;
+}
+.task_list ul li span{
+  color: #000;
+  font-size: 15px;
+  -moz-user-select:none;
+  -webkit-user-select:none;
+  -ms-user-select:none;
+  user-select:none;
+  cursor: default;
+}
+
+.detail{
+  position: absolute;
+  left:750px;
+  top:100px;
+  background:#fffdeb;
+  width: 300px;
+  padding:20px 30px;
+}
+.detail p{
+  color: #999;
+  margin-top: 20px;
+}
+.detail input{
+  display: block;
+  width: 100%;
+  padding: 5px 10px;
+  border: 1px solid #EAEAEA;
+  border-radius: 3px;
+  font-size: 15px;
+  font-weight: bold;
+}
+.detail textarea{
+  display: block;
+  width: 100%;
+  padding: 5px 10px;
+  height: 150px;
+  border: 1px solid #EAEAEA;
+  border-radius: 3px;
+  font-size: 15px;
+}
+.detail button{
+  padding: 5px 20px;
+  border: 1px solid #EAEAEA;
+  color: #000;
+  background: #FFF;
+  margin-top: 10px;
+  margin-right: 10px;
+  border-radius: 3px;
+  transition: all 0.2s ease-out;
+}
+
+.detail input:focus,.detail textarea:focus{
+  border: 1px solid #e300fe;
+}
+.detail button:hover{
+  background: #e300fe;
+  border: 1px solid #e300fe;
+  color: #FFF;
+}
+
+
+
+
+
+
+
+/*end*/
