@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Swiper Lite | 工作是一种乐趣时，生活是一种享受。前端开发工程师 - 房学聪</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+  <meta name="author" content="Thilina Fong" />
+  <meta name="description" content="fangxuecong.com是关于房学聪的个人网站。房学聪作为一个前端开发工程师，热爱工作，热爱生活，开朗乐观，平易近人。" />
+  <link rel="shortcut icon" href="http://fangxuecong.com/img/favicon.png" type="image/x-icon" />
+  <link rel="stylesheet" href="../css/reset.css" />
+  <link rel="stylesheet" href="../css/grid_fee300.css" />
+  <link rel="stylesheet" href="../css/styles.css" />
+  <script src="../js/modernizr.js"></script>
+<style media="screen">
+.swiperlite{
+  width: 300px;
+  margin: 0 auto;
+  background: gray;
+  height: 500px;
+  overflow: hidden;
+}
+.ul_wrap{
+  /*width:1320px ;*/
+  width:9990px ;
+  display: flex;
+  background: yellow;
+  /*-webkit-transform: translate3d(-620px,0,0);*/
+  /*transform: translate3d(-620px,0,0);*/
+  -webkit-transition:all 0 ease;
+  transition:all 0 ease;
+}
+.ul_wrap.ttion{
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+.li_item{
+  width: 220px;
+  height: 300px;
+  color: #FFF;
+  font-size: 30px;
+}
+</style>
+</head>
+<body>
+  <!-- header -->
+  <header>
+    <div class="header">
+      <div class="container clearfix">
+        <div class="logo">
+          <a href="http://fangxuecong.com/" id="logo">
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="50px"
+        	 height="50px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
+              <g id="logo_svg">
+              	<g>
+              		<polygon fill="#FFFFFF" points="95.995,74.668 23.674,2.347 20.302,5.719 20.302,70.215 11.829,70.215 4.005,78.039
+              			20.302,78.039 20.302,94.337 28.126,86.513 28.126,78.039 92.624,78.04 		"/>
+              		<path fill="#E7BE20" d="M46.23,53.5C35.777,43.472,30.146,28.464,29.096,7.77l-5.422-5.422c0.3,25.037,6.495,43.025,18.919,54.944
+              			c11.883,11.4,29.367,17.091,53.402,17.377l-5.422-5.422C70.762,68.247,56.207,63.071,46.23,53.5z"/>
+              	</g>
+              </g>
+              <g id="图层_2">
+              </g>
+            </svg>
+            <i class="up"></i>
+            <span>fang<code class="x">x</code>ue<code class="c">c</code>ong.com</span>
+            <i class="down"></i>
+          </a>
+        </div>
+        <ul class="nav clearfix">
+          <li>
+            <!-- <i></i> -->
+            <a href="../tetris-game/">俄罗斯方块</a>
+          </li>
+          <li>
+            <a href="../fifteen/">九空格</a>
+          </li>
+          <li>
+            <a href="../remember/">备忘录</a>
+          </li>
+          <li>
+            <a href="javascript:;" class="active">swiper lite</a>
+          </li>
+          <li>
+            <a href="../tangram/">七巧</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </header>
+<div class="page" id="container">
+  <article class="article">
+    <div class="swiperlite">
+      <div class="ul_wrap">
+        <div class="li_item i1" style="background:#DEB408;">
+          0
+        </div>
+        <div class="li_item i1" style="background:#4C3900;">
+          1(all 0 ease)
+        </div>
+        <div class="li_item i2" style="background:#FDEB33;">
+          2
+        </div>
+        <div class="li_item i3" style="background:#F2B749;">
+          3
+        </div>
+      </div>
+    </div>
+  </article>
+</div>
+<!-- coming soon -->
+<section>
+  <div class="comming_soon">
+    <div class="head">
+      <img src="../img/head/head0.png" alt="">
+      <img src="../img/head/head1.png" alt="">
+      <img src="../img/head/head2.png" alt="">
+      <img src="../img/head/head3.png" alt="">
+    </div>
+    <!-- footer页脚：版权，qq，email -->
+    <footer>
+      <p>&copy; Copyright 2017 fangxuecong 聪意制作室</p>
+      <p>qq: 02492407460</p>
+      <p>email: <a href="mailto:15915940450@139.com">15915940450@139.com</a></p>
+    </footer>
+  </div>
+</section>
+<script src="../js/jquery-3.0.0.min.js"></script>
+<script src="../js/main.js"></script>
+<script type="text/javascript">
+var isTouchMove,startTx,startTy,moveTx,moveTy;
+var eleUlWrap=document.querySelector('.ul_wrap');
+var eleLiItems=eleUlWrap.querySelectorAll('.li_item');
+var numLiItemsLength=eleLiItems.length;
+var numEleWidth=220;
+var strInitEleUlWrapClassName=eleUlWrap.className;
+var numViewWidth=300;
+var eleStartX=-numEleWidth*numLiItemsLength+(numViewWidth-numEleWidth)/2; //-620
+
+eleUlWrap.innerHTML=eleUlWrap.innerHTML+eleUlWrap.innerHTML;
+eleUlWrap.style.width=numEleWidth*numLiItemsLength*2+'px';
+eleUlWrap.style.WebkitTransform='translate3d('+eleStartX+'px,0,0)';
+eleUlWrap.style.transform='translate3d('+eleStartX+'px,0,0)';
+//===================================================
+myTouch(eleUlWrap,function(){ //move
+  console.log('moving');
+  eleUlWrap.style.WebkitTransform='translate3d('+(moveTx-startTx+eleStartX)+'px,0,0)';
+  eleUlWrap.style.transform='translate3d('+(moveTx-startTx+eleStartX)+'px,0,0)';
+},function(){ //mySwipeLeft
+  eleUlWrap.style.WebkitTransform='translate3d('+(eleStartX-numEleWidth)+'px,0,0)';
+  eleUlWrap.style.transform='translate3d('+(eleStartX-numEleWidth)+'px,0,0)';
+  // eleStartX=eleStartX-numEleWidth;
+  var elefirstItem=eleUlWrap.querySelector('.li_item:first-child');
+  var eleLastItem=eleUlWrap.querySelector('.li_item:last-child');
+  window.setTimeout(function(){
+    //動畫結束200ms
+    eleUlWrap.className=strInitEleUlWrapClassName;
+    eleUlWrap.appendChild(elefirstItem);
+    eleUlWrap.style.WebkitTransform='translate3d('+eleStartX+'px,0,0)';
+    eleUlWrap.style.transform='translate3d('+eleStartX+'px,0,0)';
+    // eleStartX=eleStartX-numEleWidth;
+  },200);
+},function(){  //mySwipeRight
+  eleUlWrap.style.WebkitTransform='translate3d('+(eleStartX+numEleWidth)+'px,0,0)';
+  eleUlWrap.style.transform='translate3d('+(eleStartX+numEleWidth)+'px,0,0)';
+  // eleStartX=eleStartX+numEleWidth;
+  // eleUlWrap.dataset.elestartx=-180;
+  var elefirstItem=eleUlWrap.querySelector('.li_item:first-child');
+  var eleLastItem=eleUlWrap.querySelector('.li_item:last-child');
+  // console.log(elefirstItem);
+  // console.log(eleLastItem);
+  window.setTimeout(function(){
+    //動畫結束200ms
+    eleUlWrap.className=strInitEleUlWrapClassName;
+    eleUlWrap.insertBefore(eleLastItem,elefirstItem);
+    eleUlWrap.style.WebkitTransform='translate3d('+eleStartX+'px,0,0)';
+    eleUlWrap.style.transform='translate3d('+eleStartX+'px,0,0)';
+    // eleStartX=eleStartX-numEleWidth;
+  },200);
+});
+//===================================================
+function myTouch(element,MyTouchMove,mySwipeLeft,mySwipeRight){
+//1.start
+  element.addEventListener( 'touchstart', function( e ){
+  var touches = e.touches[0];
+
+  startTx = touches.clientX;
+  startTy = touches.clientY;
+  isTouchMove = false;
+  element.className=strInitEleUlWrapClassName;
+  }, false );
+//2.move
+  element.addEventListener('touchmove', function(e){
+  isTouchMove = true;
+  e.preventDefault();
+  var touches = e.touches[0];
+  moveTx=touches.clientX;
+  moveTy=touches.clientY;
+  MyTouchMove();
+  }, false );
+
+  element.addEventListener('touchend',function(e){
+  element.className+=' ttion';
+  if( !isTouchMove ){
+    return;
+  }
+
+  var touches = e.changedTouches[0],
+    endTx = touches.clientX,
+    endTy = touches.clientY,
+    distanceX = startTx - endTx
+    distanceY = startTy - endTy,
+    isSwipe = false;
+
+  if( Math.abs(distanceX) >= Math.abs(distanceY) ){
+    if( distanceX > 20 ){
+      // console.log( 'fire swipe left event' );
+      mySwipeLeft();
+      isSwipe = true;
+    }
+    else if( distanceX < -20 ){
+      // console.log( 'fire swipe right event' );
+      mySwipeRight();
+      isSwipe = true;
+    }else{
+      //滑動距離小於20
+      element.style.WebkitTransform='translate3d('+eleStartX+'px,0,0)';
+      element.style.transform='translate3d('+eleStartX+'px,0,0)';
+    }
+  }
+  else{
+    if( distanceY > 20 ){
+      console.log( 'fire swipe up event' );
+      isSwipe = true;
+    }
+    else if( distanceY < -20 ){
+      console.log( 'fire swipe down event' );
+      isSwipe = true;
+    }
+    element.style.WebkitTransform='translate3d('+eleStartX+'px,0,0)';
+    element.style.transform='translate3d('+eleStartX+'px,0,0)';
+  }
+
+  if( isSwipe ){
+    // console.log( 'fire swipe event' );
+  }
+  }, false );
+}
+</script>
+</body>
+</html>
