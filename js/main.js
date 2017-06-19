@@ -1,4 +1,6 @@
 $(function(){
+  var numClientW=document.documentElement.clientWidth || document.body.clientWidth;
+  // alert(numClientW);
   /*
   *履歷圖片等寬高
   */
@@ -103,13 +105,22 @@ $(function(){
   *tangram:origin,runner
   */
   if($('#tangram').length>0){
-    $('#tangram').hover(function(){
-      // $('.tangram-wrap').addClass('runner');
-      $('.tangram-wrap').attr('class','tangram-wrap runner');
-    },function(){
-      $('.tangram-wrap').attr('class','tangram-wrap origin');
-      // $('.tangram-wrap').removeClass('runner');
-    });
+    if(numClientW<=992){
+      //手機
+      var Timer=window.setInterval(function(){
+        var strTangramName=['origin','runner'][Math.floor(Math.random()*2)];
+        $('.tangram-wrap').attr('class','tangram-wrap '+strTangramName);
+      },3000);
+    }else{
+      $('#tangram').hover(function(){
+        // $('.tangram-wrap').addClass('runner');
+        $('.tangram-wrap').attr('class','tangram-wrap runner');
+      },function(){
+        $('.tangram-wrap').attr('class','tangram-wrap origin');
+        // $('.tangram-wrap').removeClass('runner');
+      });
+    }
+
   }
 
 // resize

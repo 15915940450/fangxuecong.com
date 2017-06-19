@@ -5,12 +5,13 @@ html,body{
 }
 
 /*variables $tangramWidth:300px;*/
-$tangramWidth:200px;
-
+$tangramWidth:190px;
+article{
+  min-height: $tangramWidth * 2.5;
+}
 #tangram {
   width: $tangramWidth;
   height: $tangramWidth;
-  // overflow: hidden;
   margin: 0 auto;
 }
 
@@ -18,7 +19,7 @@ $tangramWidth:200px;
   position: relative;
   width: $tangramWidth;
   height: $tangramWidth * 1.33;
-  margin-top: $tangramWidth * 0.500;
+  margin-top: $tangramWidth * 0.250;
 }
 
 .t {
@@ -27,9 +28,11 @@ $tangramWidth:200px;
   left: 0;
   width: 0;
   height: 0;
+  -webkit-transform-origin: 0 0;
   transform-origin: 0 0;
   // display: none;
-  transition: all 0.6s ease-out;
+  -webkit-transition: all 0.5s ease-out;
+  transition: all 0.5s ease-out;
 }
 
 .t1 {
@@ -94,32 +97,25 @@ $tangramWidth:200px;
 
 /*your design*/
 .runner{
-  // border: 1px solid red;
   .t1{
     transform: translate($tangramWidth * 0.500, $tangramWidth * 0.500) rotate(-135deg);
   }
   .t2{
-    // transform: translate($tangramWidth * 0.500, $tangramWidth * 0.500) rotate(135deg);
     transform: translate($tangramWidth * 0.250, $tangramWidth * 0.250) rotate(45deg);
   }
   .t3{
-    // transform: translate($tangramWidth * 0.500, $tangramWidth * 0.500) rotate(45deg);
     transform: translate($tangramWidth * 0.500,-$tangramWidth * 0.500) rotate(45deg);
   }
   .t4{
-    // transform: translate($tangramWidth * 0.500, $tangramWidth * 0.500) rotate(-45deg);
     transform: translate($tangramWidth,$tangramWidth * 1.250) rotate(-135deg);
   }
   .t5{
-    // transform: translate($tangramWidth * 0.250, $tangramWidth * 0.750) rotate(45deg);
     transform: translate(-$tangramWidth * 0.575,$tangramWidth * 0.500) rotate(45deg);
   }
   .t6{
-    // transform: translate($tangramWidth) rotate(90deg) skew(45deg);
     transform: translate($tangramWidth * 0.250,$tangramWidth * 0.750) rotate(0deg) skew(45deg);
   }
   .t7{
-    // transform: translate($tangramWidth, $tangramWidth) rotate(180deg);
     transform: translate(-$tangramWidth * 0.100, $tangramWidth * 1.100) rotate(225deg);
   }
 }

@@ -5,17 +5,21 @@ html, body {
 }
 
 /*variables $tangramWidth:300px;*/
+article {
+  min-height: 475px;
+}
+
 #tangram {
-  width: 200px;
-  height: 200px;
+  width: 190px;
+  height: 190px;
   margin: 0 auto;
 }
 
 .tangram-wrap {
   position: relative;
-  width: 200px;
-  height: 266px;
-  margin-top: 100px;
+  width: 190px;
+  height: 252.7px;
+  margin-top: 47.5px;
 }
 
 .t {
@@ -24,90 +28,92 @@ html, body {
   left: 0;
   width: 0;
   height: 0;
+  -webkit-transform-origin: 0 0;
   transform-origin: 0 0;
-  transition: all 0.6s ease-out;
+  -webkit-transition: all 0.5s ease-out;
+  transition: all 0.5s ease-out;
 }
 
 .t1 {
-  border-top: 141.4px solid #B5D338;
-  border-right: 141.4px solid transparent;
+  border-top: 134.33px solid #B5D338;
+  border-right: 134.33px solid transparent;
 }
 
 .t2 {
-  border-top: 141.4px solid #D0E969;
-  border-right: 141.4px solid transparent;
+  border-top: 134.33px solid #D0E969;
+  border-right: 134.33px solid transparent;
 }
 
 .t3 {
-  width: 70.8px;
-  height: 70.8px;
+  width: 67.26px;
+  height: 67.26px;
   background: #C6C6C6;
 }
 
 .t4 {
-  border-top: 70.8px solid #95288C;
-  border-right: 70.8px solid transparent;
+  border-top: 67.26px solid #95288C;
+  border-right: 67.26px solid transparent;
 }
 
 .t5 {
-  border-top: 70.8px solid #D7E98B;
-  border-right: 70.8px solid transparent;
+  border-top: 67.26px solid #D7E98B;
+  border-right: 67.26px solid transparent;
 }
 
 .t6 {
-  width: 100px;
-  height: 50px;
+  width: 95px;
+  height: 47.5px;
   background: #728912;
 }
 
 .t7 {
-  border-top: 100px solid #D0E969;
-  border-right: 100px solid transparent;
+  border-top: 95px solid #D0E969;
+  border-right: 95px solid transparent;
 }
 
 .origin .t1 {
-  transform: translate(100px, 100px) rotate(-135deg);
+  transform: translate(95px, 95px) rotate(-135deg);
 }
 .origin .t2 {
-  transform: translate(100px, 100px) rotate(135deg);
+  transform: translate(95px, 95px) rotate(135deg);
 }
 .origin .t3 {
-  transform: translate(100px, 100px) rotate(45deg);
+  transform: translate(95px, 95px) rotate(45deg);
 }
 .origin .t4 {
-  transform: translate(100px, 100px) rotate(-45deg);
+  transform: translate(95px, 95px) rotate(-45deg);
 }
 .origin .t5 {
-  transform: translate(50px, 150px) rotate(45deg);
+  transform: translate(47.5px, 142.5px) rotate(45deg);
 }
 .origin .t6 {
-  transform: translate(200px) rotate(90deg) skew(45deg);
+  transform: translate(190px) rotate(90deg) skew(45deg);
 }
 .origin .t7 {
-  transform: translate(200px, 200px) rotate(180deg);
+  transform: translate(190px, 190px) rotate(180deg);
 }
 
 /*your design*/
 .runner .t1 {
-  transform: translate(100px, 100px) rotate(-135deg);
+  transform: translate(95px, 95px) rotate(-135deg);
 }
 .runner .t2 {
-  transform: translate(50px, 50px) rotate(45deg);
+  transform: translate(47.5px, 47.5px) rotate(45deg);
 }
 .runner .t3 {
-  transform: translate(100px, -100px) rotate(45deg);
+  transform: translate(95px, -95px) rotate(45deg);
 }
 .runner .t4 {
-  transform: translate(200px, 250px) rotate(-135deg);
+  transform: translate(190px, 237.5px) rotate(-135deg);
 }
 .runner .t5 {
-  transform: translate(-115px, 100px) rotate(45deg);
+  transform: translate(-109.25px, 95px) rotate(45deg);
 }
 .runner .t6 {
-  transform: translate(50px, 150px) rotate(0deg) skew(45deg);
+  transform: translate(47.5px, 142.5px) rotate(0deg) skew(45deg);
 }
 .runner .t7 {
-  transform: translate(-20px, 220px) rotate(225deg);
+  transform: translate(-19px, 209px) rotate(225deg);
 }
 
 /*# sourceMappingURL=master.min.css.map */
