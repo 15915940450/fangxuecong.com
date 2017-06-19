@@ -576,6 +576,29 @@ footer a{
   .nav{
     display: none;
   }
+  .banner h1{
+    width: auto;
+    font-size: 39px;
+  }
+  .banner h3{
+    width: auto;
+  }
+  .banner ul{
+
+  }
+  .banner ul li{
+    width: 60px;
+    height: 60px;
+    margin-right: 16px;
+  }
+  .banner ul li a{
+    width: 60px;
+    height: 60px;
+  }
+    #wechat_code{
+      width: 80px;
+      max-width: 80px;
+    }
 }
 
 
