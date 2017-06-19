@@ -310,7 +310,8 @@ class Add extends React.Component{
   }
   // onMouseDown 先于blur，blur先于click
   // onMouseDown ,點擊了按鈕
-  addLi(){
+  addLi(ev){
+    ev.preventDefault();
     var strNeirong=this.eleInput.value;
     this.props.rAddLi(strNeirong);
     this.eleInput.value='';
@@ -319,8 +320,10 @@ class Add extends React.Component{
   render(){
     return (
       <div className="add">
-        <input ref={(a)=>{this.eleInput=a}} type="text" placeholder="添加一個任務" onFocus={this.displayAddButton.bind(this)} onBlur={this.handleBlur.bind(this)} onInput={this.enableAddButton.bind(this)} />
-        <button ref={(a)=>{this.eleButton=a}} style={{display:'none'}} type="button" onMouseDown={this.addLi.bind(this)}>add</button>
+        <form onSubmit={this.addLi.bind(this)}>
+          <input ref={(a)=>{this.eleInput=a}} type="text" placeholder="添加一個任務" onFocus={this.displayAddButton.bind(this)} onBlur={this.handleBlur.bind(this)} onInput={this.enableAddButton.bind(this)} />
+          <button ref={(a)=>{this.eleButton=a}} style={{display:'none'}} type="button" onMouseDown={this.addLi.bind(this)}>add</button>
+        </form>
       </div>
     );
   }
