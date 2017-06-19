@@ -564,42 +564,7 @@ footer a{
 .myproject a:hover i{
   width:100%;
 }
-/*手机不显示详细内容*/
-@media (max-width:992px) {
-  .work{
-    padding-top: 0;
-    padding-bottom: 0;
-  }
-  .work_item .illustrate ul{
-    display: none;
-  }
-  .nav{
-    display: none;
-  }
-  .banner h1{
-    width: auto;
-    font-size: 39px;
-  }
-  .banner h3{
-    width: auto;
-  }
-  .banner ul{
 
-  }
-  .banner ul li{
-    width: 60px;
-    height: 60px;
-    margin-right: 16px;
-  }
-  .banner ul li a{
-    width: 60px;
-    height: 60px;
-  }
-    #wechat_code{
-      width: 80px;
-      max-width: 80px;
-    }
-}
 
 
 /*page*/
@@ -687,16 +652,18 @@ footer a{
   color: #FFF;
   z-index: 100;
   display: none;
+  overflow: hidden;
 }
 .mask .houtai{
   /*background: red;*/
-  padding-top: 6%;
+  padding-top: 9%;
   display: none;
 }
 .mask .houtai p{
   text-align: center;
   font-size: 16px;
   margin-top: 10px;
+  margin-bottom: 50px;
 }
 .mask svg{
   width: 30px;
@@ -706,3 +673,46 @@ footer a{
   top: 10px;
   cursor: pointer;
 }
+
+
+/*手机不显示详细内容*/
+@media (max-width:992px) {
+  .work{
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  .work_item .illustrate ul{
+    display: none;
+  }
+  .nav{
+    display: none;
+  }
+  .banner h1{
+    width: auto;
+    font-size: 39px;
+  }
+  .banner h3{
+    width: auto;
+  }
+  .banner ul{
+
+  }
+  .banner ul li{
+    width: 60px;
+    height: 60px;
+    margin-right: 16px;
+  }
+  .banner ul li a{
+    width: 60px;
+    height: 60px;
+  }
+    #wechat_code{
+      width: 80px;
+      max-width: 80px;
+    }
+    .mask .houtai{
+      padding-top: 60px;
+    }
+}
+
+/*END*/
