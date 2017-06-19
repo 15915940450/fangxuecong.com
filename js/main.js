@@ -85,6 +85,18 @@ $(function(){
       return (Math.random()*(max-min)+min);
     }
   }
+  /*
+  *mask
+  */
+  $('#xposed').on('click',function(){
+    $('.houtai').css({display:'block'});
+    $('.mask').fadeIn();
+  });
+  $('.mask svg').on('click',function(){
+    $('.mask').fadeOut(function(){
+      $('.houtai').css({display:'none'});
+    });
+  });
 
 // resize
   window.onresize=function(){
