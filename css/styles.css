@@ -28,7 +28,7 @@
 /*banner*/
 .banner{
   height: 466px;
-  background: url(../img/banner.jpg) no-repeat center 0;
+  background:#28272F url(../img/banner.jpg) no-repeat center 0;
   overflow: hidden;
   position: relative;
 }
