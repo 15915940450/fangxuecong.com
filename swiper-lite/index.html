@@ -128,124 +128,126 @@
 <script src="../js/jquery-3.0.0.min.js"></script>
 <script src="../js/main.js"></script>
 <script type="text/javascript">
-var isTouchMove,startTx,startTy,moveTx,moveTy;
-var eleUlWrap=document.querySelector('.ul_wrap');
-var eleLiItems=eleUlWrap.querySelectorAll('.li_item');
-var numLiItemsLength=eleLiItems.length;
-var numEleWidth=220;
-var strInitEleUlWrapClassName=eleUlWrap.className;
-var numViewWidth=300;
-var eleStartX=-numEleWidth*numLiItemsLength+(numViewWidth-numEleWidth)/2; //-620
+(function(){
+  var isTouchMove,startTx,startTy,moveTx,moveTy;
+  var eleUlWrap=document.querySelector('.ul_wrap');
+  var eleLiItems=eleUlWrap.querySelectorAll('.li_item');
+  var numLiItemsLength=eleLiItems.length;
+  var numEleWidth=220;
+  var strInitEleUlWrapClassName=eleUlWrap.className;
+  var numViewWidth=300;
+  var eleStartX=-numEleWidth*numLiItemsLength+(numViewWidth-numEleWidth)/2; //-620
 
-eleUlWrap.innerHTML=eleUlWrap.innerHTML+eleUlWrap.innerHTML;
-eleUlWrap.style.width=numEleWidth*numLiItemsLength*2+'px';
-eleUlWrap.style.WebkitTransform='translate3d('+eleStartX+'px,0,0)';
-eleUlWrap.style.transform='translate3d('+eleStartX+'px,0,0)';
-//===================================================
-myTouch(eleUlWrap,function(){ //move
-  console.log('moving');
-  eleUlWrap.style.WebkitTransform='translate3d('+(moveTx-startTx+eleStartX)+'px,0,0)';
-  eleUlWrap.style.transform='translate3d('+(moveTx-startTx+eleStartX)+'px,0,0)';
-},function(){ //mySwipeLeft
-  eleUlWrap.style.WebkitTransform='translate3d('+(eleStartX-numEleWidth)+'px,0,0)';
-  eleUlWrap.style.transform='translate3d('+(eleStartX-numEleWidth)+'px,0,0)';
-  // eleStartX=eleStartX-numEleWidth;
-  var elefirstItem=eleUlWrap.querySelector('.li_item:first-child');
-  var eleLastItem=eleUlWrap.querySelector('.li_item:last-child');
-  window.setTimeout(function(){
-    //動畫結束200ms
-    eleUlWrap.className=strInitEleUlWrapClassName;
-    eleUlWrap.appendChild(elefirstItem);
-    eleUlWrap.style.WebkitTransform='translate3d('+eleStartX+'px,0,0)';
-    eleUlWrap.style.transform='translate3d('+eleStartX+'px,0,0)';
+  eleUlWrap.innerHTML=eleUlWrap.innerHTML+eleUlWrap.innerHTML;
+  eleUlWrap.style.width=numEleWidth*numLiItemsLength*2+'px';
+  eleUlWrap.style.WebkitTransform='translate3d('+eleStartX+'px,0,0)';
+  eleUlWrap.style.transform='translate3d('+eleStartX+'px,0,0)';
+  //===================================================
+  myTouch(eleUlWrap,function(){ //move
+    console.log('moving');
+    eleUlWrap.style.WebkitTransform='translate3d('+(moveTx-startTx+eleStartX)+'px,0,0)';
+    eleUlWrap.style.transform='translate3d('+(moveTx-startTx+eleStartX)+'px,0,0)';
+  },function(){ //mySwipeLeft
+    eleUlWrap.style.WebkitTransform='translate3d('+(eleStartX-numEleWidth)+'px,0,0)';
+    eleUlWrap.style.transform='translate3d('+(eleStartX-numEleWidth)+'px,0,0)';
     // eleStartX=eleStartX-numEleWidth;
-  },200);
-},function(){  //mySwipeRight
-  eleUlWrap.style.WebkitTransform='translate3d('+(eleStartX+numEleWidth)+'px,0,0)';
-  eleUlWrap.style.transform='translate3d('+(eleStartX+numEleWidth)+'px,0,0)';
-  // eleStartX=eleStartX+numEleWidth;
-  // eleUlWrap.dataset.elestartx=-180;
-  var elefirstItem=eleUlWrap.querySelector('.li_item:first-child');
-  var eleLastItem=eleUlWrap.querySelector('.li_item:last-child');
-  // console.log(elefirstItem);
-  // console.log(eleLastItem);
-  window.setTimeout(function(){
-    //動畫結束200ms
-    eleUlWrap.className=strInitEleUlWrapClassName;
-    eleUlWrap.insertBefore(eleLastItem,elefirstItem);
-    eleUlWrap.style.WebkitTransform='translate3d('+eleStartX+'px,0,0)';
-    eleUlWrap.style.transform='translate3d('+eleStartX+'px,0,0)';
-    // eleStartX=eleStartX-numEleWidth;
-  },200);
-});
-//===================================================
-function myTouch(element,MyTouchMove,mySwipeLeft,mySwipeRight){
-//1.start
-  element.addEventListener( 'touchstart', function( e ){
-  var touches = e.touches[0];
+    var elefirstItem=eleUlWrap.querySelector('.li_item:first-child');
+    var eleLastItem=eleUlWrap.querySelector('.li_item:last-child');
+    window.setTimeout(function(){
+      //動畫結束200ms
+      eleUlWrap.className=strInitEleUlWrapClassName;
+      eleUlWrap.appendChild(elefirstItem);
+      eleUlWrap.style.WebkitTransform='translate3d('+eleStartX+'px,0,0)';
+      eleUlWrap.style.transform='translate3d('+eleStartX+'px,0,0)';
+      // eleStartX=eleStartX-numEleWidth;
+    },200);
+  },function(){  //mySwipeRight
+    eleUlWrap.style.WebkitTransform='translate3d('+(eleStartX+numEleWidth)+'px,0,0)';
+    eleUlWrap.style.transform='translate3d('+(eleStartX+numEleWidth)+'px,0,0)';
+    // eleStartX=eleStartX+numEleWidth;
+    // eleUlWrap.dataset.elestartx=-180;
+    var elefirstItem=eleUlWrap.querySelector('.li_item:first-child');
+    var eleLastItem=eleUlWrap.querySelector('.li_item:last-child');
+    // console.log(elefirstItem);
+    // console.log(eleLastItem);
+    window.setTimeout(function(){
+      //動畫結束200ms
+      eleUlWrap.className=strInitEleUlWrapClassName;
+      eleUlWrap.insertBefore(eleLastItem,elefirstItem);
+      eleUlWrap.style.WebkitTransform='translate3d('+eleStartX+'px,0,0)';
+      eleUlWrap.style.transform='translate3d('+eleStartX+'px,0,0)';
+      // eleStartX=eleStartX-numEleWidth;
+    },200);
+  });
+  //===================================================
+  function myTouch(element,MyTouchMove,mySwipeLeft,mySwipeRight){
+  //1.start
+    element.addEventListener( 'touchstart', function( e ){
+    var touches = e.touches[0];
 
-  startTx = touches.clientX;
-  startTy = touches.clientY;
-  isTouchMove = false;
-  element.className=strInitEleUlWrapClassName;
-  }, false );
-//2.move
-  element.addEventListener('touchmove', function(e){
-  isTouchMove = true;
-  e.preventDefault();
-  var touches = e.touches[0];
-  moveTx=touches.clientX;
-  moveTy=touches.clientY;
-  MyTouchMove();
-  }, false );
+    startTx = touches.clientX;
+    startTy = touches.clientY;
+    isTouchMove = false;
+    element.className=strInitEleUlWrapClassName;
+    }, false );
+  //2.move
+    element.addEventListener('touchmove', function(e){
+    isTouchMove = true;
+    e.preventDefault();
+    var touches = e.touches[0];
+    moveTx=touches.clientX;
+    moveTy=touches.clientY;
+    MyTouchMove();
+    }, false );
 
-  element.addEventListener('touchend',function(e){
-  element.className+=' ttion';
-  if( !isTouchMove ){
-    return;
-  }
-
-  var touches = e.changedTouches[0],
-    endTx = touches.clientX,
-    endTy = touches.clientY,
-    distanceX = startTx - endTx
-    distanceY = startTy - endTy,
-    isSwipe = false;
-
-  if( Math.abs(distanceX) >= Math.abs(distanceY) ){
-    if( distanceX > 20 ){
-      // console.log( 'fire swipe left event' );
-      mySwipeLeft();
-      isSwipe = true;
+    element.addEventListener('touchend',function(e){
+    element.className+=' ttion';
+    if( !isTouchMove ){
+      return;
     }
-    else if( distanceX < -20 ){
-      // console.log( 'fire swipe right event' );
-      mySwipeRight();
-      isSwipe = true;
-    }else{
-      //滑動距離小於20
+
+    var touches = e.changedTouches[0],
+      endTx = touches.clientX,
+      endTy = touches.clientY,
+      distanceX = startTx - endTx
+      distanceY = startTy - endTy,
+      isSwipe = false;
+
+    if( Math.abs(distanceX) >= Math.abs(distanceY) ){
+      if( distanceX > 20 ){
+        // console.log( 'fire swipe left event' );
+        mySwipeLeft();
+        isSwipe = true;
+      }
+      else if( distanceX < -20 ){
+        // console.log( 'fire swipe right event' );
+        mySwipeRight();
+        isSwipe = true;
+      }else{
+        //滑動距離小於20
+        element.style.WebkitTransform='translate3d('+eleStartX+'px,0,0)';
+        element.style.transform='translate3d('+eleStartX+'px,0,0)';
+      }
+    }
+    else{
+      if( distanceY > 20 ){
+        console.log( 'fire swipe up event' );
+        isSwipe = true;
+      }
+      else if( distanceY < -20 ){
+        console.log( 'fire swipe down event' );
+        isSwipe = true;
+      }
       element.style.WebkitTransform='translate3d('+eleStartX+'px,0,0)';
       element.style.transform='translate3d('+eleStartX+'px,0,0)';
     }
-  }
-  else{
-    if( distanceY > 20 ){
-      console.log( 'fire swipe up event' );
-      isSwipe = true;
-    }
-    else if( distanceY < -20 ){
-      console.log( 'fire swipe down event' );
-      isSwipe = true;
-    }
-    element.style.WebkitTransform='translate3d('+eleStartX+'px,0,0)';
-    element.style.transform='translate3d('+eleStartX+'px,0,0)';
-  }
 
-  if( isSwipe ){
-    // console.log( 'fire swipe event' );
+    if( isSwipe ){
+      // console.log( 'fire swipe event' );
+    }
+    }, false );
   }
-  }, false );
-}
+})();
 </script>
 </body>
 </html>
