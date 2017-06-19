@@ -99,6 +99,18 @@ $(function(){
       $('.houtai').css({display:'none'});
     });
   });
+  /*
+  *tangram:origin,runner
+  */
+  if($('#tangram').length>0){
+    $('#tangram').hover(function(){
+      // $('.tangram-wrap').addClass('runner');
+      $('.tangram-wrap').attr('class','tangram-wrap runner');
+    },function(){
+      $('.tangram-wrap').attr('class','tangram-wrap origin');
+      // $('.tangram-wrap').removeClass('runner');
+    });
+  }
 
 // resize
   window.onresize=function(){

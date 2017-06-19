@@ -5,19 +5,20 @@ html,body{
 }
 
 /*variables $tangramWidth:300px;*/
-$tangramWidth:300px;
+$tangramWidth:200px;
 
 #tangram {
   width: $tangramWidth;
   height: $tangramWidth;
-  overflow: hidden;
-  margin: 100px auto 0;
+  // overflow: hidden;
+  margin: 0 auto;
 }
 
-.wrap {
+.tangram-wrap {
   position: relative;
   width: $tangramWidth;
   height: $tangramWidth * 1.33;
+  margin-top: $tangramWidth * 0.500;
 }
 
 .t {
@@ -27,48 +28,98 @@ $tangramWidth:300px;
   width: 0;
   height: 0;
   transform-origin: 0 0;
+  // display: none;
+  transition: all 0.6s ease-out;
 }
 
 .t1 {
   border-top: $tangramWidth * 0.707 solid #B5D338;
   border-right: $tangramWidth * 0.707 solid transparent;
-  transform: translate($tangramWidth * 0.500, $tangramWidth * 0.500) rotate(-135deg);
 }
 
 .t2 {
   border-top: $tangramWidth * 0.707 solid #D0E969;
   border-right: $tangramWidth * 0.707 solid transparent;
-  transform: translate($tangramWidth * 0.500, $tangramWidth * 0.500) rotate(135deg);
 }
 
 .t3 {
   width: $tangramWidth * 0.354;
   height: $tangramWidth * 0.354;
   background: #C6C6C6;
-  transform: translate($tangramWidth * 0.500, $tangramWidth * 0.500) rotate(45deg);
 }
 
 .t4 {
   border-top: $tangramWidth * 0.354 solid #95288C;
   border-right: $tangramWidth * 0.354 solid transparent;
-  transform: translate($tangramWidth * 0.500, $tangramWidth * 0.500) rotate(-45deg);
 }
 
 .t5 {
   border-top: $tangramWidth * 0.354 solid #D7E98B;
   border-right: $tangramWidth * 0.354 solid transparent;
-  transform: translate($tangramWidth * 0.250, $tangramWidth * 0.750) rotate(45deg);
 }
 
 .t6 {
   width: $tangramWidth * 0.500;
   height: $tangramWidth * 0.250;
-  transform: translate($tangramWidth) rotate(90deg) skew(45deg);
   background: #728912;
 }
 
 .t7 {
   border-top: $tangramWidth * 0.500 solid #D0E969;
   border-right: $tangramWidth * 0.500 solid transparent;
-  transform: translate($tangramWidth, $tangramWidth) rotate(180deg);
+}
+.origin{
+  .t1{
+    transform: translate($tangramWidth * 0.500, $tangramWidth * 0.500) rotate(-135deg);
+  }
+  .t2{
+    transform: translate($tangramWidth * 0.500, $tangramWidth * 0.500) rotate(135deg);
+  }
+  .t3{
+    transform: translate($tangramWidth * 0.500, $tangramWidth * 0.500) rotate(45deg);
+  }
+  .t4{
+    transform: translate($tangramWidth * 0.500, $tangramWidth * 0.500) rotate(-45deg);
+  }
+  .t5{
+    transform: translate($tangramWidth * 0.250, $tangramWidth * 0.750) rotate(45deg);
+  }
+  .t6{
+    transform: translate($tangramWidth) rotate(90deg) skew(45deg);
+  }
+  .t7{
+    transform: translate($tangramWidth, $tangramWidth) rotate(180deg);
+  }
+}
+
+/*your design*/
+.runner{
+  // border: 1px solid red;
+  .t1{
+    transform: translate($tangramWidth * 0.500, $tangramWidth * 0.500) rotate(-135deg);
+  }
+  .t2{
+    // transform: translate($tangramWidth * 0.500, $tangramWidth * 0.500) rotate(135deg);
+    transform: translate($tangramWidth * 0.250, $tangramWidth * 0.250) rotate(45deg);
+  }
+  .t3{
+    // transform: translate($tangramWidth * 0.500, $tangramWidth * 0.500) rotate(45deg);
+    transform: translate($tangramWidth * 0.500,-$tangramWidth * 0.500) rotate(45deg);
+  }
+  .t4{
+    // transform: translate($tangramWidth * 0.500, $tangramWidth * 0.500) rotate(-45deg);
+    transform: translate($tangramWidth,$tangramWidth * 1.250) rotate(-135deg);
+  }
+  .t5{
+    // transform: translate($tangramWidth * 0.250, $tangramWidth * 0.750) rotate(45deg);
+    transform: translate(-$tangramWidth * 0.575,$tangramWidth * 0.500) rotate(45deg);
+  }
+  .t6{
+    // transform: translate($tangramWidth) rotate(90deg) skew(45deg);
+    transform: translate($tangramWidth * 0.250,$tangramWidth * 0.750) rotate(0deg) skew(45deg);
+  }
+  .t7{
+    // transform: translate($tangramWidth, $tangramWidth) rotate(180deg);
+    transform: translate(-$tangramWidth * 0.100, $tangramWidth * 1.100) rotate(225deg);
+  }
 }

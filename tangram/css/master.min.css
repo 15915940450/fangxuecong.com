@@ -1,1 +1,113 @@
-html,body{margin:0;padding:0;height:100%}#tangram{width:300px;height:300px;overflow:hidden;margin:100px auto 0}.wrap{position:relative;width:300px;height:399px}.t{position:absolute;top:0;left:0;width:0;height:0;transform-origin:0 0}.t1{border-top:212.1px solid #b5d338;border-right:212.1px solid transparent;transform:translate(150px,150px) rotate(-135deg)}.t2{border-top:212.1px solid #d0e969;border-right:212.1px solid transparent;transform:translate(150px,150px) rotate(135deg)}.t3{width:106.2px;height:106.2px;background:#c6c6c6;transform:translate(150px,150px) rotate(45deg)}.t4{border-top:106.2px solid #95288c;border-right:106.2px solid transparent;transform:translate(150px,150px) rotate(-45deg)}.t5{border-top:106.2px solid #d7e98b;border-right:106.2px solid transparent;transform:translate(75px,225px) rotate(45deg)}.t6{width:150px;height:75px;transform:translate(300px) rotate(90deg) skew(45deg);background:#728912}.t7{border-top:150px solid #d0e969;border-right:150px solid transparent;transform:translate(300px,300px) rotate(180deg)}
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+/*variables $tangramWidth:300px;*/
+#tangram {
+  width: 200px;
+  height: 200px;
+  margin: 0 auto;
+}
+
+.tangram-wrap {
+  position: relative;
+  width: 200px;
+  height: 266px;
+  margin-top: 100px;
+}
+
+.t {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  transform-origin: 0 0;
+  transition: all 0.6s ease-out;
+}
+
+.t1 {
+  border-top: 141.4px solid #B5D338;
+  border-right: 141.4px solid transparent;
+}
+
+.t2 {
+  border-top: 141.4px solid #D0E969;
+  border-right: 141.4px solid transparent;
+}
+
+.t3 {
+  width: 70.8px;
+  height: 70.8px;
+  background: #C6C6C6;
+}
+
+.t4 {
+  border-top: 70.8px solid #95288C;
+  border-right: 70.8px solid transparent;
+}
+
+.t5 {
+  border-top: 70.8px solid #D7E98B;
+  border-right: 70.8px solid transparent;
+}
+
+.t6 {
+  width: 100px;
+  height: 50px;
+  background: #728912;
+}
+
+.t7 {
+  border-top: 100px solid #D0E969;
+  border-right: 100px solid transparent;
+}
+
+.origin .t1 {
+  transform: translate(100px, 100px) rotate(-135deg);
+}
+.origin .t2 {
+  transform: translate(100px, 100px) rotate(135deg);
+}
+.origin .t3 {
+  transform: translate(100px, 100px) rotate(45deg);
+}
+.origin .t4 {
+  transform: translate(100px, 100px) rotate(-45deg);
+}
+.origin .t5 {
+  transform: translate(50px, 150px) rotate(45deg);
+}
+.origin .t6 {
+  transform: translate(200px) rotate(90deg) skew(45deg);
+}
+.origin .t7 {
+  transform: translate(200px, 200px) rotate(180deg);
+}
+
+/*your design*/
+.runner .t1 {
+  transform: translate(100px, 100px) rotate(-135deg);
+}
+.runner .t2 {
+  transform: translate(50px, 50px) rotate(45deg);
+}
+.runner .t3 {
+  transform: translate(100px, -100px) rotate(45deg);
+}
+.runner .t4 {
+  transform: translate(200px, 250px) rotate(-135deg);
+}
+.runner .t5 {
+  transform: translate(-115px, 100px) rotate(45deg);
+}
+.runner .t6 {
+  transform: translate(50px, 150px) rotate(0deg) skew(45deg);
+}
+.runner .t7 {
+  transform: translate(-20px, 220px) rotate(225deg);
+}
+
+/*# sourceMappingURL=master.min.css.map */
