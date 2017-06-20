@@ -13,6 +13,9 @@ article{
   width: $tangramWidth;
   height: $tangramWidth;
   margin: 0 auto;
+  // fortest
+  // background: #FFF;
+  // border: 1px solid blue;
 }
 
 .tangram-wrap {
@@ -30,7 +33,6 @@ article{
   height: 0;
   -webkit-transform-origin: 0 0;
   transform-origin: 0 0;
-  // display: none;
   -webkit-transition: all 0.5s ease-out;
   transition: all 0.5s ease-out;
 }
@@ -72,6 +74,10 @@ article{
   border-right: $tangramWidth * 0.500 solid transparent;
 }
 .origin{
+  .t{
+    // fortest
+    // display: none;
+  }
   .t1{
     transform: translate($tangramWidth * 0.500, $tangramWidth * 0.500) rotate(-135deg);
   }
@@ -119,3 +125,28 @@ article{
     transform: translate(-$tangramWidth * 0.100, $tangramWidth * 1.100) rotate(225deg);
   }
 }
+.fish{
+  .t1{
+    transform: translate($tangramWidth * 0.500, $tangramWidth * 0.250) rotate(90deg);
+  }
+  .t2{
+    transform: translate($tangramWidth * 0.500, $tangramWidth * 0.250) rotate(0deg);
+  }
+  .t3{
+    transform: translate($tangramWidth * 0.750,-$tangramWidth * 0.250) rotate(45deg);
+  }
+  .t4{
+    transform: translate($tangramWidth * 0.750,-$tangramWidth * 0.250) rotate(135deg);
+  }
+  .t5{
+    transform: translate($tangramWidth * 0.500,$tangramWidth * 0.960) rotate(45deg);
+  }
+  .t6{
+    transform: translate(0,0) rotate(0deg) skew(45deg);
+  }
+  .t7{
+    transform: translate($tangramWidth * 0.500, 0) rotate(180deg);
+  }
+}
+
+/* sass --watch master.scss:master.min.css --style expanded --sourcemap */

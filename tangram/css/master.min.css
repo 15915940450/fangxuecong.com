@@ -116,4 +116,28 @@ article {
   transform: translate(-19px, 209px) rotate(225deg);
 }
 
+.fish .t1 {
+  transform: translate(95px, 47.5px) rotate(90deg);
+}
+.fish .t2 {
+  transform: translate(95px, 47.5px) rotate(0deg);
+}
+.fish .t3 {
+  transform: translate(142.5px, -47.5px) rotate(45deg);
+}
+.fish .t4 {
+  transform: translate(142.5px, -47.5px) rotate(135deg);
+}
+.fish .t5 {
+  transform: translate(95px, 182.4px) rotate(45deg);
+}
+.fish .t6 {
+  transform: translate(0, 0) rotate(0deg) skew(45deg);
+}
+.fish .t7 {
+  transform: translate(95px, 0) rotate(180deg);
+}
+
+/* sass --watch master.scss:master.min.css --style expanded --sourcemap */
+
 /*# sourceMappingURL=master.min.css.map */
