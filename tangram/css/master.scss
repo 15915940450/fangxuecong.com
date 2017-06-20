@@ -6,13 +6,12 @@ html,body{
 
 /*variables $tangramWidth:300px;*/
 $tangramWidth:190px;
-article{
-  min-height: $tangramWidth * 2.5;
-}
+
 #tangram {
   width: $tangramWidth;
-  height: $tangramWidth;
+  height: $tangramWidth * 1.55;
   margin: 0 auto;
+  padding-top: $tangramWidth * 0.55;
   // fortest
   // background: #FFF;
   // border: 1px solid blue;
@@ -22,7 +21,7 @@ article{
   position: relative;
   width: $tangramWidth;
   height: $tangramWidth * 1.33;
-  margin-top: $tangramWidth * 0.250;
+
 }
 
 .t {
