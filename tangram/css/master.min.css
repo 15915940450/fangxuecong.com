@@ -138,6 +138,28 @@ article {
   transform: translate(95px, 0) rotate(180deg);
 }
 
+.boat .t1 {
+  transform: translate(0, 123.5px) rotate(-105deg);
+}
+.boat .t2 {
+  transform: translate(152px, 123.5px) rotate(-105deg);
+}
+.boat .t3 {
+  transform: translate(133px, 123.5px) rotate(0deg);
+}
+.boat .t4 {
+  transform: translate(133px, 190px) rotate(180deg);
+}
+.boat .t5 {
+  transform: translate(200.45px, 123.5px) rotate(0deg);
+}
+.boat .t6 {
+  transform: translate(133px, 123.5px) rotate(135deg) skew(45deg);
+}
+.boat .t7 {
+  transform: translate(0, 190px) rotate(225deg);
+}
+
 /* sass --watch master.scss:master.min.css --style expanded --sourcemap */
 
 /*# sourceMappingURL=master.min.css.map */

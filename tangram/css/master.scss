@@ -149,4 +149,27 @@ article{
   }
 }
 
+.boat{
+  .t1{
+    transform: translate(0,$tangramWidth * 0.650) rotate(-105deg);
+  }
+  .t2{
+    transform: translate($tangramWidth * 0.800,$tangramWidth * 0.650) rotate(-105deg);
+  }
+  .t3{
+    transform: translate($tangramWidth * 0.700,$tangramWidth * 0.650) rotate(0deg);
+  }
+  .t4{
+    transform: translate($tangramWidth * 0.700,$tangramWidth) rotate(180deg);
+  }
+  .t5{
+    transform: translate($tangramWidth * 1.055,$tangramWidth * 0.650) rotate(0deg);
+  }
+  .t6{
+    transform: translate($tangramWidth * 0.700,$tangramWidth * 0.650) rotate(135deg) skew(45deg);
+  }
+  .t7{
+    transform: translate(0, $tangramWidth) rotate(225deg);
+  }
+}
 /* sass --watch master.scss:master.min.css --style expanded --sourcemap */

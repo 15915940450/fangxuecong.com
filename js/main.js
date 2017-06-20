@@ -108,13 +108,13 @@ $(function(){
     if(numClientW<=992){
       //手機
       var Timer=window.setInterval(function(){
-        var strTangramName=['origin','runner','fish'][Math.floor(Math.random()*3)];
+        var strTangramName=['origin','runner','fish','boat'][Math.floor(Math.random()*4)];
         $('.tangram-wrap').attr('class','tangram-wrap '+strTangramName);
       },3000);
     }else{
       $('#tangram').hover(function(){
         // $('.tangram-wrap').addClass('runner');
-        $('.tangram-wrap').attr('class','tangram-wrap '+['runner','fish'][Math.floor(Math.random()*2)]);
+        $('.tangram-wrap').attr('class','tangram-wrap '+['runner','fish','boat'][Math.floor(Math.random()*3)]);
       },function(){
         $('.tangram-wrap').attr('class','tangram-wrap origin');
         // $('.tangram-wrap').removeClass('runner');
