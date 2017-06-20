@@ -160,6 +160,28 @@ article {
   transform: translate(0, 190px) rotate(225deg);
 }
 
+.paper-crane .t1 {
+  transform: translate(142.5px, 114px) rotate(45deg);
+}
+.paper-crane .t2 {
+  transform: translate(229.33px, 66.5px) rotate(180deg);
+}
+.paper-crane .t3 {
+  transform: translate(0, 0) rotate(0deg);
+}
+.paper-crane .t4 {
+  transform: translate(95px, 161.5px) rotate(225deg);
+}
+.paper-crane .t5 {
+  transform: translate(19px, -47.5px) rotate(45deg);
+}
+.paper-crane .t6 {
+  transform: translate(0, 67.07px) rotate(0deg) skew(45deg);
+}
+.paper-crane .t7 {
+  transform: translate(161.5px, 133px) rotate(225deg);
+}
+
 /* sass --watch master.scss:master.min.css --style expanded --sourcemap */
 
 /*# sourceMappingURL=master.min.css.map */
