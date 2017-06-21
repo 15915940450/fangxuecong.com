@@ -178,6 +178,28 @@ html, body {
   transform: translate(161.5px, 133px) rotate(225deg);
 }
 
+.paper-crane2 .t1 {
+  transform: translate(28.5px, 171px) rotate(225deg);
+}
+.paper-crane2 .t2 {
+  transform: translate(123.5px, 209.76px) rotate(180deg);
+}
+.paper-crane2 .t3 {
+  transform: translate(95px, 47.5px) rotate(315deg);
+}
+.paper-crane2 .t4 {
+  transform: translate(142.5px, 95px) rotate(-45deg);
+}
+.paper-crane2 .t5 {
+  transform: translate(142.5px, -27.74px) rotate(-90deg);
+}
+.paper-crane2 .t6 {
+  transform: translate(142.5px, -95px) rotate(90deg) skew(45deg);
+}
+.paper-crane2 .t7 {
+  transform: translate(190px, 142.5px) rotate(135deg);
+}
+
 /* sass --watch master.scss:master.min.css --style expanded --sourcemap */
 
 /*# sourceMappingURL=master.min.css.map */

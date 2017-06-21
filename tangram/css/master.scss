@@ -12,16 +12,14 @@ $tangramWidth:190px;
   height: $tangramWidth * 1.55;
   margin: 0 auto;
   padding-top: $tangramWidth * 0.55;
-  // fortest
-  // background: #FFF;
-  // border: 1px solid blue;
 }
 
 .tangram-wrap {
   position: relative;
   width: $tangramWidth;
   height: $tangramWidth * 1.33;
-
+  // fortest
+  // border: 1px solid blue;
 }
 
 .t {
@@ -192,6 +190,29 @@ $tangramWidth:190px;
   }
   .t7{
     transform: translate($tangramWidth * 0.850, $tangramWidth * 0.700) rotate(225deg);
+  }
+}
+.paper-crane2{
+  .t1{
+    transform: translate($tangramWidth * 0.150,$tangramWidth * 0.900) rotate(225deg);
+  }
+  .t2{
+    transform: translate($tangramWidth * 0.650,$tangramWidth * 1.104) rotate(180deg);
+  }
+  .t3{
+    transform: translate($tangramWidth * 0.500,$tangramWidth * 0.250) rotate(315deg);
+  }
+  .t4{
+    transform: translate($tangramWidth * 0.750,$tangramWidth * 0.500) rotate(-45deg);
+  }
+  .t5{
+    transform: translate($tangramWidth * 0.75,-$tangramWidth * 0.146) rotate(-90deg);
+  }
+  .t6{
+    transform: translate($tangramWidth * 0.75,-$tangramWidth * 0.500) rotate(90deg) skew(45deg);
+  }
+  .t7{
+    transform: translate($tangramWidth, $tangramWidth * 0.750) rotate(135deg);
   }
 }
 /* sass --watch master.scss:master.min.css --style expanded --sourcemap */
