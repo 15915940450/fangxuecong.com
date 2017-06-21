@@ -1,4 +1,5 @@
 $(function(){
+  //全局變量：屏寬numClientW
   var numClientW=document.documentElement.clientWidth || document.body.clientWidth;
   // alert(numClientW);
   /*
@@ -121,6 +122,12 @@ $(function(){
       });
     }
 
+  }
+  /*
+  *vector
+  */
+  if($('#vector').length>0 && numClientW>992){
+    FSS("vector", "vector2");
   }
 
 // resize
