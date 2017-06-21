@@ -38,7 +38,7 @@ $(function(){
       .addActor('theater',{ accuracy: 1, speed: 0.6 });
 
     theater
-      .addScene('theater:大家好，我是学聪...', 1000)
+      .addScene('theater:大家好，我是学聪...', 3000)
       .addScene('theater:现居住在深圳', 200, '.', 200, '.', 200, '. ',1000)
       .addScene('theater:2011年毕业于广东工业大学', 200, '.', 200, '.', 200, '. ')
       .addScene('theater:我努力做出好看的',1000)
