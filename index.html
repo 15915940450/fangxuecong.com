@@ -10,6 +10,7 @@
     <link rel="shortcut icon" href="http://fangxuecong.com/img/favicon.png" type="image/x-icon" />
     <link rel="stylesheet" href="css/reset.css" />
     <link rel="stylesheet" href="css/grid_fee300.css" />
+    <link rel="stylesheet" href="css/swiper.min.css" />
     <link rel="stylesheet" href="css/styles.css" />
     <script src="js/modernizr.js"></script>
 </head>
@@ -320,8 +321,12 @@
               <p>Flexigrid是一个表格插件。但是它有缺点--鼠标拖拽列时会选中表格的数据，最终以反色显示。我修改了作者插件源码并申请pull request.</p>
             </li>
             <li>
-              <a href="#">玩客<i></i></a>
+              <a id="playker" href="javascript:;">玩客<i></i></a>
               <p>一个兴趣爱好社区。</p>
+            </li>
+            <li>
+              <a rel="nofollow" href="http://soft.royaleu.com/abm/">自动下注<i></i></a>
+              <p>早年工作时公司承接的博应用软件宣传页。</p>
             </li>
             <li>
               <a rel="nofollow" href="http://www.ltcentry.com/">券多多<i></i></a>
@@ -352,6 +357,7 @@
 </section>
     </div>
     <div class="mask">
+      <!-- 遮罩后台 -->
       <div class="container-fluid houtai">
         <div class="row">
           <div class="col-md-6">
@@ -363,13 +369,47 @@
             <p>优化后</p>
           </div>
         </div>
-
+      </div>
+      <!-- 遮罩玩客 -->
+      <div class="playker">
+        <div class="swiper-container">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <img src="img/project/playker1.png" alt="" />
+            </div>
+            <div class="swiper-slide">
+              <img src="img/project/playker2.png" alt="" />
+            </div>
+            <div class="swiper-slide">
+              <img src="img/project/playker3.png" alt="" />
+            </div>
+            <div class="swiper-slide">
+              <img src="img/project/playker4.png" alt="" />
+            </div>
+            <div class="swiper-slide">
+              <img src="img/project/playker5.png" alt="" />
+            </div>
+            <div class="swiper-slide">
+              <img src="img/project/playker6.png" alt="" />
+            </div>
+            <div class="swiper-slide">
+              <img src="img/project/playker7.png" alt="" />
+            </div>
+            <div class="swiper-slide">
+              <img src="img/project/playker8.png" alt="" />
+            </div>
+          </div>
+          <div class="swiper-pagination"></div>
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
+        </div>
       </div>
       <svg enable-background="new 0 0 100 100" version="1.1" viewBox="0 0 100 100" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><polygon fill="#FFF" points="77.6,21.1 49.6,49.2 21.5,21.1 19.6,23 47.6,51.1 19.6,79.2 21.5,81.1 49.6,53 77.6,81.1 79.6,79.2   51.5,51.1 79.6,23 "/></svg>
     </div>
     <script src="js/jquery-3.0.0.min.js"></script>
     <script src="js/wave.js"></script>
     <script src="js/theater.min.js"></script>
+    <script src="js/swiper.jquery.min.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>

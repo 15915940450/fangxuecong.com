@@ -99,9 +99,30 @@ $(function(){
   });
   $('.mask svg').on('click',function(){
     $('.mask').fadeOut(function(){
-      $('.houtai').css({display:'none'});
+      $('.houtai,.playker').css({display:'none'});
     });
   });
+  var numClickPlayker=0;
+  $('#playker').on('click',function(){
+    $('.playker').css({display:'block'});
+    $('.mask').fadeIn(function(){
+      if(numClickPlayker===0){
+        numClickPlayker++;
+        var mySwiper = new Swiper ('.swiper-container', {
+        loop: true,
+        // effect : 'coverflow',
+
+        // 如果需要分页器
+        pagination: '.swiper-pagination',
+
+        // 如果需要前进后退按钮
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev'
+        })
+      }
+    });
+  });
+
   /*
   *tangram:origin,runner
   */
@@ -128,6 +149,22 @@ $(function(){
   */
   if($('#vector').length>0 && numClientW>992){
     FSS("vector", "vector2");
+  }
+  /*
+  *playker
+  */
+  if($('.playker').length>0){
+    // var mySwiper = new Swiper ('.swiper-container', {
+    // loop: true,
+    // // effect : 'coverflow',
+    //
+    // // 如果需要分页器
+    // pagination: '.swiper-pagination',
+    //
+    // // 如果需要前进后退按钮
+    // nextButton: '.swiper-button-next',
+    // prevButton: '.swiper-button-prev'
+    // })
   }
 
 // resize
