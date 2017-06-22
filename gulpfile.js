@@ -63,7 +63,7 @@ gulp.task('tetrishtml',function(){
 });
 gulp.task('tetrisphp',function(){
   return gulp.src('tetris-game/*.php')
-    .pipe(exReplace(/Li\('localhost','root',''/g,'Li(\'localhost\',\'fangxuec_root\',\'\''))
+    .pipe(exReplace(/Li\('localhost','root',''/g,'Li(\'localhost\',\'fangxuec_root\',\'p0\''))
     .pipe(gulp.dest('online/tetris-game/'));
 });
 gulp.task('tetriscss',function(){
@@ -80,13 +80,16 @@ gulp.task('tetrisjs',function(){
 });
 gulp.task('tetrisimg',function(){
   return gulp.src('tetris-game/img/**/*')
-      .pipe(imagemin())
-      .pipe(gulp.dest('./online/tetris-game/img/'));
+    .pipe(imagemin())
+    .pipe(gulp.dest('./online/tetris-game/img/'));
+});
+gulp.task('tetrisfont',function(){
+  return gulp.src('tetris-game/css/MISTRAL.TTF')
+    .pipe(gulp.dest('./online/tetris-game/css/'));
 });
 
-
 //============default
-gulp.task('default',['html','css','js','img','fifteen','tangram','tetrishtml','tetrisphp','tetriscss','tetrisjs','tetrisimg'],function(){ //,'img'
+gulp.task('default',['html','css','js','img','fifteen','tangram','tetrishtml','tetrisphp','tetriscss','tetrisjs','tetrisimg','tetrisfont'],function(){ //,'img'
   //将你的默认的任务代码放在这
   console.log("--------------okay----------------------");
 });
