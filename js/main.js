@@ -118,7 +118,14 @@ $(function(){
         // 如果需要前进后退按钮
         nextButton: '.swiper-button-next',
         prevButton: '.swiper-button-prev'
-        })
+      });
+      var numWrapH=$('.playker').height();
+      $('.mask .swiper-slide img').each(function(){
+        console.log($(this).width());
+        $(this).css({
+          marginTop:(numWrapH-70-$(this).height())/2
+        });
+      });
       }
     });
   });
