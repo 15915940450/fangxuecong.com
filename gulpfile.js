@@ -18,14 +18,14 @@ gulp.task('html',function(){
 });
 
 gulp.task('css',function(){
-  return gulp.src(['css/reset.css','css/grid_fee300.css','css/swiper.css','css/styles.css'])
+  return gulp.src(['css/reset.css','css/grid_fee300.css','css/swiper.css','css/styles.css','tangram/css/master.min.css'])
     .pipe(concatCss("fangxuecong.css"))
     .pipe(cleanCss({compatibility:'ie8'}))
     .pipe(gulp.dest('online/'));
 });
 
 gulp.task('js',function(){
-  return gulp.src(['js/modernizr.js','js/jquery-3.0.0.min.js','js/wave.js','js/theater.min.js','js/swiper.jquery.min.js','js/main.js'])
+  return gulp.src(['js/modernizr.js','js/FSS.js','js/jquery-3.0.0.min.js','js/wave.js','js/theater.min.js','js/swiper.jquery.min.js','js/main.js'])
     .pipe(concat('fangxuecong.js'))
     .pipe(uglify())
     .pipe(gulp.dest('online/'));
@@ -45,11 +45,19 @@ gulp.task('fifteen',function(){
     .pipe(htmlmin({collapseWhitespace:true}))
     .pipe(gulp.dest('online/fifteen/'));
 });
+gulp.task('tangram',function(){
+  return gulp.src('tangram/index.html')
+    .pipe(exReplace(/<link rel="stylesheet".+?\/>/g,''))
+    .pipe(exReplace(/<script src="\.\.\/js\/.+?"><\/script>/g,''))
+    .pipe(exReplace(/<\/head>/g,'<link rel="stylesheet" href="../fangxuecong.css" /><script src="../fangxuecong.js"></script></head>'))
+    .pipe(htmlmin({collapseWhitespace:true}))
+    .pipe(gulp.dest('online/tangram/'));
+});
 
 
 
 //============default
-gulp.task('default',['html','css','js','img','fifteen'],function(){
+gulp.task('default',['html','css','js','fifteen','tangram'],function(){ //,'img'
   //将你的默认的任务代码放在这
   console.log("--------------okay----------------------");
 });
