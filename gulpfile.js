@@ -53,11 +53,23 @@ gulp.task('tangram',function(){
     .pipe(htmlmin({collapseWhitespace:true}))
     .pipe(gulp.dest('online/tangram/'));
 });
-
+gulp.task('tetrishtml',function(){
+  return gulp.src('tetris-game/index.html')
+    .pipe(exReplace(/<link rel="stylesheet".+?\/>/g,''))
+    .pipe(exReplace(/<script src="js\/.+?"><\/script>/g,''))
+    .pipe(exReplace(/<\/head>/g,'<link rel="stylesheet" href="tetris-game.css" /><script src="tetris-game.js"></script></head>'))
+    .pipe(htmlmin({collapseWhitespace:true}))
+    .pipe(gulp.dest('online/tetris-game/'));
+});
+gulp.task('tetrisphp',function(){
+  return gulp.src('tetris-game/*.php')
+    .pipe(exReplace(/Li\('localhost','root',''/g,'Li(\'localhost\',\'fangxuec_root\',\'\''))
+    .pipe(gulp.dest('online/tetris-game/'));
+});
 
 
 //============default
-gulp.task('default',['html','css','js','fifteen','tangram'],function(){ //,'img'
+gulp.task('default',['html','css','js','fifteen','tangram','tetrishtml','tetrisphp'],function(){ //,'img'
   //将你的默认的任务代码放在这
   console.log("--------------okay----------------------");
 });
