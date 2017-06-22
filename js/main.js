@@ -102,13 +102,22 @@ $(function(){
       $('.houtai,.playker').css({display:'none'});
     });
   });
+  //圖片放大，新窗口打開
+  if(numClientW>992){
+    $('.houtai-img,.playker-img').css({cursor:'pointer'}).on('click',function(){
+      window.open($(this).attr('src'),'_blank');
+    });
+  }
+
+
   var numClickPlayker=0;
   $('#playker').on('click',function(){
     $('.playker').css({display:'block'});
-    $('.mask').fadeIn(function(){
-      if(numClickPlayker===0){
-        numClickPlayker++;
-        var mySwiper = new Swiper ('.swiper-container', {
+    $('.mask').fadeIn();
+    // swiper
+    if(numClickPlayker===0){
+      numClickPlayker++;
+      var mySwiper = new Swiper ('.swiper-container', {
         loop: true,
         // effect : 'coverflow',
 
@@ -120,14 +129,15 @@ $(function(){
         prevButton: '.swiper-button-prev'
       });
       var numWrapH=$('.playker').height();
-      $('.mask .swiper-slide img').each(function(){
-        console.log($(this).width());
-        $(this).css({
-          marginTop:(numWrapH-70-$(this).height())/2
+      if(numClientW<=992){
+        $('.mask .swiper-slide img').each(function(){
+          $(this).css({
+            marginTop:(numWrapH-70-$(this).height())/2
+          });
         });
-      });
       }
-    });
+
+    } //endif numClickPlayker
   });
 
   /*
