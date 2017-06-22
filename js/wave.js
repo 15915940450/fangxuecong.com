@@ -93,13 +93,17 @@ SiriWave.prototype = {
 // var clientW=document.documentElement.clientWidth || document.body.clientWidth;
 // console.log(clientW);
 
-var SW = new SiriWave({
-  container:document.querySelector('.banner'),
-  width: 2000,
-  height: 300
-});
+$(function(){
+	if($('#wave').length>0){
+		var SW = new SiriWave({
+		  container:document.querySelector('.banner'),
+		  width: 2000,
+		  height: 300
+		});
 
-SW.setSpeed(0.1);
-SW.setNoise(0.3);
-SW.start();
+		SW.setSpeed(0.1);
+		SW.setNoise(0.3);
+		SW.start();
+	}
+});
 // END
