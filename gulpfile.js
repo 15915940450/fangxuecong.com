@@ -37,10 +37,19 @@ gulp.task('img',function(){
       .pipe(gulp.dest('./online/img/'));
 });
 
+gulp.task('fifteen',function(){
+  return gulp.src('fifteen/index.html')
+    .pipe(exReplace(/<link rel="stylesheet".+?\/>/g,''))
+    .pipe(exReplace(/<script src="\.\.\/js\/.+?"><\/script>/g,''))
+    .pipe(exReplace(/<\/head>/g,'<link rel="stylesheet" href="../fangxuecong.css" /><script src="../fangxuecong.js"></script></head>'))
+    .pipe(htmlmin({collapseWhitespace:true}))
+    .pipe(gulp.dest('online/fifteen/'));
+});
+
 
 
 //============default
-gulp.task('default',['html','css','js','img'],function(){
+gulp.task('default',['html','css','js','img','fifteen'],function(){
   //将你的默认的任务代码放在这
   console.log("--------------okay----------------------");
 });
