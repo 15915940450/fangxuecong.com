@@ -102,9 +102,15 @@ gulp.task('rememberhtml',function(){
     .pipe(htmlmin({collapseWhitespace:true}))
     .pipe(gulp.dest('online/remember/'));
 });
+gulp.task('remembercss',function(){
+  return gulp.src(['remember/css/checkbox.css','remember/css/styles.css'])
+    .pipe(concatCss("remember.css"))
+    .pipe(cleanCss({compatibility:'ie8'}))
+    .pipe(gulp.dest('online/remember/'));
+});
 
 //============default
-gulp.task('default',['html','css','js','img','fifteen','tangram','tetrishtml','tetrisphp','tetriscss','tetrisjs','tetrisimg','tetrisfont','rememberhtml'],function(){ //,'img'
+gulp.task('default',['html','css','js','img','fifteen','tangram','tetrishtml','tetrisphp','tetriscss','tetrisjs','tetrisimg','tetrisfont','rememberhtml','remembercss'],function(){ //,'img'
   //将你的默认的任务代码放在这
   console.log("--------------okay----------------------");
 });
