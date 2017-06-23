@@ -1,7 +1,28 @@
 $(function(){
   //全局變量：屏寬numClientW
   var numClientW=document.documentElement.clientWidth || document.body.clientWidth;
-  // alert(numClientW);
+  var numClientH=document.documentElement.clientHeight || document.body.clientHeight;
+  /*
+  *playker圖片marginTop
+  */
+  if(numClientW<=992){
+    var numWrapW=numClientW;
+    var numWrapH=numClientH-70;
+    $('.playker-img').each(function(){
+      var numImgW=Number($(this).data('w'));
+      var numImgH=Number($(this).data('h'));
+      //圖片要縮放
+      if(numImgW>numWrapW || numImgH>numWrapH){
+        if(numImgW/numImgH>numWrapW/numWrapH){
+          var numMarginTop=(numWrapH-(numWrapW*numImgH/numImgW))/2;
+          $(this).css({marginTop:numMarginTop});
+        }
+      }else{
+        var numMarginTop=(numWrapH-numImgH)/2;
+        $(this).css({marginTop:numMarginTop});
+      }
+    });
+  }
   /*
   *履歷圖片等寬高
   */
@@ -93,6 +114,24 @@ $(function(){
   /*
   *mask
   */
+  //load images
+  $('#load-xposed-img').one('click',function(){
+    $('.houtai-img').each(function(){
+      $(this).attr('src',$(this).data('src'));
+    });
+  });
+  $('#load-playker-img').one('click',function(){
+    $('.playker-img').each(function(){
+      $(this).attr('src',$(this).data('src'));
+    });
+    var mySwiper=new Swiper('.swiper-container',{
+      loop: true,
+      pagination:'.swiper-pagination',
+      nextButton: '.swiper-button-next',
+      prevButton: '.swiper-button-prev'
+    });
+  });
+
   $('#xposed').on('click',function(){
     $('.houtai').css({display:'block'});
     $('.mask').fadeIn();
@@ -108,36 +147,9 @@ $(function(){
       window.open($(this).attr('src'),'_blank');
     });
   }
-
-
-  var numClickPlayker=0;
   $('#playker').on('click',function(){
     $('.playker').css({display:'block'});
     $('.mask').fadeIn();
-    // swiper
-    if(numClickPlayker===0){
-      numClickPlayker++;
-      var mySwiper = new Swiper ('.swiper-container', {
-        loop: true,
-        // effect : 'coverflow',
-
-        // 如果需要分页器
-        pagination: '.swiper-pagination',
-
-        // 如果需要前进后退按钮
-        nextButton: '.swiper-button-next',
-        prevButton: '.swiper-button-prev'
-      });
-      var numWrapH=$('.playker').height();
-      if(numClientW<=992){
-        $('.mask .swiper-slide img').each(function(){
-          $(this).css({
-            marginTop:(numWrapH-70-$(this).height())/2
-          });
-        });
-      }
-
-    } //endif numClickPlayker
   });
 
   /*

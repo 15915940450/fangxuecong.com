@@ -664,6 +664,10 @@ footer a{
   margin-top: 10px;
   margin-bottom: 50px;
 }
+.houtai-img{
+  display: block;
+  margin: 0 auto;
+}
 .mask svg{
   width: 30px;
   height: 30px;
