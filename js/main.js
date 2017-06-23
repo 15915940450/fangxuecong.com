@@ -183,15 +183,18 @@ $(function(){
   *wave
   */
   if($('#wave').length>0){
-		var SW = new SiriWave({
-		  container:document.querySelector('.banner'),
-		  width: 2000,
-		  height: 300
-		});
+    //iPhone或者桌面
+    if(window.navigator.userAgent.indexOf('iPhone')!==-1 || numClientW>992){
+      var SW = new SiriWave({
+  		  container:document.querySelector('.banner'),
+  		  width: 2000,
+  		  height: 300
+  		});
 
-		SW.setSpeed(0.1);
-		SW.setNoise(0.3);
-		SW.start();
+  		SW.setSpeed(0.1);
+  		SW.setNoise(0.3);
+  		SW.start();
+    }
 	}
 
 // resize
