@@ -6,6 +6,8 @@ var cleanCss=require('gulp-clean-css');
 var concat=require('gulp-concat');
 var uglify=require('gulp-uglify');
 var imagemin=require('gulp-imagemin');
+// babel
+var babel = require("gulp-babel");
 
 
 gulp.task('html',function(){
@@ -91,9 +93,18 @@ gulp.task('tetrisfont',function(){
   return gulp.src('tetris-game/css/MISTRAL.TTF')
     .pipe(gulp.dest('./online/tetris-game/css/'));
 });
+gulp.task('rememberhtml',function(){
+  return gulp.src('remember/index.html')
+    .pipe(exReplace(/<link rel="stylesheet".+?\/>/g,''))
+    .pipe(exReplace(/<script src=".+?"><\/script>/g,''))
+    .pipe(exReplace(/<\/head>/g,'<link rel="stylesheet" href="../fangxuecong.css" /><link rel="stylesheet" href="remember.css" /></head>'))
+    .pipe(exReplace(/<\/body>/g,'<script src="https://cdn.bootcss.com/react/15.6.1/react.min.js"></script><script src="https://cdn.bootcss.com/react/15.6.1/react-dom.min.js"></script><script src="app.js"></script></body>'))
+    .pipe(htmlmin({collapseWhitespace:true}))
+    .pipe(gulp.dest('online/remember/'));
+});
 
 //============default
-gulp.task('default',['html','css','js','img','fifteen','tangram','tetrishtml','tetrisphp','tetriscss','tetrisjs','tetrisimg','tetrisfont'],function(){ //,'img'
+gulp.task('default',['html','css','js','img','fifteen','tangram','tetrishtml','tetrisphp','tetriscss','tetrisjs','tetrisimg','tetrisfont','rememberhtml'],function(){ //,'img'
   //将你的默认的任务代码放在这
   console.log("--------------okay----------------------");
 });
