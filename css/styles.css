@@ -705,6 +705,12 @@ footer a{
 }
 
 @media (min-width:993px){
+  .md-left{
+    float: left;
+  }
+  .md-right{
+    float: right;
+  }
   .tangram-img{
     float: right;
   }
