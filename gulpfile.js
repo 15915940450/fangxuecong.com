@@ -98,7 +98,7 @@ gulp.task('rememberhtml',function(){
     .pipe(exReplace(/<link rel="stylesheet".+?\/>/g,''))
     .pipe(exReplace(/<script src=".+?"><\/script>/g,''))
     .pipe(exReplace(/<\/head>/g,'<link rel="stylesheet" href="../fangxuecong.css" /><link rel="stylesheet" href="remember.css" /></head>'))
-    .pipe(exReplace(/<\/body>/g,'<script src="https://cdn.bootcss.com/react/15.6.1/react.min.js"></script><script src="https://cdn.bootcss.com/react/15.6.1/react-dom.min.js"></script><script src="app.js"></script></body>'))
+    .pipe(exReplace(/<\/body>/g,'<script src="https://cdn.bootcss.com/react/15.6.1/react.min.js"></script><script src="https://cdn.bootcss.com/react/15.6.1/react-dom.min.js"></script><script src="remember.js"></script></body>'))
     .pipe(htmlmin({collapseWhitespace:true}))
     .pipe(gulp.dest('online/remember/'));
 });
@@ -108,9 +108,15 @@ gulp.task('remembercss',function(){
     .pipe(cleanCss({compatibility:'ie8'}))
     .pipe(gulp.dest('online/remember/'));
 });
+gulp.task("rememberbabel", function () {
+  return gulp.src("remember/js/remember.js")
+    .pipe(babel())
+    .pipe(uglify())
+    .pipe(gulp.dest("online/remember/"));
+});
 
 //============default
-gulp.task('default',['html','css','js','img','fifteen','tangram','tetrishtml','tetrisphp','tetriscss','tetrisjs','tetrisimg','tetrisfont','rememberhtml','remembercss'],function(){ //,'img'
+gulp.task('default',['html','css','js','img','fifteen','tangram','tetrishtml','tetrisphp','tetriscss','tetrisjs','tetrisimg','tetrisfont','rememberhtml','remembercss','rememberbabel'],function(){ //,'img'
   //将你的默认的任务代码放在这
   console.log("--------------okay----------------------");
 });
