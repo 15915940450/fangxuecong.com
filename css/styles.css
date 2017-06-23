@@ -89,6 +89,12 @@
   border-radius:200px;
   width: 80px;
   height: 80px;
+  position: relative;
+}
+.banner ul a svg{
+  width: 80px;
+  height: 80px;
+  border-radius: 200px;
 }
 #wechat_code{
   width: 100px;
@@ -100,32 +106,15 @@
   -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
   cursor: crosshair;
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 .banner ul a:hover #wechat_code{
   -webkit-transform: scale(1);
   transform: scale(1);
 }
-.banner ul a.wechat{
-  background: url(../img/wechat.svg) no-repeat center center;
-  background-size: cover;
-  cursor: crosshair;
-}
-.banner ul a.weibo{
-  background: url(../img/weibo.svg) no-repeat center center;
-  background-size: cover;
-}
-.banner ul a.zhihu{
-  background: url(../img/zhihu.svg) no-repeat center center;
-  background-size: cover;
-}
-.banner ul a.github{
-  background: url(../img/github.svg) no-repeat center center;
-  background-size: cover;
-}
-.banner ul a:hover{
-  /*transform: rotate(360deg);*/
-  /*opacity: 1;*/
-}
+
 /*.nav li i{
   position: absolute;
   left: 0;
@@ -749,6 +738,10 @@ footer a{
     margin-right: 16px;
   }
   .banner ul li a{
+    width: 60px;
+    height: 60px;
+  }
+  .banner ul a svg{
     width: 60px;
     height: 60px;
   }
