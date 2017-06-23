@@ -168,21 +168,19 @@ $(function(){
     FSS("vector", "vector2");
   }
   /*
-  *playker
+  *wave
   */
-  if($('.playker').length>0){
-    // var mySwiper = new Swiper ('.swiper-container', {
-    // loop: true,
-    // // effect : 'coverflow',
-    //
-    // // 如果需要分页器
-    // pagination: '.swiper-pagination',
-    //
-    // // 如果需要前进后退按钮
-    // nextButton: '.swiper-button-next',
-    // prevButton: '.swiper-button-prev'
-    // })
-  }
+  if($('#wave').length>0){
+		var SW = new SiriWave({
+		  container:document.querySelector('.banner'),
+		  width: 2000,
+		  height: 300
+		});
+
+		SW.setSpeed(0.1);
+		SW.setNoise(0.3);
+		SW.start();
+	}
 
 // resize
   window.onresize=function(){

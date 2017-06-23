@@ -12,7 +12,8 @@ gulp.task('html',function(){
   return gulp.src('index.html')
     .pipe(exReplace(/<link rel="stylesheet".+?\/>/g,''))
     .pipe(exReplace(/<script src="js\/.+?"><\/script>/g,''))
-    .pipe(exReplace(/<\/head>/g,'<link rel="stylesheet" href="fangxuecong.css" /><script src="fangxuecong.js"></script></head>'))
+    .pipe(exReplace(/<\/head>/g,'<link rel="stylesheet" href="fangxuecong.css" /></head>'))
+    .pipe(exReplace(/<\/body>/g,'<script src="fangxuecong.js"></script></body>'))
     .pipe(htmlmin({collapseWhitespace:true}))
     .pipe(gulp.dest('online/'));
 });
@@ -41,7 +42,8 @@ gulp.task('fifteen',function(){
   return gulp.src('fifteen/index.html')
     .pipe(exReplace(/<link rel="stylesheet".+?\/>/g,''))
     .pipe(exReplace(/<script src="\.\.\/js\/.+?"><\/script>/g,''))
-    .pipe(exReplace(/<\/head>/g,'<link rel="stylesheet" href="../fangxuecong.css" /><script src="../fangxuecong.js"></script></head>'))
+    .pipe(exReplace(/<\/head>/g,'<link rel="stylesheet" href="../fangxuecong.css" /></head>'))
+    .pipe(exReplace(/<\/body>/g,'<script src="../fangxuecong.js"></script></body>'))
     .pipe(htmlmin({collapseWhitespace:true}))
     .pipe(gulp.dest('online/fifteen/'));
 });
@@ -49,7 +51,8 @@ gulp.task('tangram',function(){
   return gulp.src('tangram/index.html')
     .pipe(exReplace(/<link rel="stylesheet".+?\/>/g,''))
     .pipe(exReplace(/<script src="\.\.\/js\/.+?"><\/script>/g,''))
-    .pipe(exReplace(/<\/head>/g,'<link rel="stylesheet" href="../fangxuecong.css" /><script src="../fangxuecong.js"></script></head>'))
+    .pipe(exReplace(/<\/head>/g,'<link rel="stylesheet" href="../fangxuecong.css" /></head>'))
+    .pipe(exReplace(/<\/body>/g,'<script src="../fangxuecong.js"></script></body>'))
     .pipe(htmlmin({collapseWhitespace:true}))
     .pipe(gulp.dest('online/tangram/'));
 });
@@ -57,7 +60,8 @@ gulp.task('tetrishtml',function(){
   return gulp.src('tetris-game/index.html')
     .pipe(exReplace(/<link rel="stylesheet".+?\/>/g,''))
     .pipe(exReplace(/<script src="js\/.+?"><\/script>/g,''))
-    .pipe(exReplace(/<\/head>/g,'<link rel="stylesheet" href="tetris-game.css" /><script src="tetris-game.js"></script></head>'))
+    .pipe(exReplace(/<\/head>/g,'<link rel="stylesheet" href="tetris-game.css" /></head>'))
+    .pipe(exReplace(/<\/body>/g,'<script src="tetris-game.js"></script></body>'))
     .pipe(htmlmin({collapseWhitespace:true}))
     .pipe(gulp.dest('online/tetris-game/'));
 });
