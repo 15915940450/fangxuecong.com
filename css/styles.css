@@ -12,10 +12,6 @@
   width: 190px;
   margin-left: -15px;
 }
-.logo a{
-}
-.logo img{
-}
 .nav{
   float: right;
   margin-right: -9px;
@@ -53,7 +49,6 @@
   position: relative;
   height: 100px;
   width: 550px;
-  /*border: 1px solid blue;*/
 }
 .banner h1 span{
   position: absolute;
@@ -257,8 +252,6 @@ a:hover#logo i,a.anim#logo i{
 /*工作*/
 .work{
   background: #F0EFEB;
-  padding-top: 30px;
-  padding-bottom: 30px;
 }
 .work_item{
   padding: 0;
@@ -719,22 +712,31 @@ footer a{
     padding-top: 50px;
     padding-bottom: 60px;
   }
+  .work{
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
 }
 /*手机不显示详细内容*/
 @media (max-width:992px) {
-  .work{
-    padding-top: 0;
-    padding-bottom: 0;
-  }
   .work_item .illustrate ul{
     display: none;
   }
   .nav{
     display: none;
   }
+  .banner{
+    background:#28272F url(../img/banner_bg_phone.jpg) no-repeat center 0;
+  }
   .banner h1{
     width: auto;
     font-size: 39px;
+  }
+  .banner h1 span{
+    display: none;
+  }
+  .banner .dingwei{
+    float: none;
   }
   .banner h3{
     width: auto;

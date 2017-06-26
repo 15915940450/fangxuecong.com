@@ -183,8 +183,8 @@ $(function(){
   *wave
   */
   if($('#wave').length>0){
-    //iPhone或者桌面
-    if(window.navigator.userAgent.indexOf('iPhone')!==-1 || numClientW>992){
+    //iPhone或者桌面,UCBrowser
+    if(window.navigator.userAgent.indexOf('iPhone')!==-1 || numClientW>992 || window.navigator.userAgent.indexOf('UCBrowser')!==-1){
       var SW = new SiriWave({
   		  container:document.querySelector('.banner'),
   		  width: 2000,
