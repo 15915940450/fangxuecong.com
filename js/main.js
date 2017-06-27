@@ -204,12 +204,9 @@ $(function(){
     try{
       var expectArrInput=JSON.parse(strInput);
       if($.type(expectArrInput)==='array'){
-        if(!checkIfEveryEleIsInt(expectArrInput)){
-          $('#hint').html('数组中含有不是整数的元素！').css({opacity:1});
-        }else if(!checkIfHasSameEle(expectArrInput)){
-          $('#hint').html('数组中含有相同的两个整数！').css({opacity:1});
-        }else if(!checkIfIsSorted(expectArrInput)){
-          $('#hint').html('不是有序的数组！').css({opacity:1});
+        var objCheckArr=checkIfCanTransfer(expectArrInput);
+        if(!objCheckArr.bCanTransfer){
+          $('#hint').html(objCheckArr.strHint).css({opacity:1});
         }else{
           //确保是正序
           expectArrInput.sort(function(a,b){
@@ -233,31 +230,55 @@ $(function(){
     $('#hint').css({opacity:0});
     $('#ouput-bst').html('');
   });
-  function checkIfIsSorted(arr){
+  function checkIfCanTransfer(arr){
     var bASC=(arr[1]-arr[0]>0);
-    for(var i=2;i<arr.length;i++){
-      if((arr[i]-arr[i-1]>0)!==bASC){
-        return false;
-      }
-    }
-    return true;
-  }
-  function checkIfEveryEleIsInt(arr){
     for(var i=0;i<arr.length;i++){
       if(!Number.isInteger(arr[i])){
-        return false;
+        return {
+          bCanTransfer:false,
+          strHint:'数组中含有不是整数的元素！'
+        };
+      }
+      if((i>1) && (arr[i-1]===arr[i])){
+        return {
+          bCanTransfer:false,
+          strHint:'数组中含有相同的两个整数！'
+        };
+      }
+      if((i>1) && ((arr[i]-arr[i-1]>0)!==bASC)){
+        return {
+          bCanTransfer:false,
+          strHint:'不是有序的数组！'
+        };
       }
     }
-    return true;
+    return {bCanTransfer:true};
   }
-  function checkIfHasSameEle(arr){
-    for(var i=1;i<arr.length;i++){
-      if(arr[i-1]===arr[i]){
-        return false;
-      }
-    }
-    return true;
-  }
+  // function checkIfIsSorted(arr){
+  //   var bASC=(arr[1]-arr[0]>0);
+  //   for(var i=2;i<arr.length;i++){
+  //     if((arr[i]-arr[i-1]>0)!==bASC){
+  //       return false;
+  //     }
+  //   }
+  //   return true;
+  // }
+  // function checkIfEveryEleIsInt(arr){
+  //   for(var i=0;i<arr.length;i++){
+  //     if(!Number.isInteger(arr[i])){
+  //       return false;
+  //     }
+  //   }
+  //   return true;
+  // }
+  // function checkIfHasSameEle(arr){
+  //   for(var i=1;i<arr.length;i++){
+  //     if(arr[i-1]===arr[i]){
+  //       return false;
+  //     }
+  //   }
+  //   return true;
+  // }
 
   function BST(arr){
     var numArrLen=arr.length;
