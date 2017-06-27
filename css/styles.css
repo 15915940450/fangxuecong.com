@@ -50,10 +50,10 @@
   height: 100px;
   width: 550px;
 }
-.banner h1 span{
+.banner h1 span,#quotes{
   position: absolute;
-  left:-100px;
-  top: -20px;
+  left:-70px;
+  top: -30px;
   font-size: 90px;
   font-family: serif;
 }
@@ -732,7 +732,7 @@ footer a{
     width: auto;
     font-size: 39px;
   }
-  .banner h1 span{
+  .banner h1 span,#quotes{
     display: none;
   }
   .banner .dingwei{
