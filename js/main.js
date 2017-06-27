@@ -204,9 +204,17 @@ $(function(){
     try{
       var expectArrInput=JSON.parse(strInput);
       if($.type(expectArrInput)==='array'){
-        if(!checkIfIsSorted(expectArrInput)){
+        if(!checkIfEveryEleIsInt(expectArrInput)){
+          $('#hint').html('数组中含有不是整数的元素！').css({opacity:1});
+        }else if(!checkIfHasSameEle(expectArrInput)){
+          $('#hint').html('数组中含有相同的两个整数！').css({opacity:1});
+        }else if(!checkIfIsSorted(expectArrInput)){
           $('#hint').html('不是有序的数组！').css({opacity:1});
         }else{
+          //确保是正序
+          expectArrInput.sort(function(a,b){
+            return (a-b);
+          });
           var obj=BST(expectArrInput);
           $('#ouput-bst').html(JSON.stringify(obj));
         }
@@ -223,6 +231,7 @@ $(function(){
   });
   $('#input-arr').on('input',function(){
     $('#hint').css({opacity:0});
+    $('#ouput-bst').html('');
   });
   function checkIfIsSorted(arr){
     var bASC=(arr[1]-arr[0]>0);
@@ -233,33 +242,39 @@ $(function(){
     }
     return true;
   }
+  function checkIfEveryEleIsInt(arr){
+    for(var i=0;i<arr.length;i++){
+      if(!Number.isInteger(arr[i])){
+        return false;
+      }
+    }
+    return true;
+  }
+  function checkIfHasSameEle(arr){
+    for(var i=1;i<arr.length;i++){
+      if(arr[i-1]===arr[i]){
+        return false;
+      }
+    }
+    return true;
+  }
 
   function BST(arr){
     var numArrLen=arr.length;
+    if(numArrLen===0){
+      return {};
+    }
     var numCenterKey=Math.floor(numArrLen/2); /*中键*/
     var obj={
-      v:arr[numCenterKey],
-      l:arr.slice(0,numCenterKey),
-      r:arr.slice(numCenterKey+1)
+      v:arr[numCenterKey]
     };
-    //=====================================================
     if(numArrLen===2){ //[1,4]==>{v:4,l:[1],r:[]}
-      obj.l=BST(obj.l);
-      delete obj.r;
-    }else if(numArrLen===1){ //[1]==>{v:1,l:[],r:[]}
-      delete obj.l;
-      delete obj.r;
-    }else{
-      //[1,4,5,9]==>{v:5,l:[1,4],r:[9]}
-      //[1,5,9]==>{v:5,l:[1],r:[9]}
-      //分治思想，递归调用BST
-      //T(n)=2T(n/2)+O(1)
-      //CASE1(a=2,b=2,ε=1)(http://baike.baidu.com/link?url=l_CDLecR13m1qijEF2WzleUBvJsRVI7psBOyi-2ipL2CZEcccMYaWsvasxATT67UrOlE9TLQrZjYSFE97kEGvCiIj37yGt0Mjhn0lFvmDGeMh10ucbUntpgFGYimdbCF)
-      obj.l=BST(obj.l);
-      obj.r=BST(obj.r);
+      obj.l=BST(arr.slice(0,numCenterKey));
+    }else if(numArrLen>2){
+      obj.l=BST(arr.slice(0,numCenterKey));
+      obj.r=BST(arr.slice(numCenterKey+1));
     }
-    //=====================================================
-    return obj;
+    return obj; //此时的numArrLen等于1（默认情况），因此，数组长度0,1,2,>=3的所有可能情况都考虑到了
   }
 
 // resize
