@@ -196,6 +196,71 @@ $(function(){
   		SW.start();
     }
 	}
+  /*
+  *bst
+  */
+  $('#transfer-btn').on('click',function(){
+    var strInput=$('#input-arr').val();
+    try{
+      var expectArrInput=JSON.parse(strInput);
+      if($.type(expectArrInput)==='array'){
+        if(!checkIfIsSorted(expectArrInput)){
+          $('#hint').html('不是有序的数组！').css({opacity:1});
+        }else{
+          var obj=BST(expectArrInput);
+          $('#ouput-bst').html(JSON.stringify(obj));
+        }
+
+      }else{
+        $('#hint').html('不是数组！').css({opacity:1});
+      }
+    }catch(err){
+      console.log(err);
+      $('#hint').html('不是数组！').css({opacity:1});
+    }
+
+
+  });
+  $('#input-arr').on('input',function(){
+    $('#hint').css({opacity:0});
+  });
+  function checkIfIsSorted(arr){
+    var bASC=(arr[1]-arr[0]>0);
+    for(var i=2;i<arr.length;i++){
+      if((arr[i]-arr[i-1]>0)!==bASC){
+        return false;
+      }
+    }
+    return true;
+  }
+
+  function BST(arr){
+    var numArrLen=arr.length;
+    var numCenterKey=Math.floor(numArrLen/2); /*中键*/
+    var obj={
+      v:arr[numCenterKey],
+      l:arr.slice(0,numCenterKey),
+      r:arr.slice(numCenterKey+1)
+    };
+    //=====================================================
+    if(numArrLen===2){ //[1,4]==>{v:4,l:[1],r:[]}
+      obj.l=BST(obj.l);
+      delete obj.r;
+    }else if(numArrLen===1){ //[1]==>{v:1,l:[],r:[]}
+      delete obj.l;
+      delete obj.r;
+    }else{
+      //[1,4,5,9]==>{v:5,l:[1,4],r:[9]}
+      //[1,5,9]==>{v:5,l:[1],r:[9]}
+      //分治思想，递归调用BST
+      //T(n)=2T(n/2)+O(1)
+      //CASE1(a=2,b=2,ε=1)(http://baike.baidu.com/link?url=l_CDLecR13m1qijEF2WzleUBvJsRVI7psBOyi-2ipL2CZEcccMYaWsvasxATT67UrOlE9TLQrZjYSFE97kEGvCiIj37yGt0Mjhn0lFvmDGeMh10ucbUntpgFGYimdbCF)
+      obj.l=BST(obj.l);
+      obj.r=BST(obj.r);
+    }
+    //=====================================================
+    return obj;
+  }
 
 // resize
   window.onresize=function(){
