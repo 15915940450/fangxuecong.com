@@ -180,7 +180,7 @@ $(function(){
     FSS("vector", "vector2");
   }
   /*
-  *wave
+  *wave: and count page-index(id:2) pv
   */
   if($('#wave').length>0){
     //iPhone或者桌面,UCBrowser
@@ -195,6 +195,19 @@ $(function(){
   		SW.setNoise(0.3);
   		SW.start();
     }
+    //index pv
+    $.ajax({
+      url:'tetris-game/pv.php?pageid=2',
+      method:'GET',
+      dataType:'json',
+      success:function(data){
+        console.log('index:'+data[0].pv);
+      },
+      error:function(err){
+        console.log(err);
+      }
+    });
+
 	}
   /*
   *bst
