@@ -104,7 +104,7 @@ $(function(){
       if(x1>Math.floor(1000*60*20/numTimeInterval)){
         window.clearInterval(Timer);
         $('.comming_soon .head img').css({display:'none'});
-        $('.comming_soon .head').css({background:'#000 url("img/logo.svg") no-repeat center center'});
+        $('.comming_soon .head').css({background:'#000 url("http://fangxuecong.com/img/logo.svg") no-repeat center center'});
       }
     },numTimeInterval);
     function generateRandomNumber(min,max){
