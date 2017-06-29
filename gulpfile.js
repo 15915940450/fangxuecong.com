@@ -9,13 +9,15 @@ var imagemin=require('gulp-imagemin');
 // babel
 var babel = require("gulp-babel");
 
+var v='?v=1.6.29';
+
 
 gulp.task('html',function(){
   return gulp.src('index.html')
     .pipe(exReplace(/<link rel="stylesheet".+?\/>/g,''))
     .pipe(exReplace(/<script src="js\/.+?"><\/script>/g,''))
-    .pipe(exReplace(/<\/head>/g,'<link rel="stylesheet" href="fangxuecong.css" /></head>'))
-    .pipe(exReplace(/<\/body>/g,'<script src="fangxuecong.js"></script></body>'))
+    .pipe(exReplace(/<\/head>/g,'<link rel="stylesheet" href="fangxuecong.css'+v+'" /></head>'))
+    .pipe(exReplace(/<\/body>/g,'<script src="fangxuecong.js'+v+'"></script></body>'))
     .pipe(htmlmin({collapseWhitespace:true}))
     .pipe(gulp.dest('online/'));
 });
@@ -44,8 +46,8 @@ gulp.task('fifteen',function(){
   return gulp.src('fifteen/index.html')
     .pipe(exReplace(/<link rel="stylesheet".+?\/>/g,''))
     .pipe(exReplace(/<script src="\.\.\/js\/.+?"><\/script>/g,''))
-    .pipe(exReplace(/<\/head>/g,'<link rel="stylesheet" href="../fangxuecong.css" /></head>'))
-    .pipe(exReplace(/<\/body>/g,'<script src="../fangxuecong.js"></script></body>'))
+    .pipe(exReplace(/<\/head>/g,'<link rel="stylesheet" href="../fangxuecong.css'+v+'" /></head>'))
+    .pipe(exReplace(/<\/body>/g,'<script src="../fangxuecong.js'+v+'"></script></body>'))
     .pipe(htmlmin({collapseWhitespace:true}))
     .pipe(gulp.dest('online/fifteen/'));
 });
@@ -53,8 +55,8 @@ gulp.task('tangram',function(){
   return gulp.src('tangram/index.html')
     .pipe(exReplace(/<link rel="stylesheet".+?\/>/g,''))
     .pipe(exReplace(/<script src="\.\.\/js\/.+?"><\/script>/g,''))
-    .pipe(exReplace(/<\/head>/g,'<link rel="stylesheet" href="../fangxuecong.css" /></head>'))
-    .pipe(exReplace(/<\/body>/g,'<script src="../fangxuecong.js"></script></body>'))
+    .pipe(exReplace(/<\/head>/g,'<link rel="stylesheet" href="../fangxuecong.css'+v+'" /></head>'))
+    .pipe(exReplace(/<\/body>/g,'<script src="../fangxuecong.js'+v+'"></script></body>'))
     .pipe(htmlmin({collapseWhitespace:true}))
     .pipe(gulp.dest('online/tangram/'));
 });
@@ -62,8 +64,8 @@ gulp.task('tetrishtml',function(){
   return gulp.src('tetris-game/index.html')
     .pipe(exReplace(/<link rel="stylesheet".+?\/>/g,''))
     .pipe(exReplace(/<script src="js\/.+?"><\/script>/g,''))
-    .pipe(exReplace(/<\/head>/g,'<link rel="stylesheet" href="tetris-game.css" /></head>'))
-    .pipe(exReplace(/<\/body>/g,'<script src="tetris-game.js"></script></body>'))
+    .pipe(exReplace(/<\/head>/g,'<link rel="stylesheet" href="tetris-game.css'+v+'" /></head>'))
+    .pipe(exReplace(/<\/body>/g,'<script src="tetris-game.js'+v+'"></script></body>'))
     .pipe(htmlmin({collapseWhitespace:true}))
     .pipe(gulp.dest('online/tetris-game/'));
 });
@@ -97,8 +99,8 @@ gulp.task('rememberhtml',function(){
   return gulp.src('remember/index.html')
     .pipe(exReplace(/<link rel="stylesheet".+?\/>/g,''))
     .pipe(exReplace(/<script src=".+?"><\/script>/g,''))
-    .pipe(exReplace(/<\/head>/g,'<link rel="stylesheet" href="../fangxuecong.css" /><link rel="stylesheet" href="remember.css" /></head>'))
-    .pipe(exReplace(/<\/body>/g,'<script src="https://cdn.bootcss.com/react/15.6.1/react.min.js"></script><script src="https://cdn.bootcss.com/react/15.6.1/react-dom.min.js"></script><script src="remember.js"></script></body>'))
+    .pipe(exReplace(/<\/head>/g,'<link rel="stylesheet" href="../fangxuecong.css'+v+'" /><link rel="stylesheet" href="remember.css'+v+'" /></head>'))
+    .pipe(exReplace(/<\/body>/g,'<script src="https://cdn.bootcss.com/react/15.6.1/react.min.js"></script><script src="https://cdn.bootcss.com/react/15.6.1/react-dom.min.js"></script><script src="remember.js'+v+'"></script></body>'))
     .pipe(htmlmin({collapseWhitespace:true}))
     .pipe(gulp.dest('online/remember/'));
 });
@@ -118,8 +120,8 @@ gulp.task('bst',function(){
   return gulp.src('bst/index.html')
     .pipe(exReplace(/<link rel="stylesheet".+?\/>/g,''))
     .pipe(exReplace(/<script src="\.\.\/js\/.+?"><\/script>/g,''))
-    .pipe(exReplace(/<\/head>/g,'<link rel="stylesheet" href="../fangxuecong.css" /></head>'))
-    .pipe(exReplace(/<\/body>/g,'<script src="../fangxuecong.js"></script></body>'))
+    .pipe(exReplace(/<\/head>/g,'<link rel="stylesheet" href="../fangxuecong.css'+v+'" /></head>'))
+    .pipe(exReplace(/<\/body>/g,'<script src="../fangxuecong.js'+v+'"></script></body>'))
     .pipe(htmlmin({collapseWhitespace:true}))
     .pipe(gulp.dest('online/bst/'));
 });
