@@ -74,36 +74,48 @@
         </p>
 
         <p>首先明确算法的输入(arr)及输出(obj)。以下是完整演变过程。</p>
-        <p>
-          <img src="../img/bst/1.png" alt="" />
-        </p>
-        <p class="step">↑ 1.搭好基础骨架，此时输出 <strong>{}</strong></p>
-        <p>
-          <img src="../img/bst/2.png" alt="" />
-        </p>
-        <p class="step">↑ 2.先尝试输出obj的三个基本属性，此时输出 <strong>{v:5,l:[1,4],r:[9]}</strong></p>
-        <p>
-          <img src="../img/bst/3.png" alt="" />
-        </p>
-        <p class="step">↑ 3.上一步中可以看到l与r并不是对象，而是原数组的子数组。所以很自然的想到分治思想，递归主函数。然后就是找递归出口，先自己在草稿上画一下数组长度由4慢慢下降时的输出结果，你会发现：长度为4,3的输出都妥妥的，当数组长度为2时，r部分变为空数组，这时我们应该停止递归赋值给r部分（同时删除初始化时已经赋予的值[]），当数组长度为1时，l、r都变为空数组，这时，我们应该停止递归赋值。此时输出 <strong>{v:5,l:{v:4,l:{v:1}},r:{v:9}}</strong></p>
-        <p>
-          <img src="../img/bst/4.png" alt="" />
-        </p>
-        <p class="step">↑ 4.到这里，结果出来了。是我们想要的输出。但是，我们还应该拿更多的输入做测试。我初始化了一个1到100的数组，然后中序输出结果。在firebug下查看，是正确的。</p>
-        <p>
-          <img src="../img/bst/5.png" alt="" />
-        </p>
-        <p class="step">↑ 5.算法复杂度分析：<strong>T(n)=O(n),S(n)=O(n)</strong>.</p>
-        <p>
-          <img src="../img/bst/6.png" alt="" />
-        </p>
-        <p class="step">↑ 6.整理代码，优化细节，添加合理注释。完整代码在<a href="https://github.com/15915940450/webhtml/blob/master/index.html">这里</a>。</p>
+        <div class="step-wrap">
+          <p>
+            <img src="../img/bst/1.png" alt="" />
+          </p>
+          <p class="step">↑ 1.搭好基础骨架，此时输出 <strong>{}</strong></p>
+        </div>
+        <div class="step-wrap">
+          <p>
+            <img src="../img/bst/2.png" alt="" />
+          </p>
+          <p class="step">↑ 2.先尝试输出obj的三个基本属性，此时输出 <strong>{v:5,l:[1,4],r:[9]}</strong></p>
+        </div>
+        <div class="step-wrap">
+          <p>
+            <img src="../img/bst/3.png" alt="" />
+          </p>
+          <p class="step">↑ 3.上一步中可以看到l与r并不是对象，而是原数组的子数组。所以很自然的想到分治策略，递归主函数。然后就是找递归出口，先自己在草稿上画一下数组长度由4慢慢下降时的输出结果，你会发现：长度为4、3的输出都妥妥的，当数组长度为2时，r部分变为空数组，这时我们应该停止递归赋值给r部分（同时删除初始化时已经赋予的值[]），当数组长度为1时，l、r都变为空数组，这时，我们应该停止递归赋值。此时输出 <strong>{v:5,l:{v:4,l:{v:1}},r:{v:9}}</strong></p>
+        </div>
+        <div class="step-wrap">
+          <p>
+            <img src="../img/bst/4.png" alt="" />
+          </p>
+          <p class="step">↑ 4.到这里，结果出来了。是我们想要的输出。但是，我们还应该拿更多的输入做测试。我初始化了一个1到100的数组，然后中序输出结果。在firebug下查看，是正确的。</p>
+        </div>
+        <div class="step-wrap">
+          <p>
+            <img src="../img/bst/5.png" alt="" />
+          </p>
+          <p class="step">↑ 5.算法复杂度分析：<strong>T(n)=O(n),S(n)=O(n)</strong>.</p>
+        </div>
+        <div class="step-wrap">
+          <p>
+            <img src="../img/bst/6.png" alt="" />
+          </p>
+          <p class="step">↑ 6.整理代码，优化细节，添加合理注释。完整代码在<a href="https://github.com/15915940450/webhtml/blob/master/index.html">这里</a>。</p>
+        </div>
         <br />
         <p>最后，应该还要对算法输入做检测。检测给定的数据是否是数组？是否有序？每个元素是否都为整数？是否互异？</p>
       </article>
       <div class="demo row">
         <div class="col-md-5">
-          <textarea id="input-arr" placeholder="{1,5,9}"></textarea>
+          <textarea id="input-arr" placeholder="例如： [1,5,9]"></textarea>
           <p id="hint">输入格式不对。</p>
         </div>
         <div class="col-md-1">
