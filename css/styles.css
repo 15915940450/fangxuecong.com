@@ -665,6 +665,12 @@ footer a{
   color: red;
   opacity: 0;
 }
+.bst img.try{
+  margin-top: 0;
+}
+.bst .step{
+  /*text-decoration: overline;*/
+}
 
 /*mask*/
 .mask{
