@@ -24,9 +24,9 @@
 /*banner*/
 .banner{
   height: 466px;
-  background:#28272F url(../img/banner.jpg) no-repeat center 0;
   overflow: hidden;
   position: relative;
+  background: #28272F;
 }
 .banner canvas{
   position: absolute;
@@ -791,6 +791,9 @@ footer a{
 }
 
 @media (min-width:993px){
+  .banner{
+    background:#28272F url(../img/banner.jpg) no-repeat center 0;
+  }
   .md-left{
     float: left;
   }
