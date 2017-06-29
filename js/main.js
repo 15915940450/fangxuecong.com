@@ -267,31 +267,20 @@ $(function(){
     }
     return {bCanTransfer:true};
   }
-  // function checkIfIsSorted(arr){
-  //   var bASC=(arr[1]-arr[0]>0);
-  //   for(var i=2;i<arr.length;i++){
-  //     if((arr[i]-arr[i-1]>0)!==bASC){
-  //       return false;
-  //     }
-  //   }
-  //   return true;
-  // }
-  // function checkIfEveryEleIsInt(arr){
-  //   for(var i=0;i<arr.length;i++){
-  //     if(!Number.isInteger(arr[i])){
-  //       return false;
-  //     }
-  //   }
-  //   return true;
-  // }
-  // function checkIfHasSameEle(arr){
-  //   for(var i=1;i<arr.length;i++){
-  //     if(arr[i-1]===arr[i]){
-  //       return false;
-  //     }
-  //   }
-  //   return true;
-  // }
+  // bst pv
+  if($('.bst.page').length>0){
+    $.ajax({
+      url:'../tetris-game/pv.php?pageid=3',
+      method:'GET',
+      dataType:'json',
+      success:function(data){
+        console.log('xkool:'+data[0].pv);
+      },
+      error:function(err){
+        console.log(err);
+      }
+    });
+  }
 
   function BST(arr){
     var numArrLen=arr.length;
