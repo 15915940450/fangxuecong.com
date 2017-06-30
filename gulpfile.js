@@ -9,7 +9,8 @@ var imagemin=require('gulp-imagemin');
 // babel
 var babel = require("gulp-babel");
 
-var v='?v=1.6.29';
+var objDate=new Date();
+var v='?v=1.'+(objDate.getMonth()+1)+'.'+objDate.getDate()+objDate.getMilliseconds();
 
 
 gulp.task('html',function(){
