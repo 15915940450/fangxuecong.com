@@ -207,7 +207,10 @@ $(function(){
         console.log(err);
       }
     });
-
+    //weibo phone
+    if(numClientW<=992){
+      $('#wave a.weibo').attr({href:'https://m.weibo.cn/u/3841442461'});
+    }
 	}
   /*
   *bst
