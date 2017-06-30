@@ -9,8 +9,9 @@ var imagemin=require('gulp-imagemin');
 // babel
 var babel = require("gulp-babel");
 
-var objDate=new Date();
-var v='?v=1.'+(objDate.getMonth()+1)+'.'+objDate.getDate()+objDate.getMilliseconds();
+// var objDate=new Date();
+// var v='?v=1.'+(objDate.getMonth()+1)+'.'+objDate.getDate()+objDate.getMilliseconds();
+var v='';
 
 
 gulp.task('html',function(){
@@ -127,7 +128,7 @@ gulp.task('bst',function(){
     .pipe(gulp.dest('online/bst/'));
 });
 gulp.task('f',function(){
-  return gulp.src('f/index.html')
+  return gulp.src('f/*')
     .pipe(gulp.dest('online/f/'));
 });
 
