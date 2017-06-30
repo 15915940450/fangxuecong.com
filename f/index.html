@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>f</title>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+<meta name="author" content="Thilina Fong" />
+<meta name="description" content="" />
+</head>
+<body>
+<div id="container">
+<ul>
+  <li>2index:28</li>
+  <li></li>
+</ul>
+</div>
+<script type="text/javascript">
+function ajaxGET(url,callback){
+  var xmlhttp=new XMLHttpRequest();
+  xmlhttp.onreadystatechange=function(){
+    if(xmlhttp.readyState===4 && xmlhttp.status===200){
+      callback(xmlhttp.responseText);
+    }
+  };
+  xmlhttp.open('GET',url,true);
+  xmlhttp.send();
+}
+ajaxGET('../tetris-game/pv.php',function(data){
+  jsonPv=JSON.parse(data);
+  var arrPv=[];
+  jsonPv.forEach(function(v,i){
+    arrPv[i]='<li>'+v.id+v.page+'：<strong>'+v.pv+'</strong></li>';
+  });
+  var strPv='<ul>'+arrPv.join('')+'</ul>';
+  document.getElementById('container').innerHTML=strPv;
+});
+</script>
+</body>
+</html>
