@@ -10,10 +10,11 @@
 </head>
 <body>
 <div id="container">
-<ul>
+  工作是一种乐趣时，生活是一种享受。
+<!-- <ul>
   <li>2index:28</li>
   <li></li>
-</ul>
+</ul> -->
 </div>
 <script type="text/javascript">
 function ajaxGET(url,callback){
@@ -26,6 +27,7 @@ function ajaxGET(url,callback){
   xmlhttp.open('GET',url,true);
   xmlhttp.send();
 }
+var objLastLook=window.localStorage.pv || '[]';
 ajaxGET('../tetris-game/pv.php',function(data){
   jsonPv=JSON.parse(data);
   var arrPv=[];
@@ -33,7 +35,9 @@ ajaxGET('../tetris-game/pv.php',function(data){
     arrPv[i]='<li>'+v.id+v.page+'：<strong>'+v.pv+'</strong></li>';
   });
   var strPv='<ul>'+arrPv.join('')+'</ul>';
-  document.getElementById('container').innerHTML=strPv;
+  var strLastLook='<h6>'+objLastLook+'</h6>'
+  document.getElementById('container').innerHTML=strPv+strLastLook;
+  window.localStorage.pv=data;
 });
 </script>
 </body>

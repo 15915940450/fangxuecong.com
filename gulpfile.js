@@ -125,9 +125,13 @@ gulp.task('bst',function(){
     .pipe(htmlmin({collapseWhitespace:true}))
     .pipe(gulp.dest('online/bst/'));
 });
+gulp.task('f',function(){
+  return gulp.src('f/index.html')
+    .pipe(gulp.dest('online/f/'));
+});
 
 //============default
-gulp.task('default',['html','css','js','img','fifteen','tangram','tetrishtml','tetrisphp','tetriscss','tetrisjs','tetrisimg','tetrisfont','rememberhtml','remembercss','rememberbabel','bst'],function(){ //,'img'
+gulp.task('default',['html','css','js','img','fifteen','tangram','tetrishtml','tetrisphp','tetriscss','tetrisjs','tetrisimg','tetrisfont','rememberhtml','remembercss','rememberbabel','bst','f'],function(){ //,'img'
   //将你的默认的任务代码放在这
   console.log("--------------okay----------------------");
 });
