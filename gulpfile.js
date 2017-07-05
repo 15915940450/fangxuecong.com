@@ -9,9 +9,9 @@ var imagemin=require('gulp-imagemin');
 // babel
 var babel = require("gulp-babel");
 
-// var objDate=new Date();
-// var v='?v=1.'+(objDate.getMonth()+1)+'.'+objDate.getDate()+objDate.getMilliseconds();
-var v='';
+var objDate=new Date();
+var v='?v=1.'+(objDate.getMonth()+1)+'.'+objDate.getDate()+objDate.getMilliseconds();
+// var v='';
 
 
 gulp.task('html',function(){
