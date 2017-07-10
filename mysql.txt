@@ -26,6 +26,8 @@ CREATE TABLE pv(
 INSERT INTO pv(page,pv,date) VALUES('tetris',0,now());
 INSERT INTO pv(page,pv,date) VALUES('index',0,now());
 INSERT INTO pv(page,pv,date) VALUES('xkool',0,now());
+INSERT INTO pv(page,pv,date) VALUES('desktop',0,now());
+INSERT INTO pv(page,pv,date) VALUES('phone',0,now());
 
 UPDATE pv SET pv=pv+1 WHERE id=1
 
