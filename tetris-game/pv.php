@@ -11,12 +11,19 @@
     $sql1="UPDATE pv SET pv=pv+1 WHERE id='$pageid'";
     $res=$MSQL->query($sql1);
 
-    $sql2="SELECT * FROM pv WHERE id='$pageid'";
-    $res=$MSQL->query($sql2);
-  }else{
-    $sql2="SELECT * FROM pv";
-    $res=$MSQL->query($sql2);
+    if(isset($_GET["cw"])){
+      //desktop
+      if($_GET["cw"]>992){
+        $sql4="UPDATE pv SET pv=pv+1 WHERE page='desktop'";
+        $res=$MSQL->query($sql4);
+      }else{
+        $sql5="UPDATE pv SET pv=pv+1 WHERE page='phone'";
+        $res=$MSQL->query($sql5);
+      }
+    }
   }
+  $sql2="SELECT * FROM pv";
+  $res=$MSQL->query($sql2);
 
   $pv=array();
   while($row=$res->fetch_object()){

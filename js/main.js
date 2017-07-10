@@ -195,18 +195,20 @@ $(function(){
   		SW.setNoise(0.3);
   		SW.start();
     }
-    //index pv
+    //index pv(pageid,cw)
     $.ajax({
-      url:'tetris-game/pv.php?pageid=2',
+      url:'tetris-game/pv.php?pageid=2&cw='+numClientW,
       method:'GET',
       dataType:'json',
       success:function(data){
-        console.log('index:'+data[0].pv);
+        console.log(data);
+        // console.log('index:'+data[0].pv);
       },
       error:function(err){
         console.log(err);
       }
     });
+
     //weibo phone
     if(numClientW<=992){
       $('#wave a.weibo').attr({href:'https://m.weibo.cn/u/3841442461'});
@@ -277,7 +279,8 @@ $(function(){
       method:'GET',
       dataType:'json',
       success:function(data){
-        console.log('xkool:'+data[0].pv);
+        console.log(data);
+        // console.log('xkool:'+data[0].pv);
       },
       error:function(err){
         console.log(err);

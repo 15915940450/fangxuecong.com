@@ -116,7 +116,9 @@ function initTetris(){
   eleLevel.innerHTML=1;
 //PV
   ajaxGET('pv.php?pageid=1',function(data){
-    elePV.innerHTML=JSON.parse(data)[0].pv;
+    var objData=JSON.parse(data);
+    console.log(objData);
+    elePV.innerHTML=objData[0].pv;
   });
   eleUser.style.display='none';
   eleTop.style.backgroundColor='rgba(109,28,243,.1)';
