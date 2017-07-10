@@ -388,6 +388,10 @@ footer p{
 footer a{
   color: #696969;
 }
+footer a.footer-a{
+  color: #E7BE20;
+  text-decoration: underline;
+}
 
 /*技能*/
 .tech{
