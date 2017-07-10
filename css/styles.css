@@ -146,6 +146,25 @@
 .nav a:hover::before,.nav a.active::before{
   width: 15px;
 }
+.nav li:last-child a{
+  color: #FFF !important;
+}
+.nav li:last-child a:hover,.nav li:last-child a.active{
+  /*background: red;*/
+}
+.nav li:last-child a::before{
+  /*display: none;*/
+  content: ">>";
+  width: 20px;
+  height: 30px;
+  background: none;
+  color: #FFF;
+  left:0;
+  top:0;
+}
+.nav li:last-child a:hover::before,.nav li:last-child a.active::before{
+  width: 20px;
+}
 /*keyframes rideonrails*/
 @-webkit-keyframes rideonrails {
   0%{
