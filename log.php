@@ -7,9 +7,16 @@
   $MSQL->set_charset('utf8');
   //============================
   if (!empty($_POST)){
+    $ua=$_POST['ua'];
+    $cw=$_POST['cw'];
+    $ch=$_POST['ch'];
+    $sw=$_POST['sw'];
+    $sh=$_POST['sh'];
+    $isInternetExplorer=$_POST['isInternetExplorer'];
+    $city=$_POST['city'];
+    $ip=$_POST['ip'];
 
-    // echo $_POST["ua"];
-    $sql="INSERT INTO log(ua,cw,ch,sw,sh,isInternetExplorer,city,logtime,ip) VALUES('Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.104 Safari/537.36 Core/1.53.3103.400 QQBrowser/9.6.11372.400',700,500,1920,1080,1,'广东省深圳市宝安区(440306)',now(),'119.137.54.102')";
+    $sql="INSERT INTO log(ua,cw,ch,sw,sh,isInternetExplorer,city,logtime,ip) VALUES('$ua','$cw','$ch','$sw','$sh','$isInternetExplorer','$city',now(),'$ip')";
     $res=$MSQL->query($sql);
   }else{
     // echo "$_POST is empty.";
