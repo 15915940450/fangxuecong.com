@@ -44,6 +44,28 @@ CREATE TABLE tetrisscore(
 
 INSERT INTO tetrisscore(nickname,score,playtime) VALUES('fangxuecong',50500,now());
 
+3.創建log表(index)
+CREATE TABLE log(
+  id INT NOT NULL AUTO_INCREMENT,
+  ua VARCHAR(256),
+  cw INT,
+  ch INT,
+  sw INT,
+  sh INT,
+  isInternetExplorer INT,
+  city VARCHAR(32),
+  logtime DATETIME,
+  ip VARCHAR(32),
+  PRIMARY KEY (id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8
+
+
+INSERT INTO log(ua,cw,ch,sw,sh,isInternetExplorer,city,logtime,ip) VALUES('Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.104 Safari/537.36 Core/1.53.3103.400 QQBrowser/9.6.11372.400',700,500,1920,1080,0,'广东省深圳市宝安区(440306)',now(),'119.137.54.102');
+
+
+
+
+
 
 
 =================================

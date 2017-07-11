@@ -197,7 +197,7 @@ $(function(){
     }
     //index pv(pageid,cw)
     $.ajax({
-      url:'tetris-game/pv.php?pageid=2&cw='+numClientW,
+      url:'/tetris-game/pv.php?pageid=2&cw='+numClientW,
       method:'GET',
       dataType:'json',
       success:function(data){
@@ -213,6 +213,45 @@ $(function(){
     if(numClientW<=992){
       $('#wave a.weibo').attr({href:'https://m.weibo.cn/u/3841442461'});
     }
+    //首頁訪問log
+    (function(){
+      // ua,cw,ch,sw,sh,isInternetExplorer,objSohuC,ip
+      // var objSohuC=returnCitySN;
+      // var ip=objSohuC.cip;
+      // var ua=window.navigator.userAgent;
+      // var cw=numClientW;
+      // var ch=numClientH;
+      // var sw=window.screen.width;
+      // var sh=window.screen.height;
+      // var isInternetExplorer=Boolean(window.ActiveXObject || "ActiveXObject" in window);
+      var plainObjectDataThatToBeSentToTheServer={
+        ua:window.navigator.userAgent,
+        cw:numClientW,
+        ch:numClientH,
+        sw:window.screen.width,
+        sh:window.screen.height,
+        isInternetExplorer:(Boolean(window.ActiveXObject || "ActiveXObject" in window)?1:0),
+        // objSohuC:returnCitySN,
+        city:returnCitySN.cname+'('+returnCitySN.cid+')',
+        ip:returnCitySN.cip
+      };
+      // console.log(plainObjectDataThatToBeSentToTheServer.ua);
+      // return false;
+
+      $.ajax({
+        url:'/log.php',
+        method:'POST',
+        data:plainObjectDataThatToBeSentToTheServer,
+        dataType:'json',
+        success:function(data){
+          console.log(data);
+          // console.log('index:'+data[0].pv);
+        },
+        error:function(err){
+          console.log('log err: '+err);
+        }
+      });
+    })();
 	}
   /*
   *bst
@@ -275,7 +314,7 @@ $(function(){
   // bst pv
   if($('.bst.page').length>0){
     $.ajax({
-      url:'../tetris-game/pv.php?pageid=3',
+      url:'/tetris-game/pv.php?pageid=3',
       method:'GET',
       dataType:'json',
       success:function(data){
