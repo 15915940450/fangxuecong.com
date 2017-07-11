@@ -131,9 +131,27 @@ gulp.task('f',function(){
   return gulp.src('f/*')
     .pipe(gulp.dest('online/f/'));
 });
+gulp.task('map',function(){
+  return gulp.src('map.html')
+    .pipe(exReplace(/<link rel="stylesheet".+?\/>/g,''))
+    .pipe(exReplace(/<script src="js\/.+?"><\/script>/g,''))
+    .pipe(exReplace(/<\/head>/g,'<link rel="stylesheet" href="fangxuecong.css'+v+'" /></head>'))
+    .pipe(exReplace(/<\/body>/g,'<script src="fangxuecong.js'+v+'"></script></body>'))
+    .pipe(htmlmin({collapseWhitespace:true}))
+    .pipe(gulp.dest('online/'));
+});
+gulp.task('getintouch',function(){
+  return gulp.src('getintouch/index.html')
+    .pipe(exReplace(/<link rel="stylesheet".+?\/>/g,''))
+    .pipe(exReplace(/<script src="\.\.\/js\/.+?"><\/script>/g,''))
+    .pipe(exReplace(/<\/head>/g,'<link rel="stylesheet" href="../fangxuecong.css'+v+'" /></head>'))
+    .pipe(exReplace(/<\/body>/g,'<script src="../fangxuecong.js'+v+'"></script></body>'))
+    .pipe(htmlmin({collapseWhitespace:true}))
+    .pipe(gulp.dest('online/getintouch/'));
+});
 
 //============default
-gulp.task('default',['html','css','js','img','fifteen','tangram','tetrishtml','tetrisphp','tetriscss','tetrisjs','tetrisimg','tetrisfont','rememberhtml','remembercss','rememberbabel','bst','f'],function(){ //,'img'
+gulp.task('default',['html','css','js','img','fifteen','tangram','tetrishtml','tetrisphp','tetriscss','tetrisjs','tetrisimg','tetrisfont','rememberhtml','remembercss','rememberbabel','bst','f','map','getintouch'],function(){ //,'img'
   //将你的默认的任务代码放在这
   console.log("--------------okay----------------------");
 });
