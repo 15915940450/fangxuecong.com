@@ -60,6 +60,9 @@
 #theater{
   font-style: normal;
 }
+#no-theater{
+  font-weight: 500;
+}
 .banner h3{
   font-size: 30px;
   color: #b5a1a1;

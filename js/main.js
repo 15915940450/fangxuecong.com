@@ -42,6 +42,7 @@ $(function(){
   *theater
   */
   if($('#theater').length>0){
+    $('#no-theater').css({display:'none'});
     var theater = theaterJS();
 
     theater
@@ -60,14 +61,14 @@ $(function(){
       .addActor('theater',{ accuracy: 1, speed: 0.6 });
 
     theater
-      .addScene('theater:大家好，我是学聪...', 3000)
+      .addScene('theater:大家好，我是学聪 ...', 3000)
       .addScene('theater:现居住在深圳', 200, '.', 200, '.', 200, '. ',1000)
-      .addScene('theater:2011年毕业于广东工业大学', 200, '.', 200, '.', 200, '. ')
+      .addScene('theater:2011年毕业于广东工业大学', 200, '.', 20, '.', 20, '. ',100)
       .addScene('theater:我努力做出好看的',1000)
       .addScene(-3,'美丽大方的界面',500, '.', 500, '.', 500, '. ',2000)
       // .addScene('theater:我努力做出好看的、美丽大方的界面', 200, '.', 200, '.', 200, '. ',2000)
       .addScene('theater:我注重网站性能', 200, '.', 200, '.', 200, '. ',1000)
-      .addScene('theater:我编写高质量的前端代码', 200, '.', 200, '.', 200, '. ',3000)
+      .addScene('theater:我编写高质量的前端代码.', 200, '.', 200, '. ',3000)
       .addScene('theater:愿我们成为好朋友',500,' ^_^',5000)
       .addScene(theater.replay);
   }
