@@ -196,19 +196,19 @@ $(function(){
   		SW.setNoise(0.3);
   		SW.start();
     }
-    //index pv(pageid,cw)
-    $.ajax({
-      url:'/tetris-game/pv.php?pageid=2&cw='+numClientW,
-      method:'GET',
-      dataType:'json',
-      success:function(data){
-        console.log(data);
-        // console.log('index:'+data[0].pv);
-      },
-      error:function(err){
-        console.log(err);
-      }
-    });
+    //================2017-07-12(remove) index pv(pageid,cw)
+    // $.ajax({
+    //   url:'/tetris-game/pv.php?pageid=2&cw='+numClientW,
+    //   method:'GET',
+    //   dataType:'json',
+    //   // success:function(data){
+    //   //   console.log(data);
+    //   //   // console.log('index:'+data[0].pv);
+    //   // },
+    //   error:function(err){
+    //     console.log(err);
+    //   }
+    // });
 
     //weibo phone
     if(numClientW<=992){
@@ -243,11 +243,11 @@ $(function(){
         url:'/log.php',
         method:'POST',
         data:plainObjectDataThatToBeSentToTheServer,
-        dataType:'json',
-        success:function(data){
-          console.log(data);
-          // console.log('index:'+data[0].pv);
-        },
+        // dataType:'json',
+        // success:function(data){
+        //   console.log(data);
+        //   // console.log('index:'+data[0].pv);
+        // },
         error:function(err){
           console.log('log err: '+err);
         }
