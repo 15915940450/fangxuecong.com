@@ -71,11 +71,6 @@ gulp.task('tetrishtml',function(){
     .pipe(htmlmin({collapseWhitespace:true}))
     .pipe(gulp.dest('online/tetris-game/'));
 });
-gulp.task('tetrisphp',function(){
-  return gulp.src('tetris-game/*.php')
-    .pipe(exReplace(/Li\('localhost','root',''/g,'Li(\'localhost\',\'fangxuec_root\',\'p0\''))
-    .pipe(gulp.dest('online/tetris-game/'));
-});
 gulp.task('tetriscss',function(){
   return gulp.src(['css/reset.css','tetris-game/css/styles.css'])
     .pipe(concatCss("tetris-game.css"))
@@ -149,14 +144,14 @@ gulp.task('getintouch',function(){
     .pipe(htmlmin({collapseWhitespace:true}))
     .pipe(gulp.dest('online/getintouch/'));
 });
-gulp.task('logphp',function(){
-  return gulp.src('log.php')
+gulp.task('php',function(){
+  return gulp.src('./**/*.php')
     .pipe(exReplace(/Li\('localhost','root',''/g,'Li(\'localhost\',\'fangxuec_root\',\'p0\''))
     .pipe(gulp.dest('online/'));
 });
 
 //============default
-gulp.task('default',['html','css','js','img','fifteen','tangram','tetrishtml','tetrisphp','tetriscss','tetrisjs','tetrisimg','tetrisfont','rememberhtml','remembercss','rememberbabel','bst','f','map','getintouch','logphp'],function(){ //,'img'
+gulp.task('default',['html','css','js','img','fifteen','tangram','tetrishtml','tetriscss','tetrisjs','tetrisimg','tetrisfont','rememberhtml','remembercss','rememberbabel','bst','f','map','getintouch','php'],function(){ //,'img'
   //将你的默认的任务代码放在这
   console.log("--------------okay----------------------");
 });
