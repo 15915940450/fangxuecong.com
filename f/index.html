@@ -75,12 +75,19 @@ ajaxGET('/log.php',function(data){
   var arrTbody=[];
   var strThead='';
   var strTbody='';
+
+  var today=new Date();
+  var strToday=today.getFullYear()+'-'+(today.getMonth()+1<10?'0'+(today.getMonth()+1):today.getMonth()+1)+'-'+(today.getDate()<10?'0'+today.getDate():today.getDate());
   objData.forEach(function(v,i){
     arrTbody[i]=[];
     // var strTbodyI='';
     for(var k in v){
-      // console.log(k);
-      arrTbody[i].push('<td>'+v[k]+'</td>');
+      if(v[k].indexOf(strToday)!==-1){
+        arrTbody[i].push('<td class="today">'+v[k]+'</td>');
+      }else{
+        arrTbody[i].push('<td>'+v[k]+'</td>');
+      }
+
     }
     // strTbodyI='<tr>'+arrTbody[i].join('')+'</tr>';
     // console.log(strTbodyI);
@@ -105,6 +112,11 @@ ajaxGET('/log.php',function(data){
     ${strTbody}
   </tbody>
   `;
+  var elesTrToday=document.querySelectorAll('.today');
+  console.log(elesTrToday);
+  for(var i=0;i<elesTrToday.length;i++){
+    elesTrToday[i].parentNode.style.backgroundColor="rgba(255,255,155,0.9)";
+  }
 });
 ajaxGET('../tetris-game/pv.php',function(data){
   jsonPv=JSON.parse(data);
