@@ -145,7 +145,7 @@ gulp.task('getintouch',function(){
     .pipe(gulp.dest('online/getintouch/'));
 });
 gulp.task('php',function(){
-  return gulp.src('./**/*.php')
+  return gulp.src(['./**/*.php','!f/**/*.php','!online_public_html/**/*.php','!test/**/*.php'])
     .pipe(exReplace(/Li\('localhost','root',''/g,'Li(\'localhost\',\'fangxuec_root\',\'p0\''))
     .pipe(gulp.dest('online/'));
 });
