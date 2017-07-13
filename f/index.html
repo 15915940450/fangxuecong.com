@@ -7,14 +7,53 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
 <meta name="author" content="Thilina Fong" />
 <meta name="description" content="" />
+<style media="screen">
+  #log-table{
+    background: rgba(255,255,222,0.9);
+    border: 1px solid #333;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  #log-table th{
+    background: rgba(173,216,230,0.95);
+    border: 1px solid #333;
+    padding: 5px 10px;
+    font-size: 12px;
+    text-transform: uppercase;
+  }
+  #log-table td{
+    border: 1px solid #333;
+    padding: 5px 10px;
+    font-size: 11px;
+  }
+</style>
 </head>
 <body>
 <div id="container">
   工作是一种乐趣时，生活是一种享受。
-<!-- <ul>
-  <li>2index:28</li>
-  <li></li>
-</ul> -->
+
+<div id="pv">
+  <!-- <ul>
+    <li>2index:28</li>
+    <li></li>
+  </ul> -->
+</div>
+<table id="log-table">
+  <!-- <thead>
+    <tr>
+      <td>id</td>
+      <td>ip</td>
+      <td>ua</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody> -->
+</table>
 </div>
 <script type="text/javascript">
 function ajaxGET(url,callback){
@@ -27,17 +66,56 @@ function ajaxGET(url,callback){
   xmlhttp.open('GET',url,true);
   xmlhttp.send();
 }
-var objLastLook=window.localStorage.pv || '[]';
+
+var eleTable=document.getElementById('log-table');
+ajaxGET('/log.php',function(data){
+  var objData=JSON.parse(data);
+
+  var arrThead=[];
+  var arrTbody=[];
+  var strThead='';
+  var strTbody='';
+  objData.forEach(function(v,i){
+    arrTbody[i]=[];
+    // var strTbodyI='';
+    for(var k in v){
+      // console.log(k);
+      arrTbody[i].push('<td>'+v[k]+'</td>');
+    }
+    // strTbodyI='<tr>'+arrTbody[i].join('')+'</tr>';
+    // console.log(strTbodyI);
+    arrTbody[i]='<tr>'+arrTbody[i].join('')+'</tr>';  //[]==>''
+
+    if(i===0){
+      for(var kThead in v){
+        arrThead.push('<th>'+kThead+'</th>');
+      }
+    }
+  });
+  // console.log(arrTbody);
+
+
+  strThead='<tr>'+arrThead.join('')+'</tr>';
+  strTbody=arrTbody.join('');
+  eleTable.innerHTML=`
+  <thead>
+    ${strThead}
+  </thead>
+  <tbody>
+    ${strTbody}
+  </tbody>
+  `;
+});
 ajaxGET('../tetris-game/pv.php',function(data){
   jsonPv=JSON.parse(data);
   var arrPv=[];
-  jsonPv.forEach(function(v,i){
-    arrPv[i]='<li>'+v.id+v.page+'：<strong>'+v.pv+'</strong></li>';
-  });
+  // jsonPv.forEach(function(v,i){
+  //   arrPv[i]='<li>'+v.id+v.page+'：<strong>'+v.pv+'</strong></li>';
+  // });
+  arrPv[0]='<li>'+jsonPv[2].id+jsonPv[2].page+'：<strong>'+jsonPv[2].pv+'</strong></li>';
+  arrPv[1]='<li>'+jsonPv[0].id+jsonPv[0].page+'：<strong>'+jsonPv[0].pv+'</strong></li>';
   var strPv='<ul>'+arrPv.join('')+'</ul>';
-  var strLastLook='<h6>'+objLastLook+'</h6>'
-  document.getElementById('container').innerHTML=strPv+strLastLook;
-  window.localStorage.pv=data;
+  document.getElementById('pv').innerHTML=strPv;
 });
 </script>
 </body>
