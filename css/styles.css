@@ -14,12 +14,14 @@
 }
 .nav{
   float: right;
-  margin-right: -9px;
 }
 .nav li{
   float: left;
-  margin-left: 35px;
+  margin-left: 25px;
   position: relative;
+}
+.nav li.more{
+  margin-left:15px;
 }
 /*banner*/
 .banner{
@@ -191,6 +193,22 @@
     transform: translate(130px,0);
   }
 }
+
+/*lang*/
+.header .lang{
+  float:right;
+  margin-left:20px;
+}
+.header .lang a{
+  font-size:13px;
+  /* background:rgba(58,69,83,.9); */
+  color:#a0c6fa;
+  text-decoration:none;
+}
+.header .lang a:hover{
+  text-decoration:underline;
+}
+
 /*logo*/
 a#logo{
   position: relative;
