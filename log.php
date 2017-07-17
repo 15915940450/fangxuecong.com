@@ -18,19 +18,21 @@
 
     $sql="INSERT INTO log(ua,cw,ch,sw,sh,isInternetExplorer,city,logtime,ip) VALUES('$ua','$cw','$ch','$sw','$sh','$isInternetExplorer','$city',now(),'$ip')";
     $res=$MSQL->query($sql);
+    echo $res;
+    //var_dump($res);
   }else{
-    // echo "$_POST is empty.";
+    // echo "_POST is empty.";
+    $sql2="SELECT * FROM log ORDER BY logtime DESC";
+    $res=$MSQL->query($sql2);
+
+    $arrLog=array();
+    while($row=$res->fetch_object()){
+      $arrLog[]=$row;
+    }
+    echo json_encode($arrLog);
+    //============================
+    $res->free();
+    $MSQL->close();
   }
   // return;
-  $sql2="SELECT * FROM log ORDER BY logtime DESC";
-  $res=$MSQL->query($sql2);
-
-  $arrLog=array();
-  while($row=$res->fetch_object()){
-    $arrLog[]=$row;
-  }
-  echo json_encode($arrLog);
-  //============================
-  $res->free();
-  $MSQL->close();
 ?>

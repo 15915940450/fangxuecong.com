@@ -244,10 +244,9 @@ $(function(){
         method:'POST',
         data:plainObjectDataThatToBeSentToTheServer,
         // dataType:'json',
-        // success:function(data){
-        //   console.log(data);
-        //   // console.log('index:'+data[0].pv);
-        // },
+        success:function(data){
+          console.log(data);
+        },
         error:function(err){
           console.log('log err: '+err);
         }
