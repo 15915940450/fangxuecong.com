@@ -206,6 +206,7 @@
   /* background:rgba(58,69,83,.9); */
   color:#a0c6fa;
   text-decoration:none;
+  text-shadow:0 0 1px rgba(255,255,255,0.15),-0 -0 1px rgba(255,255,255,0.15);
 }
 .header .lang a:hover{
   text-decoration:underline;
