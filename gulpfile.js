@@ -8,6 +8,8 @@ var uglify=require('gulp-uglify');
 var imagemin=require('gulp-imagemin');
 // babel
 var babel = require("gulp-babel");
+// cht
+var cht=require('gulp-cht');
 
 var objDate=new Date();
 var v='?v=1.'+(objDate.getMonth()+1)+'.'+objDate.getDate()+objDate.getMilliseconds();
@@ -148,6 +150,13 @@ gulp.task('php',function(){
   return gulp.src(['./**/*.php','!f/**/*.php','!online_public_html/**/*.php','!test/**/*.php'])
     .pipe(exReplace(/Li\('localhost','root',''/g,'Li(\'localhost\',\'fangxuec_root\',\'p0\''))
     .pipe(gulp.dest('online/'));
+});
+
+gulp.task('tocht',['html','css','js','fifteen','tangram','tetrishtml','tetriscss','tetrisjs','tetrisimg','tetrisfont','rememberhtml','remembercss','rememberbabel','bst','f','map','getintouch','php'],function(){
+  console.log("--------------cht---------------------");
+  gulp.src(['online/**/*','!online/zh-HK/**/*'])
+      .pipe(cht())
+      .pipe(gulp.dest('online/zh-HK/'));
 });
 
 //============default
