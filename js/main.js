@@ -244,9 +244,9 @@ $(function(){
         method:'POST',
         data:plainObjectDataThatToBeSentToTheServer,
         // dataType:'json',
-        success:function(data){
-          console.log(data);
-        },
+        //success:function(data){
+        //  console.log(data);
+        //},
         error:function(err){
           console.log('log err: '+err);
         }
@@ -317,10 +317,10 @@ $(function(){
       url:'/tetris-game/pv.php?pageid=3',
       method:'GET',
       dataType:'json',
-      success:function(data){
-        console.log(data);
+      //success:function(data){
+        //console.log(data);
         // console.log('xkool:'+data[0].pv);
-      },
+      //},
       error:function(err){
         console.log(err);
       }
