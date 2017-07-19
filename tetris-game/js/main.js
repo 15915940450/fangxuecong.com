@@ -117,7 +117,7 @@ function initTetris(){
 //PV
   ajaxGET('pv.php?pageid=1',function(data){
     var objData=JSON.parse(data);
-    console.log(objData);
+    //console.log(objData);
     elePV.innerHTML=objData[0].pv;
   });
   eleUser.style.display='none';
