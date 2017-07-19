@@ -152,15 +152,21 @@ gulp.task('php',function(){
     .pipe(gulp.dest('online/'));
 });
 
+
+gulp.task('onlineimg',['img','tetrisimg'],function(){
+  console.log('------------onlineimg----------------');
+  return gulp.src(['online/img/**/*','online/tetris-game/img/**/*'],{base:'online'})
+    .pipe(gulp.dest('./online/zh-HK/'));
+});
 gulp.task('tocht',['html','css','js','fifteen','tangram','tetrishtml','tetriscss','tetrisjs','tetrisimg','tetrisfont','rememberhtml','remembercss','rememberbabel','bst','f','map','getintouch','php'],function(){
   console.log("--------------cht---------------------");
-  gulp.src(['online/**/*','!online/zh-HK/**/*'])
+  gulp.src(['online/**/*','!online/zh-HK/**/*','!online/img/**/*','!online/tetris-game/img/**/*'])
       .pipe(cht())
       .pipe(gulp.dest('online/zh-HK/'));
 });
 
 //============default
-gulp.task('default',['html','css','js','img','fifteen','tangram','tetrishtml','tetriscss','tetrisjs','tetrisimg','tetrisfont','rememberhtml','remembercss','rememberbabel','bst','f','map','getintouch','php'],function(){ //,'img'
+gulp.task('default',['html','css','js','img','fifteen','tangram','tetrishtml','tetriscss','tetrisjs','tetrisimg','tetrisfont','rememberhtml','remembercss','rememberbabel','bst','f','map','getintouch','php'],function(){ //,'img','tetrisimg'
   //将你的默认的任务代码放在这
   console.log("--------------okay----------------------");
 });
