@@ -604,6 +604,8 @@ footer a.footer-a{
   padding-top: 60px;
   padding-bottom: 60px;
   font-size: 16px;
+  position:relative;
+  z-index:99;
 }
 .article h1{
   font-size: 30px;
@@ -783,6 +785,7 @@ footer a.footer-a{
   line-height: 30px;
   text-transform: uppercase;
   font-weight: 500;
+  color:#000;
 }
 .get-in-touch h3{
   font-size: 18px;
@@ -790,19 +793,21 @@ footer a.footer-a{
   margin-top: 20px;
   margin-bottom: 50px;
   line-height: 1.5em;
-  color: #333;
+  color: #D3D3D3;
 }
 .get-in-touch dt{
   float: left;
   font-weight: 600;
   font-size: 18px;
   line-height: 1.5em;
+  color:#000;
 }
 .get-in-touch dd{
   font-size: 18px;
   float: left;
   margin: 0;
   line-height: 1.7em;
+  color:#000;
 }
 .get-in-touch .clear{
   clear: both;
@@ -810,6 +815,7 @@ footer a.footer-a{
 }
 a.email{
   text-decoration: underline;
+  color:#111;
 }
 .site-map{}
 .site-map h2{
