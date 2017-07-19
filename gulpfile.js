@@ -148,7 +148,7 @@ gulp.task('getintouch',function(){
 });
 gulp.task('php',function(){
   return gulp.src(['./**/*.php','!f/**/*.php','!online_public_html/**/*.php','!test/**/*.php'])
-    //.pipe(exReplace(/Li\('localhost','root',''/g,'Li(\'localhost\',\'fangxuec_root\',\'p0\''))
+    .pipe(exReplace(/Li\('localhost','root',''/g,'Li(\'localhost\',\'fangxuec_root\',\'p0\''))
     .pipe(gulp.dest('online/'));
 });
 
@@ -161,7 +161,7 @@ gulp.task('onlineimg',['img','tetrisimg'],function(){
 gulp.task('onlinecht',['html','css','js','fifteen','tangram','tetrishtml','tetriscss','tetrisjs','tetrisfont','rememberhtml','remembercss','rememberbabel','bst','f','map','getintouch','php'],function(){
   //console.log("--------------cht---------------------");
 
-  return gulp.src(['online/**/*.html','online/**/*.css','online/**/*.js','online/**/*.php','!online/fangxuecong.js','!online/index.html','!online/map.html'])
+  return gulp.src(['online/**/*.html','online/**/*.js','online/**/*.php','!online/fangxuecong.js','!online/index.html','!online/map.html'])
     .pipe(cht())
     .pipe(gulp.dest('./online/zh-HK/'));
 });
@@ -183,6 +183,11 @@ gulp.task('onlineim',['onlinehi'],function(){
     .pipe(exReplace(/<a href="\/zh-HK\/">&nbsp;繁體中文（zh-HK）<\/a>/g,'<a class="yh-font" href="/">&nbsp;简体中文（zh-CN）</a>'))
     .pipe(gulp.dest('./online/zh-HK/'));
 });
+gulp.task('onlinejhenghei',['onlineim'],function(){
+  return gulp.src(['online/**/*.css'])
+    .pipe(exReplace(/font-family:"微软雅黑",Ubuntu,Arial,"libra sans",sans-serif/g,'font-family: "Microsoft JhengHei","微軟正黑體",PMingLiU,Arial,sans-serif'))
+    .pipe(gulp.dest('./online/zh-HK/'));
+});
 
 //============default
 /*
@@ -191,6 +196,6 @@ gulp.task('default',['html','css','js','img','fifteen','tangram','tetrishtml','t
   console.log("--------------okay----------------------");
 });
 */
-gulp.task('default',['onlineim'],function(){
+gulp.task('default',['onlinejhenghei'],function(){
   console.log('-----okay-----');
 });
