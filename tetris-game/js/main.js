@@ -99,7 +99,7 @@ function initTetris(){
   strNickName='';
   bCanSubmit=false;
 //排行榜jsonTop
-  ajaxGET('score.php',function(data){
+  ajaxGET('/tetris-game/score.php',function(data){
     jsonTop=JSON.parse(data);
     setEleTopTbodyInnerHTML();
   });
@@ -115,7 +115,7 @@ function initTetris(){
   eleScore.innerHTML=numScore;
   eleLevel.innerHTML=1;
 //PV
-  ajaxGET('pv.php?pageid=1',function(data){
+  ajaxGET('/tetris-game/pv.php?pageid=1',function(data){
     var objData=JSON.parse(data);
     //console.log(objData);
     elePV.innerHTML=objData[0].pv;
@@ -539,7 +539,7 @@ function sumbitNickName(ev){
     }
 
     eleNickNameHint.innerHTML='';
-    ajaxPOST('score.php','nickname='+strNickName+'&score='+numScore,function(data){
+    ajaxPOST('/tetris-game/score.php','nickname='+strNickName+'&score='+numScore,function(data){
       jsonTop=JSON.parse(data);
       setEleTopTbodyInnerHTML();
     });
