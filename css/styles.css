@@ -200,6 +200,7 @@
   margin-left:20px;
   border-left:1px solid #a0c6fa;
   padding-left:5px;
+  background: linear-gradient(90deg,#0a2150,#021023);
 }
 .header .lang a{
   font-size:13px;
@@ -207,6 +208,10 @@
   color:#a0c6fa;
   text-decoration:none;
   text-shadow:0 0 1px rgba(255,255,255,0.15),-0 -0 1px rgba(255,255,255,0.15);
+  font-family: "Microsoft JhengHei","微軟正黑體",PMingLiU,Arial,sans-serif;
+}
+.header .lang a.yh-font{
+    font-family: '微软雅黑',Ubuntu,Arial,'libra sans',sans-serif;
 }
 .header .lang a:hover{
   text-decoration:underline;

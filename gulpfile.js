@@ -148,7 +148,7 @@ gulp.task('getintouch',function(){
 });
 gulp.task('php',function(){
   return gulp.src(['./**/*.php','!f/**/*.php','!online_public_html/**/*.php','!test/**/*.php'])
-    .pipe(exReplace(/Li\('localhost','root',''/g,'Li(\'localhost\',\'fangxuec_root\',\'p0\''))
+    //.pipe(exReplace(/Li\('localhost','root',''/g,'Li(\'localhost\',\'fangxuec_root\',\'p0\''))
     .pipe(gulp.dest('online/'));
 });
 
@@ -171,8 +171,8 @@ gulp.task('onlinefont',['onlineimg','onlinecht'],function(){
 });
 gulp.task('onlinehi',['onlinefont'],function(){
   return gulp.src(['online/fangxuecong.js'])
-    .pipe(exReplace(/大家好，我是学聪/g,'Hi，各位！我係Thilina'))
-    .pipe(exReplace(/现居住在深圳/g,'哩幾年來都主要活動于深圳'))
+    .pipe(exReplace(/大家好，我是学聪/g,'Hi，各位！我系Thilina'))
+    .pipe(exReplace(/现居住在深圳/g,'依家住係深圳'))
     .pipe(exReplace(/我努力做出好看的/g,'我努力做出好睇噶'))
     .pipe(cht())
     .pipe(gulp.dest('./online/zh-HK/'));
@@ -180,7 +180,7 @@ gulp.task('onlinehi',['onlinefont'],function(){
 gulp.task('onlineim',['onlinehi'],function(){
   return gulp.src(['online/index.html','online/map.html'])
     .pipe(cht())
-    .pipe(exReplace(/<a href="\/zh-HK\/">&nbsp;繁體中文（zh-HK）<\/a>/g,'<a href="/">&nbsp;简体中文（zh-CN）</a>'))
+    .pipe(exReplace(/<a href="\/zh-HK\/">&nbsp;繁體中文（zh-HK）<\/a>/g,'<a class="yh-font" href="/">&nbsp;简体中文（zh-CN）</a>'))
     .pipe(gulp.dest('./online/zh-HK/'));
 });
 
