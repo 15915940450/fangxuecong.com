@@ -14,7 +14,7 @@ html,body {
 }
 
 article,aside,body,details,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,input,li,menu,nav,ol,p,section,select,textarea,ul {
-    font-family: '微软雅黑',Ubuntu,Arial,'libra sans',sans-serif;
+    font-family:"微软雅黑",Ubuntu,Arial,"libra sans",sans-serif;
     font-size: 12px;
     margin: 0;
     padding: 0;

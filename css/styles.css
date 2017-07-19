@@ -211,7 +211,7 @@
   font-family: "Microsoft JhengHei","微軟正黑體",PMingLiU,Arial,sans-serif;
 }
 .header .lang a.yh-font{
-    font-family: '微软雅黑',Ubuntu,Arial,'libra sans',sans-serif;
+    font-family:'微软雅黑',Arial,'libra sans',sans-serif;
 }
 .header .lang a:hover{
   text-decoration:underline;
@@ -254,7 +254,7 @@ a#logo span{
   top: 10px;
 }
 a#logo span code{
-  font-family: "微软雅黑",Ubuntu,Arial,"libra sans",sans-serif;
+  font-family:"微软雅黑",Ubuntu,Arial,"libra sans",sans-serif;
   margin-left: 0px;
   margin-right: 0px;
   color:#EEE;
