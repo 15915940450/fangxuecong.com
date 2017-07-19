@@ -118,7 +118,7 @@ ajaxGET('/log.php',function(data){
     elesTrToday[i].parentNode.style.backgroundColor="rgba(255,255,155,0.9)";
   }
 });
-ajaxGET('../tetris-game/pv.php',function(data){
+ajaxGET('/tetris-game/pv.php',function(data){
   jsonPv=JSON.parse(data);
   var arrPv=[];
   // jsonPv.forEach(function(v,i){
