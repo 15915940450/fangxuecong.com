@@ -158,11 +158,13 @@ gulp.task('onlineimg',['img','tetrisimg'],function(){
   return gulp.src(['online/img/**/*','online/tetris-game/img/**/*'],{base:'online'})
     .pipe(gulp.dest('./online/zh-HK/'));
 });
-gulp.task('tocht',['html','css','js','fifteen','tangram','tetrishtml','tetriscss','tetrisjs','tetrisimg','tetrisfont','rememberhtml','remembercss','rememberbabel','bst','f','map','getintouch','php'],function(){
+gulp.task('tocht',['html','css','js','fifteen','tangram','tetrishtml','tetriscss','tetrisjs','tetrisfont','rememberhtml','remembercss','rememberbabel','bst','f','map','getintouch','php'],function(){
+//gulp.task('tocht',['html'],function(){
   console.log("--------------cht---------------------");
-  gulp.src(['online/**/*','!online/zh-HK/**/*','!online/img/**/*','!online/tetris-game/img/**/*'])
-      .pipe(cht())
-      .pipe(gulp.dest('online/zh-HK/'));
+
+  //gulp.src(['online/**/*','!online/zh-HK/**/*','!online/img/**/*','!online/tetris-game/img/**/*','!online/zh-HK','!online/img/','!online/tetris-game/img/'])
+  //    .pipe(cht())
+  //    .pipe(gulp.dest('./online/zh-HK/'));
 });
 
 //============default

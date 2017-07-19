@@ -10,7 +10,7 @@
     "eslint-plugin-react": "^7.1.0",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
-    "gulp-cht": "^1.5.9",
+    "gulp-cht": "^1.9.0",
     "gulp-clean-css": "^3.1.1",
     "gulp-concat": "^2.6.1",
     "gulp-concat-css": "^2.3.0",
