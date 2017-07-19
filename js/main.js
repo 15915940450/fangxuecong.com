@@ -218,6 +218,7 @@ $(function(){
     (function(){
       // ua,cw,ch,sw,sh,isInternetExplorer,objSohuC,ip
       // var objSohuC=returnCitySN;
+      var returnCitySN=returnCitySN || {cname:'sohuname',cid:'sohuid',cip:'sohuip'};
       // var ip=objSohuC.cip;
       // var ua=window.navigator.userAgent;
       // var cw=numClientW;
