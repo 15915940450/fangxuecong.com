@@ -153,23 +153,25 @@ gulp.task('php',function(){
 });
 
 
-gulp.task('onlineimg',['img','tetrisimg'],function(){
-  //console.log('------------onlineimg----------------');
-  return gulp.src(['online/img/**/*','online/tetris-game/img/**/*'],{base:'online'})
+gulp.task('basetask',['html','css','js','img','fifteen','tangram','tetrishtml','tetriscss','tetrisjs','tetrisimg','tetrisfont','rememberhtml','remembercss','rememberbabel','bst','f','map','getintouch','php'],function(){
+  console.log('-----base task okay, nextstep, 2.run gulp zhhk-----');
+});
+//zhhk, after basetask
+gulp.task('onlineimgfont',function(){
+  return gulp.src(['online/img/**/*','online/tetris-game/img/**/*','online/**/*.TTF'],{base:'online'})
     .pipe(gulp.dest('./online/zh-HK/'));
 });
-gulp.task('onlinecht',['html','css','js','fifteen','tangram','tetrishtml','tetriscss','tetrisjs','tetrisfont','rememberhtml','remembercss','rememberbabel','bst','f','map','getintouch','php'],function(){
-  //console.log("--------------cht---------------------");
-
+gulp.task('onlinecssjhenghei',function(){
+  return gulp.src(['online/**/*.css'])
+    .pipe(exReplace(/font-family:"微软雅黑",Ubuntu,Arial,"libra sans",sans-serif/g,'font-family: "Microsoft JhengHei","微軟正黑體",PMingLiU,Arial,sans-serif'))
+    .pipe(gulp.dest('./online/zh-HK/'));
+});
+gulp.task('onlinehtmljsphp',function(){
   return gulp.src(['online/**/*.html','online/**/*.js','online/**/*.php','!online/fangxuecong.js','!online/index.html','!online/map.html'])
     .pipe(cht())
     .pipe(gulp.dest('./online/zh-HK/'));
 });
-gulp.task('onlinefont',['onlineimg','onlinecht'],function(){
-  return gulp.src(['online/**/*.TTF'])
-    .pipe(gulp.dest('./online/zh-HK/'));
-});
-gulp.task('onlinehi',['onlinefont'],function(){
+gulp.task('onlinejshi',function(){
   return gulp.src(['online/fangxuecong.js'])
     .pipe(exReplace(/大家好，我是学聪/g,'Hi，各位！我系Thilina'))
     .pipe(exReplace(/现居住在深圳/g,'依家住係深圳'))
@@ -177,25 +179,26 @@ gulp.task('onlinehi',['onlinefont'],function(){
     .pipe(cht())
     .pipe(gulp.dest('./online/zh-HK/'));
 });
-gulp.task('onlineim',['onlinehi'],function(){
+gulp.task('onlinehtmlzh',function(){
   return gulp.src(['online/index.html','online/map.html'])
     .pipe(cht())
     .pipe(exReplace(/<a href="\/zh-HK\/">&nbsp;繁體中文（zh-HK）<\/a>/g,'<a class="yh-font" href="/">&nbsp;简体中文（zh-CN）</a>'))
     .pipe(gulp.dest('./online/zh-HK/'));
 });
-gulp.task('onlinejhenghei',['onlineim'],function(){
-  return gulp.src(['online/**/*.css'])
-    .pipe(exReplace(/font-family:"微软雅黑",Ubuntu,Arial,"libra sans",sans-serif/g,'font-family: "Microsoft JhengHei","微軟正黑體",PMingLiU,Arial,sans-serif'))
-    .pipe(gulp.dest('./online/zh-HK/'));
+gulp.task('zhhk',['onlineimgfont','onlinecssjhenghei','onlinehtmljsphp','onlinejshi','onlinehtmlzh'],function(){
+  console.log('-----zh hk okay-----');
 });
 
-//============default
+//build  1.basetask 2.zhhk
+//=============================================================================================================================================default
 /*
 gulp.task('default',['html','css','js','img','fifteen','tangram','tetrishtml','tetriscss','tetrisjs','tetrisimg','tetrisfont','rememberhtml','remembercss','rememberbabel','bst','f','map','getintouch','php'],function(){ //,'img','tetrisimg'
   //将你的默认的任务代码放在这
   console.log("--------------okay----------------------");
 });
 */
-gulp.task('default',['onlinejhenghei'],function(){
-  console.log('-----okay-----');
+gulp.task('default',function(){
+  console.log('-----http://gulpjs.com/-----');
+  console.log('-----1.run gulp basetask-----');
+  console.log('-----2.run gulp zhhk-----');
 });
