@@ -11,9 +11,9 @@ var babel = require("gulp-babel");
 // cht
 var cht=require('gulp-cht');
 
-var objDate=new Date();
-var v='?v=1.'+(objDate.getMonth()+1)+'.'+objDate.getDate()+objDate.getMilliseconds();
-// var v='';
+//var objDate=new Date();
+//var v='?v=1.'+(objDate.getMonth()+1)+'.'+objDate.getDate()+objDate.getMilliseconds();
+var v='?v=15.9.0';
 
 
 gulp.task('html',function(){
