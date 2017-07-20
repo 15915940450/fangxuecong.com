@@ -217,8 +217,7 @@ $(function(){
     //首頁訪問log
     (function(){
       // ua,cw,ch,sw,sh,isInternetExplorer,objSohuC,ip
-      // var objSohuC=returnCitySN;
-      var returnCitySN=returnCitySN || {cname:'sohuname',cid:'sohuid',cip:'sohuip'};
+      var objSohuC=returnCitySN || {cname:'sohu-name',cid:'sohu-id',cip:'sohu-ip'};
       // var ip=objSohuC.cip;
       // var ua=window.navigator.userAgent;
       // var cw=numClientW;
@@ -234,8 +233,8 @@ $(function(){
         sh:window.screen.height,
         isInternetExplorer:(Boolean(window.ActiveXObject || "ActiveXObject" in window)?1:0),
         // objSohuC:returnCitySN,
-        city:returnCitySN.cname+'('+returnCitySN.cid+')',
-        ip:returnCitySN.cip
+        city:objSohuC.cname+'('+objSohuC.cid+')',
+        ip:objSohuC.cip
       };
       // console.log(plainObjectDataThatToBeSentToTheServer.ua);
       // return false;
