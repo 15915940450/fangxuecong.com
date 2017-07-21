@@ -118,7 +118,7 @@ class FxcGomoku{
     //步数自增
     this.numNowStep++;
     //黑白切换
-    var strPiece=['black','white'][(this.numNowStep+1)%2];
+    var strPiece=['black','white'][(this.numNowStep+1) & 1];
 
     //修改nowData
     this.nowData[numXia][numYj15]={
