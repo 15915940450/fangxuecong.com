@@ -84,11 +84,21 @@ class FxcGomoku{
     this.ctx.fillText(numStep,arrPositionIaJ15[0]+numFontLeft,arrPositionIaJ15[1]+3);
   }
   chess(numNowStep){
-    if(this.firstPlayer==='p1'){
-      //p1代表黑棋,手动下
-      this.eleCanvas.onclick=this.dealClick.bind(this);
+    if(!this.isPlayWithComputer){
+      if(this.firstPlayer==='p1'){
+        //p1代表黑棋
+        this.humanChess();
+      }else{
+      }
 
-    }else{}
+    }else{
+    }
+  }
+  humanChess(){
+    this.eleCanvas.onclick=this.dealClick.bind(this);
+  }
+  computerChess(){
+    this.humanChess();
   }
   dealClick(e){
     //console.log(this);
