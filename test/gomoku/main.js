@@ -1,25 +1,7 @@
-/*
-var eleFxcGomoku=document.getElementById('fxc-gomoku');
-eleFxcGomoku.onclick=function(){
-  alert('test');
-};
-*/
-var initData=[];
-
-    for(var i=0;i<15;i++){
-      initData[i]=[];
-      for(var j=0;j<15;j++){
-        initData[i][j]={
-          piece:'',
-          numStep:0
-        };
-      }
-    }
-
 //2017-07-21 周五 10:32 上午
 class FxcGomoku{
   constructor(){
-    this.nowData=initData;
+    this.nowData=[];
     this.eleCanvas=document.getElementById('fxc-gomoku');
     this.ctx=this.eleCanvas.getContext('2d');
     this.numCeilWidth=30; //单元格大小
@@ -34,14 +16,25 @@ class FxcGomoku{
     this.elesUndo=document.querySelectorAll('.undo a');
     this.arrStepData=[];
     this.eleNowStep=document.querySelector('.undo strong');
+
+    this.bIsOver=false;
+    this.arrWins=[];
+    this.numAllWins=0;
+    this.arrHumanWin=[];
+    this.arrComputerWin=[];
   }
 
   //============初始化
   init(){
+    this.initNowData();
+
     this.render();
     this.startChess();
     this.undo();
     this.redo();
+
+    this.createArrWins();
+    this.createArrHumanWinAndComputerWin();
   } //end of init
   render(){
     //=====第几步渲染
@@ -58,6 +51,18 @@ class FxcGomoku{
     }
   }
 
+  //===初始化棋局
+  initNowData(){
+    for(var i=0;i<15;i++){
+      this.nowData[i]=[];
+      for(var j=0;j<15;j++){
+        this.nowData[i][j]={
+          piece:'',
+          numStep:0
+        };
+      }
+    }
+  }
   //============画棋子：颜色（black，white，空），ia（x轴a-b-c），j15（y轴15-14-13）
   drawPiece(strPiece,ia,j15,numStep){
     //https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/createRadialGradient
@@ -153,6 +158,13 @@ class FxcGomoku{
 
     //轮到电脑下
     this.computerChess();
+    for(var k=0;k<this.numAllWins;k++){
+      if(this.arrWins[numXia][numYj15][k]){
+        this.arrHumanWin[k]++;
+        //this.arrComputerWin[k]=6;
+        if(this.arrHumanWin[k]==5){ alert("over"); }
+      }
+    }
   }
   //============悔棋
   undo(){
@@ -198,6 +210,58 @@ class FxcGomoku{
       gomokuThis.render();
     };
   }
+  //=============创建赢法数组
+  createArrWins(){
+    /*初始化赢法数据*/
+    for(var i=0;i<15;i++){
+      this.arrWins[i]=[];
+      for(var j=0;j<15;j++){
+        this.arrWins[i][j]=[];
+      }
+    }
+    /*计算有多少种赢法*/
+    this.numAllWins=0;
+    for(var i=0;i<15;i++){ //横线五子
+      for(var j=0;j<11;j++){
+        for(var k=0;k<5;k++){
+          this.arrWins[i][j+k][this.numAllWins]=true;
+        }
+        this.numAllWins++;
+      }
+    }
+    for(var i=0;i<11;i++){ //竖线五子
+      for(var j=0;j<15;j++){
+        for(var k=0;k<5;k++){
+          this.arrWins[i+k][j][this.numAllWins]=true;
+        }
+        this.numAllWins++;
+      }
+    }
+    for(var i=0;i<11;i++){ //斜线(\)五子
+      for(var j=0;j<11;j++){
+        for(var k=0;k<5;k++){
+          this.arrWins[i+k][j+k][this.numAllWins]=true;
+        }
+        this.numAllWins++;
+      }
+    }
+    for(var i=14;i>=4;i--){ //斜线(/)五子
+      for(var j=0;j<11;j++){
+        for(var k=0;k<5;k++){
+          this.arrWins[i-k][j+k][this.numAllWins]=true;
+        }
+        this.numAllWins++;
+      }
+    }
+  }
+  //===========创建玩家胜利数组
+  createArrHumanWinAndComputerWin(){
+    for(var i=0;i<this.numAllWins;i++){
+      this.arrHumanWin[i]=0;
+      this.arrComputerWin[i]=0;
+    }
+  }
+  //============深度拷贝
   deepCopyObject(obj){
     var str='';
     var newObj=obj.constructor===Array?[]:{};
