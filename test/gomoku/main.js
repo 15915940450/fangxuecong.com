@@ -27,12 +27,14 @@ class FxcGomoku{
     this.paddingLeft=40;  //左边距
     this.paddingTop=40; //上边距
     this.numNowStep=0;
+    this.isPlayWithComputer=false;
+    this.firstPlayer='p1';
   }
 
   init(){
     this.render();
     //var gomokuThis=this;
-    this.eleCanvas.onclick=this.dealClick.bind(this);
+    this.chess(this.numNowStep);
   } //end of init
   render(){
     //由nowData渲染出的棋局，可以使用canvas或dom
@@ -80,6 +82,13 @@ class FxcGomoku{
     this.ctx.font='12px serif';
     this.ctx.fillStyle=strColor;
     this.ctx.fillText(numStep,arrPositionIaJ15[0]+numFontLeft,arrPositionIaJ15[1]+3);
+  }
+  chess(numNowStep){
+    if(this.firstPlayer==='p1'){
+      //p1代表黑棋,手动下
+      this.eleCanvas.onclick=this.dealClick.bind(this);
+
+    }else{}
   }
   dealClick(e){
     //console.log(this);
