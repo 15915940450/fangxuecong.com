@@ -109,7 +109,11 @@ class FxcGomoku{
     var floatY=(numOffsetY-this.paddingLeft)/this.numCeilWidth;
     var numXia=Math.round(floatX);
     var numYj15=Math.round(floatY);
+    //console.log(numXia);
 
+    if(numXia<0 || numXia>14 || numYj15<0 || numYj15>14){ //点击在棋盘外
+      return false;
+    }
     if(this.nowData[numXia][numYj15].piece){  //有子，不能下
       return false;
     }
