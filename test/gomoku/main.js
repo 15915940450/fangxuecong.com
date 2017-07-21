@@ -30,13 +30,15 @@ class FxcGomoku{
 
     this.numNowStep=0;
     this.firstPlayer='human';  //'human','computer'
+
+    this.elesUndo=document.querySelectorAll('.undo a');
   }
 
   //============初始化
   init(){
     this.render();
-    //var gomokuThis=this;
     this.startChess();
+    this.undo();
   } //end of init
   render(){
     //清除画布 console.log(this.numTotalWidth);
@@ -106,7 +108,7 @@ class FxcGomoku{
     //电脑算法。。。
     //console.log("now computer"+this.numNowStep);
   }
-  //处理点击
+  //============处理点击
   dealClick(e){
     //console.log(this);
     var numOffsetX=e.offsetX;
@@ -138,6 +140,26 @@ class FxcGomoku{
 
     this.render();
     this.computerChess();
+  }
+  //============悔棋
+  undo(){
+    var gomokuThis=this;
+    this.elesUndo[0].onclick=function(){
+      console.log(gomokuThis.nowData);
+      console.log(gomokuThis.numNowStep);
+      for(var i=0;i<15;i++){
+        for(var j=0;j<15;j++){
+          if(gomokuThis.nowData[i][j].numStep===gomokuThis.numNowStep){
+            gomokuThis.nowData[i][j]={
+              piece:'',
+              numStep:0
+            }
+          }
+        }
+      }
+      gomokuThis.render();
+      gomokuThis.numNowStep--;
+    }
   }
 } //end of class
 
