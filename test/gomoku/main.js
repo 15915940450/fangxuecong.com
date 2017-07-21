@@ -12,6 +12,7 @@ class FxcGomoku{
 
     this.numNowStep=0;
     this.firstPlayer='human';  //'human','computer'
+    this.bIsPlayWithComputer=false;
 
     this.elesUndo=document.querySelectorAll('.undo a');
     this.arrStepData=[];
@@ -28,13 +29,14 @@ class FxcGomoku{
   init(){
     this.initNowData();
 
+    this.createArrWins();
+    this.createArrHumanWinAndComputerWin();
+    console.log(this.numAllWins);
     this.render();
     this.startChess();
     this.undo();
     this.redo();
 
-    this.createArrWins();
-    this.createArrHumanWinAndComputerWin();
   } //end of init
   render(){
     //=====第几步渲染
@@ -104,26 +106,27 @@ class FxcGomoku{
   startChess(){
       //第一步永远是黑棋
     if(this.firstPlayer==='human'){
-      this.humanChess();
+      this.humanChess('black');
     }else{
-      this.computerChess();
+      this.computerChess('black');
     }
   }
   //=============人下
-  humanChess(){
-    this.eleCanvas.onclick=this.dealClick.bind(this);
+  humanChess(pieceColor){
+    var gomokuThis=this;
+    this.eleCanvas.onclick=function(e){
+      var numOffsetX=e.offsetX;
+      var numOffsetY=e.offsetY;
+      gomokuThis.dealClick(pieceColor,numOffsetX,numOffsetY);
+    };
   }
   //=============机器下
-  computerChess(){
+  computerChess(pieceColor){
     //电脑算法。。。
     //console.log("now computer"+this.numNowStep);
   }
   //============处理点击
-  dealClick(e){
-    //console.log(this);
-    var numOffsetX=e.offsetX;
-    var numOffsetY=e.offsetY;
-
+  dealClick(pieceColor,numOffsetX,numOffsetY){
     var floatX=(numOffsetX-this.paddingLeft)/this.numCeilWidth;
     var floatY=(numOffsetY-this.paddingLeft)/this.numCeilWidth;
     var numXia=Math.round(floatX);
@@ -139,8 +142,9 @@ class FxcGomoku{
 
     //步数自增
     this.numNowStep++;
-    //黑白切换
-    var strPiece=['black','white'][(this.numNowStep+1) & 1];
+
+    //和电脑玩则一直是下黑棋，否则黑白切换
+    var strPiece=this.bIsPlayWithComputer?pieceColor:['white','black'][this.numNowStep & 1];
 
     //修改nowData
     this.nowData[numXia][numYj15]={
@@ -156,15 +160,25 @@ class FxcGomoku{
     this.arrStepData.length=this.numNowStep;
     //console.log(this.arrStepData);
 
-    //轮到电脑下
-    this.computerChess();
+    if(!this.checkIsWin(numXia,numYj15,pieceColor)){
+      //轮到电脑下
+      this.computerChess(pieceColor==='black'?'white':'black');
+    }else{
+      alert('v');
+    }
+  }
+  checkIsWin(i,j,pieceColor){
+    var bIsWin=false;
     for(var k=0;k<this.numAllWins;k++){
-      if(this.arrWins[numXia][numYj15][k]){
+      if(this.arrWins[i][j][k] && this.nowData[i][j].piece===pieceColor){
         this.arrHumanWin[k]++;
         //this.arrComputerWin[k]=6;
-        if(this.arrHumanWin[k]==5){ alert("over"); }
+        if(this.arrHumanWin[k]===5){
+          bIsWin=true;
+        }
       }
     }
+    return bIsWin;
   }
   //============悔棋
   undo(){
@@ -220,7 +234,6 @@ class FxcGomoku{
       }
     }
     /*计算有多少种赢法*/
-    this.numAllWins=0;
     for(var i=0;i<15;i++){ //横线五子
       for(var j=0;j<11;j++){
         for(var k=0;k<5;k++){
