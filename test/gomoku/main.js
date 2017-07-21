@@ -15,6 +15,7 @@ class FxcGomoku{
     this.numPieceWidth=13;  //棋子大小,半径
     this.paddingLeft=40;  //左边距
     this.paddingTop=40; //上边距
+    this.numNowStep=0;
   }
 
   init(){
@@ -79,7 +80,7 @@ class FxcGomoku{
     this.ctx.fillText(numStep,arrPositionIaJ15[0]+numFontLeft,arrPositionIaJ15[1]+3);
   }
   dealClick(e){
-    console.log(this);
+    //console.log(this);
     var numOffsetX=e.offsetX;
     var numOffsetY=e.offsetY;
 
@@ -88,10 +89,14 @@ class FxcGomoku{
     var numXia=Math.round(floatX);
     var numYj15=Math.round(floatY);
 
+    //var strPiece=['black','white'][this.iColor];
+    var strPiece='white';
+    this.numNowStep++;
     this.nowData[numXia][numYj15]={
-      piece:'black',
-      numStep:1
+      piece:strPiece,
+      numStep:this.numNowStep
     }
+    this.iColor=!this.iColor;
 
     this.render();
   }
