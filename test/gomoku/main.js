@@ -89,14 +89,20 @@ class FxcGomoku{
     var numXia=Math.round(floatX);
     var numYj15=Math.round(floatY);
 
-    //var strPiece=['black','white'][this.iColor];
-    var strPiece='white';
+    if(this.nowData[numXia][numYj15].piece){  //有子，不能下
+      return false;
+    }
+
+    //步数自增
     this.numNowStep++;
+    //黑白切换
+    var strPiece=['black','white'][this.numNowStep%2];
+
+    //修改nowData
     this.nowData[numXia][numYj15]={
       piece:strPiece,
       numStep:this.numNowStep
     }
-    this.iColor=!this.iColor;
 
     this.render();
   }
