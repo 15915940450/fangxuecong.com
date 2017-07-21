@@ -32,10 +32,11 @@ class FxcGomoku{
     this.firstPlayer='human';  //'human','computer'
   }
 
+  //============初始化
   init(){
     this.render();
     //var gomokuThis=this;
-    this.chess();
+    this.startChess();
   } //end of init
   render(){
     //清除画布 console.log(this.numTotalWidth);
@@ -50,6 +51,7 @@ class FxcGomoku{
     }
   }
 
+  //============画棋子：颜色（black，white，空），ia（x轴a-b-c），j15（y轴15-14-13）
   drawPiece(strPiece,ia,j15,numStep){
     //https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/createRadialGradient
     if(!strPiece){  //不画棋子
@@ -86,7 +88,8 @@ class FxcGomoku{
     this.ctx.fillStyle=strColor;
     this.ctx.fillText(numStep,arrPositionIaJ15[0]+numFontLeft,arrPositionIaJ15[1]+3);
   }
-  chess(){
+  //================开始下棋
+  startChess(){
       //第一步永远是黑棋
     if(this.firstPlayer==='human'){
       this.humanChess();
@@ -94,13 +97,16 @@ class FxcGomoku{
       this.computerChess();
     }
   }
+  //=============人下
   humanChess(){
     this.eleCanvas.onclick=this.dealClick.bind(this);
   }
+  //=============机器下
   computerChess(){
     //电脑算法。。。
     //console.log("now computer"+this.numNowStep);
   }
+  //处理点击
   dealClick(e){
     //console.log(this);
     var numOffsetX=e.offsetX;
@@ -133,7 +139,7 @@ class FxcGomoku{
     this.render();
     this.computerChess();
   }
-}
+} //end of class
 
 var objFxcGomoku=new FxcGomoku();
 objFxcGomoku.init();
