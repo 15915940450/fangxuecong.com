@@ -854,7 +854,10 @@ a.email{
   color: #FFF;
 }
 
-
+/* page gomoku */
+.gomoku{
+/*  min-height:100vh; */
+}
 
 /*mask*/
 .mask{
