@@ -32,6 +32,7 @@ class FxcGomoku{
     this.firstPlayer='human';  //'human','computer'
 
     this.elesUndo=document.querySelectorAll('.undo a');
+    this.arrUndoData=[];
   }
 
   //============初始化
@@ -145,11 +146,16 @@ class FxcGomoku{
   undo(){
     var gomokuThis=this;
     this.elesUndo[0].onclick=function(){
-      console.log(gomokuThis.nowData);
-      console.log(gomokuThis.numNowStep);
+      //没有可悔的棋局
+      if(gomokuThis.numNowStep===0){
+        return false;
+      }
       for(var i=0;i<15;i++){
         for(var j=0;j<15;j++){
           if(gomokuThis.nowData[i][j].numStep===gomokuThis.numNowStep){
+            var strTmp=JSON.stringify(gomokuThis.nowData[i][j])+'fangxuecongExpectToEnterCDC'+i+'fangxuecongexpectToEnterCDC'+j;
+            gomokuThis.arrUndoData.push(strTmp);
+            console.log(gomokuThis.arrUndoData);
             gomokuThis.nowData[i][j]={
               piece:'',
               numStep:0
@@ -160,6 +166,21 @@ class FxcGomoku{
       gomokuThis.render();
       gomokuThis.numNowStep--;
     }
+  }
+  deepCopyObject(obj){
+    var str='';
+    var newObj=obj.constructor===Array?[]:{};
+    if(typeof obj!=='object'){
+      return;
+    }else if(window.JSON){
+      str=JSON.stringify(obj);
+      newObj=JSON.parse(str);
+    }else{
+      for(var i in obj){
+        newObj[i]=typeof obj[i]==='object'?deepCopyObject(obj[i]):obj[i];
+      }
+    }
+    return newObj;
   }
 } //end of class
 
