@@ -31,7 +31,6 @@ class FxcGomoku{
 
     this.createArrWins();
     this.createArrHumanWinAndComputerWin();
-    console.log(this.numAllWins);
     this.render();
     this.startChess();
     this.undo();
@@ -160,25 +159,35 @@ class FxcGomoku{
     this.arrStepData.length=this.numNowStep;
     //console.log(this.arrStepData);
 
-    if(!this.checkIsWin(numXia,numYj15,pieceColor)){
+    var whoWin=this.checkWhoWin(numXia,numYj15,pieceColor);
+    if(!whoWin){
       //轮到电脑下
       this.computerChess(pieceColor==='black'?'white':'black');
     }else{
-      alert('v');
+      alert(whoWin+'v');
     }
   }
-  checkIsWin(i,j,pieceColor){
-    var bIsWin=false;
+  checkWhoWin(i,j,pieceColor){
+    var whoWin=false;
     for(var k=0;k<this.numAllWins;k++){
-      if(this.arrWins[i][j][k] && this.nowData[i][j].piece===pieceColor){
-        this.arrHumanWin[k]++;
-        //this.arrComputerWin[k]=6;
-        if(this.arrHumanWin[k]===5){
-          bIsWin=true;
+      if(this.arrWins[i][j][k]){
+        if(this.nowData[i][j].piece===pieceColor){
+          this.arrHumanWin[k]++;
+          //此时计算机不可能赢，因为当前位置i,j已被对方子占据
+          this.arrComputerWin[k]=6;
+          if(this.arrHumanWin[k]===5){
+            whoWin='human';
+          }
+        }else{
+          this.arrComputerWin[k]++;
+          this.arrHumanWin[k]=6;
+          if(this.arrComputerWin[k]===5){
+            whoWin='computer';
+          }
         }
       }
     }
-    return bIsWin;
+    return whoWin;
   }
   //============悔棋
   undo(){
@@ -234,7 +243,8 @@ class FxcGomoku{
       }
     }
     /*计算有多少种赢法*/
-    for(var i=0;i<15;i++){ //横线五子
+    //横线五子
+    for(var i=0;i<15;i++){
       for(var j=0;j<11;j++){
         for(var k=0;k<5;k++){
           this.arrWins[i][j+k][this.numAllWins]=true;
@@ -242,7 +252,8 @@ class FxcGomoku{
         this.numAllWins++;
       }
     }
-    for(var i=0;i<11;i++){ //竖线五子
+    //竖线五子
+    for(var i=0;i<11;i++){
       for(var j=0;j<15;j++){
         for(var k=0;k<5;k++){
           this.arrWins[i+k][j][this.numAllWins]=true;
@@ -250,7 +261,8 @@ class FxcGomoku{
         this.numAllWins++;
       }
     }
-    for(var i=0;i<11;i++){ //斜线(\)五子
+    //斜线五子
+    for(var i=0;i<11;i++){
       for(var j=0;j<11;j++){
         for(var k=0;k<5;k++){
           this.arrWins[i+k][j+k][this.numAllWins]=true;
@@ -258,7 +270,8 @@ class FxcGomoku{
         this.numAllWins++;
       }
     }
-    for(var i=14;i>=4;i--){ //斜线(/)五子
+    //反斜线五子
+    for(var i=14;i>=4;i--){
       for(var j=0;j<11;j++){
         for(var k=0;k<5;k++){
           this.arrWins[i-k][j+k][this.numAllWins]=true;
@@ -295,3 +308,4 @@ class FxcGomoku{
 var objFxcGomoku=new FxcGomoku();
 objFxcGomoku.init();
 //console.log(objFxcGomoku.nowData);
+//done in 2017-07-22 周六 07:17 上午
