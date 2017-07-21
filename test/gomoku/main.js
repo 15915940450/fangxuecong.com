@@ -6,26 +6,80 @@ eleFxcGomoku.onclick=function(){
 */
 
 //2017-07-21 周五 10:32 上午
-var FxcGomoku=function(){
-  this.nowData=[]
-}
+class FxcGomoku{
+  constructor(){
+    this.nowData=[];
+    this.eleCanvas=document.getElementById('fxc-gomoku');
+    this.ctx=this.eleCanvas.getContext('2d');
+    this.numCeilWidth=30; //单元格大小
+    this.numPieceWidth=13;  //棋子大小,半径
+    this.paddingLeft=40;  //左边距
+    this.paddingTop=40; //上边距
+  }
 
-FxcGomoku.prototype={
-  init:function(){
+  init(){
     for(var i=0;i<15;i++){
       this.nowData[i]=[];
       for(var j=0;j<15;j++){
         this.nowData[i][j]={
-          piece:'black'
+          piece:'white',
+          numStep:9
         };
       }
     }
-  }, //end of init
-  render:function(){
+    this.render();
+  } //end of init
+  render(){
+    //由nowData渲染出的棋局，可以使用canvas或dom
+    for(var i=0;i<15;i++){
+      for(var j=0;j<15;j++){
+        console.log(this.nowData[i][j]);
+        var pieceIaJ15=this.nowData[i][j];
 
+      }
+    }
   }
-};  //end of prototype
+
+  drawPiece(strPiece,ia,j15,numStep){
+    //https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/createRadialGradient
+    if(!strPiece){
+      return false;
+    }
+    var arrColorStop=[];
+    var strColor='';
+    var numFontLeft=0;
+    if(strPiece==='black'){
+      arrColorStop=['#090909','#636766'];
+      strColor='#FFF';
+    }else{
+      arrColorStop=['#d3d3d3','#f9f9f9'];
+      strColor='#000';
+    }
+    if(numStep<10){
+      numFontLeft=-2;
+    }else if(numStep<100){
+      numFontLeft=-5;
+    }else if(numStep<1000){
+      numFontLeft=-8;
+    }
+    var arrPositionIaJ15=[this.numCeilWidth*ia+this.paddingLeft,this.numCeilWidth*j15+this.paddingTop];
+
+    this.ctx.beginPath();
+    this.ctx.arc(arrPositionIaJ15[0],arrPositionIaJ15[1],this.numPieceWidth,0,2*Math.PI);
+    this.ctx.closePath();
+    var gradient=this.ctx.createRadialGradient(arrPositionIaJ15[0]+3,arrPositionIaJ15[1]-3,this.numPieceWidth,arrPositionIaJ15[0]+3,arrPositionIaJ15[1]-3,0);
+    gradient.addColorStop(0,arrColorStop[0]);
+    gradient.addColorStop(1,arrColorStop[1]);
+    this.ctx.fillStyle=gradient;
+    this.ctx.fill();
+    this.ctx.font='12px serif';
+    this.ctx.fillStyle=strColor;
+    this.ctx.fillText(numStep,arrPositionIaJ15[0]+numFontLeft,arrPositionIaJ15[1]+3);
+  }
+}
 
 var objFxcGomoku=new FxcGomoku();
 objFxcGomoku.init();
-console.log(objFxcGomoku.nowData);
+objFxcGomoku.drawPiece('black',0,1,9);
+objFxcGomoku.drawPiece('white',1,1,163);
+//console.log(objFxcGomoku.nowData);
