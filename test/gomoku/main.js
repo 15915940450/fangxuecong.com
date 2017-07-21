@@ -27,14 +27,13 @@ class FxcGomoku{
     this.paddingLeft=40;  //左边距
     this.paddingTop=40; //上边距
     this.numNowStep=0;
-    this.isPlayWithComputer=false;
-    this.firstPlayer='p1';
+    this.firstPlayer='human';  //'human','computer'
   }
 
   init(){
     this.render();
     //var gomokuThis=this;
-    this.chess(this.numNowStep);
+    this.chess();
   } //end of init
   render(){
     //由nowData渲染出的棋局，可以使用canvas或dom
@@ -83,21 +82,20 @@ class FxcGomoku{
     this.ctx.fillStyle=strColor;
     this.ctx.fillText(numStep,arrPositionIaJ15[0]+numFontLeft,arrPositionIaJ15[1]+3);
   }
-  chess(numNowStep){
-    if(!this.isPlayWithComputer){
-      if(this.firstPlayer==='p1'){
-        //p1代表黑棋
-        this.humanChess();
-      }else{
-      }
-
+  chess(){
+      //第一步永远是黑棋
+    if(this.firstPlayer==='human'){
+      this.humanChess();
     }else{
+      this.computerChess();
     }
   }
   humanChess(){
     this.eleCanvas.onclick=this.dealClick.bind(this);
   }
   computerChess(){
+    //电脑算法。。。
+    //console.log("now computer"+this.numNowStep);
     this.humanChess();
   }
   dealClick(e){
@@ -121,7 +119,7 @@ class FxcGomoku{
     //步数自增
     this.numNowStep++;
     //黑白切换
-    var strPiece=['black','white'][this.numNowStep%2];
+    var strPiece=['black','white'][(this.numNowStep+1)%2];
 
     //修改nowData
     this.nowData[numXia][numYj15]={
@@ -130,6 +128,7 @@ class FxcGomoku{
     }
 
     this.render();
+    this.computerChess();
   }
 }
 
