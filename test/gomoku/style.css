@@ -43,7 +43,7 @@ article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {
 a {
     transition: all .2s ease-out;
     text-decoration: none;
-    color:#E7BE20;
+    color:#31a5e7;
 }
 
 a:focus,input,select,textarea {
@@ -74,17 +74,29 @@ html,body{
   background:#EEE;
 }
 #container{
-}
-#fxc-gomoku{
   margin:30px auto 0;
-  display:block;
-  background:#FFF url(./qipan.svg) no-repeat 0 0;
-  background-size:cover;
   position:absolute;
   left:50%;
   top:50%;
   margin-left:-250px;
   margin-top:-250px;
+}
+#fxc-gomoku{
+  display:block;
+  background:#FFF url(./qipan.svg) no-repeat 0 0;
+  background-size:cover;
+}
+#container p{
+  text-align:center;
+  margin-top:30px;
+  font-size:15px;
+}
+.undo a{
+  text-decoration:underline;
+  padding:5px;
+}
+.undo a:first-child{
+  margin-right:20px;
 }
 
 .mask{

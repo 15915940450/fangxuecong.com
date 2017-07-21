@@ -13,6 +13,9 @@
 <div id="container">
   <!-- 1.棋盘：棋盘可以用canvas画出来，也可以使用背景图，考虑到后期可能会换棋盘或者说提供一个选棋盘的功能，我这里把棋盘用Adobe Illustrator画出来，保存成svg做背景图。 -->
   <canvas id="fxc-gomoku" width="500" height="500"></canvas>
+  <p class="undo">
+    当前第 <strong>0</strong> 步，您可以 <a href="javascript:;">悔棋</a><a href="javascript:;">撤销悔棋</a>
+  </p>
 </div>
 <!-- 遮住页面，点击开始游戏方可下棋 -->
 <div class="mask">
