@@ -4,11 +4,22 @@ eleFxcGomoku.onclick=function(){
   alert('test');
 };
 */
+var initData=[];
+
+    for(var i=0;i<15;i++){
+      initData[i]=[];
+      for(var j=0;j<15;j++){
+        initData[i][j]={
+          piece:'',
+          numStep:0
+        };
+      }
+    }
 
 //2017-07-21 周五 10:32 上午
 class FxcGomoku{
   constructor(){
-    this.nowData=[];
+    this.nowData=initData;
     this.eleCanvas=document.getElementById('fxc-gomoku');
     this.ctx=this.eleCanvas.getContext('2d');
     this.numCeilWidth=30; //单元格大小
@@ -19,15 +30,6 @@ class FxcGomoku{
   }
 
   init(){
-    for(var i=0;i<15;i++){
-      this.nowData[i]=[];
-      for(var j=0;j<15;j++){
-        this.nowData[i][j]={
-          piece:'',
-          numStep:0
-        };
-      }
-    }
     this.render();
     //var gomokuThis=this;
     this.eleCanvas.onclick=this.dealClick.bind(this);
