@@ -33,6 +33,7 @@ class FxcGomoku{
 
     this.elesUndo=document.querySelectorAll('.undo a');
     this.arrStepData=[];
+    this.eleNowStep=document.querySelector('.undo strong');
   }
 
   //============初始化
@@ -43,9 +44,11 @@ class FxcGomoku{
     this.redo();
   } //end of init
   render(){
-    //清除画布 console.log(this.numTotalWidth);
+    //=====第几步渲染
+    this.eleNowStep.innerHTML=this.numNowStep;
+    //=====清除画布 console.log(this.numTotalWidth);
     this.ctx.clearRect(0,0,this.numTotalWidth,this.numTotalWidth);
-    //由nowData渲染出的棋局，可以使用canvas或dom
+    //=====由nowData渲染出的棋局，可以使用canvas或dom
     for(var i=0;i<15;i++){
       for(var j=0;j<15;j++){
         //console.log(this.nowData[i][j]);
@@ -170,8 +173,9 @@ class FxcGomoku{
           }
         }
       }
-      gomokuThis.render();
+
       gomokuThis.numNowStep--;
+      gomokuThis.render();
     }
   }
   redo(){
@@ -190,8 +194,8 @@ class FxcGomoku{
         numStep:objRedo.numStep
       }
 
-      gomokuThis.render();
       gomokuThis.numNowStep++;
+      gomokuThis.render();
     };
   }
   deepCopyObject(obj){
