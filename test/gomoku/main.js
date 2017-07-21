@@ -26,6 +26,8 @@ class FxcGomoku{
     this.numPieceWidth=13;  //棋子大小,半径
     this.paddingLeft=40;  //左边距
     this.paddingTop=40; //上边距
+    this.numTotalWidth=this.eleCanvas.width;
+
     this.numNowStep=0;
     this.firstPlayer='human';  //'human','computer'
   }
@@ -36,6 +38,8 @@ class FxcGomoku{
     this.chess();
   } //end of init
   render(){
+    //清除画布 console.log(this.numTotalWidth);
+    this.ctx.clearRect(0,0,this.numTotalWidth,this.numTotalWidth);
     //由nowData渲染出的棋局，可以使用canvas或dom
     for(var i=0;i<15;i++){
       for(var j=0;j<15;j++){
