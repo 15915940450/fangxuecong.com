@@ -32,7 +32,7 @@ class FxcGomoku{
     this.firstPlayer='human';  //'human','computer'
 
     this.elesUndo=document.querySelectorAll('.undo a');
-    this.arrUndoData=[];
+    this.arrStepData=[];
   }
 
   //============初始化
@@ -40,6 +40,7 @@ class FxcGomoku{
     this.render();
     this.startChess();
     this.undo();
+    this.redo();
   } //end of init
   render(){
     //清除画布 console.log(this.numTotalWidth);
@@ -140,6 +141,14 @@ class FxcGomoku{
     }
 
     this.render();
+    //渲染完后保存下棋log
+    var strTmp=JSON.stringify(this.nowData[numXia][numYj15])+'fangxuecongExpectToEnterCDC'+numXia+'fangxuecongExpectToEnterCDC'+numYj15;
+    this.arrStepData[this.numNowStep-1]=strTmp;
+    //删除当前步后面的步数（当撤销后又手动下）。后期如果深化，考虑有多分歧的棋局，则可能产生多维数组，不删除步数。。。
+    this.arrStepData.length=this.numNowStep;
+    //console.log(this.arrStepData);
+
+    //轮到电脑下
     this.computerChess();
   }
   //============悔棋
@@ -150,12 +159,10 @@ class FxcGomoku{
       if(gomokuThis.numNowStep===0){
         return false;
       }
+      //还原为初始值
       for(var i=0;i<15;i++){
         for(var j=0;j<15;j++){
           if(gomokuThis.nowData[i][j].numStep===gomokuThis.numNowStep){
-            var strTmp=JSON.stringify(gomokuThis.nowData[i][j])+'fangxuecongExpectToEnterCDC'+i+'fangxuecongexpectToEnterCDC'+j;
-            gomokuThis.arrUndoData.push(strTmp);
-            console.log(gomokuThis.arrUndoData);
             gomokuThis.nowData[i][j]={
               piece:'',
               numStep:0
@@ -166,6 +173,26 @@ class FxcGomoku{
       gomokuThis.render();
       gomokuThis.numNowStep--;
     }
+  }
+  redo(){
+    var gomokuThis=this;
+    this.elesUndo[1].onclick=function(){
+      //没有可撤销的棋局
+      if(gomokuThis.numNowStep===gomokuThis.arrStepData.length){
+        return false;
+      }
+      var objRedo=JSON.parse(gomokuThis.arrStepData[gomokuThis.numNowStep].split(/fangxuecongExpectToEnterCDC/g)[0]);
+      var i=Number(gomokuThis.arrStepData[gomokuThis.numNowStep].split(/fangxuecongExpectToEnterCDC/g)[1]);
+      var j=Number(gomokuThis.arrStepData[gomokuThis.numNowStep].split(/fangxuecongExpectToEnterCDC/g)[2]);
+      //赋值
+      gomokuThis.nowData[i][j]={
+        piece:objRedo.piece,
+        numStep:objRedo.numStep
+      }
+
+      gomokuThis.render();
+      gomokuThis.numNowStep++;
+    };
   }
   deepCopyObject(obj){
     var str='';
