@@ -1,0 +1,150 @@
+@charset 'utf-8';
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box
+}
+
+html,body {
+    background-color: #fff;
+    -webkit-font-smoothing: antialiased
+}
+
+article,aside,body,details,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,input,li,menu,nav,ol,p,section,select,textarea,ul {
+    font-family:"微软雅黑",Ubuntu,Arial,"libra sans",sans-serif;
+    font-size: 12px;
+    margin: 0;
+    padding: 0;
+}
+
+p {
+    line-height: 1.6em
+}
+
+textarea {
+    overflow: auto;
+    resize: none
+}
+
+li {
+    list-style: none
+}
+
+img {
+    border: none;
+    max-width: 100%;
+}
+
+article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {
+    display: block
+}
+
+a {
+    transition: all .2s ease-out;
+    text-decoration: none;
+    color:#E7BE20;
+}
+
+a:focus,input,select,textarea {
+    outline: 0
+}
+
+.clearfix:after {
+    display: block;
+    visibility: hidden;
+    clear: both;
+    height: 0;
+    content: 'Thilina Fong'
+}
+
+.clearfix {
+    zoom: 1
+}
+
+.ellip {
+    max-width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+html,body{
+  background:#EEE;
+}
+#container{
+}
+#gomoku{
+  margin:30px auto 0;
+  display:block;
+  background:#FFF url(./qipan.svg) no-repeat 0 0;
+  background-size:cover;
+  position:absolute;
+  left:50%;
+  top:50%;
+  margin-left:-250px;
+  margin-top:-250px;
+}
+
+.mask{
+  position:fixed;
+  left:0;
+  top:0;
+  width:100%;
+  height:100%;
+  background:rgba(5,5,5,0.0);
+}
+.mask p{
+  background:#FFF;
+  position:absolute;
+  left:0;
+  top:50%;
+  margin-top:-50px;
+  width:100%;
+  height:90px;
+  text-align:center;
+}
+a#init{
+  display:inline-block;
+  background:#FFF;
+  border-radius:3px;
+  color:#f66567;
+  padding:10px 30px;
+  border:2px solid #f66567;
+  font-weight:500;
+  margin-top:20px;
+}
+a#init:hover{
+  color:#FFF;
+  background:#f66567;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* END */
