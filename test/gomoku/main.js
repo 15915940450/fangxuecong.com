@@ -22,27 +22,29 @@ class FxcGomoku{
       this.nowData[i]=[];
       for(var j=0;j<15;j++){
         this.nowData[i][j]={
-          piece:'white',
-          numStep:9
+          piece:'',
+          numStep:0
         };
       }
     }
     this.render();
+    //var gomokuThis=this;
+    this.eleCanvas.onclick=this.dealClick.bind(this);
   } //end of init
   render(){
     //由nowData渲染出的棋局，可以使用canvas或dom
     for(var i=0;i<15;i++){
       for(var j=0;j<15;j++){
-        console.log(this.nowData[i][j]);
+        //console.log(this.nowData[i][j]);
         var pieceIaJ15=this.nowData[i][j];
-
+        objFxcGomoku.drawPiece(pieceIaJ15.piece,i,j,pieceIaJ15.numStep);
       }
     }
   }
 
   drawPiece(strPiece,ia,j15,numStep){
     //https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/createRadialGradient
-    if(!strPiece){
+    if(!strPiece){  //不画棋子
       return false;
     }
     var arrColorStop=[];
@@ -76,10 +78,25 @@ class FxcGomoku{
     this.ctx.fillStyle=strColor;
     this.ctx.fillText(numStep,arrPositionIaJ15[0]+numFontLeft,arrPositionIaJ15[1]+3);
   }
+  dealClick(e){
+    console.log(this);
+    var numOffsetX=e.offsetX;
+    var numOffsetY=e.offsetY;
+
+    var floatX=(numOffsetX-this.paddingLeft)/this.numCeilWidth;
+    var floatY=(numOffsetY-this.paddingLeft)/this.numCeilWidth;
+    var numXia=Math.round(floatX);
+    var numYj15=Math.round(floatY);
+
+    this.nowData[numXia][numYj15]={
+      piece:'black',
+      numStep:1
+    }
+
+    this.render();
+  }
 }
 
 var objFxcGomoku=new FxcGomoku();
 objFxcGomoku.init();
-objFxcGomoku.drawPiece('black',0,1,9);
-objFxcGomoku.drawPiece('white',1,1,163);
 //console.log(objFxcGomoku.nowData);
