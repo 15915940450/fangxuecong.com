@@ -96,7 +96,6 @@ class FxcGomoku{
   computerChess(){
     //电脑算法。。。
     //console.log("now computer"+this.numNowStep);
-    this.humanChess();
   }
   dealClick(e){
     //console.log(this);
