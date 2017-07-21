@@ -11,8 +11,10 @@
 </head>
 <body>
 <div id="container">
-  <canvas id="gomoku" width="500" height="500"></canvas>
+  <!-- 1.棋盘：棋盘可以用canvas画出来，也可以使用背景图，考虑到后期可能会换棋盘或者说提供一个选棋盘的功能，我这里把棋盘用Adobe Illustrator画出来，保存成svg做背景图。 -->
+  <canvas id="fxc-gomoku" width="500" height="500"></canvas>
 </div>
+<!-- 遮住页面，点击开始游戏方可下棋 -->
 <div class="mask">
   <p>
     <a id="init" href="javascript:;">开始游戏</a>

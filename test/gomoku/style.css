@@ -75,7 +75,7 @@ html,body{
 }
 #container{
 }
-#gomoku{
+#fxc-gomoku{
   margin:30px auto 0;
   display:block;
   background:#FFF url(./qipan.svg) no-repeat 0 0;
@@ -88,6 +88,7 @@ html,body{
 }
 
 .mask{
+  display:none;
   position:fixed;
   left:0;
   top:0;
