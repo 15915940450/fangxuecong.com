@@ -18,6 +18,7 @@ class FxcGomoku{
     this.arrStepData=[];
     this.eleNowStep=document.querySelector('.undo strong');
 
+    this.eleGameOver=document.querySelector('h1');
     this.bIsOver=false;
     this.arrWins=[];
     this.numAllWins=0;
@@ -25,6 +26,7 @@ class FxcGomoku{
     this.arrComputerWin=[];
     this.arrHumanWinLog=[];
     this.arrComputerWinLog=[];
+    this.whoWin=false;  //false,'human','computer'
   }
 
   //============初始化
@@ -40,6 +42,11 @@ class FxcGomoku{
 
   } //end of init
   render(){
+    //=====渲染棋局状态
+    if(this.bIsOver){
+      var playerColor=this.firstPlayer===this.whoWin?'black':'white';
+      this.eleGameOver.innerHTML='五子棋：over, '+playerColor+' win.';
+    }
     //=====渲染第几步提示
     this.eleNowStep.innerHTML=this.numNowStep;
     //=====清除画布 console.log(this.numTotalWidth);
@@ -148,6 +155,10 @@ class FxcGomoku{
   }
   //============处理点击
   dealClick(pieceColor,numOffsetX,numOffsetY){
+    //more choices...
+    if(this.bIsOver){
+      return false;
+    }
     var floatX=(numOffsetX-this.paddingLeft)/this.numCeilWidth;
     var floatY=(numOffsetY-this.paddingLeft)/this.numCeilWidth;
     var numXia=Math.round(floatX);
@@ -173,6 +184,17 @@ class FxcGomoku{
       numStep:this.numNowStep
     }
 
+    //判断胜负
+    this.whoWin=this.checkWhoWin(numXia,numYj15,pieceColor);
+    if(!this.whoWin){
+      //轮到电脑下
+      this.computerChess(pieceColor==='black'?'white':'black');
+    }else{
+      //alert(this.whoWin+'v');
+      //console.log(this.whoWin);
+      this.bIsOver=true;
+    }
+
     this.render();
     //渲染完后保存下棋log
     var strTmp=JSON.stringify(this.nowData[numXia][numYj15])+'fangxuecongExpectToEnterCDC'+numXia+'fangxuecongExpectToEnterCDC'+numYj15;
@@ -181,13 +203,6 @@ class FxcGomoku{
     this.arrStepData.length=this.numNowStep;
     //console.log(this.arrStepData);
 
-    var whoWin=this.checkWhoWin(numXia,numYj15,pieceColor);
-    if(!whoWin){
-      //轮到电脑下
-      this.computerChess(pieceColor==='black'?'white':'black');
-    }else{
-      alert(whoWin+'v');
-    }
   }
   checkWhoWin(i,j,pieceColor){
     var whoWin=false;
