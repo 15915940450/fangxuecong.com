@@ -23,6 +23,8 @@ class FxcGomoku{
     this.numAllWins=0;
     this.arrHumanWin=[];
     this.arrComputerWin=[];
+    this.arrHumanWinLog=[];
+    this.arrComputerWinLog=[];
   }
 
   //============初始化
@@ -187,6 +189,10 @@ class FxcGomoku{
         }
       }
     }
+    //保存玩家胜利数组日记
+    this.arrHumanWinLog[this.numNowStep-1]=JSON.stringify(this.arrHumanWin);
+    this.arrComputerWinLog[this.numNowStep-1]=JSON.stringify(this.arrComputerWin);
+    //console.log(this.arrHumanWinLog);
     return whoWin;
   }
   //============悔棋
@@ -210,8 +216,13 @@ class FxcGomoku{
       }
 
       gomokuThis.numNowStep--;
-      console.log(gomokuThis.arrStepData);
-      console.log(gomokuThis.numNowStep);
+      //console.log(gomokuThis.arrStepData);
+      //还原玩家胜利数组
+      gomokuThis.arrHumanWin=JSON.parse(gomokuThis.arrHumanWinLog[gomokuThis.numNowStep-1]);
+      gomokuThis.arrComputerWin=JSON.parse(gomokuThis.arrComputerWinLog[gomokuThis.numNowStep-1]);
+      //console.log(gomokuThis.numNowStep);
+      //console.log(gomokuThis.arrHumanWinLog);
+      //console.log(gomokuThis.arrHumanWin);
 
       gomokuThis.render();
     }
@@ -233,8 +244,11 @@ class FxcGomoku{
       }
 
       gomokuThis.numNowStep++;
-      console.log(gomokuThis.arrStepData);
-      console.log(gomokuThis.numNowStep);
+      //console.log(gomokuThis.arrStepData);
+      //console.log(gomokuThis.numNowStep);
+      //还原玩家胜利数组
+      gomokuThis.arrHumanWin=JSON.parse(gomokuThis.arrHumanWinLog[gomokuThis.numNowStep-1]);
+      gomokuThis.arrComputerWin=JSON.parse(gomokuThis.arrComputerWinLog[gomokuThis.numNowStep-1]);
 
       gomokuThis.render();
     };
