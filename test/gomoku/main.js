@@ -210,6 +210,9 @@ class FxcGomoku{
       }
 
       gomokuThis.numNowStep--;
+      console.log(gomokuThis.arrStepData);
+      console.log(gomokuThis.numNowStep);
+
       gomokuThis.render();
     }
   }
@@ -230,6 +233,9 @@ class FxcGomoku{
       }
 
       gomokuThis.numNowStep++;
+      console.log(gomokuThis.arrStepData);
+      console.log(gomokuThis.numNowStep);
+
       gomokuThis.render();
     };
   }
