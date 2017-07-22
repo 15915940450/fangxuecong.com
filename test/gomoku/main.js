@@ -363,4 +363,7 @@ class FxcGomoku{
 var objFxcGomoku=new FxcGomoku();
 objFxcGomoku.init();
 //console.log(objFxcGomoku.nowData);
-//done in 2017-07-22 周六 07:17 上午
+//done in 2017-07-22 周六 03:27 下午
+//edit by fangxuecong with vim.
+//I hope say hello to you: http://fangxuecong.com/getintouch/
+//THANK YOU.
