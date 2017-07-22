@@ -40,7 +40,7 @@ class FxcGomoku{
 
   } //end of init
   render(){
-    //=====第几步渲染
+    //=====渲染第几步提示
     this.eleNowStep.innerHTML=this.numNowStep;
     //=====清除画布 console.log(this.numTotalWidth);
     this.ctx.clearRect(0,0,this.numTotalWidth,this.numTotalWidth);
@@ -91,6 +91,8 @@ class FxcGomoku{
     }
     var arrPositionIaJ15=[this.numCeilWidth*ia+this.paddingLeft,this.numCeilWidth*j15+this.paddingTop];
 
+    this.ctx.translate(0.5,0.5);  //图变清脆
+
     this.ctx.beginPath();
     this.ctx.arc(arrPositionIaJ15[0],arrPositionIaJ15[1],this.numPieceWidth,0,2*Math.PI);
     this.ctx.closePath();
@@ -99,9 +101,27 @@ class FxcGomoku{
     gradient.addColorStop(1,arrColorStop[1]);
     this.ctx.fillStyle=gradient;
     this.ctx.fill();
-    this.ctx.font='12px serif';
     this.ctx.fillStyle=strColor;
-    this.ctx.fillText(numStep,arrPositionIaJ15[0]+numFontLeft,arrPositionIaJ15[1]+3);
+    if(this.numNowStep===numStep){
+      //最后一步棋子
+      this.ctx.beginPath();
+      this.ctx.moveTo(arrPositionIaJ15[0],this.numTotalWidth-40);
+      this.ctx.lineTo(arrPositionIaJ15[0],this.numTotalWidth-24);
+      this.ctx.moveTo(this.numTotalWidth-40,arrPositionIaJ15[1]);
+      this.ctx.lineTo(this.numTotalWidth-24,arrPositionIaJ15[1]);
+      this.ctx.closePath();
+      this.ctx.strokeStyle="#999";
+      this.ctx.lineWidth=2;
+      this.ctx.stroke();
+
+      this.ctx.font='15px Helvetica';
+      //this.ctx.fillStyle="red";
+      this.ctx.fillText(numStep,arrPositionIaJ15[0]+numFontLeft-2,arrPositionIaJ15[1]+3+2);
+    }else{
+      this.ctx.font='12px serif';
+      this.ctx.fillText(numStep,arrPositionIaJ15[0]+numFontLeft,arrPositionIaJ15[1]+3);
+    }
+    this.ctx.translate(-0.5,-0.5);  //图变清脆
   }
   //================开始下棋
   startChess(){
