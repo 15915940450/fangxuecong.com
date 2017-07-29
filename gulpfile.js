@@ -13,7 +13,7 @@ var cht=require('gulp-cht');
 
 //var objDate=new Date();
 //var v='?v=1.'+(objDate.getMonth()+1)+'.'+objDate.getDate()+objDate.getMilliseconds();
-var v='?v=15.9.0';
+var v='?v=15.9.1';
 
 
 gulp.task('html',function(){
@@ -151,9 +151,26 @@ gulp.task('php',function(){
     .pipe(exReplace(/Li\('localhost','root',''/g,'Li(\'localhost\',\'fangxuec_root\',\'p0\''))
     .pipe(gulp.dest('online/'));
 });
+gulp.task('cdc',function(){
+  return gulp.src('cdc/index.html')
+    .pipe(exReplace(/<link rel="stylesheet".+?\/>/g,''))
+    .pipe(exReplace(/<script src="\.\.\/js\/.+?"><\/script>/g,''))
+    .pipe(exReplace(/<\/head>/g,'<link rel="stylesheet" href="../fangxuecong.css'+v+'" /></head>'))
+    .pipe(exReplace(/<\/body>/g,'<script src="../fangxuecong.js'+v+'"></script></body>'))
+    .pipe(htmlmin({collapseWhitespace:true}))
+    .pipe(gulp.dest('online/cdc/'));
+});
+gulp.task("cdcjs", function () {
+  return gulp.src("cdc/wuziqi.js")
+    .pipe(babel({
+      presets: ['es2015']
+    }))
+    .pipe(uglify())
+    .pipe(gulp.dest("online/cdc/"));
+});
 
 
-gulp.task('basetask',['html','css','js','img','fifteen','tangram','tetrishtml','tetriscss','tetrisjs','tetrisimg','tetrisfont','rememberhtml','remembercss','rememberbabel','bst','f','map','getintouch','php'],function(){
+gulp.task('basetask',['html','css','js','img','fifteen','tangram','tetrishtml','tetriscss','tetrisjs','tetrisimg','tetrisfont','rememberhtml','remembercss','rememberbabel','bst','f','map','getintouch','php','cdc','cdcjs'],function(){
   console.log('-----base task okay, nextstep, 2.run gulp zhhk-----');
 });
 //zhhk, after basetask
