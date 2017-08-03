@@ -36,9 +36,6 @@ gulp.task('css',function(){
 gulp.task('js',function(){
   return gulp.src(['js/modernizr.js','js/FSS.js','js/jquery-3.0.0.min.js','js/wave.js','js/theater.min.js','js/swiper.jquery.min.js','js/main.js'])
     .pipe(concat('fangxuecong.js'))
-    .pipe(babel({
-      presets: ['es2015']
-    }))
     .pipe(uglify())
     .pipe(gulp.dest('online/'));
 });
