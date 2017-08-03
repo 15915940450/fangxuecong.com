@@ -329,6 +329,8 @@ a:hover#logo i,a.anim#logo i{
   margin-top:100px;
   font-weight:500;
   font-style:italic;
+  float: left;
+  border-bottom:7px double #202020;
 }
 .fe-road h2 span{
   font-size:26px;
