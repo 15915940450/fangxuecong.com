@@ -28,10 +28,10 @@ $(function(){
   */
   function setHeightEqualWidth(){
     if($('.work').length>0){
-      var numW=$('.col-md-3.work_item').width();
+      var numW=$('.col-md-6.work_item').width();
       $('.work_item').each(function(i){
         // console.log(numW);
-        $(this).height(numW);
+        $(this).height(numW/2);
       });
     }
   }
