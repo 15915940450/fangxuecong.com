@@ -10,4 +10,4 @@ const path=require('path');
 console.log('===========================================');
 
 var strResolve=path.resolve();
-console.log(strResolve);
+console.log(strResolve)asdasd;
