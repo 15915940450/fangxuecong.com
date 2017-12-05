@@ -1102,6 +1102,41 @@ a.email{
   color: #FFF;
 }
 
+/* shortcuts */
+#windows10{
+  /*width:1000px;*/
+  margin-top:30px;
+  margin-bottom:50px;
+}
+.shortcuts h3{
+  line-height:1.2em;
+  font-weight:300;
+  font-size:22px;
+  color:#000;
+  margin-bottom:20px;
+}
+.win-table{
+  width:100%;
+  max-width:100%;
+  border-collapse:collapse;
+}
+.win-table td{
+  border:1px solid #d0d0d0;
+  padding:12px;
+  font-size:13px;
+  background:#fff;
+}
+.win-table td:first-child{
+  background:#f2f2f2;
+}
+.win-table tr:first-child td{
+  font-size:0.7em;
+  color:rgba(0,0,0,.6);
+  border:none;
+  background:#fff;
+}
+.win-table{}
+.win-table{}
 /* page gomoku */
 .gomoku{
 /*  min-height:100vh; */
