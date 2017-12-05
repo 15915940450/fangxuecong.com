@@ -1103,10 +1103,10 @@ a.email{
 }
 
 /* shortcuts */
-#windows10{
+#windows10,#vim,#atom{
   /*width:1000px;*/
   margin-top:30px;
-  margin-bottom:50px;
+  margin-bottom:90px;
 }
 .shortcuts h3{
   line-height:1.2em;
