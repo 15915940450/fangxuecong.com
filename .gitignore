@@ -42,3 +42,4 @@ test/mysql
 tangram/css/.sass-cache
 tangram/css/master.min.css.map
 online
+*.sublime-workspace
