@@ -449,6 +449,9 @@ footer a.footer-a{
   border:1px solid #021023;
   padding-top:10px;
 }
+.height2music{
+  height:22px;
+}
 .ili_hint > span{
   display:block;
   text-align:left;
@@ -474,6 +477,9 @@ footer a.footer-a{
   overflow:hidden;
 }
 
+.module_ili_hint:hover .yc{
+  display:block !important;
+}
 
 /*技能*/
 .tech{
