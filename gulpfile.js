@@ -42,7 +42,7 @@ gulp.task('js',function(){
 
 gulp.task('img',function(){
   return gulp.src('img/**/*')
-      .pipe(imagemin())
+      //.pipe(imagemin())
       .pipe(gulp.dest('./online/img/'));
 });
 
@@ -115,6 +115,15 @@ gulp.task("rememberbabel", function () {
     .pipe(uglify())
     .pipe(gulp.dest("online/remember/"));
 });
+gulp.task('shortcuts',function(){
+  return gulp.src('shortcuts/index.html')
+    .pipe(exReplace(/<link rel="stylesheet".+?\/>/g,''))
+    .pipe(exReplace(/<script src="\.\.\/js\/.+?"><\/script>/g,''))
+    .pipe(exReplace(/<\/head>/g,'<link rel="stylesheet" href="../fangxuecong.css'+v+'" /></head>'))
+    .pipe(exReplace(/<\/body>/g,'<script src="../fangxuecong.js'+v+'"></script></body>'))
+    .pipe(htmlmin({collapseWhitespace:true}))
+    .pipe(gulp.dest('online/shortcuts/'));
+});
 gulp.task('bst',function(){
   return gulp.src('bst/index.html')
     .pipe(exReplace(/<link rel="stylesheet".+?\/>/g,''))
@@ -147,7 +156,7 @@ gulp.task('getintouch',function(){
     .pipe(gulp.dest('online/getintouch/'));
 });
 gulp.task('php',function(){
-  return gulp.src(['./**/*.php','!f/**/*.php','!online_public_html/**/*.php','!test/**/*.php'])
+  return gulp.src(['./**/*.php','!f/**/*.php','!online_public_html/**/*.php','!datetime/**/*.php'])
     .pipe(exReplace(/Li\('localhost','root',''/g,'Li(\'localhost\',\'fangxuec_root\',\'p0\''))
     .pipe(gulp.dest('online/'));
 });
@@ -170,7 +179,7 @@ gulp.task("cdcjs", function () {
 });
 
 
-gulp.task('basetask',['html','css','js','img','fifteen','tangram','tetrishtml','tetriscss','tetrisjs','tetrisimg','tetrisfont','rememberhtml','remembercss','rememberbabel','bst','f','map','getintouch','php','cdc','cdcjs'],function(){
+gulp.task('basetask',['html','css','js','img','fifteen','tangram','tetrishtml','tetriscss','tetrisjs','tetrisimg','tetrisfont','rememberhtml','remembercss','rememberbabel','bst','shortcuts','f','map','getintouch','php','cdc','cdcjs'],function(){
   console.log('-----base task okay, nextstep, 2.run gulp zhhk-----');
 });
 //zhhk, after basetask
