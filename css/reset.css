@@ -70,3 +70,6 @@ a:focus,input,select,textarea {
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+.yc{
+  display:none !important;
+}

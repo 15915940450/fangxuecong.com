@@ -435,6 +435,45 @@ footer a.footer-a{
   color: #E7BE20;
   text-decoration: underline;
 }
+.module_ili_hint{
+  position:relative;
+}
+.ili_hint{
+  position:absolute;
+  left:-30px;
+  bottom:30px;
+  width:370px;
+  height:170px;
+  display:block;
+  background:#FFF;
+  border:1px solid #021023;
+  padding-top:10px;
+}
+.ili_hint > span{
+  display:block;
+  text-align:left;
+  margin-left:10px;
+}
+.ili_hint > span a{
+  color:#7795f8;
+}
+.ili_hint > span a:hover{
+  text-decoration:underline;
+}
+.ili_hint_tri{
+  position:absolute;
+  left:32px;
+  bottom:-20px;
+  border:10px solid #021023;
+  border-left-color:transparent;
+  border-bottom-color:transparent;
+  border-right-color:transparent;
+  width:0;
+  height:0;
+  display:block;
+  overflow:hidden;
+}
+
 
 /*技能*/
 .tech{
