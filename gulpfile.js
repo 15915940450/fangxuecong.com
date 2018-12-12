@@ -157,7 +157,7 @@ gulp.task('getintouch',function(){
 });
 gulp.task('php',function(){
   return gulp.src(['./**/*.php','!f/**/*.php','!online_public_html/**/*.php','!datetime/**/*.php'])
-    .pipe(exReplace(/Li\('localhost','root',''/g,'Li(\'localhost\',\'fangxuec_root\',\'p0\''))
+    .pipe(exReplace(/Li\('localhost','root','00000000'/g,'Li(\'localhost\',\'fangxuec_root\',\'p0\''))
     .pipe(gulp.dest('online/'));
 });
 gulp.task('cdc',function(){
