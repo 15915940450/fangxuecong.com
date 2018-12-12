@@ -12,7 +12,7 @@
 
     $sql="INSERT INTO im_log(phone,lau,time) VALUES('$phone','$lau',now())";
     $res=$MSQL->query($sql);
-    echo $lau;
+    echo $res;
     //var_dump($res);
   }else{
     // echo "_POST is empty.";
