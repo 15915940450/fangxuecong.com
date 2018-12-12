@@ -8,20 +8,20 @@
 <meta name="author" content="Thilina Fong" />
 <meta name="description" content="" />
 <style media="screen">
-  #log-table{
+  #log-table,.f_table{
     background: rgba(255,255,222,0.9);
     border: 1px solid #333;
     border-collapse: collapse;
     width: 100%;
   }
-  #log-table th{
+  #log-table th,.f_table th{
     background: rgba(173,216,230,0.95);
     border: 1px solid #333;
     padding: 5px 10px;
     font-size: 12px;
     text-transform: uppercase;
   }
-  #log-table td{
+  #log-table td,.f_table td{
     border: 1px solid #333;
     padding: 5px 10px;
     font-size: 11px;
@@ -30,7 +30,11 @@
 </head>
 <body>
 <div id="container">
-  工作是一种乐趣时，生活是一种享受。
+  <table id="mm" class="f_table">
+    <tbody>
+      
+    </tbody>
+  </table>
 
 <div id="pv">
   <!-- <ul>
@@ -128,6 +132,20 @@ ajaxGET('/tetris-game/pv.php',function(data){
   arrPv[1]='<li>'+jsonPv[0].id+jsonPv[0].page+'：<strong>'+jsonPv[0].pv+'</strong></li>';
   var strPv='<ul>'+arrPv.join('')+'</ul>';
   document.getElementById('pv').innerHTML=strPv;
+});
+var eleMM=document.getElementById('mm');
+ajaxGET('../im_log.php',function(data){
+  // console.log(data);
+  data=JSON.parse(data);
+  var strHTML=data.map(function(v){
+    return (`<tr>
+        <td>${v.id}</td>
+        <td>${v.phone}</td>
+        <td>${v.lau}</td>
+        <td>${v.time}</td>
+      </tr>`);
+  }).join('');
+  eleMM.innerHTML=strHTML;
 });
 </script>
 </body>
