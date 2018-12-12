@@ -134,8 +134,7 @@ ajaxGET('/tetris-game/pv.php',function(data){
   document.getElementById('pv').innerHTML=strPv;
 });
 var eleMM=document.getElementById('mm');
-ajaxGET('../im_log.php',function(data){
-  // console.log(data);
+ajaxGET('/im_log.php',function(data){
   data=JSON.parse(data);
   var strHTML=data.map(function(v){
     return (`<tr>
