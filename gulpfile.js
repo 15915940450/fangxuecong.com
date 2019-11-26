@@ -46,6 +46,10 @@ gulp.task('img',function(){
       .pipe(gulp.dest('./online/img/'));
 });
 
+
+
+
+
 gulp.task('fifteen',function(){
   return gulp.src('fifteen/index.html')
     .pipe(exReplace(/<link rel="stylesheet".+?\/>/g,''))
@@ -64,6 +68,8 @@ gulp.task('tangram',function(){
     .pipe(htmlmin({collapseWhitespace:true}))
     .pipe(gulp.dest('online/tangram/'));
 });
+//=========================================文章构建任务2019
+
 gulp.task('tetrishtml',function(){
   return gulp.src('tetris-game/index.html')
     .pipe(exReplace(/<link rel="stylesheet".+?\/>/g,''))
