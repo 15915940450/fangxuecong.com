@@ -898,6 +898,9 @@ footer a.footer-a{
 .page{
   background: #EEE;
 }
+.page.max_height{
+  min-height:calc(100vh - 50px) ;
+}
 .article{
   padding-top: 60px;
   padding-bottom: 60px;
@@ -915,6 +918,9 @@ footer a.footer-a{
 }
 .article p a{
   border-bottom: 1px solid #E7BE20;
+}
+.article .bg_span span{
+  background:rebeccapurple;
 }
 
 .i-wrap{
