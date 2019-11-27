@@ -1,11 +1,15 @@
 @charset 'utf-8';
 
 /*header*/
+header{
+  position: relative;
+  z-index: 696;
+}
 .header{
   background: #021023;
   height: 50px;
   line-height: 50px;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 .logo{
   float: left;
@@ -15,14 +19,15 @@
 .nav{
   float: right;
 }
-.nav li{
+.nav > li{
   float: left;
   margin-left: 25px;
   position: relative;
 }
-.nav li.more{
+.nav > li.more{
   margin-left:15px;
 }
+
 /*banner*/
 .banner{
   height: 466px;
@@ -132,7 +137,7 @@
   font-size: 13px;
   text-transform: uppercase;
 }
-.nav a::before{
+.nav > li > a::before{
   content: "i";
   position: absolute;
   left: 0;
@@ -151,13 +156,13 @@
 .nav a:hover::before,.nav a.active::before{
   width: 15px;
 }
-.nav li:last-child a{
+.nav > li:last-child > a{
   color: #FFF !important;
 }
-.nav li:last-child a:hover,.nav li:last-child a.active{
+.nav > li:last-child > a:hover,.nav li:last-child a.active{
   /*background: red;*/
 }
-.nav li:last-child a::before{
+.nav > li:last-child > a::before{
   /*display: none;*/
   content: ">>";
   width: 20px;
@@ -167,8 +172,26 @@
   left:0;
   top:0;
 }
-.nav li:last-child a:hover::before,.nav li:last-child a.active::before{
+.nav > li:last-child > a:hover::before,.nav li:last-child > a.active::before{
   width: 20px;
+}
+
+/* 二级菜单 */
+.nav ul{
+  width: 150px;
+  position: absolute;
+  left: 0;
+  top: 50px;
+  background:#021033; 
+  border-left: 1px solid #E7BE20;
+  display: none;
+}
+.nav ul a{
+  height: 40px;
+  line-height: 40px;
+}
+.nav > li:hover ul{
+  display: block;
 }
 /*keyframes rideonrails*/
 @-webkit-keyframes rideonrails {
