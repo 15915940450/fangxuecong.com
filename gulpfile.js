@@ -249,4 +249,5 @@ gulp.task('default',function(){
   console.log('-----http://gulpjs.com/-----');
   console.log('-----1.run gulp basetask-----');
   console.log('-----2.run gulp zhhk-----');
+  console.log('-----记得p0 00000000-----');
 });
