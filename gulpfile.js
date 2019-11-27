@@ -68,7 +68,7 @@ gulp.task('tangram',function(){
     .pipe(htmlmin({collapseWhitespace:true}))
     .pipe(gulp.dest('online/tangram/'));
 });
-//=========================================文章构建任务2019
+//=========================================algo文章构建任务2019
 
 gulp.task('tetrishtml',function(){
   return gulp.src('tetris-game/index.html')
