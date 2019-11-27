@@ -1,18 +1,21 @@
 class Queen{
   constructor(){
     this.n=-1;  //raf多少次
-    this.interval=10; //每幀的間隔
+    this.interval=1; //每幀的間隔
     this.currentStep=-1; //當前。。。
     this.eleCanvas=document.querySelector('#eightqueens');
 
     this.result=[]; //解决方案
     // this.result=[3, 6, 4, 1, 5, 0, 2, 7];
     this.arrColIndex=[0,1,2,3,4,5,6,7];
+
+    this.currentRow=0;
+    this.currentCol=0;
   }
 
   init(){
-    
   }
+
 
   // 算法
   solve(){
@@ -26,7 +29,7 @@ class Queen{
     var rafCallback=function(){
       f.n++;
       //動畫終止條件
-      if(f.n<1e1*f.interval){
+      if(f.currentRow<8){
         if(!(f.n%f.interval)){
           //若n加了10, currentStep加了1
           f.currentStep=f.n/f.interval;
@@ -41,9 +44,74 @@ class Queen{
   //每一幀你要做點什麽？
   doINeveryframe(){
     var f=this;
-    console.log(f.currentStep);
+    // console.log(f.currentStep);
+    f.plusRow();
     f.draw();
     return f;
+  }
+  plusRow(){
+    var f=this;
+    f.result[f.currentRow]=f.currentCol || 0;
+    var isPass=f.check(f.currentRow,f.currentCol);
+    // console.log(isPass);
+    if(isPass){
+      //下一行
+      f.currentRow++;
+      f.currentCol=0;
+    }else{
+      //列+1
+      f.currentCol++;
+
+      f.back();
+
+    }
+
+    
+    return f;
+  }
+  back(){
+    var f=this;
+
+    if(f.currentCol===8){
+      //回溯
+      f.currentRow--;
+      f.currentCol=f.result[f.currentRow]+1;
+      f.result.pop();
+      // console.log(f.currentRow,f.currentCol);
+      f.back();
+    }
+
+    return f;
+  }
+
+  //檢查this.result[row]下是否可行，沒有被攻擊
+  check(row,col){
+    var f=this;
+    //2.45deg(有一些)
+    var check45=f.result.slice(0,-1).some(function(v,i){
+      //已存在的點(v,i)與 當前點(col,row)
+      var cot=(col-v)/(row-i);
+      var arrCot=[0,-1,1];
+      return (arrCot.includes(cot));
+    });
+    if(check45){
+      return false;
+    }
+
+    return true;
+  }
+  //洗牌
+  shuffle(arr){
+    var f=this;
+    arr=arr || f.arrColIndex;
+    for(var i=0;i<arr.length;i++){
+      var eleLastI=arr[arr.length-i-1];
+      var randomNum=Math.floor(Math.random()*(arr.length-i));
+      arr[arr.length-i-1]=arr[randomNum];
+      arr[randomNum]=eleLastI;
+    }
+    // console.log(arr);
+    return arr;
   }
   //绘制canvas
   draw(){
@@ -62,7 +130,7 @@ class Queen{
           ctx.fillStyle='white';
         }
         ctx.fillRect(i*w,j*w,w,w);
-        if(f.result[i]===j){
+        if(f.result[j]===i){
           ctx.strokeRect(i*w+10,j*w+10,w-20,w-20);
         }
 
