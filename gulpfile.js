@@ -69,6 +69,22 @@ gulp.task('tangram',function(){
     .pipe(gulp.dest('online/tangram/'));
 });
 //=========================================algo文章构建任务2019
+gulp.task('algorithm',function(){
+  gulp.src('algorithm/**/index.html')
+    .pipe(exReplace(/<link rel="stylesheet".+?\/>/g,''))
+    .pipe(exReplace(/<script src="\.\.\/\.\.\/js\/.+?"><\/script>/g,''))
+    .pipe(exReplace(/<\/head>/g,'<link rel="stylesheet" href="../../fangxuecong.css'+v+'" /></head>'))
+    .pipe(exReplace(/<\/body>/g,'<script src="../../fangxuecong.js'+v+'"></script></body>'))
+    .pipe(htmlmin({collapseWhitespace:true}))
+    .pipe(gulp.dest('online/algorithm/'));
+
+  gulp.src([
+    'algorithm/**/*',
+
+    '!algorithm/**/index.html'
+    ])
+    .pipe(gulp.dest('online/algorithm/'));
+});
 
 gulp.task('tetrishtml',function(){
   return gulp.src('tetris-game/index.html')
@@ -185,7 +201,7 @@ gulp.task("cdcjs", function () {
 });
 
 
-gulp.task('basetask',['html','css','js','img','fifteen','tangram','tetrishtml','tetriscss','tetrisjs','tetrisimg','tetrisfont','rememberhtml','remembercss','rememberbabel','bst','shortcuts','f','map','getintouch','php','cdc','cdcjs'],function(){
+gulp.task('basetask',['html','css','js','img','fifteen','tangram','algorithm','tetrishtml','tetriscss','tetrisjs','tetrisimg','tetrisfont','rememberhtml','remembercss','rememberbabel','bst','shortcuts','f','map','getintouch','php','cdc','cdcjs'],function(){
   console.log('-----base task okay, nextstep, 2.run gulp zhhk-----');
 });
 //zhhk, after basetask
