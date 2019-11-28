@@ -1,7 +1,7 @@
 class Queen{
   constructor(){
     this.n=-1;  //raf多少次
-    this.interval=10; //每幀的間隔
+    this.interval=1; //每幀的間隔
     this.currentStep=-1; //當前。。。
     this.eleCanvas=document.querySelector('#eightqueens');
 
@@ -13,6 +13,19 @@ class Queen{
   }
 
   init(){
+    this.listenInterval();
+  }
+
+  listenInterval(){
+    var f=this;
+    var inputRange=document.querySelector('.interval');
+    // console.log(inputRange.value);
+    f.interval=inputRange.value;
+    inputRange.onchange=function(){
+      // console.log(this.value);
+      f.interval=this.value;
+    };
+    return f;
   }
 
 
@@ -46,8 +59,14 @@ class Queen{
   doINeveryframe(){
     var f=this;
     // console.log(f.currentStep);
+    f.htmlStep();
     f.plusRow();
     f.draw();
+    return f;
+  }
+  htmlStep(){
+    var f=this;
+    document.querySelector('.step').innerHTML=f.currentStep;
     return f;
   }
   plusRow(){
@@ -66,7 +85,7 @@ class Queen{
       f.back();
 
     }
-
+    f.result[f.currentRow]=f.currentCol || 0;
     
     return f;
   }
@@ -105,6 +124,7 @@ class Queen{
   draw(){
     var f=this;
     var ctx=f.eleCanvas.getContext('2d');
+    ctx.clearRect(0,0,400,400);
     var w=50;
     ctx.translate(0.5,0.5);
     ctx.strokeStyle='crimson';
@@ -112,11 +132,19 @@ class Queen{
     var x=0;
     for(var i=0;i<8;i++){
       for(var j=0;j<8;j++){
-        ctx.fillStyle='black';
         //x&1^x>>>3&1  偶數行奇數列或奇數行偶數列
         if(x&1^x>>>3&1){
           ctx.fillStyle='white';
+          if(f.isPass(i,j)){
+            ctx.fillStyle='rgba(255,100,100,.8)';
+          }
+        }else{
+          ctx.fillStyle='black';
+          if(f.isPass(i,j)){
+            ctx.fillStyle='rgba(255,10,10,.8)';
+          }
         }
+
         ctx.fillRect(i*w,j*w,w,w);
         if(f.result[j]===i){
           ctx.strokeRect(i*w+10,j*w+10,w-20,w-20);
@@ -127,6 +155,10 @@ class Queen{
     }
     ctx.translate(-0.5,-0.5);
     return f;
+  }
+  //是否已经经过(首行忽略)
+  isPass(col,row){
+    return (this.result[row]>col && row!==0);
   }
 
 } //class
