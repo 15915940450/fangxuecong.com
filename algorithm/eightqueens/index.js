@@ -9,7 +9,7 @@ class Queen{
     // this.result=[2, 7, 3, 6, 0, 5, 1, 4];
 
     this.currentRow=0;
-    this.currentCol=Math.random()*8>>0;
+    this.currentCol=Math.random()*8>>0;  //Math.random()*8>>0
   }
 
   init(){
@@ -61,7 +61,7 @@ class Queen{
     // console.log(f.currentStep);
     f.htmlStep();
     f.plusRow();
-    f.draw();
+    
     return f;
   }
   htmlStep(){
@@ -85,7 +85,6 @@ class Queen{
       f.back();
 
     }
-    f.result[f.currentRow]=f.currentCol || 0;
     
     return f;
   }
@@ -107,6 +106,10 @@ class Queen{
   //檢查this.result[row]下是否可行，沒有被攻擊
   check(row,col){
     var f=this;
+
+    //检查当前局面(此时绘制更适合)
+    f.draw();
+
     //2.45deg(有一些)
     var check45=f.result.slice(0,-1).some(function(v,i){
       //已存在的點(v,i)與 當前點(col,row)
@@ -120,7 +123,7 @@ class Queen{
 
     return true;
   }
-  //绘制canvas
+  //绘制canvas (留意绘制的时机)
   draw(){
     var f=this;
     var ctx=f.eleCanvas.getContext('2d');
