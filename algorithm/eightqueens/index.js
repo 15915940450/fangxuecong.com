@@ -1,16 +1,15 @@
 class Queen{
   constructor(){
     this.n=-1;  //raf多少次
-    this.interval=1; //每幀的間隔
+    this.interval=10; //每幀的間隔
     this.currentStep=-1; //當前。。。
     this.eleCanvas=document.querySelector('#eightqueens');
 
     this.result=[]; //解决方案
-    // this.result=[3, 6, 4, 1, 5, 0, 2, 7];
-    this.arrColIndex=[0,1,2,3,4,5,6,7];
+    // this.result=[2, 7, 3, 6, 0, 5, 1, 4];
 
     this.currentRow=0;
-    this.currentCol=0;
+    this.currentCol=Math.random()*8>>0;
   }
 
   init(){
@@ -36,6 +35,8 @@ class Queen{
           f.doINeveryframe();
         }
         window.requestAnimationFrame(rafCallback);
+      }else{
+        console.log(f.result);
       }
     };
     window.requestAnimationFrame(rafCallback);
@@ -99,19 +100,6 @@ class Queen{
     }
 
     return true;
-  }
-  //洗牌
-  shuffle(arr){
-    var f=this;
-    arr=arr || f.arrColIndex;
-    for(var i=0;i<arr.length;i++){
-      var eleLastI=arr[arr.length-i-1];
-      var randomNum=Math.floor(Math.random()*(arr.length-i));
-      arr[arr.length-i-1]=arr[randomNum];
-      arr[randomNum]=eleLastI;
-    }
-    // console.log(arr);
-    return arr;
   }
   //绘制canvas
   draw(){
