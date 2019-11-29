@@ -6,7 +6,7 @@
     //MySQL
     
     //使用面向对象进行数据库的连接，在创建对象的时候就自动的连接数据,密码为空
-    $MSQL=new MySQLi('localhost','root','158162','dt',3306);
+    $MSQL=new MySQLi('localhost','root','00000000','dt',3306);
     if($MSQL->connect_errno){
       die('数据库连接失败'.$MSQL->connect_error);
     }
