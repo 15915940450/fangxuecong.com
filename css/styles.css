@@ -9,7 +9,6 @@ header{
   background: #021023;
   height: 50px;
   line-height: 50px;
-  /* overflow: hidden; */
 }
 .logo{
   float: left;
@@ -1335,9 +1334,11 @@ a.email{
     display:none;
   }
 }
-/*手机不显示详细内容*/
+/*手机端*/
 @media (max-width:992px) {
-
+  .header{
+    overflow: hidden; 
+  }
   .work_item .illustrate ul{
     display: none;
   }
