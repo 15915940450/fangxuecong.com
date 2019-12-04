@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Lévy flight | fangxuecong.com</title>
+  <title>A* 搜寻算法 | fangxuecong.com</title>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
@@ -52,7 +52,7 @@
             <a href="javascript:;" class="active">算法</a>
             <ul>
               <li>
-                <a class="active" href="javascript:;">
+                <a href="../levy/">
                   Lévy flight
                 </a>
               </li>
@@ -67,7 +67,7 @@
                 </a>
               </li>
               <li>
-                <a href="../astar/">
+                <a href="javascript:;" class="active">
                   A* 搜寻算法
                 </a>
               </li>
@@ -103,21 +103,29 @@
   <div class="page max_height" style="background:black;color:#FFF;position:relative;">
     <div class="container">
       <div class="row">
-        <div class="col-md-12 tangram-article">
+        <div class="col-md-5 tangram-article">
           <article class="article">
-            <h1>Lévy flight</h1>
-            <p class="bg_span" style="width: 61.8%;">
-              <span>
-                A
-              </span>
-              <a rel="nofollow" href="https://en.wikipedia.org/wiki/L%C3%A9vy_flight" target="_blank">Lévy flight</a>
-              <span>
-                , named for French mathematician Paul Lévy, is a random walk in which the step-lengths have a probability distribution that is heavy-tailed.
-              </span>
+            <h1>A* 搜寻算法</h1>
+            <p>
+              <a href="https://en.wikipedia.org/wiki/A*_search_algorithm" target="_blank" rel="nofollow">A*（A-Star)算法</a>
+              <span>是一种静态路网中求解最短路径最有效的直接搜索方法，也是解决许多搜索问题的有效算法。算法中的距离估算值与实际值越接近，最终搜索速度越快。</span>
             </p>
-            <p class="bg_span">
-              <span>莱维飞行模型，js源码在</span>
-              <a rel="nofollow" href="https://github.com/15915940450/fifteen/tree/master/L%C3%A9vy%20flight" target="_blank">
+            <p style="margin: 30px 0;">
+              <strong>公式表示为： f(n)=g(n)+h(n),</strong>
+            </p>
+            
+            <p>
+              <small>g(n) 是在状态空间中从初始状态到状态n的实际代价，</small>
+            </p>
+            <p>
+              <small>h(n) 是从状态n到目标状态的最佳路径的估计代价。</small>
+            </p>
+            <p>
+              <small>其中， f(n) 是从初始状态经由状态n到目标状态的代价估计，</small>
+            </p>
+            <p class="">
+              <span>源码在</span>
+              <a rel="nofollow" href="https://github.com/15915940450/fifteen/tree/master/graph" target="_blank">
                 这里
               </a>
             </p>
@@ -128,7 +136,7 @@
       </div>
 
     </div>
-    <canvas id="levy" width="1" height="1" style="position: absolute;left: 0;top:0;"></canvas>
+    <canvas id="a_star" width="1" height="1" style="position: absolute;left: 0;top:0;"></canvas>
   </div>
   <!-- coming soon -->
   <section>
