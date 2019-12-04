@@ -4,7 +4,7 @@ class Astar{
     this.CH=(document.documentElement.clientHeight || document.body.clientHeight)-50;
     this.eleCanvas=document.querySelector('#a_star');
     this.ctx=this.eleCanvas.getContext('2d');
-    this.colorDefault='dimgray';
+    
     this.colorSPT='#0077ee';
     this.colorOpenSet='lawngreen';
     this.colorClosedSet='floralwhite';
@@ -20,6 +20,12 @@ class Astar{
     this.rate=.2;
     this.SPTw=3;
 
+    //=====================================
+  }
+  init(iInter){
+    var i;
+    //====================================
+    this.colorDefault=['dimgray','midnightblue'][iInter & 1];
     this.adj=[];  //邻接表
 
     this.result=[];
@@ -33,9 +39,7 @@ class Astar{
     this.E=0; //边数
 
     this.complete=false;
-  }
-  init(){
-    var i;
+    //====================================
     this.eleCanvas.width=this.CW;
     this.eleCanvas.height=this.CH;
 
@@ -204,6 +208,14 @@ class Astar{
     var f=this;
     f.findPath();
     console.log('complete:::'+JSON.stringify(f.result));
+
+    iInter++;
+    //重新开始
+    window.setTimeout(function(){
+      f.init(iInter);
+      f.solve();
+    },1e4);
+
     return f;
   }
   //寻找路径
@@ -335,7 +347,9 @@ class Astar{
     f.ctx.fillStyle=f.colorClosedSet;
     var strVE=`顶点数V: ${f.V}, 边数E: ${f.E}`;
     if(f.complete){
-      strVE+='===> complete';
+      strVE+='('+iInter+')===> complete';
+    }else{
+      strVE+='('+iInter+')===> 搜寻中 . .';
     }
     f.ctx.fillText(strVE,f.CW/2-2e2,-8);
 
@@ -411,5 +425,6 @@ class Astar{
 } //class
 
 var obj =new Astar();
-obj.init();
+var iInter=0;
+obj.init(iInter);
 obj.solve();
