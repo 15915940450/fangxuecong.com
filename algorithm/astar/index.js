@@ -315,17 +315,38 @@ class Astar{
       f.drawVertex(i);
     }
 
+    
+    f.ctx.fill();
+
+
     //绘制文字(顶点数以及边数)
+    f.drawTextAndStartEnd();
+
+
+
+    f.ctx.fillStyle=f.colorDefault;
+
+    f.ctx.translate(-25.5,-25.5);
+    return f;
+  }
+  drawTextAndStartEnd(){
+    var f=this;
+
     f.ctx.fillStyle=f.colorClosedSet;
     var strVE=`顶点数V: ${f.V}, 边数E: ${f.E}`;
     if(f.complete){
       strVE+='===> complete';
     }
     f.ctx.fillText(strVE,f.CW/2-2e2,-8);
-    f.ctx.fill();
-    f.ctx.fillStyle=f.colorDefault;
 
-    f.ctx.translate(-25.5,-25.5);
+
+    f.ctx.fillStyle='crimson';
+    f.ctx.arc(f.index2center(f.V-1).x,f.index2center(f.V-1).y,5,0,2*Math.PI,true);
+    f.ctx.closePath();
+    f.ctx.arc(f.index2center(0).x,f.index2center(0).y,5,0,2*Math.PI,true);
+    f.ctx.closePath();
+    f.ctx.fill();
+
     return f;
   }
   drawVertex(index){
