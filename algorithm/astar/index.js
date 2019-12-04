@@ -125,9 +125,11 @@ class Astar{
   //已知index求该顶点的中心点坐标
   index2center(index){
     var f=this;
+    //从左下到右上
+    var realRow=f.rows-f.adj[index].row-1;
     return ({
       x:f.d*f.adj[index].col+f.d/2,
-      y:f.d*f.adj[index].row+f.d/2
+      y:f.d*realRow+f.d/2
     });
   }
   //查找该顶点的所有邻居
@@ -296,6 +298,7 @@ class Astar{
     return f;
   }
 
+  //绘制
   draw(){
     var f=this,i;
     f.ctx.clearRect(0,0,f.CW,f.CH);
