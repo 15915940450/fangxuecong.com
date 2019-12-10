@@ -6,9 +6,12 @@ class Journey{
     this.direction=[];  //八个方向
 
     this.eleCanvas=document.querySelector('#journey');
+    //长度不断增长
     this.arrStep=[{"x":5,"y":7,"step":0},{"step":1,"x":7,"y":6},{"step":2,"x":6,"y":4},{"step":3,"x":7,"y":2},{"step":4,"x":6,"y":0},{"step":5,"x":4,"y":1},{"step":6,"x":2,"y":0},{"step":7,"x":0,"y":1},{"step":8,"x":1,"y":3},{"step":9,"x":0,"y":5},{"step":10,"x":1,"y":7},{"step":11,"x":3,"y":6},{"step":12,"x":1,"y":5},{"step":13,"x":0,"y":7},{"step":14,"x":2,"y":6},{"step":15,"x":4,"y":7},{"step":16,"x":6,"y":6},{"step":17,"x":7,"y":4},{"step":18,"x":6,"y":2},{"step":19,"x":7,"y":0},{"step":20,"x":5,"y":1},{"step":21,"x":3,"y":0},{"step":22,"x":1,"y":1},{"step":23,"x":0,"y":3},{"step":24,"x":2,"y":2},{"step":25,"x":1,"y":0},{"step":26,"x":0,"y":2},{"step":27,"x":1,"y":4},{"step":28,"x":0,"y":6},{"step":29,"x":2,"y":7},{"step":30,"x":4,"y":6},{"step":31,"x":6,"y":7},{"step":32,"x":7,"y":5},{"step":33,"x":6,"y":3},{"step":34,"x":7,"y":1},{"step":35,"x":5,"y":0},{"step":36,"x":3,"y":1}];
     //下一步有效单元格（属性numCeotLou:此单元格的出路数）
     this.nextValidCell=[];
+
+    this.okay=false;
   }
 
   init(){
@@ -76,7 +79,7 @@ class Journey{
     var rafCallback=function(){
       f.n++;
       //動畫終止條件
-      if(f.n<1e1*f.interval){
+      if(!f.okay){
         if(!(f.n%f.interval)){
           //若n加了10, currentStep加了1
           f.currentStep=f.n/f.interval;
@@ -91,9 +94,21 @@ class Journey{
   //每一幀你要做點什麽？
   doINeveryframe(){
     var f=this;
+
     // console.log(f.currentStep);
     f.nextValidCell=f.getAllStep_1__Greed();
+    
     f.draw();
+
+    
+
+    //始终会有效，因为贪心
+    f.arrStep.push(JSON.parse(f.nextValidCell[0].nextStepInfo));
+
+    if(f.arrStep.length===64){
+      this.okay=true;
+    }
+
     return f;
   }
   //绘制canvas (留意绘制的时机)
@@ -101,7 +116,7 @@ class Journey{
     var f=this;
 
     var arrCell=f.step2cell();
-    console.log(arrCell);
+    // console.log(arrCell);
 
     var ctx=f.eleCanvas.getContext('2d');
     ctx.clearRect(0,0,400,400);
@@ -200,7 +215,7 @@ class Journey{
         }
       }
     }
-    var arrCell=arrCell.map(function(v){
+    arrCell=arrCell.map(function(v){
       var isNext=f.nextValidCell.find(function(v2){
         var nextStepInfo=JSON.parse(v2.nextStepInfo);
         // console.log(v2.numCeotLou);
