@@ -101,6 +101,7 @@ class Journey{
     var f=this;
 
     var arrCell=f.step2cell();
+    console.log(arrCell);
 
     var ctx=f.eleCanvas.getContext('2d');
     ctx.clearRect(0,0,400,400);
@@ -127,16 +128,29 @@ class Journey{
 
         ctx.fillRect(j*w,i*w,w,w);
 
+        
         if(arrCell[x].step===f.arrStep[f.arrStep.length-1].step){
           ctx.fillStyle='yellow';
           ctx.fillRect(j*w+10,i*w+10,w-20,w-20);
         }
 
+
+        ctx.fillStyle='rgba(0,200,0,.5)';
+        ctx.font = "30px serif";
+        ctx.textAlign='center';
+        ctx.textBaseline='middle';
+        if(arrCell[x].isNext){
+          ctx.fillText(arrCell[x].numCeotLou,(j+1/2)*w,(i+1/2)*w);
+        }
+
+
         //文字层在上面(同时画文字)
         ctx.fillStyle='black';
+        ctx.font = "12px serif";
         if(arrCell[x].isPass){
-          ctx.fillText(arrCell[x].step,(j+1/3)*w,(i+1/2)*w);
+          ctx.fillText(arrCell[x].step,(j+1/2)*w,(i+1/2)*w);
         }
+        
 
         x++;
       }
@@ -186,6 +200,22 @@ class Journey{
         }
       }
     }
+    var arrCell=arrCell.map(function(v){
+      var isNext=f.nextValidCell.find(function(v2){
+        var nextStepInfo=JSON.parse(v2.nextStepInfo);
+        // console.log(v2.numCeotLou);
+        nextStepInfo.cellIndex=nextStepInfo.x+nextStepInfo.y*8;
+        return (nextStepInfo.cellIndex===v.cellIndex);
+      });
+      
+      v.isNext=false;
+      if(isNext){
+        v.isNext=true;
+        v.numCeotLou=isNext.numCeotLou;
+      }
+
+      return (v);
+    });
     return (arrCell);
   }
 
