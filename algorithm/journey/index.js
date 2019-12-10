@@ -3,6 +3,7 @@ class Journey{
     this.n=-1;  //raf多少次
     this.interval=10; //每幀的間隔
     this.currentStep=-1; //當前。。。
+    this.direction=[];  //八个方向
 
     this.eleCanvas=document.querySelector('#journey');
     this.arrStep=[{"x":5,"y":7,"step":0},{"step":1,"x":7,"y":6},{"step":2,"x":6,"y":4},{"step":3,"x":7,"y":2},{"step":4,"x":6,"y":0},{"step":5,"x":4,"y":1},{"step":6,"x":2,"y":0},{"step":7,"x":0,"y":1},{"step":8,"x":1,"y":3},{"step":9,"x":0,"y":5},{"step":10,"x":1,"y":7},{"step":11,"x":3,"y":6},{"step":12,"x":1,"y":5},{"step":13,"x":0,"y":7},{"step":14,"x":2,"y":6},{"step":15,"x":4,"y":7},{"step":16,"x":6,"y":6},{"step":17,"x":7,"y":4},{"step":18,"x":6,"y":2},{"step":19,"x":7,"y":0},{"step":20,"x":5,"y":1},{"step":21,"x":3,"y":0},{"step":22,"x":1,"y":1},{"step":23,"x":0,"y":3},{"step":24,"x":2,"y":2},{"step":25,"x":1,"y":0},{"step":26,"x":0,"y":2},{"step":27,"x":1,"y":4},{"step":28,"x":0,"y":6},{"step":29,"x":2,"y":7},{"step":30,"x":4,"y":6},{"step":31,"x":6,"y":7},{"step":32,"x":7,"y":5},{"step":33,"x":6,"y":3},{"step":34,"x":7,"y":1},{"step":35,"x":5,"y":0},{"step":36,"x":3,"y":1}];
@@ -11,7 +12,56 @@ class Journey{
   }
 
   init(){
-    
+    this.direction=[
+      {
+        xPlus:2,
+        yPlus:-1,
+        greedLevel:0,
+        ZH:'右下'
+      },
+      {
+        xPlus:1,
+        yPlus:-2,
+        greedLevel:0,
+        ZH:'下右'
+      },
+      {
+        xPlus:-1,
+        yPlus:-2,
+        greedLevel:0,
+        ZH:'下左'
+      },
+      {
+        xPlus:-2,
+        yPlus:-1,
+        greedLevel:0,
+        ZH:'左下'
+      },
+      {
+        xPlus:-2,
+        yPlus:1,
+        greedLevel:0,
+        ZH:'左上'
+      },
+      {
+        xPlus:-1,
+        yPlus:2,
+        greedLevel:0,
+        ZH:'上左'
+      },
+      {
+        xPlus:1,
+        yPlus:2,
+        greedLevel:0,
+        ZH:'上右'
+      },
+      {
+        xPlus:2,
+        yPlus:1,
+        greedLevel:0,
+        ZH:'右上'
+      }
+    ];  //八個方向
   }
 
   // 算法
@@ -42,10 +92,10 @@ class Journey{
   doINeveryframe(){
     var f=this;
     // console.log(f.currentStep);
+    f.nextValidCell=f.getAllStep_1__Greed();
     f.draw();
     return f;
   }
-  //绘制canvas (留意绘制的时机)
   //绘制canvas (留意绘制的时机)
   draw(){
     var f=this;
@@ -137,6 +187,65 @@ class Journey{
       }
     }
     return (arrCell);
+  }
+
+  //由 step-0 获取到其中的一个 step-1
+  getNextStep(step_0,objDirection){
+    var step_1={
+      step:step_0.step+1,
+      x:step_0.x+objDirection.xPlus,
+      y:step_0.y+objDirection.yPlus
+    };
+    return (step_1);
+  }
+  //貪心計算:返回目前爲止最優的下一步數組集合，按貪心級別從高到低排序
+  getAllStep_1__Greed(stepInfo){
+    var f=this;
+    stepInfo=stepInfo || f.arrStep[f.arrStep.length-1];
+    var arrDirGreed=f.direction.map(function(v){
+      //八個方向上其中的一個點
+      var nextStepInfo=f.getNextStep(stepInfo,v);
+      var greedLevel=0;
+
+      if(f.check(nextStepInfo)){
+        //該點有多少個不通的出口？
+        greedLevel=f.direction.map(function(v2){
+          return (!f.check(f.getNextStep(nextStepInfo,v2)));
+        }).filter(function(v3){
+          return v3;
+        }).length;
+        // console.log(greedLevel);
+        // greedLevel=_.compact().length;
+      }
+
+      return (Object.assign({},v,{
+        nextStepInfo:JSON.stringify(nextStepInfo),
+        greedLevel:greedLevel,  //贪婪系数
+        numCeotLou:8-greedLevel  //下一出路个数
+      }));
+
+    }).filter(function(v){
+      //過濾掉不符合條件的下一步
+      return (v.greedLevel);
+    }).sort(function(a,b){
+      return (b.greedLevel-a.greedLevel);
+    });
+
+    // console.log(arrDirGreed);
+    return (arrDirGreed);
+  }
+  check(stepInfo){
+    var es6This=this;
+    //1.超出邊界
+    // if(stepInfo.x>=8 || stepInfo.y>=8 || stepInfo.x<0 || stepInfo.y<0){
+    if(stepInfo.x>>>3 || stepInfo.y>>>3){
+      return false;
+    }
+    //2.已經走過
+    var isJumped=es6This.arrStep.some(function(v){
+      return (v.x===stepInfo.x && v.y===stepInfo.y);
+    });
+    return !isJumped;
   }
 
 } //class
