@@ -3,18 +3,6 @@ class Journey{
     this.n=-1;  //raf多少次
     this.interval=10; //每幀的間隔,读取输入框的值
     this.currentStep=-1; //當前。。。
-    this.direction=[];  //八个方向
-
-    this.eleCanvas=document.querySelector('#journey');
-    //长度不断增长
-    this.arrStep=[];
-    //下一步有效单元格（属性numCeotLou:此单元格的出路数）
-    this.nextValidCell=[];
-
-    this.okay=false;
-  }
-
-  init(){
     this.direction=[
       {
         xPlus:2,
@@ -65,12 +53,26 @@ class Journey{
         ZH:'右上'
       }
     ];  //八個方向
+
+    this.eleCanvas=document.querySelector('#journey');
+    //长度不断增长
+    this.arrStep=[];
+    //下一步有效单元格（属性numCeotLou:此单元格的出路数）
+    this.nextValidCell=[];
+
+    this.okay=false;
+  }
+
+  init(){
     this.arrStep=[{
       x:Math.random()*8>>0,
       y:Math.random()*8>>0,
       step:0
     }];
-    this.listenInterval();
+
+    //重新开始需要重置的变量
+    this.okay=false;
+    this.currentStep=-1;
   }
 
   //速度
@@ -105,11 +107,22 @@ class Journey{
           f.doINeveryframe();
         }
         window.requestAnimationFrame(rafCallback);
+      }else{
+        f.success();
       }
     };
     window.requestAnimationFrame(rafCallback);
     return f;
   } //raf
+  success(){
+    var f=this;
+    //重新开始
+    window.setTimeout(function(){
+      f.init();
+      f.solve();
+    },1e4);
+    return f;
+  }
   //每一幀你要做點什麽？
   doINeveryframe(){
     var f=this;
@@ -329,3 +342,5 @@ class Journey{
 var obj=new Journey();
 obj.init();
 obj.solve();
+
+obj.listenInterval();
