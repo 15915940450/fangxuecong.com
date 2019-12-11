@@ -1,166 +1,378 @@
-class Levy{
+class Maze{
+  //basic要素
   constructor(){
-    this.eleCanvas=document.querySelector('#levy');
-    this.ctx=this.eleCanvas.getContext('2d');
+    this.eleMaze=document.querySelector('#maze');
     this.CW=document.documentElement.clientWidth || document.body.clientWidth;
-    this.CH=(document.documentElement.clientHeight || document.body.clientHeight)-50;
+    this.CH=document.documentElement.clientHeight || document.body.clientHeight;
+    this.ctx=this.eleMaze.getContext('2d');
 
-    this.currentPoint=null; //当前点
-    this.startPoint=null; //开始点(原点)
-    this.timerN=0;
+    this.w=10;
+    this.grid=[]; //網格(包含cell)
+    this.rows=(this.CH-100)/this.w>>0;
+    this.cols=(this.CW-300)/this.w>>0;
+
+    this.adjacentFrontier=[]; //sure is visited(最重要的數據)
+    this.complete=false;
+
+    this.n=0;
+
+    //尋路所需
+    this.startIndex=-1;
+    this.endIndex=-1;
+    this.queue=[];
+    this.pathBFS=[];
+    this.search0=true;
+    this.completeSearch=false;
+
+    this.elePercent=document.querySelectorAll('.percent');
+    this.percentGeneration=0;
+    this.percentSolve=0;
+    this.allCells=0;
   }
 
-  //生成A(包含)到B(包含)的整数
-  random(inclusiveA,inclusiveB){
-    var x=Math.random()*(inclusiveB+1-inclusiveA)>>0;
-    return (x+inclusiveA);
-  }
-  //初始化
   init(){
     var f=this;
-    f.eleCanvas.width=f.CW;
-    f.eleCanvas.height=f.CH;
-    return f;
-  }
+    f.eleMaze.width=f.CW;
+    f.eleMaze.height=f.CH-70;
 
-  draw(){
-    var f=this;
-    var ctx=f.ctx;
-    ctx.translate(0.5,0.5);
+    for(var i=0;i<f.rows;i++){
+      for(var j=0;j<f.cols;j++){
+        var falseFirst=true;
+        var falseLast=true;
+        if(i+j===0){
+          falseFirst=false;
+        }
+        if(i===f.rows-1 && j===f.cols-1){
+          falseLast=false;
+        }
 
-    f.currentPoint={
-      x:f.CW/2,
-      y:f.CH/2
-    };
-
-    ctx.strokeStyle='blanchedalmond';
-    ctx.beginPath();
-    ctx.moveTo(f.currentPoint.x,f.currentPoint.y);
-    f.signStart(ctx,f.currentPoint);
-    f.timer();
-
-    return f;
-  }
-  //标志开始点
-  signStart(ctx,currentPoint){
-    var f=this;
-    f.startPoint={
-      x:currentPoint.x,
-      y:currentPoint.y
-    };
-    ctx.arc(currentPoint.x,currentPoint.y,30,0,Math.PI*2,true);
-    ctx.fillStyle='crimson';
-    ctx.fill();
-
-    return f;
-  }
-  timer(){
-    var f=this;
-    
-    var ctx=f.ctx;
-    var rafCallback=function(){
-      f.timerN++;
-      var nextPoint=f.generateNext();
-
-
-      ctx.lineTo(nextPoint.x,nextPoint.y);
-      ctx.stroke();
-
-      //如果回到原点(轨迹经过原点)
-      var isPass=f.back2o(f.startPoint,f.currentPoint,nextPoint);
-      if(isPass){
-        var time=new Date();
-        alert('已经回到原点('+time+')');
-        return true;
+        f.grid.push({
+          index:i*f.cols+j,
+          row:i,
+          col:j,
+          visited:false,
+          walls:[true,falseLast,true,falseFirst] //上，右，下，左
+        });
       }
+    }
 
-      //赋值于当前点
-      f.currentPoint={
-        x:nextPoint.x,
-        y:nextPoint.y
-      };
+    f.allCells=f.grid.length;
+    f.startIndex=0;
+    f.endIndex=f.grid[f.grid.length-1].index;
+    this.queue.push(f.startIndex);
+    this.grid[f.startIndex].marked=true;
 
-      window.requestAnimationFrame(rafCallback);
+    //STEP1
+    f.adjacentFrontier.push(f.getRandomOne(f.grid));
+    f.adjacentFrontier[0].visited=true;
+    return f;
+  }
+  //從數組中隨機選擇一個元素
+  getRandomOne(arr){
+    return (arr[Math.random()*arr.length>>0]);
+  }
+  //檢測是否生成完成
+  checkIsComplete(){
+    var f=this;
+    var isComplete=f.grid.every(function(v){
+      return (v.visited);
+    });
+    return isComplete;
+  }
+  // 生成未訪問的鄰居數組
+  checkNeighbour(objCell){
+    var f=this,i,cellNeighbour;
+    var arr=[];
+    for(i=0;i<4;i++){
+      cellNeighbour=f.grid[objCell.index+((i===3 || i===0)?-1:1)*Math.pow(f.cols,(i+1)&1)];
+      if(cellNeighbour && !cellNeighbour.visited){
+        if((i===3 && !objCell.col) || (i===1 && !cellNeighbour.col)){
+          //左或右
+          continue;
+        }
+        arr.push(cellNeighbour);
+      }
+    }
+
+    //當前，上，右，下，左
+    // var topNeighbour=f.grid[objCell.index-f.cols];
+    // var rightNeighbour=f.grid[objCell.index+1];
+    // var bottomNeighbour=f.grid[objCell.index+f.cols];
+    // var leftNeighbour=f.grid[objCell.index-1];
+
+    // if(objCell.row && !topNeighbour.visited){
+    //   arr.push(topNeighbour);  //上
+    // }
+    // if(objCell.col!==f.cols-1 && !rightNeighbour.visited){
+    //   arr.push(rightNeighbour);  //右
+    // }
+    // if(objCell.row!==f.rows-1 && !bottomNeighbour.visited){
+    //   arr.push(bottomNeighbour);  //下
+    // }
+    // if(objCell.col && !leftNeighbour.visited){
+    //   arr.push(leftNeighbour);  //左
+    // }
+    return arr;
+  }
+  //隨機選擇frontier
+  chooseRandomFrontier(objCell){
+    var f=this;
+    var neighbors=f.checkNeighbour(objCell);
+    return (f.getRandomOne(neighbors));
+  }
+  //移除墻體
+  removeWall(currentCell,chosenCell){
+    var f=this;
+    switch(chosenCell.row-currentCell.row){
+    case 1:
+      chosenCell.walls[0]=false;
+      currentCell.walls[2]=false;
+      break;
+    case -1:
+      chosenCell.walls[2]=false;
+      currentCell.walls[0]=false;
+      break;
+    default:
+
+    }
+
+    switch(chosenCell.col-currentCell.col){
+    case 1:
+      chosenCell.walls[3]=false;
+      currentCell.walls[1]=false;
+      break;
+    case -1:
+      chosenCell.walls[1]=false;
+      currentCell.walls[3]=false;
+      break;
+    default:
+    
+    }
+
+    return f;
+  }
+  dealGrid(){
+    var f=this;
+    // STEP2
+    if(!f.checkIsComplete()){
+      // STEP3&4
+      var randomAdjacent=f.getRandomOne(f.adjacentFrontier);
+      var randomFrontier=f.chooseRandomFrontier(randomAdjacent);
+      // STEP5
+      f.removeWall(randomAdjacent,randomFrontier);
+      // STEP6
+      randomFrontier.visited=true;
+      //can not just push
+      f.adjacentFrontier.push(randomFrontier);
+      //need to filter
+      f.adjacentFrontier=f.adjacentFrontier.filter(function(v){
+        return (f.checkNeighbour(v).length);
+      });
+      
+    }else{
+      f.complete=true;
+    }
+    return f;
+  }
+  addAdj(){
+    var f=this;
+    f.grid=f.grid.map(function(v){
+      v.adj=f.gAdj(v);
+      v.marked=false;
+      v.edgeTo=-1;
+      v.isPath=false;
+
+      return (v);
+    });
+    return f;
+  }
+  gAdj(v){
+    var objAdj,i,arr=[];
+    for(i=0;i<4;i++){
+      if(!v.walls[i]){
+        //沒有墻，連通
+        // switch(i){
+        // case 0:
+        //   objAdj=this.grid[v.index-this.cols];
+        //   break;
+        // case 1:
+        //   objAdj=this.grid[v.index+1];
+        //   break;
+        // case 2:
+        //   objAdj=this.grid[v.index+this.cols];
+        //   break;
+        // case 3:
+        //   objAdj=this.grid[v.index-1];
+        //   break;
+        // default:
+        
+        // }
+        // if(objAdj){
+        // }
+        objAdj=this.grid[v.index+((i===3 || i===0)?-1:1)*Math.pow(this.cols,(i+1)&1)];
+        objAdj && arr.push(objAdj.index);
+      }
+    }
+    
+    return arr;
+  }
+  dealGridSearch(){
+    var f=this,i;
+    var currentIndex=f.queue.shift();
+    for(i=0;i<f.grid[currentIndex].adj.length;i++){
+      var vertex=f.grid[f.grid[currentIndex].adj[i]];
+      if(!vertex.marked){
+        // 未訪問過
+        f.queue.push(vertex.index);
+        vertex.marked=true;
+        vertex.edgeTo=currentIndex;
+      }
+    }
+    return f;
+  }
+  findPath(w){
+    var f=this;
+    f.pathBFS.unshift(w);
+    if(w===f.startIndex){
+      return true;
+    }
+    var b=f.findPath(f.grid[w].edgeTo);
+    return b;
+  }
+  markedThePath(){
+    var f=this;
+    f.pathBFS.forEach(function(v){
+      f.grid[v].isPath=true;
+    });
+    return f;
+  }
+  calcPercent(isG){
+    var f=this;
+    if(isG){
+      f.percentGeneration=100*f.grid.filter(function(v){
+        return v.visited;
+      }).length/f.allCells;
+    }else{
+      f.percentSolve=100*f.grid.filter(function(v){
+        return v.marked;
+      }).length/f.allCells;
+    }
+    return f;
+  }
+  //動畫
+  raf(){
+    var f=this;
+    var objNum;
+    var rafCallback=function(){
+      f.n++;
+      // console.log(f.n);
+      if(!f.complete){
+        //生成過程中
+        f.dealGrid();
+        //percent
+        f.calcPercent(true);
+        objNum=new Number(f.percentGeneration);
+        f.elePercent[0].innerHTML=objNum.toFixed(3)+'%';
+        window.requestAnimationFrame(rafCallback);
+      }else if(!f.grid[f.endIndex].marked){
+        //尋路中
+        if(f.search0){
+          f.addAdj();
+          f.search0=false;
+        }
+        f.dealGridSearch();
+        f.calcPercent(false);
+        objNum=new Number(f.percentSolve);
+        f.elePercent[1].innerHTML=objNum.toFixed(3)+'%';
+        window.requestAnimationFrame(rafCallback);
+      }else{
+        //程序結束
+        console.log('completeSearch');
+        f.completeSearch=true;
+        f.elePercent[1].innerHTML='100.000%';
+        f.findPath(f.endIndex);
+        f.markedThePath();
+      }
+      f.draw();
     };
     window.requestAnimationFrame(rafCallback);
     return f;
   }
-  //判断点p(x,y)在直线p0(x0,y0)p1(x1,y1)上
-  back2o(p,p0,p1){
+
+  //根據grid繪製canvas
+  draw(){
     var f=this;
-    var x=p.x;
-    var x0=p0.x;
-    var x1=p1.x;
-    var y=p.y;
-    var y0=p0.y;
-    var y1=p1.y;
+    var ctx=f.ctx;
+    ctx.translate(130.5,30.5);
+    ctx.clearRect(0,0,f.CW,f.CH);
+    ctx.moveTo(0,0);
+    ctx.strokeStyle='tan';
     
+    var color='dimgray';
     
-    //1.x1=x0
-    // 要y==y0
-    if(x1===x0 && y!==y0){
-      return false;
-    }
+    for(var i=0;i<f.grid.length;i++){
+      var cell=f.grid[i];
+      
+      //已訪問(生成)
+      if(cell.visited){
+        ctx.fillStyle=color;
+        ctx.fillRect(cell.col*f.w,cell.row*f.w,f.w+1,f.w+1);
+      }
+      //已訪問(馴鹿)
+      if(cell.marked){
+        ctx.fillStyle='midnightblue';
+        ctx.fillRect(cell.col*f.w,cell.row*f.w,f.w+1,f.w+1);
+        ctx.fillStyle=color;
+      }
+      //是路徑
+      if(cell.isPath){
+        ctx.fillStyle='#fbfb8d';
+        ctx.fillRect(cell.col*f.w,cell.row*f.w,f.w+1,f.w+1);
+        ctx.fillStyle=color;
+      }
 
-    //2.x1!=x0
-    // 要y==(y1-y0)*(x-x0)/(x1-x0)+y0;
-    var yTemp=((y1-y0)*(x-x0)/(x1-x0)+y0);
-    if(x1!==x0 && Math.abs(y-yTemp)>1){
-      return false;
-    }
-    // console.log(x0,x1,y0,y1,x,y,yTemp);
+      // console.log(cell);
+      ctx.beginPath();
+      if(cell.walls[0]){
+        //上邊
+        ctx.moveTo(cell.col*f.w,cell.row*f.w);
+        ctx.lineTo((cell.col+1)*f.w,cell.row*f.w);
+      }
+      if(cell.walls[1]){
+        //右邊
+        ctx.moveTo((cell.col+1)*f.w,cell.row*f.w);
+        ctx.lineTo((cell.col+1)*f.w,(cell.row+1)*f.w);
+      }
+      if(cell.walls[2]){
+        //下邊
+        ctx.moveTo((cell.col+1)*f.w,(cell.row+1)*f.w);
+        ctx.lineTo(cell.col*f.w,(cell.row+1)*f.w);
+      }
+      if(cell.walls[3]){
+        //左邊
+        ctx.moveTo(cell.col*f.w,(cell.row+1)*f.w);
+        ctx.lineTo(cell.col*f.w,cell.row*f.w);
+      }
+      ctx.stroke();
 
-    //3.最终判断是否在延伸线上
-    if((x<x0-1 && x<x1-1) || (x>x0+1 && x>x1+1)){
-      return false;
-    }
-
-    
-
-    
-
-
-
-
-    if(f.timerN<=1e2){
-      return false;
-    }
-    console.log(f.timerN,p,p0,p1);
-    return true;
-  }
-  generateNext(){
-    var f=this;
-    var randomX=f.random(-5,5);
-    var randomY=f.random(-5,5);
-
-    if(Math.random()<0.05){
-      randomX=f.random(-88,88);
-      randomY=f.random(-88,88);
-    }
-    var x=f.currentPoint.x+randomX;
-    var y=f.currentPoint.y+randomY;
-    if(x<0 || x>f.CW || y<0 || y>f.CH-4){
-      //超出屏幕界限
-      // console.log(x,y);
-      var obj=f.generateNext();
-      return obj;
-    }else{
-      return ({
-        x:x,
-        y:y
-      });
-    }
-
-
-    
+      // 尋路時繪製網格編號
+      if(!f.completeSearch && f.complete){
+        ctx.font='9px serif';
+        ctx.fillStyle='silver';
+        ctx.textAlign='center';
+        ctx.textBaseline='middle';
+        ctx.fillText(cell.index,cell.col*f.w+f.w/2,cell.row*f.w+f.w/2);
+        ctx.fillStyle=color;
+      }
+    } //for
+    // ctx.closePath();
+    ctx.translate(-130.5,-30.5);
+    return f;
   }
 
 
 
 } //class
 
-
-//===levy
-var levy=new Levy();
-levy.init().draw();
-  
+var obj=new Maze();
+obj.init().raf();
