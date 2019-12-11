@@ -43,8 +43,8 @@ class Queen{
       //動畫終止條件
       if(f.currentRow<8){
         if(!(f.n%f.interval)){
-          //若n加了10, currentStep加了1
-          f.currentStep=f.n/f.interval;
+          //一帧一步
+          f.currentStep++;
           f.doINeveryframe();
         }
         window.requestAnimationFrame(rafCallback);

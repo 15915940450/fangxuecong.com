@@ -1,13 +1,13 @@
 class Journey{
   constructor(){
     this.n=-1;  //raf多少次
-    this.interval=10; //每幀的間隔
+    this.interval=10; //每幀的間隔,读取输入框的值
     this.currentStep=-1; //當前。。。
     this.direction=[];  //八个方向
 
     this.eleCanvas=document.querySelector('#journey');
     //长度不断增长
-    this.arrStep=[{"x":5,"y":7,"step":0},{"step":1,"x":7,"y":6},{"step":2,"x":6,"y":4},{"step":3,"x":7,"y":2},{"step":4,"x":6,"y":0},{"step":5,"x":4,"y":1},{"step":6,"x":2,"y":0},{"step":7,"x":0,"y":1},{"step":8,"x":1,"y":3},{"step":9,"x":0,"y":5},{"step":10,"x":1,"y":7},{"step":11,"x":3,"y":6},{"step":12,"x":1,"y":5},{"step":13,"x":0,"y":7},{"step":14,"x":2,"y":6},{"step":15,"x":4,"y":7},{"step":16,"x":6,"y":6},{"step":17,"x":7,"y":4},{"step":18,"x":6,"y":2},{"step":19,"x":7,"y":0},{"step":20,"x":5,"y":1},{"step":21,"x":3,"y":0},{"step":22,"x":1,"y":1},{"step":23,"x":0,"y":3},{"step":24,"x":2,"y":2},{"step":25,"x":1,"y":0},{"step":26,"x":0,"y":2},{"step":27,"x":1,"y":4},{"step":28,"x":0,"y":6},{"step":29,"x":2,"y":7},{"step":30,"x":4,"y":6},{"step":31,"x":6,"y":7},{"step":32,"x":7,"y":5},{"step":33,"x":6,"y":3},{"step":34,"x":7,"y":1},{"step":35,"x":5,"y":0},{"step":36,"x":3,"y":1}];
+    this.arrStep=[];
     //下一步有效单元格（属性numCeotLou:此单元格的出路数）
     this.nextValidCell=[];
 
@@ -65,6 +65,25 @@ class Journey{
         ZH:'右上'
       }
     ];  //八個方向
+    this.arrStep=[{
+      x:Math.random()*8>>0,
+      y:Math.random()*8>>0,
+      step:0
+    }];
+    this.listenInterval();
+  }
+
+  //速度
+  listenInterval(){
+    var f=this;
+    var inputRange=document.querySelector('.interval');
+    // console.log(inputRange.value);
+    f.interval=inputRange.value;
+    inputRange.onchange=function(){
+      // console.log(this.value);
+      f.interval=this.value;
+    };
+    return f;
   }
 
   // 算法
@@ -81,8 +100,8 @@ class Journey{
       //動畫終止條件
       if(!f.okay){
         if(!(f.n%f.interval)){
-          //若n加了10, currentStep加了1
-          f.currentStep=f.n/f.interval;
+          //一帧一步
+          f.currentStep++;
           f.doINeveryframe();
         }
         window.requestAnimationFrame(rafCallback);
@@ -96,6 +115,7 @@ class Journey{
     var f=this;
 
     // console.log(f.currentStep);
+    f.htmlStep();
     f.nextValidCell=f.getAllStep_1__Greed();
     
     f.draw();
@@ -109,6 +129,11 @@ class Journey{
       this.okay=true;
     }
 
+    return f;
+  }
+  htmlStep(){
+    var f=this;
+    document.querySelector('.step').innerHTML=f.currentStep;
     return f;
   }
   //绘制canvas (留意绘制的时机)
@@ -125,6 +150,7 @@ class Journey{
     /*ctx.strokeStyle='silver';
     ctx.lineWidth=10;*/
     
+    //isPass:是否已经走过
     var x=0,i,j;
     for(i=0;i<8;i++){
       for(j=0;j<8;j++){
@@ -140,30 +166,35 @@ class Journey{
             ctx.fillStyle='rgba(255,10,10,.8)';
           }
         }
-
+        //绘制棋盘
         ctx.fillRect(j*w,i*w,w,w);
 
-        
+        //当前步的单元格（黄色标志）
         if(arrCell[x].step===f.arrStep[f.arrStep.length-1].step){
           ctx.fillStyle='yellow';
           ctx.fillRect(j*w+10,i*w+10,w-20,w-20);
         }
 
-
-        ctx.fillStyle='rgba(0,200,0,.5)';
-        ctx.font = "30px serif";
+        //==文字水平垂直居中
         ctx.textAlign='center';
         ctx.textBaseline='middle';
-        if(arrCell[x].isNext){
-          ctx.fillText(arrCell[x].numCeotLou,(j+1/2)*w,(i+1/2)*w);
-        }
+
+        
 
 
         //文字层在上面(同时画文字)
         ctx.fillStyle='black';
-        ctx.font = "12px serif";
+        ctx.font = "13px serif";
         if(arrCell[x].isPass){
+          //显示已经走过的步数
           ctx.fillText(arrCell[x].step,(j+1/2)*w,(i+1/2)*w);
+        }
+
+        //下一步提示出路数
+        ctx.fillStyle='rgba(0,200,0,.8)';
+        ctx.font = "30px serif";
+        if(arrCell[x].isNext){
+          ctx.fillText(arrCell[x].numCeotLou,(j+1/2)*w,(i+1/2)*w);
         }
         
 
