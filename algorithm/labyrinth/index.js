@@ -6,7 +6,7 @@ class Maze{
     this.CH=document.documentElement.clientHeight || document.body.clientHeight;
     this.ctx=this.eleMaze.getContext('2d');
 
-    this.w=100;
+    this.w=30;
     this.grid=[]; //網格(包含cell)
     this.rows=(this.CH-100)/this.w>>0;
     this.cols=(this.CW-300)/this.w>>0;
@@ -306,14 +306,14 @@ class Maze{
     ctx.translate(130.5,30.5);
     ctx.clearRect(0,0,f.CW,f.CH);
     ctx.moveTo(0,0);
-    ctx.strokeStyle='tan';
+    ctx.strokeStyle='snow';
     
     var color='dimgray';
     
     for(var i=0;i<f.grid.length;i++){
       var cell=f.grid[i];
       var col=cell.col;
-      var row=cell.row;
+      var row=f.rows-1-cell.row;
       
       //已訪問(生成)
       if(cell.visited){
@@ -328,14 +328,14 @@ class Maze{
       }
       //是路徑
       if(cell.isPath){
-        ctx.fillStyle='#fbfb8d';
-        ctx.fillRect(col*f.w,row*f.w,f.w+1,f.w+1);
+        ctx.fillStyle='crimson';
+        ctx.fillRect(col*f.w+f.w/4,row*f.w+f.w/4,f.w-f.w/2,f.w-f.w/2);
         ctx.fillStyle=color;
       }
 
       // console.log(cell);
       ctx.beginPath();
-      if(cell.walls[0]){
+      if(cell.walls[2]){
         //上邊
         ctx.moveTo(col*f.w,row*f.w);
         ctx.lineTo((col+1)*f.w,row*f.w);
@@ -345,7 +345,7 @@ class Maze{
         ctx.moveTo((col+1)*f.w,row*f.w);
         ctx.lineTo((col+1)*f.w,(row+1)*f.w);
       }
-      if(cell.walls[2]){
+      if(cell.walls[0]){
         //下邊
         ctx.moveTo((col+1)*f.w,(row+1)*f.w);
         ctx.lineTo(col*f.w,(row+1)*f.w);
