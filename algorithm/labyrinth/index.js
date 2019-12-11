@@ -6,7 +6,7 @@ class Maze{
     this.CH=document.documentElement.clientHeight || document.body.clientHeight;
     this.ctx=this.eleMaze.getContext('2d');
 
-    this.w=30;
+    this.w=22;
     this.grid=[]; //網格(包含cell)
     this.rows=(this.CH-100)/this.w>>0;
     this.cols=(this.CW-300)/this.w>>0;
