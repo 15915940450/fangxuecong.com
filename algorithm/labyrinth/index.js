@@ -6,7 +6,7 @@ class Maze{
     this.CH=document.documentElement.clientHeight || document.body.clientHeight;
     this.ctx=this.eleMaze.getContext('2d');
 
-    this.w=10;
+    this.w=100;
     this.grid=[]; //網格(包含cell)
     this.rows=(this.CH-100)/this.w>>0;
     this.cols=(this.CW-300)/this.w>>0;
@@ -312,22 +312,24 @@ class Maze{
     
     for(var i=0;i<f.grid.length;i++){
       var cell=f.grid[i];
+      var col=cell.col;
+      var row=cell.row;
       
       //已訪問(生成)
       if(cell.visited){
         ctx.fillStyle=color;
-        ctx.fillRect(cell.col*f.w,cell.row*f.w,f.w+1,f.w+1);
+        ctx.fillRect(col*f.w,row*f.w,f.w+1,f.w+1);
       }
       //已訪問(馴鹿)
       if(cell.marked){
         ctx.fillStyle='midnightblue';
-        ctx.fillRect(cell.col*f.w,cell.row*f.w,f.w+1,f.w+1);
+        ctx.fillRect(col*f.w,row*f.w,f.w+1,f.w+1);
         ctx.fillStyle=color;
       }
       //是路徑
       if(cell.isPath){
         ctx.fillStyle='#fbfb8d';
-        ctx.fillRect(cell.col*f.w,cell.row*f.w,f.w+1,f.w+1);
+        ctx.fillRect(col*f.w,row*f.w,f.w+1,f.w+1);
         ctx.fillStyle=color;
       }
 
@@ -335,23 +337,23 @@ class Maze{
       ctx.beginPath();
       if(cell.walls[0]){
         //上邊
-        ctx.moveTo(cell.col*f.w,cell.row*f.w);
-        ctx.lineTo((cell.col+1)*f.w,cell.row*f.w);
+        ctx.moveTo(col*f.w,row*f.w);
+        ctx.lineTo((col+1)*f.w,row*f.w);
       }
       if(cell.walls[1]){
         //右邊
-        ctx.moveTo((cell.col+1)*f.w,cell.row*f.w);
-        ctx.lineTo((cell.col+1)*f.w,(cell.row+1)*f.w);
+        ctx.moveTo((col+1)*f.w,row*f.w);
+        ctx.lineTo((col+1)*f.w,(row+1)*f.w);
       }
       if(cell.walls[2]){
         //下邊
-        ctx.moveTo((cell.col+1)*f.w,(cell.row+1)*f.w);
-        ctx.lineTo(cell.col*f.w,(cell.row+1)*f.w);
+        ctx.moveTo((col+1)*f.w,(row+1)*f.w);
+        ctx.lineTo(col*f.w,(row+1)*f.w);
       }
       if(cell.walls[3]){
         //左邊
-        ctx.moveTo(cell.col*f.w,(cell.row+1)*f.w);
-        ctx.lineTo(cell.col*f.w,cell.row*f.w);
+        ctx.moveTo(col*f.w,(row+1)*f.w);
+        ctx.lineTo(col*f.w,row*f.w);
       }
       ctx.stroke();
 
@@ -361,7 +363,7 @@ class Maze{
         ctx.fillStyle='silver';
         ctx.textAlign='center';
         ctx.textBaseline='middle';
-        ctx.fillText(cell.index,cell.col*f.w+f.w/2,cell.row*f.w+f.w/2);
+        ctx.fillText(cell.index,col*f.w+f.w/2,row*f.w+f.w/2);
         ctx.fillStyle=color;
       }
     } //for
