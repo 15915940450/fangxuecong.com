@@ -36,16 +36,20 @@ class Souduk{
 
 
     this.arrGung=[];  //宫数据
+    this.currentCell=[];  //当前进行尝试的单元格索引 [gungIndex,cell]
+
+    this.okay=false;
   }
 
   //判断动画是否 持续 进行
   ciZuk(){
-    return (this.n<1e1*this.interval);
+    return (!this.okay);
   }
 
   init(){
     //首先生成1，5，9這三個宮，索引是0，4，8
     this.gung159();
+    this.currentCell=[1,-1];
   }
 
   gung159(){
@@ -96,6 +100,54 @@ class Souduk{
   doINeveryframe(){
     var f=this;
     // console.log(f.currentStep);
+    f.tryCell(1);
+    
+    return f;
+  }
+
+  tryCell(num){
+    var f=this;
+    f.updateCurrentCell();
+    if(!f.okay){
+      f.updateArrGung(num);
+    }
+      
+
+    return f;
+  }
+  updateCurrentCell(){
+    var f=this;
+    var gungIndex=f.currentCell[0];  //从第一个宫开始
+    var cellIndex=f.currentCell[1];
+    cellIndex++;
+    if(cellIndex>=9){
+      cellIndex=0;
+      gungIndex++;
+      //跳过宫
+      if(gungIndex===4){
+        gungIndex=5;
+      }
+    }
+
+
+    this.currentCell=[gungIndex,cellIndex];
+
+
+    //已经生成成功
+    if(gungIndex>=8){
+      // console.log(cellIndex,gungIndex);
+      f.okay=true;
+    }
+
+    return f;
+  }
+  //更新宫数据
+  updateArrGung(num){
+    var f=this;
+    f.arrGung[f.currentCell[0]][f.currentCell[1]]=num;
+    // console.log(f.arrGung);
+
+    //绘制的时机
     f.draw();
     return f;
   }
@@ -112,7 +164,6 @@ class Souduk{
     var w=50;
     ctx.translate(20.5,20.5);
 
-console.log(arrRowCol.arrRow);
     var i,j;
     for(i=0;i<9;i++){
       for(j=0;j<9;j++){
