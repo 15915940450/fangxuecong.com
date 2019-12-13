@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>A* 搜寻算法 | fangxuecong.com</title>
+  <title>数独 | fangxuecong.com</title>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
@@ -57,7 +57,7 @@
                 </a>
               </li>
               <li>
-                <a href="../eightqueens/">
+                <a class="active" href="javascript:;">
                   八皇后问题
                 </a>
               </li>
@@ -67,7 +67,7 @@
                 </a>
               </li>
               <li>
-                <a href="javascript:;" class="active">
+                <a href="../astar/">
                   A* 搜寻算法
                 </a>
               </li>
@@ -105,43 +105,49 @@
   </header>
 
   <!-- ============================================= page ========================================================================= -->
-  <div class="page max_height" style="background:black;color:#FFF;position:relative;">
+  <div class="page" style="background:#232c3b;color:#FFF;position:relative;padding-bottom: 30px;">
     <div class="container">
       <div class="row">
         <div class="col-md-5 tangram-article">
           <article class="article">
-            <h1>A* 搜寻算法</h1>
-            <p>
-              <a href="https://en.wikipedia.org/wiki/A*_search_algorithm" target="_blank" rel="nofollow">A*（A-Star)算法</a>
-              <span>是一种静态路网中求解最短路径最有效的直接搜索方法，也是解决许多搜索问题的有效算法。算法中的距离估算值与实际值越接近，最终搜索速度越快。</span>
-            </p>
-            <p style="margin: 30px 0;">
-              <strong>公式表示为： f(n)=g(n)+h(n),</strong>
-            </p>
-            
-            <p>
-              <small>g(n) 是在状态空间中从初始状态到状态n的实际代价，</small>
-            </p>
-            <p>
-              <small>h(n) 是从状态n到目标状态的最佳路径的估计代价。</small>
-            </p>
-            <p>
-              <small>其中， f(n) 是从初始状态经由状态n到目标状态的代价估计，</small>
-            </p>
+            <h1>数独</h1>
             <p class="">
-              <span>源码在</span>
-              <a rel="nofollow" href="https://github.com/15915940450/fifteen/tree/master/graph" target="_blank">
+              数独终盘共有6,670,903,752,021,072,936,960（约为6.67×10的21次方）种组合，2005年由Bertram Felgenhauer和Frazer Jarvis计算出该数字，并将计算方法发布在他们网站上，如果将等价终盘（如旋转、翻转、行行对换，数字对换等变形）不计算，则有5,472,730,538个组合。
+            </p>
+
+            <p>
+              右边演示了运用回溯算法生成其中一个终盘的过程。
+            </p>
+
+
+
+            <p class="">
+              <span>
+                js源码在
+              </span>
+              <a rel="nofollow" href="https://github.com/15915940450/fifteen/tree/master/shudu" target="_blank">
                 这里
               </a>
+              
             </p>
             
           </article>
+        </div>
+        <div class="col-md-7" style="padding-top: 90px;text-align: right;padding-right: 30px;">
+          <canvas id="souduk" width="400" height="400" style="border:4px solid #3b4351;"></canvas>
+          <div class="row" style="margin-top: 20px;">
+            <p class="col-md-7">
+              速度：
+              <input class="interval" type="range" min="1" max="100" step="5" value="31" />
+            </p>
+            <p class="col-md-5">尝试次数：<span class="step">0</span></p>
+          </div>
         </div>
 
       </div>
 
     </div>
-    <canvas id="a_star" width="1" height="1" style="position: absolute;left: 0;top:0;"></canvas>
+    
   </div>
   <!-- coming soon -->
   <section>

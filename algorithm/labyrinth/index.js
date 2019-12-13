@@ -360,7 +360,7 @@ class Maze{
       // 尋路時繪製網格編號
       if(!f.completeSearch && f.complete){
         ctx.font='9px serif';
-        ctx.fillStyle='silver';
+        ctx.fillStyle='dimgray';
         ctx.textAlign='center';
         ctx.textBaseline='middle';
         ctx.fillText(cell.index,col*f.w+f.w/2,row*f.w+f.w/2);
