@@ -26,7 +26,7 @@ console.log(a,b);*/
 class Souduk{
   constructor(){
     this.n=-1;  //raf多少次
-    this.interval=10; //每幀的間隔
+    this.interval=50; //每幀的間隔
     this.currentStep=-1; //當前。。。
 
     this.CW=document.documentElement.clientWidth || document.body.clientWidth;
@@ -37,6 +37,7 @@ class Souduk{
 
     this.arrGung=[];  //宫数据
     this.currentCell=[];  //当前进行尝试的单元格索引 [gungIndex,cell]
+    this.currentNum=1;
 
     this.okay=false;
   }
@@ -100,16 +101,16 @@ class Souduk{
   doINeveryframe(){
     var f=this;
     // console.log(f.currentStep);
-    f.tryCell(1);
+    f.tryCell();
     
     return f;
   }
 
-  tryCell(num){
+  tryCell(){
     var f=this;
-    f.updateCurrentCell();
+    // f.updateCurrentCell();
     if(!f.okay){
-      f.updateArrGung(num);
+      f.updateArrGung();
     }
       
 
@@ -142,9 +143,9 @@ class Souduk{
     return f;
   }
   //更新宫数据
-  updateArrGung(num){
+  updateArrGung(){
     var f=this;
-    f.arrGung[f.currentCell[0]][f.currentCell[1]]=num;
+    f.arrGung[f.currentCell[0]][f.currentCell[1]]=f.currentNum;
     // console.log(f.arrGung);
 
     //绘制的时机
@@ -238,6 +239,18 @@ class Souduk{
       row:x,
       col:y
     });
+  }
+  //检查数据的正确性,（更新了arrGung之前）,针对当前单元格进行检查
+  check(){
+    var f=this;
+    //获取当前单元格所在宫数据
+    var gungIndex=f.currentCell[0];
+    var perGung=f.arrGung[gungIndex];
+
+    //okay：没有 f.currentNum
+    var checkOkay=!perGung.includes(f.currentNum);
+    console.log(checkOkay);
+    return checkOkay;
   }
 
 } //class
