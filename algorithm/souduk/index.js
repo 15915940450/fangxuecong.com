@@ -50,7 +50,7 @@ class Souduk{
   init(){
     //首先生成1，5，9這三個宮，索引是0，4，8
     this.gung159();
-    this.currentCell=[1,-1];
+    this.currentCell=[1,0];
   }
 
   gung159(){
@@ -109,11 +109,18 @@ class Souduk{
   tryCell(){
     var f=this;
     // f.updateCurrentCell();
+    var checkOkay=f.check();
     if(!f.okay){
-      f.updateArrGung();
-    }
-      
+      if(checkOkay){
+        //当前单元格可以填充 f.currentNum
+        f.updateArrGung();
+      }else{
+        
+      }
+    }else{
+      //生成终盘成功
 
+    }
     return f;
   }
   updateCurrentCell(){
