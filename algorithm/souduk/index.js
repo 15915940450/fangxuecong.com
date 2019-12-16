@@ -123,8 +123,8 @@ class Souduk{
         f.updateCurrentCell();
       }else{
         //还原数据，更新填入数字
-        f.arrGung=arrGungBeforeUpdate;
         f.updateCurrentNum();
+        f.arrGung=arrGungBeforeUpdate;
       }
     }else{
       //生成终盘成功
@@ -137,8 +137,9 @@ class Souduk{
     var f=this;
     f.currentNum++;
     if(f.currentNum>=10){
+      console.log(f.currentCell);
       //回溯
-      f.back();
+      // f.back();
     }
     return f;
   }
@@ -179,12 +180,13 @@ class Souduk{
   //尝试单元格(前进或回退)
   updateCurrentCell(isBack){
     var f=this;
-    if(isBack){}else{
-      f.currentNum=1;
-    }
+
 
     var gungIndex=f.currentCell[0];  //从第一个宫开始
     var cellIndex=f.currentCell[1];
+
+    
+
     if(isBack){
       cellIndex--;
     }else{
@@ -210,6 +212,12 @@ class Souduk{
 
 
     this.currentCell=[gungIndex,cellIndex];
+    if(isBack){
+      f.currentNum=f.arrGung[gungIndex][cellIndex]+1;
+      f.arrGung[gungIndex][cellIndex]=f.currentNum;
+    }else{
+      f.currentNum=1;
+    }
 
 
     //已经生成成功
@@ -218,10 +226,10 @@ class Souduk{
       f.okay=true;
     }
     //回退失败
-    if(gungIndex<0){
+    if(gungIndex<1){
       // console.log(cellIndex,gungIndex);
-      f.okay=true;
       console.log('生成失败');
+      f.okay=true;
     }
 
     return f;
@@ -352,7 +360,7 @@ class Souduk{
 
     //okay：没有 f.currentNum
     var checkOkay=!theGungRowCol.includes(f.currentNum);
-    console.log(checkOkay);
+    // console.log(checkOkay);
     return checkOkay;
   }
 
