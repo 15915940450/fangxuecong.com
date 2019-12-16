@@ -45,6 +45,8 @@ class Souduk{
     this.okay=false;
   }
 
+  
+
   //判断动画是否 持续 进行
   ciZuk(){
     return (!this.okay);
@@ -54,9 +56,18 @@ class Souduk{
     //首先生成1，5，9這三個宮，索引是0，4，8
     this.gung159();
     this.currentCell=[1,0];
-    /*this.arrGung=[[1,3,7,2,8,5,6,9,4],[4,2,6,1,7,3,5,8,9],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[7,6,5,8,1,9,2,3,4],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[3,4,5,6,9,2,7,1,8]];
-    this.currentCell=[1,8];
-    this.currentNum=9;*/
+    this.listenInterval();
+  }
+  listenInterval(){
+    var f=this;
+    var inputRange=document.querySelector('.interval');
+    // console.log(inputRange.value);
+    f.interval=inputRange.value;
+    inputRange.onchange=function(){
+      // console.log(this.value);
+      f.interval=this.value;
+    };
+    return f;
   }
 
   gung159(){
@@ -103,10 +114,17 @@ class Souduk{
     window.requestAnimationFrame(rafCallback);
     return f;
   } //raf
+
+  htmlStep(){
+    var f=this;
+    document.querySelector('.step').innerHTML=f.currentStep;
+    return f;
+  }
   //每一幀你要做點什麽？
   doINeveryframe(){
     var f=this;
     // console.log(f.currentStep);
+    f.htmlStep();
     f.tryCell();
     
     return f;
@@ -117,10 +135,11 @@ class Souduk{
     //保存更新之前的数据
     var arrGungBeforeUpdate=JSON.parse(JSON.stringify(f.arrGung));
 
-    //更新
-    f.updateArrGung();
-
     var checkOkay=f.check(arrGungBeforeUpdate);
+    //更新
+    f.updateArrGung(checkOkay);
+
+    
     if(checkOkay){
       //当前单元格可以填入 f.currentNum ,下一个单元格
       f.updateCurrentCell();
@@ -209,17 +228,17 @@ class Souduk{
     return f;
   }
   //更新宫数据
-  updateArrGung(){
+  updateArrGung(checkOkay){
     var f=this;
     f.arrGung[f.currentCell[0]][f.currentCell[1]]=f.currentNum;
     // console.log(f.arrGung);
     //绘制的时机：每更新一次，绘制一遍
-    f.draw();
+    f.draw(checkOkay);
     
     return f;
   }
 
-  draw(){
+  draw(checkOkay){
     var f=this;
 
     var arrRowCol=f.arrRowCol_from_arrGung();
@@ -243,6 +262,11 @@ class Souduk{
         ctx.font = "20px serif";
         ctx.textAlign='center';
         ctx.textBaseline='middle';
+
+        if(f.isCurrent(j,i)){
+          //当前尝试的数字
+          ctx.fillStyle='crimson';
+        }
 
         var text=arrRowCol.arrRow[j][i] || '';
         ctx.fillText(text,(i+1/2)*w,(j+1/2)*w);
@@ -294,6 +318,11 @@ class Souduk{
     });
   }
   turnGungCell2rowcol(gungIndex,cellIndex){
+    if(gungIndex===undefined){
+      //没有传入参数 undefined
+      gungIndex=this.currentCell[0];
+      cellIndex=this.currentCell[1];
+    }
     //gung[5][3]=row[4][6]
     var shangGung=Math.floor(gungIndex/3);  //商(1)
     var yuGung=gungIndex%3; //余(2)
@@ -308,6 +337,10 @@ class Souduk{
       col:y
     });
   }
+  isCurrent(row,col){
+    var rowCol=this.turnGungCell2rowcol();
+    return (rowCol.row===row && rowCol.col===col);
+  }
   //检查数据的正确性,（更新了arrGung之前）,针对当前单元格进行检查
   check(arrGungBeforeUpdate){
     var f=this;
@@ -316,11 +349,10 @@ class Souduk{
 
     //获取当前单元格所在宫数据
     var gungIndex=f.currentCell[0];
-    var cell=f.currentCell[1];
     var theGung=arrGungBeforeUpdate[gungIndex];
 
     //获取当前单元格所在的行列
-    var rowCol=f.turnGungCell2rowcol(gungIndex,cell);
+    var rowCol=f.turnGungCell2rowcol();
     var arrRowCol=f.arrRowCol_from_arrGung(arrGungBeforeUpdate);
 
     //获取当前单元格所在的行列数据
