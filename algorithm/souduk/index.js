@@ -26,7 +26,7 @@ console.log(a,b);*/
 class Souduk{
   constructor(){
     this.n=-1;  //raf多少次
-    this.interval=50; //每幀的間隔
+    this.interval=10; //每幀的間隔
     this.currentStep=-1; //當前。。。
 
     this.CW=document.documentElement.clientWidth || document.body.clientWidth;
@@ -136,22 +136,75 @@ class Souduk{
   updateCurrentNum(){
     var f=this;
     f.currentNum++;
+    if(f.currentNum>=10){
+      //回溯
+      f.back();
+    }
     return f;
   }
-  //尝试单元格
-  updateCurrentCell(){
+  back(){
     var f=this;
-    f.currentNum=1;
+    //计算当前单元格的上一个单元格
+    f.updateCurrentCell(true);
+    // f.arrGung=[];
+    // f.currentNum=1.5;
+    return f;
+  }
+  //弃用
+  backCell(){
+    var f=this;
+    var gungIndex=f.currentCell[0];  //从第一个宫开始
+    var cellIndex=f.currentCell[1];
+    cellIndex--;
+    if(cellIndex<0){
+      //回退到上个宫
+      cellIndex=8;
+      gungIndex--;
+      //跳过宫
+      if(gungIndex===4){
+        gungIndex=3;
+      }
+    }
+
+    this.currentCell=[gungIndex,cellIndex];
+
+    //回退失败
+    if(gungIndex<0){
+      // console.log(cellIndex,gungIndex);
+      f.okay=true;
+      console.log('生成失败');
+    }
+
+  }
+  //尝试单元格(前进或回退)
+  updateCurrentCell(isBack){
+    var f=this;
+    if(isBack){}else{
+      f.currentNum=1;
+    }
 
     var gungIndex=f.currentCell[0];  //从第一个宫开始
     var cellIndex=f.currentCell[1];
-    cellIndex++;
+    if(isBack){
+      cellIndex--;
+    }else{
+      cellIndex++;
+    }
     if(cellIndex>=9){
       cellIndex=0;
       gungIndex++;
       //跳过宫
       if(gungIndex===4){
         gungIndex=5;
+      }
+    }
+    if(cellIndex<0){
+      //回退到上个宫
+      cellIndex=8;
+      gungIndex--;
+      //跳过宫
+      if(gungIndex===4){
+        gungIndex=3;
       }
     }
 
@@ -163,6 +216,12 @@ class Souduk{
     if(gungIndex>=8){
       // console.log(cellIndex,gungIndex);
       f.okay=true;
+    }
+    //回退失败
+    if(gungIndex<0){
+      // console.log(cellIndex,gungIndex);
+      f.okay=true;
+      console.log('生成失败');
     }
 
     return f;
