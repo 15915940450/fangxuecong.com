@@ -108,14 +108,23 @@ class Souduk{
 
   tryCell(){
     var f=this;
-    // f.updateCurrentCell();
-    var checkOkay=f.check();
+    //保存更新之前的数据
+    var arrGungBeforeUpdate=JSON.parse(JSON.stringify(f.arrGung));
+
+    //更新
+    f.updateArrGung();
+    //绘制的时机：每更新一次，绘制一遍
+    f.draw();
+
     if(!f.okay){
+      var checkOkay=f.check(arrGungBeforeUpdate);
       if(checkOkay){
         //当前单元格可以填充 f.currentNum
-        f.updateArrGung();
+        f.updateCurrentCell();
       }else{
-        
+        //还原数据，更新填入数字
+        f.arrGung=arrGungBeforeUpdate;
+        f.updateCurrentNum();
       }
     }else{
       //生成终盘成功
@@ -123,8 +132,17 @@ class Souduk{
     }
     return f;
   }
+  //尝试数字
+  updateCurrentNum(){
+    var f=this;
+    f.currentNum++;
+    return f;
+  }
+  //尝试单元格
   updateCurrentCell(){
     var f=this;
+    f.currentNum=1;
+
     var gungIndex=f.currentCell[0];  //从第一个宫开始
     var cellIndex=f.currentCell[1];
     cellIndex++;
@@ -155,8 +173,7 @@ class Souduk{
     f.arrGung[f.currentCell[0]][f.currentCell[1]]=f.currentNum;
     // console.log(f.arrGung);
 
-    //绘制的时机
-    f.draw();
+    
     return f;
   }
 
@@ -248,11 +265,14 @@ class Souduk{
     });
   }
   //检查数据的正确性,（更新了arrGung之前）,针对当前单元格进行检查
-  check(){
+  check(arrGungBeforeUpdate){
     var f=this;
+
+    
+
     //获取当前单元格所在宫数据
     var gungIndex=f.currentCell[0];
-    var perGung=f.arrGung[gungIndex];
+    var perGung=arrGungBeforeUpdate[gungIndex];
 
     //okay：没有 f.currentNum
     var checkOkay=!perGung.includes(f.currentNum);
