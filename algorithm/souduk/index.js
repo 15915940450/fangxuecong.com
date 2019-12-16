@@ -23,10 +23,13 @@ Array.prototype.shuffle = function() {
 var b=a.shuffle();
 console.log(a,b);*/
 
+
+
+
 class Souduk{
   constructor(){
     this.n=-1;  //raf多少次
-    this.interval=10; //每幀的間隔
+    this.interval=1; //每幀的間隔
     this.currentStep=-1; //當前。。。
 
     this.CW=document.documentElement.clientWidth || document.body.clientWidth;
@@ -51,6 +54,9 @@ class Souduk{
     //首先生成1，5，9這三個宮，索引是0，4，8
     this.gung159();
     this.currentCell=[1,0];
+    /*this.arrGung=[[1,3,7,2,8,5,6,9,4],[4,2,6,1,7,3,5,8,9],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[7,6,5,8,1,9,2,3,4],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[3,4,5,6,9,2,7,1,8]];
+    this.currentCell=[1,8];
+    this.currentNum=9;*/
   }
 
   gung159(){
@@ -113,86 +119,53 @@ class Souduk{
 
     //更新
     f.updateArrGung();
-    //绘制的时机：每更新一次，绘制一遍
-    f.draw();
 
-    if(!f.okay){
-      var checkOkay=f.check(arrGungBeforeUpdate);
-      if(checkOkay){
-        //当前单元格可以填充 f.currentNum
-        f.updateCurrentCell();
-      }else{
-        //还原数据，更新填入数字
-        f.updateCurrentNum();
-        f.arrGung=arrGungBeforeUpdate;
-      }
+    var checkOkay=f.check(arrGungBeforeUpdate);
+    if(checkOkay){
+      //当前单元格可以填入 f.currentNum ,下一个单元格
+      f.updateCurrentCell();
     }else{
-      //生成终盘成功
-      console.log('success');
+      //当前单元格不可以填入 f.currentNum ,还原数据，更新填入数字(+1)
+      f.updateCurrentNum();
     }
+    
+  
+    
     return f;
   }
   //尝试数字
   updateCurrentNum(){
     var f=this;
     f.currentNum++;
+
     if(f.currentNum>=10){
-      console.log(f.currentCell);
-      //回溯
-      // f.back();
+      //回溯,尝试上一个单元格 isBack true
+      f.updateCurrentCell(true);
     }
     return f;
   }
-  back(){
-    var f=this;
-    //计算当前单元格的上一个单元格
-    f.updateCurrentCell(true);
-    // f.arrGung=[];
-    // f.currentNum=1.5;
-    return f;
-  }
-  //弃用
-  backCell(){
-    var f=this;
-    var gungIndex=f.currentCell[0];  //从第一个宫开始
-    var cellIndex=f.currentCell[1];
-    cellIndex--;
-    if(cellIndex<0){
-      //回退到上个宫
-      cellIndex=8;
-      gungIndex--;
-      //跳过宫
-      if(gungIndex===4){
-        gungIndex=3;
-      }
-    }
-
-    this.currentCell=[gungIndex,cellIndex];
-
-    //回退失败
-    if(gungIndex<0){
-      // console.log(cellIndex,gungIndex);
-      f.okay=true;
-      console.log('生成失败');
-    }
-
-  }
+  
   //尝试单元格(前进或回退)
   updateCurrentCell(isBack){
     var f=this;
 
 
-    var gungIndex=f.currentCell[0];  //从第一个宫开始
+    var gungIndex=f.currentCell[0];
     var cellIndex=f.currentCell[1];
 
-    
-
     if(isBack){
+      // console.log(JSON.stringify(f.arrGung));
+      //当前单元格置0，然后将上一个单元格置为当前单元格
+      f.arrGung[gungIndex][cellIndex]=0;
+      // console.log(JSON.stringify(f.arrGung));
       cellIndex--;
     }else{
       cellIndex++;
     }
+
+
     if(cellIndex>=9){
+      // 切换宫
       cellIndex=0;
       gungIndex++;
       //跳过宫
@@ -211,7 +184,8 @@ class Souduk{
     }
 
 
-    this.currentCell=[gungIndex,cellIndex];
+    //f.currentCell,f.currentNum,,f.arrGung 三要素
+    f.currentCell=[gungIndex,cellIndex];
     if(isBack){
       f.currentNum=f.arrGung[gungIndex][cellIndex]+1;
       f.arrGung[gungIndex][cellIndex]=f.currentNum;
@@ -222,7 +196,7 @@ class Souduk{
 
     //已经生成成功
     if(gungIndex>=8){
-      // console.log(cellIndex,gungIndex);
+      console.log(f.arrGung);
       f.okay=true;
     }
     //回退失败
@@ -239,7 +213,8 @@ class Souduk{
     var f=this;
     f.arrGung[f.currentCell[0]][f.currentCell[1]]=f.currentNum;
     // console.log(f.arrGung);
-
+    //绘制的时机：每更新一次，绘制一遍
+    f.draw();
     
     return f;
   }
