@@ -128,7 +128,7 @@ class Souduk{
       }
     }else{
       //生成终盘成功
-
+      console.log('success');
     }
     return f;
   }
@@ -231,8 +231,10 @@ class Souduk{
   }
 
   //生成arrRow使與arrGung相對應
-  arrRowCol_from_arrGung(){
+  arrRowCol_from_arrGung(arrGung){
     var f=this;
+    //默认是f.arrGung
+    arrGung=arrGung || f.arrGung;
     var arrRow=[],arrCol=[];
     for(var gungIndex=0;gungIndex<9;gungIndex++){
       arrRow[gungIndex]=arrRow[gungIndex] || [];
@@ -240,8 +242,8 @@ class Souduk{
         arrCol[cellIndex]=arrCol[cellIndex] || [];
 
         var rowcol=f.turnGungCell2rowcol(gungIndex,cellIndex);
-        arrRow[gungIndex][cellIndex]=f.arrGung[rowcol.row][rowcol.col];
-        arrCol[cellIndex][gungIndex]=f.arrGung[rowcol.row][rowcol.col];
+        arrRow[gungIndex][cellIndex]=arrGung[rowcol.row][rowcol.col];
+        arrCol[cellIndex][gungIndex]=arrGung[rowcol.row][rowcol.col];
       }
     }
     return ({
@@ -272,10 +274,25 @@ class Souduk{
 
     //获取当前单元格所在宫数据
     var gungIndex=f.currentCell[0];
-    var perGung=arrGungBeforeUpdate[gungIndex];
+    var cell=f.currentCell[1];
+    var theGung=arrGungBeforeUpdate[gungIndex];
+
+    //获取当前单元格所在的行列
+    var rowCol=f.turnGungCell2rowcol(gungIndex,cell);
+    var arrRowCol=f.arrRowCol_from_arrGung(arrGungBeforeUpdate);
+
+    //获取当前单元格所在的行列数据
+    var theRow=arrRowCol.arrRow[rowCol.row];
+    var theCol=arrRowCol.arrCol[rowCol.col];
+
+
+    //concat
+    var theGungRowCol=theGung.concat(theRow,theCol);
+    // console.log(theGungRowCol);
+
 
     //okay：没有 f.currentNum
-    var checkOkay=!perGung.includes(f.currentNum);
+    var checkOkay=!theGungRowCol.includes(f.currentNum);
     console.log(checkOkay);
     return checkOkay;
   }
