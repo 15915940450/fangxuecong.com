@@ -266,6 +266,10 @@ class Souduk{
         if(f.isCurrent(j,i)){
           //当前尝试的数字
           ctx.fillStyle='crimson';
+          if(checkOkay){
+            ctx.fillStyle='lawngreen';
+            ctx.font = "30px serif";
+          }
         }
 
         var text=arrRowCol.arrRow[j][i] || '';
@@ -317,12 +321,18 @@ class Souduk{
       arrCol:arrCol
     });
   }
-  turnGungCell2rowcol(gungIndex,cellIndex){
-    if(gungIndex===undefined){
+
+  //将宫坐标转换为行列坐标
+  turnGungCell2rowcol(gungIndex=this.currentCell[0],cellIndex=this.currentCell[1]){
+    /*
+    Default function parameters :
+    https://mp.weixin.qq.com/s?src=11&timestamp=1576490648&ver=2038&signature=u8o97Cw9tv89J9yqYsKQ6Taf5L5Fre4TYz8dlTL4adifWdxHLbDl8LdWMyvlozNmAYCxE87iZXZMqE-3egybDLQxXQB5FkA5HilRhR1WMVuCn5dBCnWg3a53zIOv1Yed&new=1
+    */
+    /*if(gungIndex===undefined){
       //没有传入参数 undefined
       gungIndex=this.currentCell[0];
       cellIndex=this.currentCell[1];
-    }
+    }*/
     //gung[5][3]=row[4][6]
     var shangGung=Math.floor(gungIndex/3);  //商(1)
     var yuGung=gungIndex%3; //余(2)
