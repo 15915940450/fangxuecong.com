@@ -203,11 +203,15 @@ class Souduk{
     }
 
 
-    //f.currentCell,f.currentNum,,f.arrGung 三要素
+    
+    //f.currentCell,f.arrGung,f.currentNum 三要素
     f.currentCell=[gungIndex,cellIndex];
     if(isBack){
-      f.currentNum=f.arrGung[gungIndex][cellIndex]+1;
-      f.arrGung[gungIndex][cellIndex]=f.currentNum;
+      f.currentNum=f.arrGung[gungIndex][cellIndex];
+      f.arrGung[gungIndex][cellIndex]=f.currentNum+1;
+      //递归调用
+      f.updateCurrentNum();
+      // f.currentNum>9 && console.log(f.currentNum);
     }else{
       f.currentNum=1;
     }
