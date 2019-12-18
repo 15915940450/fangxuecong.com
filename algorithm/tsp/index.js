@@ -1,3 +1,27 @@
+/*
+Fisher–Yates shuffle
+https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle
+https://gaohaoyang.github.io/2016/10/16/shuffle-algorithm/
+
+[1,2,3,4,5,6,7,8].shuffle()
+*/
+Array.prototype.shuffle = function() {
+  //避免修改原数组
+  var input = JSON.parse(JSON.stringify(this));
+
+  for (var i = input.length-1; i >=0; i--) {
+
+    var randomIndex = Math.floor(Math.random()*(i+1));
+    var itemAtIndex = input[randomIndex];
+
+    input[randomIndex] = input[i];
+    input[i] = itemAtIndex;
+  }
+  return (input);
+};
+/*var a=[1,2,3,5];
+var b=a.shuffle();
+console.log(a,b);*/
 
 class TSP{
   constructor(){
@@ -21,12 +45,26 @@ class TSP{
     };*/
 
 
+    //==================參數
+    this.gthPopulation=1e3; //種群DNA總數
+    this.allGeneration=1e2; //要進化多少代
+    this.mutateRate=0.01;   //突變率,一般取0.001－0.1
     this.gthAllPoints=55;  //除起點外的所經過點的個數
+    this.pow=15;
+    this.population=[]; //種群
   }
 
   //判断动画是否 持续 进行
   ciZuk(){
     return (this.n<1e1*this.interval);
+  }
+
+  //适应度函数设计直接影响到遗传算法的性能。
+  funFitness(DNA){
+    var f=this;
+    var distance=f.calcDistance(DNA);
+    var pow=Math.pow(distance,f.pow)+1;
+    return (1/pow);
   }
 
   init(){
@@ -43,7 +81,65 @@ class TSP{
         gene:i
       };
     }
-    console.log(JSON.stringify(this.points));
+    // console.log(JSON.stringify(this.points));
+
+    //生成種群
+    for(i=0;i<this.gthPopulation;i++){
+      this.population[i]={
+        DNA:DNA.shuffle(),
+        fitness:-1
+      };
+    }
+
+  }
+
+  //計算所有點長度
+  calcDistance(DNA){
+    var f=this;
+    var initialValue=f.calcDistanceAbout2point(f.startPointAlsoEndPoint,f.points[DNA[0].gene]);
+    var distance=DNA.reduce(function(acc,cur,idx,src){
+      var distance2idx;
+
+      if(idx===f.gthAllPoints-1){
+        distance2idx=f.calcDistanceAbout2point(f.points[cur.gene],f.startPointAlsoEndPoint);
+      }else{
+        distance2idx=f.calcDistanceAbout2point(f.points[cur.gene],f.points[src[idx+1].gene]);
+      }
+
+      return (acc+distance2idx);
+    },initialValue)>>0;
+
+    //一旦找到比歷史更短的distance，立馬設置為最優解並繪製
+    //set best(初次或當前比歷史更短)
+    f.setBest(distance,DNA);
+    return distance;
+  }
+  //計算兩點之間的距離
+  calcDistanceAbout2point(m,n){
+    var powX=Math.pow(m.x-n.x,2);
+    var powY=Math.pow(m.y-n.y,2);
+    var distanceMN=Math.sqrt(powX+powY);
+    return (distanceMN);
+  }
+
+  setBest(distance,DNA){
+    var f=this;
+    if(!f.best.distance || distance<f.best.distance){
+      f.best={
+        distance:distance,
+        DNA:DNA.slice()
+      };
+      console.log('best distance:'+distance+', at '+f.currentGeneration+'th generation');
+      f.eleRecord.innerHTML='最短記錄：'+distance;
+      //存貯到本地(3398)
+      if(!window.localStorage['bestDNA'+f.gthAllPoints] || (window.localStorage['bestDNA'+f.gthAllPoints] && +window.localStorage['bestDNA'+f.gthAllPoints]>distance)){
+        window.localStorage['bestDNA'+f.gthAllPoints]=distance;
+      }
+      f.drawBest();
+    }else if(distance===f.best.distance){
+      // console.log('again best:',DNA);
+    }
+    return f;
   }
 
   //生成點
@@ -84,8 +180,87 @@ class TSP{
   doINeveryframe(){
     var f=this;
     console.log(f.currentStep);
+    f.nextGeneration();
     f.draw(f.best.DNA);
     return f;
+  }
+
+  // 产生下一代
+  nextGeneration(){
+    /*
+    在每一代，根据问题域中个体的适应度（fitness）大小选择（selection）个体，并借助于自然遗传学的遗传算子（genetic operators）进行组合交叉（crossover）和变异（mutation），产生出代表新的解集的种群。这个过程将导致种群像自然进化一样的后生代种群比前代更加适应于环境，末代种群中的最优个体经过解码（decoding），可以作为问题近似最优解。
+    */
+    var f=this;
+    //選擇（selection）（組合交叉：crossover）
+    f.selection();
+    //變異（mutation）
+    f.mutation(f.mutateRate);
+
+    //生成第二代之後找出當前代中最優解
+    f.findBestInCureentGeneration();
+    return f;
+  }
+  //計算適應度
+  calcFitness(){
+    var f=this;
+    f.population=f.population.map(function(v){
+      v.fitness=f.funFitness(v.DNA);
+      return (v);
+    });
+    var sumFitness=f.population.reduce(function(acc,cur){
+      return (acc+cur.fitness);
+    },0);
+    f.population=f.population.map(function(v){
+      v.fitness=v.fitness/sumFitness;
+      return (v);
+    });
+    return f;
+  }
+  //輪盤賭
+  roulette(){
+    var f=this;
+    var index=0;
+    var randomNum=Math.random();
+    while(randomNum>0){
+      randomNum=randomNum-f.population[index].fitness;
+      index++;
+    }
+    return (index-1);
+  }
+  selection(){
+    var f=this;
+    f.calcFitness();
+    var newPopulation=[];
+
+    for(var i=0;i<f.gthPopulation;i++){
+      if(i){
+        var DNA1index=f.roulette();
+        var DNA2index=f.roulette();
+        newPopulation[i]={
+          DNA:f.crossover(f.population[DNA1index].DNA,f.population[DNA2index].DNA),
+          fitness:-1
+        };
+      }else{
+        //最優解直接進入第二代
+        newPopulation[0]={
+          DNA:f.best.DNA,
+          fitness:-1
+        };
+      }
+    }
+    f.population=newPopulation;
+  }
+  crossover(DNA1,DNA2){
+    var f=this;
+    var start=_.random(0,f.gthAllPoints-1);
+    var end=_.random(start+1,f.gthAllPoints-1);
+    var sniDNA1=DNA1.slice(start,end);
+    DNA2.forEach(function(v){
+      if(!sniDNA1.includes(v)){
+        sniDNA1.push(v);
+      }
+    });
+    return sniDNA1;
   }
 
   draw(DNA){
