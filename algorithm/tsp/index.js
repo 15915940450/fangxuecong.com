@@ -38,18 +38,17 @@ class TSP{
 
     this.points=[]; //所經過的點
     //目標：最好的路綫
-    this.best={"distance":4232,"DNA":[{"gene":26},{"gene":4},{"gene":41},{"gene":47},{"gene":7},{"gene":12},{"gene":45},{"gene":24},{"gene":15},{"gene":31},{"gene":39},{"gene":28},{"gene":2},{"gene":8},{"gene":32},{"gene":11},{"gene":34},{"gene":29},{"gene":10},{"gene":54},{"gene":14},{"gene":5},{"gene":16},{"gene":27},{"gene":46},{"gene":33},{"gene":21},{"gene":44},{"gene":53},{"gene":30},{"gene":1},{"gene":52},{"gene":13},{"gene":43},{"gene":6},{"gene":25},{"gene":17},{"gene":35},{"gene":51},{"gene":19},{"gene":20},{"gene":37},{"gene":3},{"gene":9},{"gene":49},{"gene":48},{"gene":23},{"gene":42},{"gene":36},{"gene":50},{"gene":38},{"gene":18},{"gene":22},{"gene":0},{"gene":40}]};
-    /*this.best={
+    this.best={
       distance:0,
       DNA:[]
-    };*/
+    };
 
 
     //==================參數
-    this.gthPopulation=1e3; //種群DNA總數
+    this.gthPopulation=1e1; //種群DNA總數
     this.allGeneration=1e2; //要進化多少代
     this.mutateRate=0.01;   //突變率,一般取0.001－0.1
-    this.gthAllPoints=55;  //除起點外的所經過點的個數
+    this.gthAllPoints=5;  //除起點外的所經過點的個數
     this.pow=15;
     this.population=[]; //種群
   }
@@ -103,6 +102,7 @@ class TSP{
       if(idx===f.gthAllPoints-1){
         distance2idx=f.calcDistanceAbout2point(f.points[cur.gene],f.startPointAlsoEndPoint);
       }else{
+        console.log(src,idx);
         distance2idx=f.calcDistanceAbout2point(f.points[cur.gene],f.points[src[idx+1].gene]);
       }
 
@@ -130,12 +130,6 @@ class TSP{
         DNA:DNA.slice()
       };
       console.log('best distance:'+distance+', at '+f.currentGeneration+'th generation');
-      f.eleRecord.innerHTML='最短記錄：'+distance;
-      //存貯到本地(3398)
-      if(!window.localStorage['bestDNA'+f.gthAllPoints] || (window.localStorage['bestDNA'+f.gthAllPoints] && +window.localStorage['bestDNA'+f.gthAllPoints]>distance)){
-        window.localStorage['bestDNA'+f.gthAllPoints]=distance;
-      }
-      f.drawBest();
     }else if(distance===f.best.distance){
       // console.log('again best:',DNA);
     }
@@ -250,10 +244,91 @@ class TSP{
     }
     f.population=newPopulation;
   }
+  mutation(mutateRate){
+    var f=this;
+    mutateRate=mutateRate || f.mutateRate;
+    var populationMutation=f.population.map(function(objDNA){
+      var DNA=objDNA.DNA;
+
+      var i1=f.random(0,f.gthAllPoints-2);
+      var i2=f.random(i1+1,f.gthAllPoints-1);
+      
+
+      if(Math.random()<mutateRate){
+        var randomABC=f.random(0,2);
+        switch(randomABC){
+        case 0:
+          DNA=f.mutateA(DNA,i1,i2);
+          break;
+        case 1:
+          if(i2-i1<3){
+            //交換相鄰兩點
+            DNA=f.mutateA(DNA,i1,i1+1);
+          }else{
+            DNA=f.mutateB(DNA,i1,i2);
+          }
+          break;
+        case 2:
+          var i3=f.random(i2,f.gthAllPoints-1);
+          if(i3===i2){
+            DNA=f.mutateA(DNA,i1,i1+1);
+          }else{
+            DNA=f.mutateC(DNA,i1,i2,i3);
+          }
+          break;
+        default:
+          console.log('it is impossible.');
+        }
+      }
+      return ({
+        DNA:DNA,
+        fitness:-1
+      });
+    });
+    f.population=populationMutation;
+    return f;
+  }
+  //交换
+  mutateA(DNA,i1,i2){
+    this.swap(DNA,i1,i2);
+    return DNA;
+  }
+  //倒序
+  mutateB(DNA,i1,i2){
+    var DNA1=DNA.slice(0,i1);
+    var DNA2=DNA.slice(i1,i2);
+    DNA2.reverse();
+    var DNA3=DNA.slice(i2);
+    DNA=DNA1.concat(DNA2,DNA3);
+    return DNA;
+  }
+  //移动
+  mutateC(DNA,i1,i2,i3){
+    var DNA1=DNA.slice(0,i1);
+    var DNA2=DNA.slice(i1,i2);
+    var DNA3=DNA.slice(i2,i3);
+    var DNA4=DNA.slice(i3);
+    // console.log(i1,i2,i3);
+    DNA=DNA1.concat(DNA3,DNA2,DNA4);
+    return DNA;
+  }
+  //交換數組兩個元素
+  swap(arr,i,j){
+    var f=this;
+    var tmp=arr[i];
+    arr[i]=arr[j];
+    arr[j]=tmp;
+    return f;
+  }
+  random(lower,upper){
+    var result=(Math.random()*(upper-lower+1)>>0)+lower;
+    
+    return result;
+  }
   crossover(DNA1,DNA2){
     var f=this;
-    var start=_.random(0,f.gthAllPoints-1);
-    var end=_.random(start+1,f.gthAllPoints-1);
+    var start=f.random(0,f.gthAllPoints-1);
+    var end=f.random(start+1,f.gthAllPoints-1);
     var sniDNA1=DNA1.slice(start,end);
     DNA2.forEach(function(v){
       if(!sniDNA1.includes(v)){
@@ -261,6 +336,23 @@ class TSP{
       }
     });
     return sniDNA1;
+  }
+  //當前代中找到最優的解
+  findBestInCureentGeneration(){
+    var f=this;
+    var bestInCurrentGeneration=f.population[0].DNA;
+    var bestDistance=f.calcDistance(bestInCurrentGeneration);
+    for(var i=1;i<f.gthPopulation;i++){
+      var distance=f.calcDistance(f.population[i].DNA);
+      if(distance<bestDistance){
+        bestInCurrentGeneration=f.population[i].DNA;
+        bestDistance=f.calcDistance(bestInCurrentGeneration);
+      }
+    }
+    // console.log(bestInCurrentGeneration);
+    //找到之後在第一個canvas中繪製
+    f.drawWithCTX(false,bestInCurrentGeneration);
+    return f;
   }
 
   draw(DNA){
