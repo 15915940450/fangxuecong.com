@@ -1,202 +1,137 @@
-class Fourier{
+
+class TSP{
   constructor(){
-    this.radian=0; //time
+    this.n=-1;  //raf多少次
+    this.interval=10; //每幀的間隔
+    this.currentStep=-1; //當前。。。
+
     this.CW=document.documentElement.clientWidth || document.body.clientWidth;
-    this.CH=document.documentElement.clientHeight || document.body.clientHeight;
+    this.CH4=document.documentElement.clientHeight || document.body.clientHeight;
 
-    this.eleRange=document.querySelector('#n');
-    this.eleFourier=document.querySelector('#fourier');
-    this.ctx=this.eleFourier.getContext('2d');
+    this.eleCanvas=document.querySelector('#tsp');
 
-    this.radius=0;  //圓半徑
-    this.smallRadius=3;
-    this.radSpeed=1;
-    this.divideRad=2e2;
-    this.largestRad=1e6;
-    this.originXY={
-      x:300,
-      y:250
-    };
-    this.maxLength=this.divideRad*8;
-    this.percent='0.0000%';
-    this.n=4;  //級數n
+    this.startPointAlsoEndPoint=null; //起點
 
-    this.arrSineWavePoint=[]; //真正的正弦波點
-    this.arrSineWavePointOrigin=[];
+    this.points=[]; //所經過的點
+    //目標：最好的路綫
+    this.best={"distance":4232,"DNA":[{"gene":26},{"gene":4},{"gene":41},{"gene":47},{"gene":7},{"gene":12},{"gene":45},{"gene":24},{"gene":15},{"gene":31},{"gene":39},{"gene":28},{"gene":2},{"gene":8},{"gene":32},{"gene":11},{"gene":34},{"gene":29},{"gene":10},{"gene":54},{"gene":14},{"gene":5},{"gene":16},{"gene":27},{"gene":46},{"gene":33},{"gene":21},{"gene":44},{"gene":53},{"gene":30},{"gene":1},{"gene":52},{"gene":13},{"gene":43},{"gene":6},{"gene":25},{"gene":17},{"gene":35},{"gene":51},{"gene":19},{"gene":20},{"gene":37},{"gene":3},{"gene":9},{"gene":49},{"gene":48},{"gene":23},{"gene":42},{"gene":36},{"gene":50},{"gene":38},{"gene":18},{"gene":22},{"gene":0},{"gene":40}]};
+    /*this.best={
+      distance:0,
+      DNA:[]
+    };*/
+
+
+    this.gthAllPoints=55;  //除起點外的所經過點的個數
   }
 
+  //判断动画是否 持续 进行
+  ciZuk(){
+    return (this.n<1e1*this.interval);
+  }
 
-  //初始化
   init(){
-    var es6This=this;
-    es6This.eleFourier.width=es6This.CW;
-    es6This.eleFourier.height=525;
+    this.eleCanvas.width=this.CW;
+    this.eleCanvas.height=this.CH4-70;
 
-    return es6This;
+    //隨機生成點
+    var i,DNA=[];
+    this.startPointAlsoEndPoint=this.generateRandomPoint(-1);
+    this.points.length=0;
+    for(i=0;i<this.gthAllPoints;i++){
+      this.points.push(this.generateRandomPoint(i));
+      DNA[i]={
+        gene:i
+      };
+    }
+    console.log(JSON.stringify(this.points));
   }
 
-  //定時器
-  Timer(){
-    var es6This=this;
+  //生成點
+  generateRandomPoint(id){
+    var f=this;
+    return ({
+      id:id,
+      x:(Math.random()*(f.CW-50)>>0)+25,
+      y:((Math.random()*(f.CH4-150)>>0)+20)/2  //一半
+    });
+  }
 
-    var ctx=es6This.ctx;
-    ctx.fillStyle='antiquewhite';
-    ctx.strokeStyle='antiquewhite';
-    ctx.font='20px serif';
-
+  // 算法
+  solve(){
+    var f=this;
+    f.raf();
+    return f;
+  }
+  //執行動畫
+  raf(){
+    var f=this;
     var rafCallback=function(){
-      es6This.radian+=es6This.radSpeed;
-      es6This.percent=((es6This.radian+1)*100/es6This.largestRad).toFixed(6)+'%';
-      es6This.percent+=', 傅立葉級數n='+es6This.n+'.';
-      if(es6This.radian<es6This.largestRad){
-        es6This.draw();
+      f.n++;
+      //動畫进行中
+      if(f.ciZuk()){
+        if(!(f.n%f.interval)){
+          //一帧一步
+          f.currentStep++;
+          f.doINeveryframe();
+        }
         window.requestAnimationFrame(rafCallback);
-      }
+      } //end if
     };
     window.requestAnimationFrame(rafCallback);
-
-    return es6This;
+    return f;
+  } //raf
+  //每一幀你要做點什麽？
+  doINeveryframe(){
+    var f=this;
+    console.log(f.currentStep);
+    f.draw(f.best.DNA);
+    return f;
   }
-  draw(){
-    var es6This=this;
-    var ctx=es6This.ctx;
 
-    //清除畫布,繪製百分比
-    ctx.translate(0,0);
-    ctx.clearRect(0,0,es6This.CW,es6This.CH-4);
-    ctx.fillText(es6This.percent,30,30);
+  draw(DNA){
+    var f=this;
+    
+    var ctx=f.eleCanvas.getContext('2d');
+    DNA=DNA || f.population[0].DNA;
+    ctx.clearRect(0,0,f.eleCanvas.width,f.eleCanvas.height);
+    ctx.translate(0.5,0.5);
 
-    ctx.translate(es6This.originXY.x,es6This.originXY.y);
-
-
-
-    var i;
-    var x=0;
-    var y=0;
-    var xSmall=0;
-    var ySmall=0;
-    var radian=es6This.radian/es6This.divideRad;
-
-    for(i=0;i<es6This.n;i++){
-      var n=i*2+1;
-      es6This.radius=1140*4/(Math.PI*n*10);
-
-      //畫圓(圓心0，0)
-      ctx.strokeStyle='rgba(255,255,255,.4)';
-      ctx.beginPath();
-      ctx.arc(xSmall,ySmall,es6This.radius,0,Math.PI*2);
-      // ctx.closePath();
-      ctx.stroke();
-      ctx.strokeStyle='antiquewhite';
-
-      //畫小圓點
-      ctx.beginPath();
-      x=es6This.radius*Math.cos(n*radian);
-      y=es6This.radius*Math.sin(n*radian);
-      xSmall+=x;
-      ySmall+=y;
-
-      if(i===es6This.n-1){
-        //最後一個點
-        ctx.fillStyle='crimson';
-      }else{
-        ctx.fillStyle='rgba(255,255,255,0.3)';
-      }
-      ctx.arc(xSmall,ySmall,es6This.smallRadius,0,Math.PI*2);
-      ctx.fill();
-      ctx.fillStyle='antiquewhite';
-
-      //畫圓心到小圓點的連綫
-      ctx.strokeStyle='crimson';
-      ctx.lineWidth=3;
-      ctx.beginPath();
-      ctx.moveTo(xSmall,ySmall);
-      ctx.lineTo(xSmall-x,ySmall-y);
-
-      ctx.stroke();
-      ctx.strokeStyle='antiquewhite';
-      ctx.lineWidth=1;
-    }
-
-
-
-
-
-
-    //arrSineWavePointOrigin==>arrSineWavePoint
-    es6This.arrSineWavePointOrigin.unshift({
-      x:-100*radian,
-      y:ySmall
-    });
-    if(es6This.arrSineWavePointOrigin.length>es6This.maxLength){
-      es6This.arrSineWavePointOrigin.length=es6This.maxLength;
-    }
-    //arrSineWavePoint首個元素x為0
-    var gap=es6This.arrSineWavePointOrigin[0].x;
-    es6This.arrSineWavePoint=es6This.arrSineWavePointOrigin.map(function(v){
-      return ({
-        x:v.x-gap+es6This.originXY.x,
-        y:v.y
-      });
-    });
-
-    //畫小圓點映射到正弦波的連綫
-    ctx.strokeStyle='darkviolet';
+    //畫點
     ctx.beginPath();
-    ctx.moveTo(xSmall,ySmall);
-    ctx.lineTo(es6This.arrSineWavePoint[0].x,es6This.arrSineWavePoint[0].y);
-    ctx.stroke();
-    ctx.strokeStyle='antiquewhite';
-
-    //小箭頭
-    ctx.translate(es6This.arrSineWavePoint[0].x,es6This.arrSineWavePoint[0].y);
-    ctx.fillStyle='darkviolet';
-    ctx.beginPath();
-    ctx.moveTo(0,0);
-    ctx.lineTo(-10,3);
-    ctx.lineTo(-10,-3);
-    ctx.closePath();
+    ctx.fillStyle='crimson';
+    ctx.arc(f.startPointAlsoEndPoint.x,f.startPointAlsoEndPoint.y,10,0,Math.PI*2,true);
     ctx.fill();
-    ctx.fillStyle='antiquewhite';
-    ctx.translate(-es6This.arrSineWavePoint[0].x,-es6This.arrSineWavePoint[0].y);
 
-    //畫坐標軸
-    ctx.strokeStyle='#222';
-    ctx.beginPath();
-    ctx.moveTo(es6This.arrSineWavePoint[0].x,0);
-    ctx.lineTo(2e3,0);
-    ctx.stroke();
-    ctx.strokeStyle='antiquewhite';
-
-    //畫sine wave
-    ctx.beginPath();
-    ctx.moveTo(es6This.arrSineWavePoint[0].x,es6This.arrSineWavePoint[0].y);
-    for(i=1;i<es6This.arrSineWavePoint.length;i++){
-      ctx.lineTo(es6This.arrSineWavePoint[i].x,es6This.arrSineWavePoint[i].y);
+    for(var i=0;i<f.gthAllPoints;i++){
+      ctx.beginPath();
+      ctx.fillStyle='#0077ee';
+      ctx.arc(f.points[DNA[i].gene].x,f.points[DNA[i].gene].y,4,0,Math.PI*2,true);
+      ctx.fill();
     }
+
+    //畫曲綫
+    //start-0
+    ctx.beginPath();
+    ctx.moveTo(f.startPointAlsoEndPoint.x,f.startPointAlsoEndPoint.y);
+    ctx.lineTo(f.points[DNA[0].gene].x,f.points[DNA[0].gene].y);
+    ctx.strokeStyle='crimson';
     ctx.stroke();
-
-
-
-
-    //恢復坐標原點到（0，0）
-    ctx.translate(-es6This.originXY.x,-es6This.originXY.y);
-
-    return es6This;
+    //0-1-2-last-start
+    ctx.beginPath();
+    ctx.moveTo(f.points[DNA[0].gene].x,f.points[DNA[0].gene].y);
+    for(i=1;i<f.gthAllPoints;i++){
+      ctx.lineTo(f.points[DNA[i].gene].x,f.points[DNA[i].gene].y);
+    }
+    ctx.lineTo(f.startPointAlsoEndPoint.x,f.startPointAlsoEndPoint.y);
+    ctx.strokeStyle='#0077ee';
+    ctx.stroke();
+    
+    ctx.translate(-0.5,-0.5);
+    return f;
   }
-
-  listenRange(){
-    var es6This=this;
-    es6This.eleRange.value=es6This.n;
-    es6This.eleRange.onchange=function(){
-      es6This.n=this.value;
-    };
-    return es6This;
-  }
-
-
 
 } //class
 
-var obj=new Fourier();
-obj.init().Timer().listenRange();
+var obj=new TSP();
+obj.init();
+obj.solve();
