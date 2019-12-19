@@ -110,7 +110,7 @@ class TSP{
         DNA:DNA.slice()
       };
       f.bestDNA=_.cloneDeep(DNA);
-      console.log('best distance:'+distance,f.best);
+      console.log(`best distance:${f.currentStep}代-${distance}`,f.best);
     }else if(distance===f.best.distance){
       // console.log('again best:',DNA);
     }
@@ -359,7 +359,7 @@ class TSP{
     if(isBelow){
       DNA=f.bestDNA;
       ctx.translate(0,f.eleCanvas.height/2);
-      var text=`当前第 ${f.currentStep} 代，总共 ${f.allGeneration} 代`;
+      var text=`当前第 ${f.currentStep+1} 代， 总共 ${f.allGeneration} 代， 种群个数 ${f.gthPopulation}， 突变率：${f.mutateRate}， 城市个数：${f.gthAllPoints}`;
       ctx.font = "13px serif";
       ctx.textAlign='right';
       ctx.fillText(text,f.CW-50,0);
