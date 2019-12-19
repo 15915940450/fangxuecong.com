@@ -1,7 +1,7 @@
 class TSP{
   constructor(){
     this.n=-1;  //raf多少次
-    this.interval=10; //每幀的間隔
+    this.interval=1; //每幀的間隔
     this.currentStep=-1; //當前。。。
 
     this.CW=document.documentElement.clientWidth || document.body.clientWidth;
@@ -20,17 +20,18 @@ class TSP{
 
 
     //==================參數
-    this.gthPopulation=1e1; //種群DNA總數
-    this.allGeneration=1e2; //要進化多少代
+    this.gthPopulation=1e3; //種群DNA總數
+    this.allGeneration=1e4; //要進化多少代
     this.mutateRate=0.01;   //突變率,一般取0.001－0.1
-    this.gthAllPoints=5;  //除起點外的所經過點的個數
+    this.gthAllPoints=55;  //除起點外的所經過點的個數
     this.pow=15;
     this.population=[]; //種群
+    this.bestInCurrentGeneration=[];
   }
 
   //判断动画是否 持续 进行
   ciZuk(){
-    return (this.n<1e1*this.interval);
+    return (this.n<this.allGeneration*this.interval);
   }
 
   //适应度函数设计直接影响到遗传算法的性能。
@@ -114,7 +115,7 @@ class TSP{
         distance:distance,
         DNA:DNA.slice()
       };
-      // console.log('best distance:'+distance+', at '+f.currentGeneration+'th generation');
+      console.log('best distance:'+distance,f.best);
     }else if(distance===f.best.distance){
       // console.log('again best:',DNA);
     }
@@ -160,7 +161,7 @@ class TSP{
     var f=this;
     // console.log(f.currentStep);
     f.nextGeneration();
-    f.draw(f.best.DNA);
+    f.draw();
     return f;
   }
 
@@ -336,19 +337,38 @@ class TSP{
       }
     }
     // console.log(bestInCurrentGeneration);
+    f.bestInCurrentGeneration=bestInCurrentGeneration;
     //找到之後在第一個canvas中繪製
     // f.drawWithCTX(false,bestInCurrentGeneration);
     return f;
   }
 
-  draw(DNA){
+  draw(){
     var f=this;
     
     var ctx=f.eleCanvas.getContext('2d');
-    DNA=DNA || f.population[0].DNA;
+    
     ctx.clearRect(0,0,f.eleCanvas.width,f.eleCanvas.height);
     ctx.translate(0.5,0.5);
 
+    // f.drawDNA(ctx);
+    f.drawDNA(ctx,true);
+    
+    ctx.translate(-0.5,-0.5);
+    return f;
+  }
+  // isBelow画下方，全局最优解
+  drawDNA(ctx,isBelow){
+    var f=this;
+    var DNA=f.bestInCurrentGeneration;
+    if(isBelow){
+      DNA=f.best.DNA;
+      ctx.translate(0,f.eleCanvas.height/2);
+      var text=`当前第 ${f.currentStep} 代，总共 ${f.allGeneration} 代`;
+      ctx.font = "13px serif";
+      ctx.textAlign='right';
+      ctx.fillText(text,f.CW-50,0);
+    }
     //畫點
     ctx.beginPath();
     ctx.fillStyle='crimson';
@@ -358,6 +378,9 @@ class TSP{
     for(var i=0;i<f.gthAllPoints;i++){
       ctx.beginPath();
       ctx.fillStyle='#0077ee';
+      if(isBelow){
+        ctx.fillStyle='floralwhite';
+      }
       ctx.arc(f.points[DNA[i].gene].x,f.points[DNA[i].gene].y,4,0,Math.PI*2,true);
       ctx.fill();
     }
@@ -377,9 +400,14 @@ class TSP{
     }
     ctx.lineTo(f.startPointAlsoEndPoint.x,f.startPointAlsoEndPoint.y);
     ctx.strokeStyle='#0077ee';
+    if(isBelow){
+      ctx.strokeStyle='floralwhite';
+    }
     ctx.stroke();
-    
-    ctx.translate(-0.5,-0.5);
+
+    if(isBelow){
+      ctx.translate(0,-f.eleCanvas.height/2);
+    }
     return f;
   }
 
