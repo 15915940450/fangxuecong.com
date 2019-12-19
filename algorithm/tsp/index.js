@@ -17,6 +17,7 @@ class TSP{
       distance:0,
       DNA:[]
     };
+    this.bestDNA=[];
 
 
     //==================參數
@@ -62,20 +63,13 @@ class TSP{
     //生成種群
     for(i=0;i<f.gthPopulation;i++){
       f.population[i]={
-        DNA:f.shuffle(DNA),
-        // DNA:DNA,
+        DNA:_.shuffle(DNA),
         fitness:-1
       };
     }
     return f;
   } //init
 
-  shuffle(DNA){
-    DNA.sort(function(){
-      return (Math.random-0.5);
-    });    
-    return DNA;
-  }
 
   //計算所有點長度
   calcDistance(DNA){
@@ -115,6 +109,7 @@ class TSP{
         distance:distance,
         DNA:DNA.slice()
       };
+      f.bestDNA=_.cloneDeep(DNA);
       console.log('best distance:'+distance,f.best);
     }else if(distance===f.best.distance){
       // console.log('again best:',DNA);
@@ -236,12 +231,12 @@ class TSP{
     var populationMutation=f.population.map(function(objDNA){
       var DNA=objDNA.DNA;
 
-      var i1=f.random(0,f.gthAllPoints-2);
-      var i2=f.random(i1+1,f.gthAllPoints-1);
+      var i1=_.random(0,f.gthAllPoints-2);
+      var i2=_.random(i1+1,f.gthAllPoints-1);
       
 
       if(Math.random()<mutateRate){
-        var randomABC=f.random(0,2);
+        var randomABC=_.random(0,2);
         switch(randomABC){
         case 0:
           DNA=f.mutateA(DNA,i1,i2);
@@ -255,7 +250,7 @@ class TSP{
           }
           break;
         case 2:
-          var i3=f.random(i2,f.gthAllPoints-1);
+          var i3=_.random(i2,f.gthAllPoints-1);
           if(i3===i2){
             DNA=f.mutateA(DNA,i1,i1+1);
           }else{
@@ -306,15 +301,15 @@ class TSP{
     arr[j]=tmp;
     return f;
   }
-  random(lower,upper){
+  myrandom(lower,upper){
     var result=(Math.random()*(upper-lower+1)>>0)+lower;
     
     return result;
   }
   crossover(DNA1,DNA2){
     var f=this;
-    var start=f.random(0,f.gthAllPoints-1);
-    var end=f.random(start+1,f.gthAllPoints-1);
+    var start=_.random(0,f.gthAllPoints-1);
+    var end=_.random(start+1,f.gthAllPoints-1);
     var sniDNA1=DNA1.slice(start,end);
     DNA2.forEach(function(v){
       if(!sniDNA1.includes(v)){
@@ -351,7 +346,7 @@ class TSP{
     ctx.clearRect(0,0,f.eleCanvas.width,f.eleCanvas.height);
     ctx.translate(0.5,0.5);
 
-    // f.drawDNA(ctx);
+    f.drawDNA(ctx);
     f.drawDNA(ctx,true);
     
     ctx.translate(-0.5,-0.5);
@@ -362,7 +357,7 @@ class TSP{
     var f=this;
     var DNA=f.bestInCurrentGeneration;
     if(isBelow){
-      DNA=f.best.DNA;
+      DNA=f.bestDNA;
       ctx.translate(0,f.eleCanvas.height/2);
       var text=`当前第 ${f.currentStep} 代，总共 ${f.allGeneration} 代`;
       ctx.font = "13px serif";
