@@ -1,28 +1,3 @@
-/*
-Fisher–Yates shuffle
-https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle
-https://gaohaoyang.github.io/2016/10/16/shuffle-algorithm/
-
-[1,2,3,4,5,6,7,8].shuffle()
-*/
-Array.prototype.shuffle = function() {
-  //避免修改原数组
-  var input = JSON.parse(JSON.stringify(this));
-
-  for (var i = input.length-1; i >=0; i--) {
-
-    var randomIndex = Math.floor(Math.random()*(i+1));
-    var itemAtIndex = input[randomIndex];
-
-    input[randomIndex] = input[i];
-    input[i] = itemAtIndex;
-  }
-  return (input);
-};
-/*var a=[1,2,3,5];
-var b=a.shuffle();
-console.log(a,b);*/
-
 class TSP{
   constructor(){
     this.n=-1;  //raf多少次
@@ -67,34 +42,44 @@ class TSP{
   }
 
   init(){
-    this.eleCanvas.width=this.CW;
-    this.eleCanvas.height=this.CH4-70;
+    var f=this;
+    f.eleCanvas.width=f.CW;
+    f.eleCanvas.height=f.CH4-70;
 
     //隨機生成點
     var i,DNA=[];
-    this.startPointAlsoEndPoint=this.generateRandomPoint(-1);
-    this.points.length=0;
-    for(i=0;i<this.gthAllPoints;i++){
-      this.points.push(this.generateRandomPoint(i));
+    f.startPointAlsoEndPoint=f.generateRandomPoint(-1);
+    f.points.length=0;
+    for(i=0;i<f.gthAllPoints;i++){
+      f.points.push(f.generateRandomPoint(i));
       DNA[i]={
         gene:i
       };
     }
-    // console.log(JSON.stringify(this.points));
+    // console.log(JSON.stringify(f.points));
 
     //生成種群
-    for(i=0;i<this.gthPopulation;i++){
-      this.population[i]={
-        DNA:DNA.shuffle(),
+    for(i=0;i<f.gthPopulation;i++){
+      f.population[i]={
+        DNA:f.shuffle(DNA),
+        // DNA:DNA,
         fitness:-1
       };
     }
+    return f;
+  } //init
 
+  shuffle(DNA){
+    DNA.sort(function(){
+      return (Math.random-0.5);
+    });    
+    return DNA;
   }
 
   //計算所有點長度
   calcDistance(DNA){
     var f=this;
+    // console.log(DNA);
     var initialValue=f.calcDistanceAbout2point(f.startPointAlsoEndPoint,f.points[DNA[0].gene]);
     var distance=DNA.reduce(function(acc,cur,idx,src){
       var distance2idx;
@@ -102,7 +87,7 @@ class TSP{
       if(idx===f.gthAllPoints-1){
         distance2idx=f.calcDistanceAbout2point(f.points[cur.gene],f.startPointAlsoEndPoint);
       }else{
-        console.log(src,idx);
+        // console.log(src,idx);
         distance2idx=f.calcDistanceAbout2point(f.points[cur.gene],f.points[src[idx+1].gene]);
       }
 
@@ -129,7 +114,7 @@ class TSP{
         distance:distance,
         DNA:DNA.slice()
       };
-      console.log('best distance:'+distance+', at '+f.currentGeneration+'th generation');
+      // console.log('best distance:'+distance+', at '+f.currentGeneration+'th generation');
     }else if(distance===f.best.distance){
       // console.log('again best:',DNA);
     }
@@ -173,7 +158,7 @@ class TSP{
   //每一幀你要做點什麽？
   doINeveryframe(){
     var f=this;
-    console.log(f.currentStep);
+    // console.log(f.currentStep);
     f.nextGeneration();
     f.draw(f.best.DNA);
     return f;
@@ -342,6 +327,7 @@ class TSP{
     var f=this;
     var bestInCurrentGeneration=f.population[0].DNA;
     var bestDistance=f.calcDistance(bestInCurrentGeneration);
+    // return f;
     for(var i=1;i<f.gthPopulation;i++){
       var distance=f.calcDistance(f.population[i].DNA);
       if(distance<bestDistance){
@@ -351,7 +337,7 @@ class TSP{
     }
     // console.log(bestInCurrentGeneration);
     //找到之後在第一個canvas中繪製
-    f.drawWithCTX(false,bestInCurrentGeneration);
+    // f.drawWithCTX(false,bestInCurrentGeneration);
     return f;
   }
 
