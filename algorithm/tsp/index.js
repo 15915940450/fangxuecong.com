@@ -364,21 +364,7 @@ class TSP{
       ctx.textAlign='right';
       ctx.fillText(text,f.CW-50,0);
     }
-    //畫點
-    ctx.beginPath();
-    ctx.fillStyle='crimson';
-    ctx.arc(f.startPointAlsoEndPoint.x,f.startPointAlsoEndPoint.y,10,0,Math.PI*2,true);
-    ctx.fill();
 
-    for(var i=0;i<f.gthAllPoints;i++){
-      ctx.beginPath();
-      ctx.fillStyle='#0077ee';
-      if(isBelow){
-        ctx.fillStyle='floralwhite';
-      }
-      ctx.arc(f.points[DNA[i].gene].x,f.points[DNA[i].gene].y,4,0,Math.PI*2,true);
-      ctx.fill();
-    }
 
     //畫曲綫
     //start-0
@@ -400,9 +386,34 @@ class TSP{
     }
     ctx.stroke();
 
+
+    //畫點
+    ctx.beginPath();
+    ctx.fillStyle='crimson';
+    ctx.arc(f.startPointAlsoEndPoint.x,f.startPointAlsoEndPoint.y,10,0,Math.PI*2,true);
+    ctx.fill();
+
+    for(var i=0;i<f.gthAllPoints;i++){
+      ctx.beginPath();
+      ctx.fillStyle='#0077ee';
+      if(isBelow){
+        ctx.fillStyle='floralwhite';
+      }
+      ctx.arc(f.points[DNA[i].gene].x,f.points[DNA[i].gene].y,4,0,Math.PI*2,true);
+      ctx.fill();
+      ctx.fillText(i,f.points[i].x+10,f.points[i].y+15);
+    }
+    
+
     if(isBelow){
       ctx.translate(0,-f.eleCanvas.height/2);
     }
+
+
+    
+
+
+
     return f;
   }
 
@@ -411,3 +422,20 @@ class TSP{
 var obj=new TSP();
 obj.init();
 obj.solve();
+
+
+
+
+/*
+顶十字(6)：
+FRUR'U'F'
+
+顶面(8)：（index_6）
+RUR'URUUR'
+
+顶角(12)：（右眼）X'
+RRDD R'U'R DDR'UR'
+
+顶棱(12)：（全色置后面）
+RU'RURURU'R'U'RR
+*/
