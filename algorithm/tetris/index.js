@@ -28,7 +28,7 @@ class TETRIS{
     this.W=10;  //寬度：10
     this.H=20;  //高度：20
     this.cell=30; //每個格子大小
-    this.randomRow=_.random(15);  //隨機格子,false(0),1,2,3,,,15(挑戰：已固定15行)
+    this.randomRow=_.random(5,9);  //隨機格子,false(0),1,2,3,,,15(挑戰：已固定15行)
     this.lock=false; //鎖住遊戲
     this.gameOver=false; //遊戲結束
 
@@ -67,7 +67,7 @@ class TETRIS{
 
   init(){
     this.eleCanvas.width=this.CW;
-    this.eleCanvas.height=this.CH4-70;
+    this.eleCanvas.height=920;
 
     this.initRule();
     this.initArrTetris();
@@ -196,6 +196,11 @@ class TETRIS{
         level:[19,20,21,22,23,24,25,26,27,28],
         removeLine:10,
         frame:2
+      },
+      {
+        level:[29],
+        removeLine:130,
+        frame:1
       }
     ];  //級數規則
 
@@ -256,11 +261,11 @@ class TETRIS{
     };
     if(this.generation===2){
       // 二代俄羅斯方塊("tuvwxzs)
-      this.f_f.t={
+      /*this.f_f.t={
         color:'tan',
         form:['7_2_2_0','4_7_4_0','2_2_7_0','1_7_1_0']
-      };
-      this.f_f.u={
+      };*/
+      /*this.f_f.u={
         color:'tan',
         form:['5_7_0_0','6_2_6_0','0_7_5_0','3_2_3_0']
       };
@@ -271,19 +276,19 @@ class TETRIS{
       this.f_f.w={
         color:'tan',
         form:['1_3_6_0','6_3_1_0','3_6_4_0','4_6_3_0']
-      };
+      };*/
       this.f_f.x={
         color:'tan',
         form:['2_7_2_0']
       };
-      this.f_f.z={
+      /*this.f_f.z={
         color:'tan',
         form:['4_7_1_0','3_2_6_0']
       };
       this.f_f.s={
         color:'tan',
         form:['1_7_4_0','6_2_3_0']
-      };
+      };*/
     }
     // "IJLOSTZtuvwxzs"
     /*
@@ -314,8 +319,8 @@ class TETRIS{
         this.arrTetris[row]=[];
       }
       for(var j=0;j<f.W;j++){
-        if(row>=f.H-15){
-        // if(row>=f.H-f.randomRow){
+        // if(row>=f.H-15){
+        if(row>=f.H-f.randomRow){
           this.arrTetris[row][j]={
             color:'crimson',
             v:Math.random()>.4?0:1
@@ -486,6 +491,17 @@ class TETRIS{
     ctx.translate(numTranslate+0.5,100);
     ctx.beginPath();
     for(var row=0;row<arr.length;row++){
+      if(index===2){
+        ctx.fillStyle='silver';
+        ctx.font='italic 15px Arial';
+        ctx.textBaseline='middle';
+        ctx.fillText(`─ ${row}`,320,perW*(row+2/3));
+      }
+      if(index===1 && f.gameOver){
+        ctx.fillStyle='crimson';
+        ctx.font='20px';
+        ctx.fillText('GAME OVER',0,-50);
+      }
       for(var j=0;j<arr[0].length;j++){
         if(arr[row][j].v){
           ctx.fillStyle='dimgray';
