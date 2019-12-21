@@ -446,28 +446,44 @@ class TETRIS{
   render(){
     var f=this;
 
-    var ctx=f.eleCanvas.getContext('2d');
-    
-    ctx.clearRect(0,0,f.eleCanvas.width,f.eleCanvas.height);
-
     // 渲染主區
     f.renderCanvas(f.arrTetrisAppendActive);
     
-    // 渲染則區（下一個）
-    f.renderCanvas(f.F2(f.next,f.nextForm),1,22);
+    // 渲染下一個
+    f.renderCanvas(f.F2(f.next,f.nextForm),1);
 
     return f;
   }
-  //由二維數組繪製成canvas
-  renderCanvas(arr,numTranslate,perW){
+  //由二維數組繪製成canvas,index:(default_0,主区,1,下一个,2,算法区)
+  renderCanvas(arr,index){
     var f=this;
+    index=index || 0;
+
+
     // (f.eleCanvas.width/2>>0)
-    numTranslate=numTranslate || 200;
-    perW=perW || f.cell;
+    var numTranslate=(f.eleCanvas.width/2>>0),perW;
+    
+    
     var arrBCC=[1,4];
     var ctx=f.eleCanvas.getContext('2d');
 
-    ctx.translate((f.eleCanvas.width/2>>0)+numTranslate+0.5,0);
+    //:动画调用需要清除画布
+    if(index===0){
+      numTranslate=numTranslate+200;
+      ctx.clearRect(numTranslate,0,1e4,1e4);
+      perW=f.cell;
+    }
+    if(index===1){
+      ctx.clearRect(numTranslate,0,200,1e4);
+      perW=22;
+    }
+    if(index===2){
+      numTranslate=numTranslate-400;
+      ctx.clearRect(numTranslate,0,400,1e4);
+      perW=f.cell;
+    }
+    
+    ctx.translate(numTranslate+0.5,100);
     ctx.beginPath();
     for(var row=0;row<arr.length;row++){
       for(var j=0;j<arr[0].length;j++){
@@ -484,7 +500,7 @@ class TETRIS{
     }
     ctx.fill();
 
-    ctx.translate(-(f.eleCanvas.width/2>>0)-numTranslate-0.5,0);
+    ctx.translate(-numTranslate-0.5,-100);
     return f;
   }
   

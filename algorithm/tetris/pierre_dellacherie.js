@@ -206,13 +206,13 @@ export default class PD{
   }
   drawFixed(rad){
     var f=this;
-    var el=document.querySelector('.canvas_ai');
+    //渲染算法区
     this.obj.renderCanvas(f.addLETTER({
       row:f.arr3fixed[rad].row,
       j:f.arr3fixed[rad].j,
       LETTER:f.arr3fixed[rad].LETTER,
       form:f.arr3fixed[rad].form
-    }),30,el);
+    }),2);
     // console.log(f.arr3fixed[rad].AI);
     return f;
   }
