@@ -13,7 +13,7 @@ var cht=require('gulp-cht');
 
 //var objDate=new Date();
 //var v='?v=1.'+(objDate.getMonth()+1)+'.'+objDate.getDate()+objDate.getMilliseconds();
-var v='?v=15.9.DefaultFunctionParameters';
+var v='?v=15.9.cht2';
 
 
 gulp.task('html',function(){
@@ -71,6 +71,7 @@ gulp.task('tangram',function(){
 //=========================================algo文章构建任务2019
 gulp.task('algorithm',function(){
   gulp.src('algorithm/**/index.html')
+    .pipe(cht(true))
     .pipe(exReplace(/<link rel="stylesheet".+?\/>/g,''))
     .pipe(exReplace(/<script src="\.\.\/\.\.\/js\/.+?"><\/script>/g,''))
     .pipe(exReplace(/<\/head>/g,'<link rel="stylesheet" href="../../fangxuecong.css'+v+'" /></head>'))
