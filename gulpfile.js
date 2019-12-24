@@ -13,11 +13,12 @@ var cht=require('gulp-cht');
 
 //var objDate=new Date();
 //var v='?v=1.'+(objDate.getMonth()+1)+'.'+objDate.getDate()+objDate.getMilliseconds();
-var v='?v=15.9.cht2';
+var v='?v=15.9.cht2true';
 
 
 gulp.task('html',function(){
   return gulp.src('index.html')
+    .pipe(cht(true))
     .pipe(exReplace(/<link rel="stylesheet".+?\/>/g,''))
     .pipe(exReplace(/<script src="js\/.+?"><\/script>/g,''))
     .pipe(exReplace(/<\/head>/g,'<link rel="stylesheet" href="fangxuecong.css'+v+'" /></head>'))
