@@ -47,7 +47,11 @@ gulp.task('img',function(){
       .pipe(gulp.dest('./online/img/'));
 });
 
-
+gulp.task('slash',function(){
+  return gulp.src('slash/**/*')
+      //.pipe(imagemin())
+      .pipe(gulp.dest('./online/slash/'));
+});
 
 
 
@@ -203,7 +207,7 @@ gulp.task("cdcjs", function () {
 });
 
 
-gulp.task('basetask',['html','css','js','img','fifteen','tangram','algorithm','tetrishtml','tetriscss','tetrisjs','tetrisimg','tetrisfont','rememberhtml','remembercss','rememberbabel','bst','shortcuts','f','map','getintouch','php','cdc','cdcjs'],function(){
+gulp.task('basetask',['slash','html','css','js','img','fifteen','tangram','algorithm','tetrishtml','tetriscss','tetrisjs','tetrisimg','tetrisfont','rememberhtml','remembercss','rememberbabel','bst','shortcuts','f','map','getintouch','php','cdc','cdcjs'],function(){
   console.log('-----base task okay, nextstep, 2.run gulp zhhk-----');
 });
 //zhhk, after basetask
@@ -223,9 +227,9 @@ gulp.task('onlinehtmljsphp',function(){
 });
 gulp.task('onlinejshi',function(){
   return gulp.src(['online/fangxuecong.js'])
-    .pipe(exReplace(/大家好，我是学聪/g,'Hi，各位！我系Thilina'))
-    .pipe(exReplace(/现居住在深圳/g,'依家住係深圳'))
-    .pipe(exReplace(/我努力做出好看的/g,'我努力做出好睇噶'))
+    .pipe(exReplace(/大家好，我是学聪/g,'Hey，guys！我系Louis'))
+    .pipe(exReplace(/现居住在广州/g,'依家住係廣州'))
+    .pipe(exReplace(/我努力做出好看的/g,'我努力做出禁睇嘅'))
     .pipe(cht())
     .pipe(gulp.dest('./online/zh-HK/'));
 });

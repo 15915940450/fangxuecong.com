@@ -36,12 +36,12 @@ header{
   background: #28272F;
   box-sizing: border-box;
 }
-.banner canvas{
+/* .banner canvas{
   position: absolute;
   left:50%;
   top:166px;
   margin-left: -1000px;
-}
+} */
 .banner .dingwei{
   float: right;
   position: relative;
@@ -51,7 +51,7 @@ header{
   font-size: 50px;
   line-height: 50px;
   color: #444;
-  margin-top: 80px;
+  margin-top: 18vh;
   margin-bottom: 10px;
   font-weight: 500;
   position: relative;
@@ -412,7 +412,7 @@ a:hover#logo i,a.anim#logo i{
 .comming_soon .head{
   width: 100px;
   height: 100px;
-  background:#000 url("../img/logo.svg") no-repeat center center;
+  background:#000 url(/slash/logo.svg) no-repeat center center;
   background-size: 90px 90px;
   overflow: hidden;
   position: relative;
@@ -803,19 +803,19 @@ footer a.footer-a{
 }
 
 .wave-parent .slide1 {
-  background-image: url("../img/siwei.jpg");
+  background-image: url("https://www.tourboxtech.cn/developer-xc/img/siwei.jpg");
 }
 
 .wave-parent .slide2 {
-  background-image: url("../img/siwei2.jpg");
+  background-image: url("https://www.tourboxtech.cn/developer-xc/img/siwei2.jpg");
 }
 
 .wave-parent .slide3 {
-  background-image: url("../img/siwei3.jpg");
+  background-image: url("https://www.tourboxtech.cn/developer-xc/img/siwei3.jpg");
 }
 
 .wave-parent .slide4 {
-  background-image: url("../img/siwei4.jpg");
+  background-image: url("https://www.tourboxtech.cn/developer-xc/img/siwei4.jpg");
 }
 
 .wave-parent .slider {
@@ -901,19 +901,20 @@ footer a.footer-a{
   font-weight: 300;
 }
 .myproject li > a{
-  color: #38513C;
+  color: #7795f8;
   font-size: 16px;
   font-weight: bold;
   margin-bottom: 3px;
   display: inline-block;
   position: relative;
   padding-bottom: 3px;
+  /* border-bottom: 2px solid #7795f8; */
 }
 .myproject li > a i{
   position: absolute;
   width:0;
   height: 2px;
-  background: #38513C;
+  background: #7795f8;
   left: 0;
   bottom: 0;
   -webkit-transition: width .2s ease-out;
