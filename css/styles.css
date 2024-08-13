@@ -29,10 +29,12 @@ header{
 
 /*banner*/
 .banner{
-  height: 466px;
+  /* height: 466px; */
+  height: calc(100vh - 50px);
   overflow: hidden;
   position: relative;
   background: #28272F;
+  box-sizing: border-box;
 }
 .banner canvas{
   position: absolute;
@@ -48,7 +50,7 @@ header{
 .banner h1{
   font-size: 50px;
   line-height: 50px;
-  color: #FFF;
+  color: #444;
   margin-top: 80px;
   margin-bottom: 10px;
   font-weight: 500;
@@ -71,7 +73,7 @@ header{
 }
 .banner h3{
   font-size: 30px;
-  color: #b5a1a1;
+  color: darkgray;
   font-weight: 100;
 }
 .banner ul{
@@ -223,6 +225,8 @@ header{
   border-left:1px solid #a0c6fa;
   padding-left:5px;
   background: linear-gradient(90deg,#0a2150,#021023);
+  height: 50px;
+  overflow: hidden;
 }
 .header .lang a{
   font-size:13px;
@@ -403,6 +407,7 @@ a:hover#logo i,a.anim#logo i{
   padding-top: 90px;
   padding-bottom: 60px;
   background: #FFF;
+  position: relative;
 }
 .comming_soon .head{
   width: 100px;
@@ -413,6 +418,7 @@ a:hover#logo i,a.anim#logo i{
   position: relative;
   margin: 0 auto;
   border-radius: 200px;
+  z-index: 3;
 }
 .comming_soon .head img{
   position: absolute;
@@ -546,7 +552,7 @@ footer a.footer-a{
 }
 .progress_bar .progress_number{
   float: right;
-  margin-top: -24px;
+  /* margin-top: -24px; */
 }
 .progress_bar .progress-bar-inner {
   background-color: hsl(0, 0%, 88%);
@@ -1105,7 +1111,6 @@ footer a.footer-a{
 }
 
 .get-in-touch{
-  /*border:1px solid blue;*/
   padding-top: 90px;
   padding-bottom: 60px;
 }
@@ -1307,7 +1312,7 @@ a.email{
 
 @media (min-width:993px){
   .banner{
-    background:#28272F url(../img/banner.jpg) no-repeat center 0;
+    background:#c8ffff;
   }
   .md-left{
     float: left;
@@ -1338,7 +1343,7 @@ a.email{
   }
 }
 /*手机端*/
-@media (max-width:992px) {
+@media (max-width:1200px) {
   .header{
     overflow: hidden; 
   }
@@ -1354,7 +1359,7 @@ a.email{
     margin-left: 0px;
   }
   .banner{
-    background:#28272F url(../img/banner_bg_phone.jpg) no-repeat center 0;
+    background:#c8ffff;
   }
   .banner h1{
     width: auto;

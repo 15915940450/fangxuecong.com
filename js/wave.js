@@ -55,11 +55,11 @@ SiriWave.prototype = {
 
 		this.phase = (this.phase+this.speed)%(Math.PI*64);
 		this._clear();
-		this._drawLine(1.5, 'rgba(255,255,255,0.1)');
-		this._drawLine(2, 'rgba(255,255,255,0.2)');
-		this._drawLine(2.5, 'rgba(255,255,255,0.4)');
-		this._drawLine(3, 'rgba(255,255,255,0.6)');
-		this._drawLine(1, 'rgba(255,255,255,1)', 1.5);
+		this._drawLine(1.5, 'rgba(0,0,0,0.1)');
+		this._drawLine(2, 'rgba(0,0,0,0.2)');
+		this._drawLine(2.5, 'rgba(0,0,0,0.4)');
+		this._drawLine(3, 'rgba(0,0,0,0.6)');
+		this._drawLine(1, 'rgba(0,0,0,1)', 1.5);
 
 		requestAnimationFrame(this._draw.bind(this), 1000);
 	},

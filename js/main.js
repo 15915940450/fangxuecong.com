@@ -185,30 +185,19 @@ $(function(){
   */
   if($('#wave').length>0){
     //iPhone或者桌面,UCBrowser
-    if(window.navigator.userAgent.indexOf('iPhone')!==-1 || numClientW>992 || window.navigator.userAgent.indexOf('UCBrowser')!==-1){
+    if(true){
+      var container=document.querySelector('#wave')
       var SW = new SiriWave({
-  		  container:document.querySelector('.banner'),
-  		  width: 2000,
-  		  height: 300
+  		  container:container,
+  		  width: container.getBoundingClientRect().width,
+  		  height: 100
   		});
+      // console.log(SW)
 
   		SW.setSpeed(0.1);
   		SW.setNoise(0.3);
   		SW.start();
     }
-    //================2017-07-12(remove) index pv(pageid,cw)
-    // $.ajax({
-    //   url:'/tetris-game/pv.php?pageid=2&cw='+numClientW,
-    //   method:'GET',
-    //   dataType:'json',
-    //   // success:function(data){
-    //   //   console.log(data);
-    //   //   // console.log('index:'+data[0].pv);
-    //   // },
-    //   error:function(err){
-    //     console.log(err);
-    //   }
-    // });
 
     //weibo phone
     if(numClientW<=992){

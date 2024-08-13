@@ -232,7 +232,7 @@ gulp.task('onlinejshi',function(){
 gulp.task('onlinehtmlzh',function(){
   return gulp.src(['online/index.html','online/map.html'])
     .pipe(cht())
-    .pipe(exReplace(/<a href="\/zh-HK\/">&nbsp;繁體中文（zh-HK）<\/a>/g,'<a class="yh-font" href="/">&nbsp;简体中文（zh-CN）</a>'))
+    .pipe(exReplace(/<a href=".\/zh-HK\/">&nbsp;繁體中文（zh-HK）<\/a>/g,'<a class="yh-font" href="../">&nbsp;简体中文（zh-CN）</a>'))
     .pipe(gulp.dest('./online/zh-HK/'));
 });
 gulp.task('zhhk',['onlineimgfont','onlinecssjhenghei','onlinehtmljsphp','onlinejshi','onlinehtmlzh'],function(){
