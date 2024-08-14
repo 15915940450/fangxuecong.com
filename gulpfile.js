@@ -15,10 +15,12 @@ var cht=require('gulp-cht');
 //var v='?v=1.'+(objDate.getMonth()+1)+'.'+objDate.getDate()+objDate.getMilliseconds();
 var v='?v=15.9.cht2true';
 
-
+var DIR='developer-xc'
+var base='/'+DIR
 gulp.task('html',function(){
   return gulp.src('index.html')
     .pipe(cht(true))
+    .pipe(exReplace(/\/slash\//g,base+'/slash/'))
     .pipe(exReplace(/<link rel="stylesheet".+?\/>/g,''))
     .pipe(exReplace(/<script src="js\/.+?"><\/script>/g,''))
     .pipe(exReplace(/<\/head>/g,'<link rel="stylesheet" href="fangxuecong.css'+v+'" /></head>'))
@@ -49,7 +51,6 @@ gulp.task('img',function(){
 
 gulp.task('slash',function(){
   return gulp.src('slash/**/*')
-      //.pipe(imagemin())
       .pipe(gulp.dest('./online/slash/'));
 });
 

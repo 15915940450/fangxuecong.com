@@ -1,35 +1,44 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>聪 | fangxuecong.com</title>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
-    <meta name="screen-orientation" content="portrait" />
-    <meta name="full-screen" content="yes" />
-    <meta name="layoutmode" content="standard" />
-    <meta name="imagemode" content="force" />
-    <meta name="browsermode" content="application" />
-    <meta name="x5-orientation" content="portrait" />
-    <meta name="x5-fullscreen" content="true" />
-    <meta name="x5-page-mode" content="app" />
-    <meta name="author" content="Thilina Fong" />
-    <meta name="description" content="fangxuecong.com是关于房学聪的个人网站。房学聪作为一个前端开发工程师，热爱工作，热爱生活，开朗乐观，平易近人。" />
-    <meta name="keywords" content="fangxuecong,Thilina,fonghokcung,房学聪,聪" />
-    <link rel="shortcut icon" href="http://fangxuecong.com/img/favicon.png" type="image/x-icon" />
-    <link rel="stylesheet" href="css/reset.css" />
-    <link rel="stylesheet" href="css/grid_fee300.css" />
-    <link rel="stylesheet" href="css/swiper.css" />
-    <link rel="stylesheet" href="css/styles.css" />
-    <script type="importmap">
-      {
-        "imports":{
-          "three":"https://unpkg.com/three/build/three.module.js",
-          "three/addons/":"https://unpkg.com/three/examples/jsm/"
-        }
+  <title>聪 | fangxuecong</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+  <meta name="screen-orientation" content="portrait" />
+  <meta name="full-screen" content="yes" />
+  <meta name="layoutmode" content="standard" />
+  <meta name="imagemode" content="force" />
+  <meta name="browsermode" content="application" />
+  <meta name="x5-orientation" content="portrait" />
+  <meta name="x5-fullscreen" content="true" />
+  <meta name="x5-page-mode" content="app" />
+  <meta name="author" content="Thilina Fong" />
+  <meta name="description" content="fangxuecong.com是关于房学聪的个人网站。房学聪作为一个前端开发工程师，热爱工作，热爱生活，开朗乐观，平易近人。" />
+  <meta name="keywords" content="fangxuecong,Thilina,fonghokcung,房学聪,聪" />
+  <link rel="shortcut icon" href="http://fangxuecong.com/img/favicon.png" type="image/x-icon" />
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/grid_fee300.css" />
+  <link rel="stylesheet" href="css/swiper.css" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <script type="importmap">
+    {
+      "imports":{
+        "three":"https://unpkg.com/three/build/three.module.js",
+        "three/addons/":"https://unpkg.com/three/examples/jsm/"
       }
-    </script>
-    <!-- shader for bird's position -->
+    }
+  </script>
+  <script>
+    var DIR='developer-xc'
+    window.base='/'+DIR
+    let re=/localhost/
+    if(re.test(window.location.href)){
+      window.base=''
+    }
+  </script>
+  <!-- shader for bird's position -->
   <script id="fragmentShaderPosition" type="x-shader/x-fragment">
 
     uniform float time;
@@ -212,678 +221,847 @@
     }
 
   </script>
+  <!-- 基路径 -->
   <script type="module" src="/slash/gltf.js" defer></script>
-    <style media="screen">
-      .playker .swiper-button-prev{
-        background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M0%2C22L22%2C0l2.1%2C2.1L4.2%2C22l19.9%2C19.9L22%2C44L0%2C22L0%2C22L0%2C22z'%20fill%3D'%23007aff'%2F%3E%3C%2Fsvg%3E");
-      }
-      .playker .swiper-button-next{
-        background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M27%2C22L27%2C22L5%2C44l-2.1-2.1L22.8%2C22L2.9%2C2.1L5%2C0L27%2C22L27%2C22z'%20fill%3D'%23007aff'%2F%3E%3C%2Fsvg%3E");
-      }
-      #wave canvas{
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%,-80px);
-        /* background: red; */
-      }
-      .thr{
-        position: relative;
-        overflow: hidden;
-      }
-      .thr > .container{
-        position: relative;
-        z-index: 3;
-      }
-      .thr .wrap_thr_canvas{
-        position: absolute;
-        left: 0;
-        top: 0;
-      }
+  <style media="screen">
+    .playker .swiper-button-prev {
+      background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M0%2C22L22%2C0l2.1%2C2.1L4.2%2C22l19.9%2C19.9L22%2C44L0%2C22L0%2C22L0%2C22z'%20fill%3D'%23007aff'%2F%3E%3C%2Fsvg%3E");
+    }
 
-    </style>
+    .playker .swiper-button-next {
+      background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M27%2C22L27%2C22L5%2C44l-2.1-2.1L22.8%2C22L2.9%2C2.1L5%2C0L27%2C22L27%2C22z'%20fill%3D'%23007aff'%2F%3E%3C%2Fsvg%3E");
+    }
+
+    #wave canvas {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -80px);
+      /* background: red; */
+    }
+
+    .thr {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .thr>.container {
+      position: relative;
+      z-index: 3;
+    }
+
+    .thr .wrap_thr_canvas {
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+
+    .wave-parent .slide1 {
+      background-image: url("/slash/siwei.jpg");
+    }
+
+    .wave-parent .slide2 {
+      background-image: url("/slash/siwei2.jpg");
+    }
+
+    .wave-parent .slide3 {
+      background-image: url("/slash/siwei3.jpg");
+    }
+
+    .wave-parent .slide4 {
+      background-image: url("/slash/siwei4.jpg");
+    }
+  </style>
 </head>
+
 <body>
-    <div id="container">
-<!-- header -->
-<header>
-  <div class="header">
-    <div class="container clearfix">
-      <div class="logo">
-        <a href="./" id="logo">
-          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="50px"
-      	 height="50px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
-            <g id="logo_svg">
-            	<g>
-            		<polygon fill="#FFFFFF" points="95.995,74.668 23.674,2.347 20.302,5.719 20.302,70.215 11.829,70.215 4.005,78.039
-            			20.302,78.039 20.302,94.337 28.126,86.513 28.126,78.039 92.624,78.04 		"/>
-            		<path fill="#E7BE20" d="M46.23,53.5C35.777,43.472,30.146,28.464,29.096,7.77l-5.422-5.422c0.3,25.037,6.495,43.025,18.919,54.944
-            			c11.883,11.4,29.367,17.091,53.402,17.377l-5.422-5.422C70.762,68.247,56.207,63.071,46.23,53.5z"/>
-            	</g>
-            </g>
-            <g id="图层_2">
-            </g>
-          </svg>
-          <i class="up"></i>
-          <span>fang<code class="x">x</code>ue<code class="c">c</code>ong</span>
-          <i class="down"></i>
-        </a>
-      </div>
-      <div class="lang">
-        <a href="./zh-HK/">&nbsp;繁體中文（zh-HK）</a>
-      </div>
-      <ul class="nav clearfix">
-        <li>
-          <a href="javascript:;">算法</a>
-          <ul>
+  <div id="container">
+    <!-- header -->
+    <header>
+      <div class="header">
+        <div class="container clearfix">
+          <div class="logo">
+            <a href="./" id="logo">
+              <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+                y="0px" width="50px" height="50px" viewBox="0 0 100 100" enable-background="new 0 0 100 100"
+                xml:space="preserve">
+                <g id="logo_svg">
+                  <g>
+                    <polygon fill="#FFFFFF" points="95.995,74.668 23.674,2.347 20.302,5.719 20.302,70.215 11.829,70.215 4.005,78.039
+            			20.302,78.039 20.302,94.337 28.126,86.513 28.126,78.039 92.624,78.04 		" />
+                    <path fill="#E7BE20" d="M46.23,53.5C35.777,43.472,30.146,28.464,29.096,7.77l-5.422-5.422c0.3,25.037,6.495,43.025,18.919,54.944
+            			c11.883,11.4,29.367,17.091,53.402,17.377l-5.422-5.422C70.762,68.247,56.207,63.071,46.23,53.5z" />
+                  </g>
+                </g>
+                <g id="图层_2">
+                </g>
+              </svg>
+              <i class="up"></i>
+              <span>fang<code class="x">x</code>ue<code class="c">c</code>ong</span>
+              <i class="down"></i>
+            </a>
+          </div>
+          <div class="lang">
+            <a href="./zh-HK/">&nbsp;繁體中文（zh-HK）</a>
+          </div>
+          <ul class="nav clearfix">
             <li>
-              <a href="./algorithm/levy/">
-                Lévy flight
-              </a>
+              <a href="javascript:;">算法</a>
+              <ul>
+                <li>
+                  <a href="./algorithm/levy/">
+                    Lévy flight
+                  </a>
+                </li>
+                <li>
+                  <a href="./algorithm/eightqueens/">
+                    八皇后问题
+                  </a>
+                </li>
+                <li>
+                  <a href="./algorithm/fourier/">
+                    傅里叶级数
+                  </a>
+                </li>
+                <li>
+                  <a href="./algorithm/astar/">
+                    A* 搜寻算法
+                  </a>
+                </li>
+                <li>
+                  <a href="./algorithm/journey/">
+                    马踏棋盘
+                  </a>
+                </li>
+                <li>
+                  <a href="./algorithm/tetris/">
+                    AI:俄羅斯方塊
+                  </a>
+                </li>
+                <li>
+                  <a href="./algorithm/labyrinth/">
+                    迷宫算法
+                  </a>
+                </li>
+                <li>
+                  <a href="./algorithm/souduk/">
+                    数独
+                  </a>
+                </li>
+                <li>
+                  <a href="./algorithm/tsp/">
+                    旅行商问题
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+            <li>
+              <!-- <i></i> -->
+              <a href="./tetris-game/">俄罗斯方块</a>
             </li>
             <li>
-              <a href="./algorithm/eightqueens/">
-                八皇后问题
-              </a>
+              <a href="./fifteen/">九空格</a>
             </li>
             <li>
-              <a href="./algorithm/fourier/">
-                傅里叶级数
-              </a>
+              <a href="./remember/">备忘录</a>
             </li>
             <li>
-              <a href="./algorithm/astar/">
-                A* 搜寻算法
-              </a>
+              <a rel="nofollow" href="https://github.com/15915940450/swiperlite">swiper lite</a>
             </li>
             <li>
-              <a href="./algorithm/journey/">
-                马踏棋盘
-              </a>
+              <a href="./tangram/">七巧</a>
             </li>
-            <li>
-              <a href="./algorithm/tetris/">
-                AI:俄羅斯方塊
-              </a>
-            </li>
-            <li>
-              <a href="./algorithm/labyrinth/">
-                迷宫算法
-              </a>
-            </li>
-            <li>
-              <a href="./algorithm/souduk/">
-                数独
-              </a>
-            </li>
-            <li>
-              <a href="./algorithm/tsp/">
-                旅行商问题
-              </a>
+            <li class="more">
+              <a href="#project">更多</a>
             </li>
           </ul>
-        </li>
-        
-        <li>
-          <!-- <i></i> -->
-          <a href="./tetris-game/">俄罗斯方块</a>
-        </li>
-        <li>
-          <a href="./fifteen/">九空格</a>
-        </li>
-        <li>
-          <a href="./remember/">备忘录</a>
-        </li>
-        <li>
-          <a rel="nofollow" href="https://github.com/15915940450/swiperlite">swiper lite</a>
-        </li>
-        <li>
-          <a href="./tangram/">七巧</a>
-        </li>
-        <li class="more">
-          <a href="#project">更多</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</header>
-<!-- 首屏 -->
-<section>
-  <div class="banner thr" id="THREE">
-    <div class="container">
-      <div class="dingwei">
-        <h1>
-          <strong id="no-theater">大家好，我是学聪 ...</strong>
-          <!-- <span>“</span> -->
-          <svg version="1.1" id="quotes" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-          	 width="36px" height="36px" viewBox="0 0 50 50" enable-background="new 0 0 50 50" xml:space="preserve">
-          <g>
-          	<path fill="#444" d="M21.335,17.239C13.937,20.601,9.052,26.95,8.912,32.677c0.838-0.623,2.513-1.12,4.048-1.12
+        </div>
+      </div>
+    </header>
+    <!-- 首屏 -->
+    <section>
+      <div class="banner thr" id="THREE">
+        <div class="container">
+          <div class="dingwei">
+            <h1>
+              <strong id="no-theater">大家好，我是学聪 ...</strong>
+              <!-- <span>“</span> -->
+              <svg version="1.1" id="quotes" xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="36px" height="36px"
+                viewBox="0 0 50 50" enable-background="new 0 0 50 50" xml:space="preserve">
+                <g>
+                  <path fill="#444" d="M21.335,17.239C13.937,20.601,9.052,26.95,8.912,32.677c0.838-0.623,2.513-1.12,4.048-1.12
           		c5.166,0,8.516,3.486,8.516,7.843c0,3.734-3.071,7.843-9.214,7.843c-5.863,0-10.749-4.73-10.749-11.454
           		c0-10.955,8.376-19.421,17.171-23.031L21.335,17.239z M47.861,17.239c-7.539,3.361-12.426,9.711-12.426,15.437
           		c0.838-0.623,2.374-1.12,4.048-1.12c5.166,0,8.516,3.486,8.516,7.843c0,3.734-3.071,7.843-9.214,7.843
-          		c-5.863,0-10.749-4.73-10.749-11.454c0-10.955,8.376-19.421,17.031-23.031L47.861,17.239z"/>
-          </g>
-          </svg>
-          <i id="theater"></i>
-        </h1>
-        <h3>一个热衷于前端开发技术的web爱好者。</h3>
-        <ul class="clearfix">
-          <li>
-            <a class="wechat" href="javascript:;">
-              <svg height="256px" style="enable-background:new 0 0 256 256;" version="1.1" viewBox="0 0 256 256" width="256px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g id="Background_1_" style="enable-background:new    ;"><g id="Background"><g><path d="M249.422,30.679c-2.721-4.985-5.816-9.536-9.793-13.521     c-3.992-3.998-8.709-7.587-13.703-10.314c-8.381-4.576-18.788-6.856-29.002-6.856H59.075c-10.444,0-20.542,2.345-29.265,6.949     c-5.022,2.649-9.588,6.146-13.502,10.126c-3.932,3.998-7.491,8.488-10.046,13.572c-4.289,8.533-6.274,18.477-6.274,28.65v137.429     c0,10.327,1.671,20.679,6.296,29.135c2.681,4.9,6.191,9.86,10.087,13.794c3.934,3.971,8.583,7.226,13.502,9.956     c8.466,4.7,18.842,6.413,29.202,6.413h137.849c10.568,0,20.399-1.523,28.982-6.401c4.739-2.692,9.879-6.113,13.687-9.966     c3.923-3.969,7.2-8.851,9.886-13.799c4.566-8.415,6.533-18.874,6.533-29.132V59.285     C256.012,48.978,254.031,39.124,249.422,30.679z" style="fill-rule:evenodd;clip-rule:evenodd;fill:#64AB23;"/></g></g></g><g id="Shape_3_1_" style="enable-background:new    ;"><g id="Shape_3"><g><path d="M99.586,47.146c-37.49-0.565-68.642,26.99-68.642,59.488     c0,18.759,8.821,35.033,25.896,46.981c0,0-6.258,20.657-6.169,21.071c0.089,0.415,1.451,1.229,1.925,0.963     s22.622-13.477,22.622-13.477c16.974,5.828,26.869,3.89,27.435,3.851c-1.694-4.961-2.804-12.686-1.54-19.967     c6.617-38.105,45.622-49.958,66.999-47.933C162.209,70.604,136.568,47.703,99.586,47.146z" style="fill-rule:evenodd;clip-rule:evenodd;fill:#FFFFFF;"/></g></g></g><g id="Shape_2_1_" style="enable-background:new    ;"><g id="Shape_2"><g><path d="M222.99,151.854c0-27.841-26.918-49.166-58.146-49.166     c-33.065,0-59.437,21.807-59.437,49.646c0,27.89,25.084,50.979,59.475,51.168c6.922,0.039,17.232-1.741,24.184-4.646     c0,0,16.619,10.079,17.55,10.005c0.93-0.075,1.407-0.812,1.444-1.444c0.037-0.632-5.295-16.364-5.295-16.364     C217.035,179.875,222.99,167.558,222.99,151.854z" style="fill-rule:evenodd;clip-rule:evenodd;fill:#FFFFFF;"/></g></g></g><g id="Shape_1_3_" style="enable-background:new    ;"><g id="Shape_1"><g><path d="M73.528,78.422c-4.918,0-8.904,3.988-8.904,8.908     s3.986,8.908,8.904,8.908s8.905-3.988,8.905-8.908S78.446,78.422,73.528,78.422z M127.435,78.422     c-4.917,0-8.904,3.988-8.904,8.908s3.987,8.908,8.904,8.908c4.918,0,8.905-3.988,8.905-8.908S132.354,78.422,127.435,78.422z" style="fill-rule:evenodd;clip-rule:evenodd;fill:#60A721;"/></g></g></g><g id="Shape_1_2_" style="enable-background:new    ;"><g id="Shape_1_1_"><g><path d="M143.081,125.788c-4.351,0-7.878,3.534-7.878,7.895     c0,4.359,3.527,7.894,7.878,7.894s7.878-3.534,7.878-7.894C150.959,129.322,147.432,125.788,143.081,125.788z M185.207,125.788     c-4.351,0-7.878,3.534-7.878,7.895c0,4.359,3.527,7.894,7.878,7.894c4.352,0,7.879-3.534,7.879-7.894     C193.086,129.322,189.559,125.788,185.207,125.788z" style="fill-rule:evenodd;clip-rule:evenodd;fill:#60A721;"/></g></g></g></svg>
-              <img id="wechat_code" src="img/wechat_code.jpg" alt="微信二维码">
-            </a>
-          </li>
-          <li>
-            <a rel="nofollow" class="weibo" href="http://weibo.com/phone15915940450/profile" title="微博">
-              <svg height="256px" style="enable-background:new 0 0 256 256;" version="1.1" viewBox="0 0 256 256" width="256px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g id="Background_1_" style="enable-background:new    ;"><g id="Background"><g><path d="M249.422,30.68c-2.721-4.986-5.816-9.537-9.793-13.521     c-3.992-3.998-8.709-7.587-13.703-10.314c-8.381-4.576-18.788-6.855-29.002-6.855H59.075c-10.444,0-20.542,2.344-29.265,6.948     c-5.022,2.649-9.588,6.146-13.502,10.126c-3.932,3.998-7.491,8.488-10.046,13.572c-4.289,8.533-6.274,18.478-6.274,28.65v137.43     c0,10.326,1.671,20.678,6.296,29.134c2.681,4.9,6.191,9.86,10.087,13.795c3.934,3.97,8.583,7.225,13.503,9.955     c8.465,4.7,18.842,6.413,29.201,6.413h137.849c10.568,0,20.399-1.523,28.982-6.401c4.739-2.692,9.879-6.113,13.687-9.966     c3.923-3.968,7.2-8.851,9.886-13.799c4.566-8.415,6.533-18.874,6.533-29.131V59.285C256.012,48.978,254.031,39.124,249.422,30.68     z" style="fill-rule:evenodd;clip-rule:evenodd;fill:#FFE591;"/></g></g></g><g id="Shape_4_1_" style="enable-background:new    ;"><g id="Shape_4"><g><path d="M169.217,151.074c-2.088-20.866-29.861-35.239-62.04-32.095     c-32.171,3.145-56.568,22.611-54.478,43.479c2.09,20.876,29.865,35.248,62.039,32.11     C146.916,191.425,171.303,171.957,169.217,151.074z" style="fill-rule:evenodd;clip-rule:evenodd;fill:#FFFFFF;"/></g></g></g><g id="Shape_3_1_" style="enable-background:new    ;"><g id="Shape_3"><g><path d="M179.092,125.276c-2.738-0.812-4.615-1.361-3.18-4.917     c3.104-7.715,3.425-14.372,0.059-19.121c-6.311-8.908-23.572-8.427-43.359-0.239c0-0.011-6.212,2.687-4.625-2.184     c3.044-9.67,2.585-17.771-2.151-22.444c-10.736-10.616-39.284,0.399-63.764,24.585c-18.333,18.12-28.979,37.325-28.979,53.928     c0,31.76,41.215,51.07,81.536,51.07c52.858,0,88.019-30.345,88.019-54.443C202.648,136.952,190.239,128.692,179.092,125.276z      M114.738,194.569c-32.174,3.138-59.949-11.234-62.039-32.11c-2.09-20.868,22.307-40.335,54.478-43.479     c32.179-3.145,59.952,11.229,62.04,32.095C171.303,171.957,146.916,191.425,114.738,194.569z" style="fill-rule:evenodd;clip-rule:evenodd;fill:#CD201F;"/></g></g></g><g id="Shape_2_1_" style="enable-background:new    ;"><g id="Shape_2"><g><path d="M117.572,134.441c-15.319-3.905-32.636,3.573-39.29,16.802     c-6.777,13.483-0.225,28.456,15.254,33.354c16.032,5.063,34.93-2.701,41.5-17.255     C141.516,153.107,133.426,138.454,117.572,134.441z M105.874,168.889c-3.115,4.863-9.783,6.996-14.806,4.749     c-4.949-2.204-6.411-7.861-3.296-12.604c3.076-4.729,9.52-6.834,14.505-4.785C107.321,158.354,108.931,163.969,105.874,168.889z      M116.131,155.985c-1.125,1.887-3.615,2.794-5.565,2.007c-1.917-0.772-2.518-2.878-1.429-4.735     c1.122-1.844,3.513-2.744,5.427-1.999C116.508,151.952,117.206,154.086,116.131,155.985z" style="fill-rule:evenodd;clip-rule:evenodd;fill:#232323;"/></g></g></g><g id="Shape_1_1_" style="enable-background:new    ;"><g id="Shape_1"><g><path d="M212.111,67.308c-12.48-14.403-30.891-19.894-47.882-16.133     h-0.007c-3.932,0.876-6.438,4.901-5.598,8.986c0.839,4.089,4.706,6.701,8.639,5.829c12.088-2.672,25.168,1.236,34.043,11.467     c8.863,10.23,11.271,24.185,7.475,36.416l0.002,0.004c-1.236,3.986,0.856,8.247,4.689,9.535c3.817,1.288,7.922-0.891,9.16-4.864     c0-0.008,0-0.022,0.003-0.03C227.965,101.311,224.595,81.696,212.111,67.308z M169.621,77.464     c-3.383,0.751-5.54,4.218-4.815,7.743c0.726,3.51,4.052,5.767,7.429,5.001v0.007c4.048-0.89,8.436,0.409,11.404,3.831     c2.975,3.43,3.773,8.104,2.497,12.203h0.007c-1.061,3.422,0.738,7.103,4.03,8.214c3.292,1.097,6.823-0.773,7.884-4.203     c2.603-8.383,0.977-17.936-5.111-24.95C186.871,78.296,177.901,75.632,169.621,77.464z" style="fill-rule:evenodd;clip-rule:evenodd;fill:#DD880C;"/></g></g></g></svg>
-            </a>
-          </li>
-          <li>
-            <a rel="nofollow" class="zhihu" href="https://www.zhihu.com/people/thilinafong" title="知乎">
-              <svg height="256px" style="enable-background:new 0 0 256 256;" version="1.1" viewBox="0 0 256 256" width="256px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g id="Background_1_" style="enable-background:new    ;"><g id="Background"><g><path d="M249.422,30.68c-2.721-4.986-5.816-9.537-9.793-13.521     c-3.992-3.998-8.709-7.588-13.703-10.314c-8.381-4.576-18.788-6.856-29.002-6.856H59.075c-10.444,0-20.542,2.345-29.265,6.948     c-5.022,2.651-9.588,6.147-13.502,10.127c-3.932,3.998-7.491,8.488-10.046,13.572c-4.289,8.533-6.274,18.477-6.274,28.649     v137.431c0,10.326,1.671,20.678,6.296,29.134c2.681,4.9,6.191,9.861,10.087,13.794c3.934,3.971,8.583,7.226,13.503,9.956     c8.465,4.7,18.842,6.413,29.201,6.413h137.849c10.568,0,20.399-1.523,28.982-6.401c4.739-2.692,9.879-6.114,13.687-9.966     c3.923-3.969,7.2-8.851,9.886-13.798c4.566-8.416,6.533-18.875,6.533-29.132V59.284C256.012,48.978,254.031,39.124,249.422,30.68     z" style="fill-rule:evenodd;clip-rule:evenodd;fill:#1989C8;"/></g></g></g><g id="Shape_1_1_" style="enable-background:new    ;"><g id="Shape_1"><g><path d="M97.396,138.936c23.78,0,14.415,0.017,37.703,0.017     c-0.188-10.444-2.423-14.207-3.933-14.376c-23.826,0-4.903-0.009-32.721-0.009c0.061-0.952,1.248-24.032,1.711-44.651h30.967     c0.759-7.608-1.071-14.187-4.518-14.604c-42.003,0-16.319,0.046-54.921,0.046c0.846-3.268,1.864-7.133,3.037-10.841     c1.802-5.696,3.832-11.117,4.768-13.345c-0.765-0.476-2.093-0.146-5.421,0.646c-3.878,1.158-6.114,2.305-9.387,5.107     c-1.708,1.462-2.974,3.352-3.993,5.457c-3.536,8.688-10.581,32.93-19.719,49.619c14.18-0.85,21.152-9.007,23.5-15.481     c0.874-2.41,1.773-4.649,2.288-6.693c5.981-0.046,10.551-0.049,18.837-0.049c0.087,8.2-0.119,24.132-1.449,44.707     c-16.61,0-24.322-0.116-33.836-0.116c-4.892,1.327-7.483,9.267-8.266,14.46c0.046,0.046,0.092,0.092,0.138,0.138     c21.417,0,17.475,0,40.296,0c-0.984,7.76-1.297,11.573-4.575,22.944c-5.571,16.796-14.218,30.188-26.335,42.239     c-3.235,3.218-7.735,7.293-12.147,10.768c-0.138,0.184-0.276,0.367-0.414,0.552c4.15,3.599,18.522-0.054,21.948-1.242     c2.776-0.963,5.575-1.706,7.592-3.451c7.711-6.67,17.196-21.411,23.258-43.514c21.914,25.576,26.99,33.265,32.509,39.648h0.552     c1.743-6.452,2.98-16.668,0.69-21.672c-0.153-0.705-0.728-1.538-1.335-2.479c-10.986-13.144-10.833-12.888-22.761-25.983     c-7.073,5.667-8.69,7.072-8.69,7.072s1.647-6.182,2.143-8.358C96.493,148.536,96.611,145.385,97.396,138.936z M216.435,63.021     c-35.401,0-28.577,0.056-70.083,0.056c-0.9,0-2.043,0.842-2.043,1.964c0,79.036-0.008,11.016-0.008,130.923     c0,0.825,0.762,1.854,2.041,1.854c8.018,0,8.875,0.012,11.088-0.01c0.637,0.004,1.936,7.142,4.764,14.982     c15.087-9.789,21.833-13.955,25.261-14.923c9.708-0.046,27.491-0.059,29.018-0.059c0.787,0,1.738-0.966,1.738-1.902     c0-87.302,0.052-41.637,0.052-131.17C218.262,63.679,217.077,63.085,216.435,63.021z M203.377,181.97     c0,0.567-0.576,1.152-1.053,1.152c-0.925,0-9.195,0.008-15.077,0.035c-0.208,0-0.55,0.138-0.82,0.324     c-3.699,2.552-9.214,6.085-18.239,11.541c-1.552-5.238-2.928-11.879-3.314-11.882c-1.34,0.014,0.373,0.006-4.483,0.006     c-0.775,0-1.237-0.623-1.237-1.123c0-72.644,0.005-55.591,0.005-103.474c0-0.68,0.692-1.19,1.237-1.19     c25.146,0,20.291-0.033,41.739-0.033c0.523,0,1.275,0.503,1.275,1.143C203.409,132.711,203.377,129.079,203.377,181.97z" style="fill-rule:evenodd;clip-rule:evenodd;fill:#FFFFFF;"/></g></g></g></svg>
-            </a>
-          </li>
-          <li>
-            <a rel="nofollow" class="github" href="https://github.com/15915940450" title="github">
-              <svg enable-background="new 0 0 128 128" id="Social_Icons" version="1.1" viewBox="0 0 128 128" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g id="_x31__stroke"><g id="Github_1_"><rect clip-rule="evenodd" fill="none" fill-rule="evenodd" height="128" width="128"/><path clip-rule="evenodd" d="M63.996,1.333C28.656,1.333,0,30.099,0,65.591    c0,28.384,18.336,52.467,43.772,60.965c3.2,0.59,4.368-1.394,4.368-3.096c0-1.526-0.056-5.566-0.088-10.927    c-17.804,3.883-21.56-8.614-21.56-8.614c-2.908-7.421-7.104-9.397-7.104-9.397c-5.812-3.988,0.44-3.907,0.44-3.907    c6.42,0.454,9.8,6.622,9.8,6.622c5.712,9.819,14.98,6.984,18.628,5.337c0.58-4.152,2.236-6.984,4.064-8.59    c-14.212-1.622-29.152-7.132-29.152-31.753c0-7.016,2.492-12.75,6.588-17.244c-0.66-1.626-2.856-8.156,0.624-17.003    c0,0,5.376-1.727,17.6,6.586c5.108-1.426,10.58-2.136,16.024-2.165c5.436,0.028,10.912,0.739,16.024,2.165    c12.216-8.313,17.58-6.586,17.58-6.586c3.492,8.847,1.296,15.377,0.636,17.003c4.104,4.494,6.58,10.228,6.58,17.244    c0,24.681-14.964,30.115-29.22,31.705c2.296,1.984,4.344,5.903,4.344,11.899c0,8.59-0.08,15.517-0.08,17.626    c0,1.719,1.152,3.719,4.4,3.088C109.68,118.034,128,93.967,128,65.591C128,30.099,99.344,1.333,63.996,1.333" fill="#3E75C3" fill-rule="evenodd" id="Github"/></g></g></svg>
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- 項目myproject -->
-<section id="project">
-  <div class="myproject">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-9">
-          <h3>some projects</h3>
-          <ul>
-            <li>
-              <a href="./algorithm/tetris/" target="_blank">让机器自己去玩的俄罗斯方块<i></i></a>
-              <p>
-                AI俄罗斯方块，2014年的作品，目的是为了强化js编程。采用了Pierre Dellacherie算法，此算法只考虑当前方块，不对未来的情况进行计算，算法每次生成一个方块，便穷举该方块所有旋转的所有落点。通过一个评估函数，选择最优的下落位置。
-              </p>
-            </li>
-            <li>
-              <a href="https://online.hitpaw.com/toolbox/image/photo-enhancer" target="_blank">照片增强项目<i></i></a>
-              <p>
-                使用AI算法将像素化、模糊和低质量的照片转换为高质量清晰的照片。熟练的vue3, element plus开发技术，运用了canvas+fabric，TWEEN动画库等技术点，完成PC与移动端适配的复杂交互的应用，直观的展示了前后照片对比效果。其中有不少数理变量值的转换公式，通过画示意图，悉心专研，充分结合矩阵变换等数学知识推导，应用到实际开发。
-              </p>
-            </li>
-            <li>
-              <!-- Algorithms -->
-              <a href="./algorithm/astar/" target="_blank">算法<i></i></a>
-              <p>
-                身为程序员，对算法多多少少得要了解一些。通读《算法（第4版）》之后，于业余时间用 JavaScript 写过不少经典算法问题。如
-                <a href="./algorithm/eightqueens/">八皇后问题</a>
-                ，
-                <a href="./algorithm/journey/">马踏棋盘</a>
-                ，
-                <a href="./algorithm/labyrinth/">迷宫生成算法与迷宫寻路算法</a>
-                ，
-                <a href="./algorithm/tetris/">AI:俄罗斯方块(Tetris)</a>
-                ，
-                0-1背包
-                ，
-                <a href="./algorithm/souduk/">数独</a>
-                ，
-                快速排序
-                ，
-                <a href="./algorithm/tsp/">旅行商问题</a>
-                等。
-              </p>
-            </li>
-            <li>
-              <a href="http://agent.ehuandian.net/#/" target="_blank">代理商管理后台<i></i></a>
-              <p>易马达业务迅速扩展，为其代理商提供一个管理工具。最初1.0.0版本前端用了13个工作日的开发周期，其中运用到vuejs，elementUI技术。</p>
-            </li>
-            <li>
-              <a href="https://ec-repair.ehuandian.net" target="_blank">中控故障返修平台<i></i></a>
-              <p>平台所实现的主要功能有：账号登录，可根据sid(mac)、SN查询中控，展示与该中控有关的故障信息，处理故障，登记报废。所采用的技术链为：React+Material-UI。</p>
-            </li>
-            <li>
-              <a href="./tetris-game/">俄罗斯方块<i></i></a>
-              <p>没有尝试自己写过一个游戏，算不上热爱编程。还记得小时候我们一班农村孩子排排坐，拿着小游戏机就是为这俄罗斯方块着迷。</p>
-              <p>该项目是一个业余项目，主要是在canvas上绘图，还涉及一些PHP，MySQL知识，用来保存游戏分数，统计pv之类。</p>
-            </li>
-            <li>
-              <a href="./cdc/">单机五子棋<i></i></a>
-              <p>思路是很清晰的，用面向对象（OOP）的写法。虽然是纯原生，但运用了ES6的类，还借鉴了react由数据模型生成视图的思想。</p>
-            </li>
-            <li>
-              <a href="./fifteen/">九空格<i></i></a>
-              <p>把1~-9填入九宫格内,使横竖斜三个数的和等于15. 通过最常见的枚举法得到答案。</p>
-            </li>
-            <li>
-              <a href="./remember/">备忘录<i></i></a>
-              <p>用React编写的单页app备忘录。使用localStorage存储数据，我在我的工作电脑上日日运行它。</p>
-            </li>
-            <li>
-              <a rel="nofollow" href="https://github.com/15915940450/swiperlite">swiper lite<i></i></a>
-              <p>强大的swiper大家可能都听说过，但我写的是最简版的。仅支持手机，不依赖任何库，纯原生，代码小。此外启用硬件加速，很流畅。</p>
-            </li>
-            <li>
-              <a href="./tangram/">七巧<i></i></a>
-              <p>不知为啥，我就对七巧板情有独钟。使用CSS3，你可以摆出很多有意思的图案。</p>
-            </li>
-            <li>
-              <a href="https://www.npmjs.com/package/gulp-cht">gulp-cht<i></i></a>
-              <p>gulp plugin: change Simplified Chinese to Traditional Chinese.</p>
-            </li>
-            <li id="load-xposed-img">
-              <a id="xposed" href="javascript:;">xposed后台<i></i></a>
-              <p>一个后台界面优化的案例，我接手时已有雏形，经过我的设计及重构优化，经理表示很喜欢。</p>
-            </li>
-            <li>
-              <a rel="nofollow" href="http://xposedrom.com/">rom下载站<i></i></a>
-              <p>rom资源的下载站，同时包含有刷机教程。</p>
-            </li>
-            <li>
-              <a rel="nofollow" href="https://github.com/15915940450/chrome-addon">chrome扩展：baiduCAl<i></i></a>
-              <p>谷歌浏览器绝对是最有前途的桌面浏览器。百度则是国内访问量最高的网站之一。很遗憾，我没有发现一个键盘快捷键能将焦点定位到百度搜索框去，于是我写了一个chrome扩展。</p>
-            </li>
-            <li>
-              <a rel="nofollow" href="https://github.com/15915940450/Flexigrid">Flexigrid贡献代码<i></i></a>
-              <p>Flexigrid是一个表格插件。但是它有缺点--鼠标拖拽列时会选中表格的数据，最终以反色显示。我修改了作者插件源码并申请pull request.</p>
-            </li>
-            <li id="load-playker-img">
-              <a id="playker" href="javascript:;">玩客<i></i></a>
-              <p>一个兴趣爱好社区。</p>
-            </li>
-            <li>
-              <a rel="nofollow" href="http://soft.royaleu.com/abm/">自动下注<i></i></a>
-              <p>早年工作时公司承接的博应用软件宣传页。</p>
-            </li>
-            <li>
-              <a rel="nofollow" href="http://www.ltcentry.com/">券多多<i></i></a>
-              <p>领券的h5活动页，主要通过微信传播。</p>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- 技能 -->
-<section>
-  <div class="tech">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-offset-2 col-md-8">
-          <div class="progress_bar">
-            <div class="pro-bar">
-              <small class="progress_bar_title">
-                  HTML
-                  <span class="progress_number">95%</span>
-                </small>
-              <span class="progress-bar-inner" style="background-color: #1abc9c; width: 95%;" data-value="95" data-percentage-value="95"></span>
-            </div>
-          </div>
-
-          <div class="progress_bar">
-            <div class="pro-bar">
-              <small class="progress_bar_title">
-                  CSS
-                  <span class="progress_number">95%</span>
-                </small>
-              <span class="progress-bar-inner" style="background-color: #fdba04; width: 95%;" data-value="95" data-percentage-value="95"></span>
-            </div>
-          </div>
-
-          <div class="progress_bar">
-            <div class="pro-bar">
-              <small class="progress_bar_title">
-                  JavaScript
-                  <span class="progress_number">95%</span>
-                </small>
-              <span class="progress-bar-inner" style="background-color: #049dff; width: 95%;" data-value="95" data-percentage-value="95"></span>
-            </div>
-          </div>
-
-          <div class="progress_bar">
-            <div class="pro-bar">
-              <small class="progress_bar_title">
-                  Node.js
-                  <span class="progress_number">80%</span>
-                </small>
-              <span class="progress-bar-inner" style="background-color: #43853D; width: 80%;" data-value="80" data-percentage-value="80"></span>
-            </div>
-          </div>
-
-          <div class="progress_bar">
-            <div class="pro-bar">
-              <small class="progress_bar_title">
-                Vue.js
-                <span class="progress_number">90%</span>
-              </small>
-              <span class="progress-bar-inner" style="background-color: #41b883; width: 90%;" data-value="90" data-percentage-value="90"></span>
-            </div>
-          </div>
-
-          <div class="progress_bar">
-            <div class="pro-bar">
-              <small class="progress_bar_title">
-                React
-                <span class="progress_number">70%</span>
-              </small>
-              <span class="progress-bar-inner" style="background-color: #61dafb; width: 70%;" data-value="70" data-percentage-value="70"></span>
-            </div>
+          		c-5.863,0-10.749-4.73-10.749-11.454c0-10.955,8.376-19.421,17.031-23.031L47.861,17.239z" />
+                </g>
+              </svg>
+              <i id="theater"></i>
+            </h1>
+            <h3>一个热衷于前端开发技术的web爱好者。</h3>
+            <ul class="clearfix">
+              <li>
+                <a class="wechat" href="javascript:;">
+                  <svg height="256px" style="enable-background:new 0 0 256 256;" version="1.1" viewBox="0 0 256 256"
+                    width="256px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <g id="Background_1_" style="enable-background:new    ;">
+                      <g id="Background">
+                        <g>
+                          <path
+                            d="M249.422,30.679c-2.721-4.985-5.816-9.536-9.793-13.521     c-3.992-3.998-8.709-7.587-13.703-10.314c-8.381-4.576-18.788-6.856-29.002-6.856H59.075c-10.444,0-20.542,2.345-29.265,6.949     c-5.022,2.649-9.588,6.146-13.502,10.126c-3.932,3.998-7.491,8.488-10.046,13.572c-4.289,8.533-6.274,18.477-6.274,28.65v137.429     c0,10.327,1.671,20.679,6.296,29.135c2.681,4.9,6.191,9.86,10.087,13.794c3.934,3.971,8.583,7.226,13.502,9.956     c8.466,4.7,18.842,6.413,29.202,6.413h137.849c10.568,0,20.399-1.523,28.982-6.401c4.739-2.692,9.879-6.113,13.687-9.966     c3.923-3.969,7.2-8.851,9.886-13.799c4.566-8.415,6.533-18.874,6.533-29.132V59.285     C256.012,48.978,254.031,39.124,249.422,30.679z"
+                            style="fill-rule:evenodd;clip-rule:evenodd;fill:#64AB23;" />
+                        </g>
+                      </g>
+                    </g>
+                    <g id="Shape_3_1_" style="enable-background:new    ;">
+                      <g id="Shape_3">
+                        <g>
+                          <path
+                            d="M99.586,47.146c-37.49-0.565-68.642,26.99-68.642,59.488     c0,18.759,8.821,35.033,25.896,46.981c0,0-6.258,20.657-6.169,21.071c0.089,0.415,1.451,1.229,1.925,0.963     s22.622-13.477,22.622-13.477c16.974,5.828,26.869,3.89,27.435,3.851c-1.694-4.961-2.804-12.686-1.54-19.967     c6.617-38.105,45.622-49.958,66.999-47.933C162.209,70.604,136.568,47.703,99.586,47.146z"
+                            style="fill-rule:evenodd;clip-rule:evenodd;fill:#FFFFFF;" />
+                        </g>
+                      </g>
+                    </g>
+                    <g id="Shape_2_1_" style="enable-background:new    ;">
+                      <g id="Shape_2">
+                        <g>
+                          <path
+                            d="M222.99,151.854c0-27.841-26.918-49.166-58.146-49.166     c-33.065,0-59.437,21.807-59.437,49.646c0,27.89,25.084,50.979,59.475,51.168c6.922,0.039,17.232-1.741,24.184-4.646     c0,0,16.619,10.079,17.55,10.005c0.93-0.075,1.407-0.812,1.444-1.444c0.037-0.632-5.295-16.364-5.295-16.364     C217.035,179.875,222.99,167.558,222.99,151.854z"
+                            style="fill-rule:evenodd;clip-rule:evenodd;fill:#FFFFFF;" />
+                        </g>
+                      </g>
+                    </g>
+                    <g id="Shape_1_3_" style="enable-background:new    ;">
+                      <g id="Shape_1">
+                        <g>
+                          <path
+                            d="M73.528,78.422c-4.918,0-8.904,3.988-8.904,8.908     s3.986,8.908,8.904,8.908s8.905-3.988,8.905-8.908S78.446,78.422,73.528,78.422z M127.435,78.422     c-4.917,0-8.904,3.988-8.904,8.908s3.987,8.908,8.904,8.908c4.918,0,8.905-3.988,8.905-8.908S132.354,78.422,127.435,78.422z"
+                            style="fill-rule:evenodd;clip-rule:evenodd;fill:#60A721;" />
+                        </g>
+                      </g>
+                    </g>
+                    <g id="Shape_1_2_" style="enable-background:new    ;">
+                      <g id="Shape_1_1_">
+                        <g>
+                          <path
+                            d="M143.081,125.788c-4.351,0-7.878,3.534-7.878,7.895     c0,4.359,3.527,7.894,7.878,7.894s7.878-3.534,7.878-7.894C150.959,129.322,147.432,125.788,143.081,125.788z M185.207,125.788     c-4.351,0-7.878,3.534-7.878,7.895c0,4.359,3.527,7.894,7.878,7.894c4.352,0,7.879-3.534,7.879-7.894     C193.086,129.322,189.559,125.788,185.207,125.788z"
+                            style="fill-rule:evenodd;clip-rule:evenodd;fill:#60A721;" />
+                        </g>
+                      </g>
+                    </g>
+                  </svg>
+                  <img id="wechat_code" src="img/wechat_code.jpg" alt="微信二维码">
+                </a>
+              </li>
+              <li>
+                <a rel="nofollow" class="weibo" href="http://weibo.com/phone15915940450/profile" title="微博">
+                  <svg height="256px" style="enable-background:new 0 0 256 256;" version="1.1" viewBox="0 0 256 256"
+                    width="256px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <g id="Background_1_" style="enable-background:new    ;">
+                      <g id="Background">
+                        <g>
+                          <path
+                            d="M249.422,30.68c-2.721-4.986-5.816-9.537-9.793-13.521     c-3.992-3.998-8.709-7.587-13.703-10.314c-8.381-4.576-18.788-6.855-29.002-6.855H59.075c-10.444,0-20.542,2.344-29.265,6.948     c-5.022,2.649-9.588,6.146-13.502,10.126c-3.932,3.998-7.491,8.488-10.046,13.572c-4.289,8.533-6.274,18.478-6.274,28.65v137.43     c0,10.326,1.671,20.678,6.296,29.134c2.681,4.9,6.191,9.86,10.087,13.795c3.934,3.97,8.583,7.225,13.503,9.955     c8.465,4.7,18.842,6.413,29.201,6.413h137.849c10.568,0,20.399-1.523,28.982-6.401c4.739-2.692,9.879-6.113,13.687-9.966     c3.923-3.968,7.2-8.851,9.886-13.799c4.566-8.415,6.533-18.874,6.533-29.131V59.285C256.012,48.978,254.031,39.124,249.422,30.68     z"
+                            style="fill-rule:evenodd;clip-rule:evenodd;fill:#FFE591;" />
+                        </g>
+                      </g>
+                    </g>
+                    <g id="Shape_4_1_" style="enable-background:new    ;">
+                      <g id="Shape_4">
+                        <g>
+                          <path
+                            d="M169.217,151.074c-2.088-20.866-29.861-35.239-62.04-32.095     c-32.171,3.145-56.568,22.611-54.478,43.479c2.09,20.876,29.865,35.248,62.039,32.11     C146.916,191.425,171.303,171.957,169.217,151.074z"
+                            style="fill-rule:evenodd;clip-rule:evenodd;fill:#FFFFFF;" />
+                        </g>
+                      </g>
+                    </g>
+                    <g id="Shape_3_1_" style="enable-background:new    ;">
+                      <g id="Shape_3">
+                        <g>
+                          <path
+                            d="M179.092,125.276c-2.738-0.812-4.615-1.361-3.18-4.917     c3.104-7.715,3.425-14.372,0.059-19.121c-6.311-8.908-23.572-8.427-43.359-0.239c0-0.011-6.212,2.687-4.625-2.184     c3.044-9.67,2.585-17.771-2.151-22.444c-10.736-10.616-39.284,0.399-63.764,24.585c-18.333,18.12-28.979,37.325-28.979,53.928     c0,31.76,41.215,51.07,81.536,51.07c52.858,0,88.019-30.345,88.019-54.443C202.648,136.952,190.239,128.692,179.092,125.276z      M114.738,194.569c-32.174,3.138-59.949-11.234-62.039-32.11c-2.09-20.868,22.307-40.335,54.478-43.479     c32.179-3.145,59.952,11.229,62.04,32.095C171.303,171.957,146.916,191.425,114.738,194.569z"
+                            style="fill-rule:evenodd;clip-rule:evenodd;fill:#CD201F;" />
+                        </g>
+                      </g>
+                    </g>
+                    <g id="Shape_2_1_" style="enable-background:new    ;">
+                      <g id="Shape_2">
+                        <g>
+                          <path
+                            d="M117.572,134.441c-15.319-3.905-32.636,3.573-39.29,16.802     c-6.777,13.483-0.225,28.456,15.254,33.354c16.032,5.063,34.93-2.701,41.5-17.255     C141.516,153.107,133.426,138.454,117.572,134.441z M105.874,168.889c-3.115,4.863-9.783,6.996-14.806,4.749     c-4.949-2.204-6.411-7.861-3.296-12.604c3.076-4.729,9.52-6.834,14.505-4.785C107.321,158.354,108.931,163.969,105.874,168.889z      M116.131,155.985c-1.125,1.887-3.615,2.794-5.565,2.007c-1.917-0.772-2.518-2.878-1.429-4.735     c1.122-1.844,3.513-2.744,5.427-1.999C116.508,151.952,117.206,154.086,116.131,155.985z"
+                            style="fill-rule:evenodd;clip-rule:evenodd;fill:#232323;" />
+                        </g>
+                      </g>
+                    </g>
+                    <g id="Shape_1_1_" style="enable-background:new    ;">
+                      <g id="Shape_1">
+                        <g>
+                          <path
+                            d="M212.111,67.308c-12.48-14.403-30.891-19.894-47.882-16.133     h-0.007c-3.932,0.876-6.438,4.901-5.598,8.986c0.839,4.089,4.706,6.701,8.639,5.829c12.088-2.672,25.168,1.236,34.043,11.467     c8.863,10.23,11.271,24.185,7.475,36.416l0.002,0.004c-1.236,3.986,0.856,8.247,4.689,9.535c3.817,1.288,7.922-0.891,9.16-4.864     c0-0.008,0-0.022,0.003-0.03C227.965,101.311,224.595,81.696,212.111,67.308z M169.621,77.464     c-3.383,0.751-5.54,4.218-4.815,7.743c0.726,3.51,4.052,5.767,7.429,5.001v0.007c4.048-0.89,8.436,0.409,11.404,3.831     c2.975,3.43,3.773,8.104,2.497,12.203h0.007c-1.061,3.422,0.738,7.103,4.03,8.214c3.292,1.097,6.823-0.773,7.884-4.203     c2.603-8.383,0.977-17.936-5.111-24.95C186.871,78.296,177.901,75.632,169.621,77.464z"
+                            style="fill-rule:evenodd;clip-rule:evenodd;fill:#DD880C;" />
+                        </g>
+                      </g>
+                    </g>
+                  </svg>
+                </a>
+              </li>
+              <li>
+                <a rel="nofollow" class="zhihu" href="https://www.zhihu.com/people/thilinafong" title="知乎">
+                  <svg height="256px" style="enable-background:new 0 0 256 256;" version="1.1" viewBox="0 0 256 256"
+                    width="256px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <g id="Background_1_" style="enable-background:new    ;">
+                      <g id="Background">
+                        <g>
+                          <path
+                            d="M249.422,30.68c-2.721-4.986-5.816-9.537-9.793-13.521     c-3.992-3.998-8.709-7.588-13.703-10.314c-8.381-4.576-18.788-6.856-29.002-6.856H59.075c-10.444,0-20.542,2.345-29.265,6.948     c-5.022,2.651-9.588,6.147-13.502,10.127c-3.932,3.998-7.491,8.488-10.046,13.572c-4.289,8.533-6.274,18.477-6.274,28.649     v137.431c0,10.326,1.671,20.678,6.296,29.134c2.681,4.9,6.191,9.861,10.087,13.794c3.934,3.971,8.583,7.226,13.503,9.956     c8.465,4.7,18.842,6.413,29.201,6.413h137.849c10.568,0,20.399-1.523,28.982-6.401c4.739-2.692,9.879-6.114,13.687-9.966     c3.923-3.969,7.2-8.851,9.886-13.798c4.566-8.416,6.533-18.875,6.533-29.132V59.284C256.012,48.978,254.031,39.124,249.422,30.68     z"
+                            style="fill-rule:evenodd;clip-rule:evenodd;fill:#1989C8;" />
+                        </g>
+                      </g>
+                    </g>
+                    <g id="Shape_1_1_" style="enable-background:new    ;">
+                      <g id="Shape_1">
+                        <g>
+                          <path
+                            d="M97.396,138.936c23.78,0,14.415,0.017,37.703,0.017     c-0.188-10.444-2.423-14.207-3.933-14.376c-23.826,0-4.903-0.009-32.721-0.009c0.061-0.952,1.248-24.032,1.711-44.651h30.967     c0.759-7.608-1.071-14.187-4.518-14.604c-42.003,0-16.319,0.046-54.921,0.046c0.846-3.268,1.864-7.133,3.037-10.841     c1.802-5.696,3.832-11.117,4.768-13.345c-0.765-0.476-2.093-0.146-5.421,0.646c-3.878,1.158-6.114,2.305-9.387,5.107     c-1.708,1.462-2.974,3.352-3.993,5.457c-3.536,8.688-10.581,32.93-19.719,49.619c14.18-0.85,21.152-9.007,23.5-15.481     c0.874-2.41,1.773-4.649,2.288-6.693c5.981-0.046,10.551-0.049,18.837-0.049c0.087,8.2-0.119,24.132-1.449,44.707     c-16.61,0-24.322-0.116-33.836-0.116c-4.892,1.327-7.483,9.267-8.266,14.46c0.046,0.046,0.092,0.092,0.138,0.138     c21.417,0,17.475,0,40.296,0c-0.984,7.76-1.297,11.573-4.575,22.944c-5.571,16.796-14.218,30.188-26.335,42.239     c-3.235,3.218-7.735,7.293-12.147,10.768c-0.138,0.184-0.276,0.367-0.414,0.552c4.15,3.599,18.522-0.054,21.948-1.242     c2.776-0.963,5.575-1.706,7.592-3.451c7.711-6.67,17.196-21.411,23.258-43.514c21.914,25.576,26.99,33.265,32.509,39.648h0.552     c1.743-6.452,2.98-16.668,0.69-21.672c-0.153-0.705-0.728-1.538-1.335-2.479c-10.986-13.144-10.833-12.888-22.761-25.983     c-7.073,5.667-8.69,7.072-8.69,7.072s1.647-6.182,2.143-8.358C96.493,148.536,96.611,145.385,97.396,138.936z M216.435,63.021     c-35.401,0-28.577,0.056-70.083,0.056c-0.9,0-2.043,0.842-2.043,1.964c0,79.036-0.008,11.016-0.008,130.923     c0,0.825,0.762,1.854,2.041,1.854c8.018,0,8.875,0.012,11.088-0.01c0.637,0.004,1.936,7.142,4.764,14.982     c15.087-9.789,21.833-13.955,25.261-14.923c9.708-0.046,27.491-0.059,29.018-0.059c0.787,0,1.738-0.966,1.738-1.902     c0-87.302,0.052-41.637,0.052-131.17C218.262,63.679,217.077,63.085,216.435,63.021z M203.377,181.97     c0,0.567-0.576,1.152-1.053,1.152c-0.925,0-9.195,0.008-15.077,0.035c-0.208,0-0.55,0.138-0.82,0.324     c-3.699,2.552-9.214,6.085-18.239,11.541c-1.552-5.238-2.928-11.879-3.314-11.882c-1.34,0.014,0.373,0.006-4.483,0.006     c-0.775,0-1.237-0.623-1.237-1.123c0-72.644,0.005-55.591,0.005-103.474c0-0.68,0.692-1.19,1.237-1.19     c25.146,0,20.291-0.033,41.739-0.033c0.523,0,1.275,0.503,1.275,1.143C203.409,132.711,203.377,129.079,203.377,181.97z"
+                            style="fill-rule:evenodd;clip-rule:evenodd;fill:#FFFFFF;" />
+                        </g>
+                      </g>
+                    </g>
+                  </svg>
+                </a>
+              </li>
+              <li>
+                <a rel="nofollow" class="github" href="https://github.com/15915940450" title="github">
+                  <svg enable-background="new 0 0 128 128" id="Social_Icons" version="1.1" viewBox="0 0 128 128"
+                    xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <g id="_x31__stroke">
+                      <g id="Github_1_">
+                        <rect clip-rule="evenodd" fill="none" fill-rule="evenodd" height="128" width="128" />
+                        <path clip-rule="evenodd"
+                          d="M63.996,1.333C28.656,1.333,0,30.099,0,65.591    c0,28.384,18.336,52.467,43.772,60.965c3.2,0.59,4.368-1.394,4.368-3.096c0-1.526-0.056-5.566-0.088-10.927    c-17.804,3.883-21.56-8.614-21.56-8.614c-2.908-7.421-7.104-9.397-7.104-9.397c-5.812-3.988,0.44-3.907,0.44-3.907    c6.42,0.454,9.8,6.622,9.8,6.622c5.712,9.819,14.98,6.984,18.628,5.337c0.58-4.152,2.236-6.984,4.064-8.59    c-14.212-1.622-29.152-7.132-29.152-31.753c0-7.016,2.492-12.75,6.588-17.244c-0.66-1.626-2.856-8.156,0.624-17.003    c0,0,5.376-1.727,17.6,6.586c5.108-1.426,10.58-2.136,16.024-2.165c5.436,0.028,10.912,0.739,16.024,2.165    c12.216-8.313,17.58-6.586,17.58-6.586c3.492,8.847,1.296,15.377,0.636,17.003c4.104,4.494,6.58,10.228,6.58,17.244    c0,24.681-14.964,30.115-29.22,31.705c2.296,1.984,4.344,5.903,4.344,11.899c0,8.59-0.08,15.517-0.08,17.626    c0,1.719,1.152,3.719,4.4,3.088C109.68,118.034,128,93.967,128,65.591C128,30.099,99.344,1.333,63.996,1.333"
+                          fill="#3E75C3" fill-rule="evenodd" id="Github" />
+                      </g>
+                    </g>
+                  </svg>
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
-      <div class="readme">
-        <p>庄子说过：“水之积也不厚，则其负大舟也无力。”作为一名前端开发工程师，我对前端的基础知识 <a rel="nofollow" href="http://www.w3school.com.cn/html/">HTML</a> ， <a rel="nofollow" href="http://www.w3school.com.cn/css/index.asp">CSS</a> ， <a rel="nofollow" href="http://www.w3school.com.cn/js/">JavaScript</a> 驾轻就熟，清楚整个网站开发流程。</p>
-        <p>刚毕业的那一两年，我从事网页设计工作，用AI和Photoshop把需求展现在效果图之上。</p>
-        <p>从2013年开始，我便专注于前端领域，经过多年的工作与学习，让我在 <a rel="nofollow" href="http://jquery.com/">jQuery</a> 、 <a rel="nofollow" href="http://getbootstrap.com/">Bootstrap</a> 、 <a rel="nofollow" href="https://nodejs.org/en/">Node.js</a> 、 <a rel="nofollow" href="https://d3js.org/">D3.js</a> 、 <a rel="nofollow" href="http://snapsvg.io/">Snap.svg</a> 、 <a rel="nofollow" href="http://www.w3school.com.cn/php/">PHP</a> 等技术点都有涉略。我偏向于 <a rel="nofollow" href="https://git-scm.com/downloads">git</a> 工具控制项目版本，我习惯于开源免费的 <a rel="nofollow" href="https://atom.io/">Atom</a> 现代编辑器。此外我每天都用 <a rel="nofollow" href="http://getfirebug.com/">firebug</a> 来调试网页，RESTClient、ESlint、Fiddler这些好工具有时真帮了我大忙。下班回到家，我就在个人电脑玩转Ubuntu系统，对Linux常用命令、终端 <a rel="nofollow" href="http://www.vim.org/">VIM</a> 不会感到陌生。</p>
-        <p>
-          这几年前端发展很快，在最近的一年时间里，我着重学习和运用
-          <a rel="nofollow" href="https://vuejs.org/index.html">Vue.js</a>
-           ，
-          <a rel="nofollow" href="https://facebook.github.io/react/">React</a>
-          框架，结合
-          <a rel="nofollow" href="https://webpack.js.org/">webpack</a>
-          热开发，打包发佈，使用
-          <a rel="nofollow" href="http://gulpjs.com/">gulp</a>
-          构建自动化工作流。
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- 代码 -->
-<section>
-  <div class="mycode">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-4">
-          <h3>我注重细节，拥有优雅的编程风格 ...</h3>
-          <p>代码就是财富。代码是写给人看的，为方便其他同事阅读、维护，我在开发过程中，除了编写注释之外，通常牢记简单的两点：</p>
-          <ul>
-            <li>缩进 -- 两个空格</li>
-            <li>命名 -- class使用减号（select-all-btn），js变量使用驼峰（eleSelectAllBtn）</li>
-          </ul>
-        </div>
-        <div class="col-md-8">
-          <img src="img/mycode.jpg" alt="">
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- 思维thought -->
-<section>
-  <div class="thought">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-4 md-right">
-          <h3>... 以及敏捷的逻辑思维</h3>
-          <p>自小我就喜欢下象棋，在获得快乐的同时，也让我的思维能力得到锻炼。我数学一向不错，曾经还得过不少竞赛奖，不知是否与我对象棋的爱好有关呢？总之，我在 <a rel="nofollow" href="http://xiangqi.qq.com/">天天象棋</a> 等你。</p>
-        </div>
-        <div class="col-md-8 md-left">
-          <img id="siwei-phone" alt="" src="img/siwei.jpg" />
-          <div class='wave-parent'>
-    <div class='slider'>
-        <button type="button" id='right' class='right' name="button">
+    </section>
 
-       <svg version="1.1" id="Capa_1" width='40px' height='40px ' xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-         viewBox="0 0 477.175 477.175" style="enable-background:new 0 0 477.175 477.175;" xml:space="preserve">
-       <g>
-        <path style='fill: #9d9d9d;' d="M360.731,229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1,0s-5.3,13.8,0,19.1l215.5,215.5l-215.5,215.5
+
+    <!-- 項目myproject -->
+    <section id="project">
+      <div class="myproject">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-9">
+              <h3>some projects</h3>
+              <ul>
+                <li>
+                  <a href="./algorithm/tetris/" target="_blank">让机器自己去玩的俄罗斯方块<i></i></a>
+                  <p>
+                    AI俄罗斯方块，2014年的作品，目的是为了强化js编程。采用了Pierre
+                    Dellacherie算法，此算法只考虑当前方块，不对未来的情况进行计算，算法每次生成一个方块，便穷举该方块所有旋转的所有落点。通过一个评估函数，选择最优的下落位置。
+                  </p>
+                </li>
+                <li>
+                  <a href="https://online.hitpaw.com/toolbox/image/photo-enhancer" target="_blank">照片增强项目<i></i></a>
+                  <p>
+                    使用AI算法将像素化、模糊和低质量的照片转换为高质量清晰的照片。熟练的vue3, element
+                    plus开发技术，运用了canvas+fabric，TWEEN动画库等技术点，完成PC与移动端适配的复杂交互的应用，直观的展示了前后照片对比效果。其中有不少数理变量值的转换公式，通过画示意图，悉心专研，充分结合矩阵变换等数学知识推导，应用到实际开发。
+                  </p>
+                </li>
+                <li>
+                  <!-- Algorithms -->
+                  <a href="./algorithm/astar/" target="_blank">算法<i></i></a>
+                  <p>
+                    身为程序员，对算法多多少少得要了解一些。通读《算法（第4版）》之后，于业余时间用 JavaScript 写过不少经典算法问题。如
+                    <a href="./algorithm/eightqueens/">八皇后问题</a>
+                    ，
+                    <a href="./algorithm/journey/">马踏棋盘</a>
+                    ，
+                    <a href="./algorithm/labyrinth/">迷宫生成算法与迷宫寻路算法</a>
+                    ，
+                    <a href="./algorithm/tetris/">AI:俄罗斯方块(Tetris)</a>
+                    ，
+                    0-1背包
+                    ，
+                    <a href="./algorithm/souduk/">数独</a>
+                    ，
+                    快速排序
+                    ，
+                    <a href="./algorithm/tsp/">旅行商问题</a>
+                    等。
+                  </p>
+                </li>
+                <li>
+                  <a href="http://agent.ehuandian.net/#/" target="_blank">代理商管理后台<i></i></a>
+                  <p>易马达业务迅速扩展，为其代理商提供一个管理工具。最初1.0.0版本前端用了13个工作日的开发周期，其中运用到vuejs，elementUI技术。</p>
+                </li>
+                <li>
+                  <a href="https://ec-repair.ehuandian.net" target="_blank">中控故障返修平台<i></i></a>
+                  <p>平台所实现的主要功能有：账号登录，可根据sid(mac)、SN查询中控，展示与该中控有关的故障信息，处理故障，登记报废。所采用的技术链为：React+Material-UI。</p>
+                </li>
+                <li>
+                  <a href="./tetris-game/">俄罗斯方块<i></i></a>
+                  <p>没有尝试自己写过一个游戏，算不上热爱编程。还记得小时候我们一班农村孩子排排坐，拿着小游戏机就是为这俄罗斯方块着迷。</p>
+                  <p>该项目是一个业余项目，主要是在canvas上绘图，还涉及一些PHP，MySQL知识，用来保存游戏分数，统计pv之类。</p>
+                </li>
+                <li>
+                  <a href="./cdc/">单机五子棋<i></i></a>
+                  <p>思路是很清晰的，用面向对象（OOP）的写法。虽然是纯原生，但运用了ES6的类，还借鉴了react由数据模型生成视图的思想。</p>
+                </li>
+                <li>
+                  <a href="./fifteen/">九空格<i></i></a>
+                  <p>把1~-9填入九宫格内,使横竖斜三个数的和等于15. 通过最常见的枚举法得到答案。</p>
+                </li>
+                <li>
+                  <a href="./remember/">备忘录<i></i></a>
+                  <p>用React编写的单页app备忘录。使用localStorage存储数据，我在我的工作电脑上日日运行它。</p>
+                </li>
+                <li>
+                  <a rel="nofollow" href="https://github.com/15915940450/swiperlite">swiper lite<i></i></a>
+                  <p>强大的swiper大家可能都听说过，但我写的是最简版的。仅支持手机，不依赖任何库，纯原生，代码小。此外启用硬件加速，很流畅。</p>
+                </li>
+                <li>
+                  <a href="./tangram/">七巧<i></i></a>
+                  <p>不知为啥，我就对七巧板情有独钟。使用CSS3，你可以摆出很多有意思的图案。</p>
+                </li>
+                <li>
+                  <a href="https://www.npmjs.com/package/gulp-cht">gulp-cht<i></i></a>
+                  <p>gulp plugin: change Simplified Chinese to Traditional Chinese.</p>
+                </li>
+                <li id="load-xposed-img">
+                  <a id="xposed" href="javascript:;">xposed后台<i></i></a>
+                  <p>一个后台界面优化的案例，我接手时已有雏形，经过我的设计及重构优化，经理表示很喜欢。</p>
+                </li>
+                <li>
+                  <a rel="nofollow" href="http://xposedrom.com/">rom下载站<i></i></a>
+                  <p>rom资源的下载站，同时包含有刷机教程。</p>
+                </li>
+                <li>
+                  <a rel="nofollow" href="https://github.com/15915940450/chrome-addon">chrome扩展：baiduCAl<i></i></a>
+                  <p>谷歌浏览器绝对是最有前途的桌面浏览器。百度则是国内访问量最高的网站之一。很遗憾，我没有发现一个键盘快捷键能将焦点定位到百度搜索框去，于是我写了一个chrome扩展。</p>
+                </li>
+                <li>
+                  <a rel="nofollow" href="https://github.com/15915940450/Flexigrid">Flexigrid贡献代码<i></i></a>
+                  <p>Flexigrid是一个表格插件。但是它有缺点--鼠标拖拽列时会选中表格的数据，最终以反色显示。我修改了作者插件源码并申请pull request.</p>
+                </li>
+                <li id="load-playker-img">
+                  <a id="playker" href="javascript:;">玩客<i></i></a>
+                  <p>一个兴趣爱好社区。</p>
+                </li>
+                <li>
+                  <a rel="nofollow" href="http://soft.royaleu.com/abm/">自动下注<i></i></a>
+                  <p>早年工作时公司承接的博应用软件宣传页。</p>
+                </li>
+                <li>
+                  <a rel="nofollow" href="http://www.ltcentry.com/">券多多<i></i></a>
+                  <p>领券的h5活动页，主要通过微信传播。</p>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- 技能 -->
+    <section>
+      <div class="tech">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-offset-2 col-md-8">
+              <div class="progress_bar">
+                <div class="pro-bar">
+                  <small class="progress_bar_title">
+                    HTML
+                    <span class="progress_number">95%</span>
+                  </small>
+                  <span class="progress-bar-inner" style="background-color: #1abc9c; width: 95%;" data-value="95"
+                    data-percentage-value="95"></span>
+                </div>
+              </div>
+
+              <div class="progress_bar">
+                <div class="pro-bar">
+                  <small class="progress_bar_title">
+                    CSS
+                    <span class="progress_number">95%</span>
+                  </small>
+                  <span class="progress-bar-inner" style="background-color: #fdba04; width: 95%;" data-value="95"
+                    data-percentage-value="95"></span>
+                </div>
+              </div>
+
+              <div class="progress_bar">
+                <div class="pro-bar">
+                  <small class="progress_bar_title">
+                    JavaScript
+                    <span class="progress_number">95%</span>
+                  </small>
+                  <span class="progress-bar-inner" style="background-color: #049dff; width: 95%;" data-value="95"
+                    data-percentage-value="95"></span>
+                </div>
+              </div>
+
+              <div class="progress_bar">
+                <div class="pro-bar">
+                  <small class="progress_bar_title">
+                    Node.js
+                    <span class="progress_number">80%</span>
+                  </small>
+                  <span class="progress-bar-inner" style="background-color: #43853D; width: 80%;" data-value="80"
+                    data-percentage-value="80"></span>
+                </div>
+              </div>
+
+              <div class="progress_bar">
+                <div class="pro-bar">
+                  <small class="progress_bar_title">
+                    Vue.js
+                    <span class="progress_number">90%</span>
+                  </small>
+                  <span class="progress-bar-inner" style="background-color: #41b883; width: 90%;" data-value="90"
+                    data-percentage-value="90"></span>
+                </div>
+              </div>
+
+              <div class="progress_bar">
+                <div class="pro-bar">
+                  <small class="progress_bar_title">
+                    React
+                    <span class="progress_number">70%</span>
+                  </small>
+                  <span class="progress-bar-inner" style="background-color: #61dafb; width: 70%;" data-value="70"
+                    data-percentage-value="70"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="readme">
+            <p>庄子说过：“水之积也不厚，则其负大舟也无力。”作为一名前端开发工程师，我对前端的基础知识 <a rel="nofollow"
+                href="http://www.w3school.com.cn/html/">HTML</a> ， <a rel="nofollow"
+                href="http://www.w3school.com.cn/css/index.asp">CSS</a> ， <a rel="nofollow"
+                href="http://www.w3school.com.cn/js">JavaScript</a> 驾轻就熟，清楚整个网站开发流程。</p>
+            <p>刚毕业的那一两年，我从事网页设计工作，用AI和Photoshop把需求展现在效果图之上。</p>
+            <p>从2013年开始，我便专注于前端领域，经过多年的工作与学习，让我在 <a rel="nofollow" href="http://jquery.com/">jQuery</a> 、 <a
+                rel="nofollow" href="http://getbootstrap.com/">Bootstrap</a> 、 <a rel="nofollow"
+                href="https://nodejs.org/en/">Node.js</a> 、 <a rel="nofollow" href="https://d3js.org/">D3.js</a> 、 <a
+                rel="nofollow" href="http://snapsvg.io/">Snap.svg</a> 、 <a rel="nofollow"
+                href="http://www.w3school.com.cn/php/">PHP</a> 等技术点都有涉略。我偏向于 <a rel="nofollow"
+                href="https://git-scm.com/downloads">git</a> 工具控制项目版本，我习惯于开源免费的 <a rel="nofollow"
+                href="https://atom.io/">Atom</a> 现代编辑器。此外我每天都用 <a rel="nofollow"
+                href="http://getfirebug.com/">firebug</a>
+              来调试网页，RESTClient、ESlint、Fiddler这些好工具有时真帮了我大忙。下班回到家，我就在个人电脑玩转Ubuntu系统，对Linux常用命令、终端 <a rel="nofollow"
+                href="http://www.vim.org/">VIM</a> 不会感到陌生。</p>
+            <p>
+              这几年前端发展很快，在最近的一年时间里，我着重学习和运用
+              <a rel="nofollow" href="https://vuejs.org/index.html">Vue.js</a>
+              ，
+              <a rel="nofollow" href="https://facebook.github.io/react/">React</a>
+              框架，结合
+              <a rel="nofollow" href="https://webpack.js.org/">webpack</a>
+              热开发，打包发佈，使用
+              <a rel="nofollow" href="http://gulpjs.com/">gulp</a>
+              构建自动化工作流。
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- 代码 -->
+    <section>
+      <div class="mycode">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-4">
+              <h3>我注重细节，拥有优雅的编程风格 ...</h3>
+              <p>代码就是财富。代码是写给人看的，为方便其他同事阅读、维护，我在开发过程中，除了编写注释之外，通常牢记简单的两点：</p>
+              <ul>
+                <li>缩进 -- 两个空格</li>
+                <li>命名 -- class使用减号（select-all-btn），js变量使用驼峰（eleSelectAllBtn）</li>
+              </ul>
+            </div>
+            <div class="col-md-8">
+              <img src="img/mycode.jpg" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- 思维thought -->
+    <section>
+      <div class="thought">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-4 md-right">
+              <h3>... 以及敏捷的逻辑思维</h3>
+              <p>自小我就喜欢下象棋，在获得快乐的同时，也让我的思维能力得到锻炼。我数学一向不错，曾经还得过不少竞赛奖，不知是否与我对象棋的爱好有关呢？总之，我在 <a rel="nofollow"
+                  href="http://xiangqi.qq.com/">天天象棋</a> 等你。</p>
+            </div>
+            <div class="col-md-8 md-left">
+              <img id="siwei-phone" alt="" src="img/siwei.jpg" />
+              <div class='wave-parent'>
+                <div class='slider'>
+                  <button type="button" id='right' class='right' name="button">
+
+                    <svg version="1.1" id="Capa_1" width='40px' height='40px ' xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 477.175 477.175"
+                      style="enable-background:new 0 0 477.175 477.175;" xml:space="preserve">
+                      <g>
+                        <path style='fill: #9d9d9d;' d="M360.731,229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1,0s-5.3,13.8,0,19.1l215.5,215.5l-215.5,215.5
           c-5.3,5.3-5.3,13.8,0,19.1c2.6,2.6,6.1,4,9.5,4c3.4,0,6.9-1.3,9.5-4l225.1-225.1C365.931,242.875,365.931,234.275,360.731,229.075z
           ">
-       </g>
+                      </g>
 
-       </svg>
+                    </svg>
 
-       </button>
-        <button type="button" id='left' class='left' name="button">
-       <svg version="1.1" id="Capa_2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-         viewBox="0 0 477.175 477.175" style="enable-background:new 0 0 477.175 477.175;" xml:space="preserve">
-       <g>
-        <path style='fill: #9d9d9d;' d="M145.188,238.575l215.5-215.5c5.3-5.3,5.3-13.8,0-19.1s-13.8-5.3-19.1,0l-225.1,225.1c-5.3,5.3-5.3,13.8,0,19.1l225.1,225
+                  </button>
+                  <button type="button" id='left' class='left' name="button">
+                    <svg version="1.1" id="Capa_2" xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 477.175 477.175"
+                      style="enable-background:new 0 0 477.175 477.175;" xml:space="preserve">
+                      <g>
+                        <path style='fill: #9d9d9d;' d="M145.188,238.575l215.5-215.5c5.3-5.3,5.3-13.8,0-19.1s-13.8-5.3-19.1,0l-225.1,225.1c-5.3,5.3-5.3,13.8,0,19.1l225.1,225
           c2.6,2.6,6.1,4,9.5,4s6.9-1.3,9.5-4c5.3-5.3,5.3-13.8,0-19.1L145.188,238.575z">
-       </g>
-       </svg>
-       </button>
-        <svg id='svg2' class='up2' xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-      <circle id='circle1' class='circle1 steap' cx="34px" cy="49%" r="20"  />
-      <circle id='circle2' class='circle2 steap' cx="34px" cy="49%" r="100"  />
-      <circle id='circle3' class='circle3 steap' cx="34px" cy="49%" r="180"  />
-      <circle id='circle4' class='circle4 steap' cx="34px" cy="49%" r="260"  />
-      <circle id='circle5' class='circle5 steap' cx="34px" cy="49%" r="340"  />
-      <circle id='circle6' class='circle6 steap' cx="34px" cy="49%" r="420"  />
-      <circle id='circle7' class='circle7 steap' cx="34px" cy="49%" r="500"  />
-      <circle id='circle8' class='circle8 steap' cx="34px" cy="49%" r="580"  />
-      <circle id='circle9' class='circle9 steap' cx="34px" cy="49%" r="660"  />
-    </svg>
-        <svg id='svg1' class='up2' xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-      <circle id='circle10' class='circle10 steap' cx="648px" cy="49%" r="20"  />
-      <circle id='circle11' class='circle11 steap' cx="648px" cy="49%" r="100"  />
-      <circle id='circle12' class='circle12 steap' cx="648px" cy="49%" r="180"  />
-      <circle id='circle13' class='circle13 steap' cx="648px" cy="49%" r="260"  />
-      <circle id='circle14' class='circle14 steap' cx="648px" cy="49%" r="340"  />
-      <circle id='circle15' class='circle15 steap' cx="648px" cy="49%" r="420"  />
-      <circle id='circle16' class='circle16 steap' cx="648px" cy="49%" r="500"  />
-      <circle id='circle17' class='circle17 steap' cx="648px" cy="49%" r="580"  />
-      <circle id='circle18' class='circle18 steap' cx="648px" cy="49%" r="660"  />
-    </svg>
-    <div id='slide1' class='slide1 up1'><span class="jianghu">W22728718</span></div>
-        <div id='slide2' class='slide2'><span class="jianghu">残局 七星聚会</span></div>
-        <div id='slide3' class='slide3'><span class="jianghu">残局 千里独行</span></div>
-        <div id='slide4' class='slide4'><span class="jianghu">残局 蚯蚓降龙</span></div>
-    </div>
-</div>
-        </div>
+                      </g>
+                    </svg>
+                  </button>
+                  <svg id='svg2' class='up2' xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <circle id='circle1' class='circle1 steap' cx="34px" cy="49%" r="20" />
+                    <circle id='circle2' class='circle2 steap' cx="34px" cy="49%" r="100" />
+                    <circle id='circle3' class='circle3 steap' cx="34px" cy="49%" r="180" />
+                    <circle id='circle4' class='circle4 steap' cx="34px" cy="49%" r="260" />
+                    <circle id='circle5' class='circle5 steap' cx="34px" cy="49%" r="340" />
+                    <circle id='circle6' class='circle6 steap' cx="34px" cy="49%" r="420" />
+                    <circle id='circle7' class='circle7 steap' cx="34px" cy="49%" r="500" />
+                    <circle id='circle8' class='circle8 steap' cx="34px" cy="49%" r="580" />
+                    <circle id='circle9' class='circle9 steap' cx="34px" cy="49%" r="660" />
+                  </svg>
+                  <svg id='svg1' class='up2' xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <circle id='circle10' class='circle10 steap' cx="648px" cy="49%" r="20" />
+                    <circle id='circle11' class='circle11 steap' cx="648px" cy="49%" r="100" />
+                    <circle id='circle12' class='circle12 steap' cx="648px" cy="49%" r="180" />
+                    <circle id='circle13' class='circle13 steap' cx="648px" cy="49%" r="260" />
+                    <circle id='circle14' class='circle14 steap' cx="648px" cy="49%" r="340" />
+                    <circle id='circle15' class='circle15 steap' cx="648px" cy="49%" r="420" />
+                    <circle id='circle16' class='circle16 steap' cx="648px" cy="49%" r="500" />
+                    <circle id='circle17' class='circle17 steap' cx="648px" cy="49%" r="580" />
+                    <circle id='circle18' class='circle18 steap' cx="648px" cy="49%" r="660" />
+                  </svg>
+                  <div id='slide1' class='slide1 up1'><span class="jianghu">W22728718</span></div>
+                  <div id='slide2' class='slide2'><span class="jianghu">残局 七星聚会</span></div>
+                  <div id='slide3' class='slide3'><span class="jianghu">残局 千里独行</span></div>
+                  <div id='slide4' class='slide4'><span class="jianghu">残局 蚯蚓降龙</span></div>
+                </div>
+              </div>
+            </div>
 
+          </div>
+        </div>
       </div>
-    </div>
+    </section>
+    <!-- 工作 -->
+    <section>
+      <div class="work">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6 col-xs-12 work_item">
+              <img src="img/immotor.jpg" alt="e換電">
+              <div class="bg">
+                <div class="illustrate">
+                  <h3>深圳易马达科技有限公司</h3>
+                  <p>2017-08 to present</p>
+                  <ul>
+                    <li>1. 使用vuejs编写了代理商平台应用。</li>
+                    <li>2. 使用jquery，bootstrap编写了运营后台管理系统，前后端分离的开发模式。</li>
+                    <li>3. 制作程程单车活动页，运用gulp工具打包发布，主要在手机移动端传播。</li>
+                    <li>4. 编写谷歌浏览器扩展，增强百度页面功能。</li>
+                    <li>5. 使用react编写了中控返修平台项目。</li>
+                    <li>6. 使用react编写了工作台项目。</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-xs-12 work_item">
+              <img src="img/meizu.jpg" alt="魅族科技大樓">
+              <div class="bg">
+                <div class="illustrate">
+                  <h3>珠海魅族科技</h3>
+                  <p>2013-02 to 2016-01</p>
+                  <ul>
+                    <li>1. 开发用户反馈项目。</li>
+                    <li>2. 开发flowchart流程管理系统。</li>
+                    <li>3. 开发nuclear报表管理系统，使用百度echarts实现统计数据的可视化。</li>
+                    <li>4. redmine二次开发及维护。</li>
+                    <li>5. 瓷砖导购个人业务系统，拼图游戏的编写。</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-xs-12 work_item fe-road">
+              <h2><strong>8</strong>年<span>前端开发之路</span></h2>
+            </div>
+            <div class="col-md-6 col-xs-12 work_item">
+              <img src="img/yifeng.jpg" alt="佛山毅豐">
+              <div class="bg">
+                <div class="illustrate">
+                  <h3>佛山市毅丰电器实业有限公司</h3>
+                  <p>2011-09 to 2012-09</p>
+                  <ul>
+                    <li>1. 维护公司官方网站。</li>
+                    <li>2. 佛山在线改版工作。</li>
+                    <li>3. 追踪并敦促同事们的工作，协助经理开发新项目。</li>
+                    <li>4. 任职期间设计制作了不少于50个网页前台页面。</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- coming soon -->
+    <section>
+      <div class="comming_soon" id="wave">
+        <div class="head" style="background:#000 url(/slash/logo.svg) no-repeat center center;">
+          <img src="img/head/head0.png" alt="">
+          <img src="img/head/head1.png" alt="">
+          <img src="img/head/head2.png" alt="">
+          <img src="img/head/head3.png" alt="">
+        </div>
+        <!-- footer页脚：版权 -->
+        <footer>
+          <p>Copyright &copy;2017 fangxuecong All Rights Reserved</p>
+          <p>
+            <a href="./">首页</a>
+            |
+            <a href="./getintouch/">联系我</a>
+            |
+            <a href="./shortcuts/">快捷键</a>
+            |
+            <span class="module_ili_hint">
+              <a href="javascript:;" class="js_ili_hint">music</a>
+              <span class="ili_hint yc">
+                <span>
+                  <a href="./img/music/1.mp3" download="1.mp3" title="下载此游戏铃声">
+                    1. FC《坦克大战》战前BGM.mp3
+                  </a>
+                </span>
+                <span>
+                  <a href="./img/music/2.flac" download="2.flac" title="下载此游戏铃声">
+                    2. コナミ矩形波倶楽部 - 魂斗罗(FC)密林の戦い~戦慄の鼓动.flac
+                  </a>
+                </span>
+                <span>
+                  <a href="./img/music/3.mp3" download="3.mp3" title="下载此游戏铃声">
+                    3. 纯音乐 - FC《魂斗罗》Base.mp3
+                  </a>
+                </span>
+                <span>
+                  <a href="./img/music/4.mp3" download="4.mp3" title="下载此游戏铃声">
+                    4. 超级马里奥兄弟游戏 - 超级玛丽.mp3
+                  </a>
+                </span>
+                <span>
+                  <a href="./img/music/5.mp3" download="5.mp3" title="下载此游戏铃声">
+                    5. 魂斗罗开场.mp3
+                  </a>
+                </span>
+                <span class="height2music"></span>
+                <span class="ili_hint_tri"></span>
+              </span>
+            </span>
+            |
+            <a href="./map.html">网站导航</a>
+          </p>
+        </footer>
+      </div>
+    </section>
   </div>
-</section>
-<!-- 工作 -->
-<section>
-  <div class="work">
-    <div class="container">
+  <div class="mask">
+    <!-- 遮罩后台 -->
+    <div class="container-fluid houtai">
       <div class="row">
-        <div class="col-md-6 col-xs-12 work_item">
-          <img src="img/immotor.jpg" alt="e換電">
-          <div class="bg">
-            <div class="illustrate">
-              <h3>深圳易马达科技有限公司</h3>
-              <p>2017-08 to present</p>
-              <ul>
-                <li>1. 使用vuejs编写了代理商平台应用。</li>
-                <li>2. 使用jquery，bootstrap编写了运营后台管理系统，前后端分离的开发模式。</li>
-                <li>3. 制作程程单车活动页，运用gulp工具打包发布，主要在手机移动端传播。</li>
-                <li>4. 编写谷歌浏览器扩展，增强百度页面功能。</li>
-                <li>5. 使用react编写了中控返修平台项目。</li>
-                <li>6. 使用react编写了工作台项目。</li>
-              </ul>
-            </div>
-          </div>
+        <div class="col-md-6">
+          <img class="houtai-img" src="img/blank.gif" data-src="img/project/houtai1.png" alt="圖片加載失敗">
+          <p>优化前</p>
         </div>
-        <div class="col-md-6 col-xs-12 work_item">
-          <img src="img/meizu.jpg" alt="魅族科技大樓">
-          <div class="bg">
-            <div class="illustrate">
-              <h3>珠海魅族科技</h3>
-              <p>2013-02 to 2016-01</p>
-              <ul>
-                <li>1. 开发用户反馈项目。</li>
-                <li>2. 开发flowchart流程管理系统。</li>
-                <li>3. 开发nuclear报表管理系统，使用百度echarts实现统计数据的可视化。</li>
-                <li>4. redmine二次开发及维护。</li>
-                <li>5. 瓷砖导购个人业务系统，拼图游戏的编写。</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-xs-12 work_item fe-road">
-          <h2><strong>8</strong>年<span>前端开发之路</span></h2>
-        </div>
-        <div class="col-md-6 col-xs-12 work_item">
-          <img src="img/yifeng.jpg" alt="佛山毅豐">
-          <div class="bg">
-            <div class="illustrate">
-              <h3>佛山市毅丰电器实业有限公司</h3>
-              <p>2011-09 to 2012-09</p>
-              <ul>
-                <li>1. 维护公司官方网站。</li>
-                <li>2. 佛山在线改版工作。</li>
-                <li>3. 追踪并敦促同事们的工作，协助经理开发新项目。</li>
-                <li>4. 任职期间设计制作了不少于50个网页前台页面。</li>
-              </ul>
-            </div>
-          </div>
+        <div class="col-md-6">
+          <img class="houtai-img" src="img/blank.gif" data-src="img/project/houtai2.png" alt="圖片加載失敗">
+          <p>优化后</p>
         </div>
       </div>
     </div>
+    <!-- 遮罩玩客 -->
+    <div class="playker">
+      <div class="swiper-container">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <img class="playker-img" src="img/blank.gif" data-src="img/project/playker1.png" data-w="1051" data-h="4210"
+              alt="圖片加載失敗" />
+          </div>
+          <div class="swiper-slide">
+            <img class="playker-img" src="img/blank.gif" data-src="img/project/playker2.png" data-w="1051" data-h="1544"
+              alt="圖片加載失敗" />
+          </div>
+          <div class="swiper-slide">
+            <img class="playker-img" src="img/blank.gif" data-src="img/project/playker3.png" data-w="1051" data-h="2012"
+              alt="圖片加載失敗" />
+          </div>
+          <div class="swiper-slide">
+            <img class="playker-img" src="img/blank.gif" data-src="img/project/playker4.png" data-w="1051" data-h="2056"
+              alt="圖片加載失敗" />
+          </div>
+          <div class="swiper-slide">
+            <img class="playker-img" src="img/blank.gif" data-src="img/project/playker5.png" data-w="1051" data-h="2728"
+              alt="圖片加載失敗" />
+          </div>
+          <div class="swiper-slide">
+            <img class="playker-img" src="img/blank.gif" data-src="img/project/playker6.png" data-w="1051" data-h="1211"
+              alt="圖片加載失敗" />
+          </div>
+          <div class="swiper-slide">
+            <img class="playker-img" src="img/blank.gif" data-src="img/project/playker7.png" data-w="1051" data-h="1213"
+              alt="圖片加載失敗" />
+          </div>
+          <div class="swiper-slide">
+            <img class="playker-img" src="img/blank.gif" data-src="img/project/playker8.png" data-w="1051" data-h="1603"
+              alt="圖片加載失敗" />
+          </div>
+        </div>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+      </div>
+    </div>
+    <svg enable-background="new 0 0 100 100" version="1.1" viewBox="0 0 100 100" xml:space="preserve"
+      xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+      <polygon fill="#FFF"
+        points="77.6,21.1 49.6,49.2 21.5,21.1 19.6,23 47.6,51.1 19.6,79.2 21.5,81.1 49.6,53 77.6,81.1 79.6,79.2   51.5,51.1 79.6,23 " />
+    </svg>
   </div>
-</section>
-
-
-<!-- coming soon -->
-<section>
-  <div class="comming_soon" id="wave">
-    <div class="head">
-      <img src="img/head/head0.png" alt="">
-      <img src="img/head/head1.png" alt="">
-      <img src="img/head/head2.png" alt="">
-      <img src="img/head/head3.png" alt="">
-    </div>
-    <!-- footer页脚：版权 -->
-    <footer>
-      <p>Copyright &copy;2017 fangxuecong All Rights Reserved</p>
-      <p>
-        <a href="./">首页</a>
-        |
-        <a href="./getintouch/">联系我</a>
-        |
-        <a href="./shortcuts/">快捷键</a>
-        |
-        <span class="module_ili_hint">
-          <a href="javascript:;" class="js_ili_hint">music</a>
-          <span class="ili_hint yc">
-            <span>
-              <a
-                href="./img/music/1.mp3"
-                download="1.mp3"
-                title="下载此游戏铃声"
-                >
-                1. FC《坦克大战》战前BGM.mp3
-              </a>
-            </span>
-            <span>
-              <a
-                href="./img/music/2.flac"
-                download="2.flac"
-                title="下载此游戏铃声"
-                >
-                2. コナミ矩形波倶楽部 - 魂斗罗(FC)密林の戦い~戦慄の鼓动.flac
-              </a>
-            </span>
-            <span>
-              <a
-                href="./img/music/3.mp3"
-                download="3.mp3"
-                title="下载此游戏铃声"
-                >
-                3. 纯音乐 - FC《魂斗罗》Base.mp3
-              </a>
-            </span>
-            <span>
-              <a
-                href="./img/music/4.mp3"
-                download="4.mp3"
-                title="下载此游戏铃声"
-                >
-                4. 超级马里奥兄弟游戏 - 超级玛丽.mp3
-              </a>
-            </span>
-            <span>
-              <a
-                href="./img/music/5.mp3"
-                download="5.mp3"
-                title="下载此游戏铃声"
-                >
-                5. 魂斗罗开场.mp3
-              </a>
-            </span>
-            <span class="height2music"></span>
-            <span class="ili_hint_tri"></span>
-          </span>
-        </span>
-        |
-        <a href="./map.html">网站导航</a>
-      </p>
-    </footer>
-  </div>
-</section>
-    </div>
-    <div class="mask">
-      <!-- 遮罩后台 -->
-      <div class="container-fluid houtai">
-        <div class="row">
-          <div class="col-md-6">
-            <img class="houtai-img" src="img/blank.gif" data-src="img/project/houtai1.png" alt="圖片加載失敗">
-            <p>优化前</p>
-          </div>
-          <div class="col-md-6">
-            <img class="houtai-img" src="img/blank.gif" data-src="img/project/houtai2.png" alt="圖片加載失敗">
-            <p>优化后</p>
-          </div>
-        </div>
-      </div>
-      <!-- 遮罩玩客 -->
-      <div class="playker">
-        <div class="swiper-container">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <img class="playker-img" src="img/blank.gif" data-src="img/project/playker1.png" data-w="1051" data-h="4210" alt="圖片加載失敗" />
-            </div>
-            <div class="swiper-slide">
-              <img class="playker-img" src="img/blank.gif" data-src="img/project/playker2.png" data-w="1051" data-h="1544" alt="圖片加載失敗" />
-            </div>
-            <div class="swiper-slide">
-              <img class="playker-img" src="img/blank.gif" data-src="img/project/playker3.png" data-w="1051" data-h="2012" alt="圖片加載失敗" />
-            </div>
-            <div class="swiper-slide">
-              <img class="playker-img" src="img/blank.gif" data-src="img/project/playker4.png" data-w="1051" data-h="2056" alt="圖片加載失敗" />
-            </div>
-            <div class="swiper-slide">
-              <img class="playker-img" src="img/blank.gif" data-src="img/project/playker5.png" data-w="1051" data-h="2728" alt="圖片加載失敗" />
-            </div>
-            <div class="swiper-slide">
-              <img class="playker-img" src="img/blank.gif" data-src="img/project/playker6.png" data-w="1051" data-h="1211" alt="圖片加載失敗" />
-            </div>
-            <div class="swiper-slide">
-              <img class="playker-img" src="img/blank.gif" data-src="img/project/playker7.png" data-w="1051" data-h="1213" alt="圖片加載失敗" />
-            </div>
-            <div class="swiper-slide">
-              <img class="playker-img" src="img/blank.gif" data-src="img/project/playker8.png" data-w="1051" data-h="1603" alt="圖片加載失敗" />
-            </div>
-          </div>
-          <div class="swiper-pagination"></div>
-          <div class="swiper-button-prev"></div>
-          <div class="swiper-button-next"></div>
-        </div>
-      </div>
-      <svg enable-background="new 0 0 100 100" version="1.1" viewBox="0 0 100 100" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><polygon fill="#FFF" points="77.6,21.1 49.6,49.2 21.5,21.1 19.6,23 47.6,51.1 19.6,79.2 21.5,81.1 49.6,53 77.6,81.1 79.6,79.2   51.5,51.1 79.6,23 "/></svg>
-    </div>
-    <script src="js/modernizr.js"></script>
-    <script src="js/jquery-3.0.0.min.js"></script>
-    <script src="js/wave.js"></script>
-    <script src="js/theater.min.js"></script>
-    <script src="js/swiper.jquery.min.js"></script>
-    <script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
-    <script src="js/main.js"></script>
+  <script src="js/modernizr.js"></script>
+  <script src="js/jquery-3.0.0.min.js"></script>
+  <script src="js/wave.js"></script>
+  <script src="js/theater.min.js"></script>
+  <script src="js/swiper.jquery.min.js"></script>
+  <script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
+  <script src="js/main.js"></script>
 </body>
+
 </html>

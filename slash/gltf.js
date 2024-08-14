@@ -1,3 +1,11 @@
+/*
+1.glb路径(base:/developer-xc)
+2.#THREE容器
+3.param值
+4.bird数量:1024，不能轻易调整
+*/ 
+
+
 
 import * as THREE from 'three';
 // import Stats from 'three/addons/libs/stats.module.js';
@@ -8,7 +16,7 @@ import { GPUComputationRenderer } from 'three/addons/misc/GPUComputationRenderer
 
 
 
-
+console.log('base',window.base)
 let isMobile=window.innerWidth<600
 
 /* TEXTURE WIDTH FOR SIMULATION */
@@ -32,17 +40,12 @@ Math.lerp = function ( value1, value2, amount ) {
 
 };
 
-/*
-1.glb路径
-2.#THREE容器
-3.param值
-4.bird数量
-*/ 
+
 const gltfs = [ 'models/gltf/Parrot.glb', 'models/gltf/Flamingo.glb' ];
 const colors = [ 0xccFFFF, 0xffdeff ];
 const sizes = [ 0.2, 0.1 ];
 const selectModel = Math.floor( Math.random() * gltfs.length );
-new GLTFLoader().load( '/slash/'+gltfs[ selectModel ], function ( gltf ) {
+new GLTFLoader().load( (window.base||'')+'/slash/'+gltfs[ selectModel ], function ( gltf ) {
 
   const animations = gltf.animations;
   durationAnimation = Math.round( animations[ 0 ].duration * 60 );
@@ -211,7 +214,7 @@ function init() {
     cohesion: 20.0,
     freedom: 0.75,
     size: sizes[ selectModel ],
-    count: Math.floor( BIRDS / (isMobile?16:4) )
+    count: Math.floor( BIRDS / 4 )
 
   };
   // document.title=effectController.count

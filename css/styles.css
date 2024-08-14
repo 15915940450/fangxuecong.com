@@ -412,7 +412,6 @@ a:hover#logo i,a.anim#logo i{
 .comming_soon .head{
   width: 100px;
   height: 100px;
-  background:#000 url(/slash/logo.svg) no-repeat center center;
   background-size: 90px 90px;
   overflow: hidden;
   position: relative;
@@ -802,21 +801,7 @@ footer a.footer-a{
   transition-delay: 0.45s;
 }
 
-.wave-parent .slide1 {
-  background-image: url("https://www.tourboxtech.cn/developer-xc/img/siwei.jpg");
-}
 
-.wave-parent .slide2 {
-  background-image: url("https://www.tourboxtech.cn/developer-xc/img/siwei2.jpg");
-}
-
-.wave-parent .slide3 {
-  background-image: url("https://www.tourboxtech.cn/developer-xc/img/siwei3.jpg");
-}
-
-.wave-parent .slide4 {
-  background-image: url("https://www.tourboxtech.cn/developer-xc/img/siwei4.jpg");
-}
 
 .wave-parent .slider {
   position: absolute;
