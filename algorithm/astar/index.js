@@ -214,7 +214,7 @@ class Astar{
     window.setTimeout(function(){
       f.init(iInter);
       f.solve();
-    },1e4);
+    },2e3);
 
     return f;
   }
@@ -428,3 +428,14 @@ var obj =new Astar();
 var iInter=0;
 obj.init(iInter);
 obj.solve();
+
+
+
+$(document).ready(()=>{
+  let el=document.querySelector('.astar_title >a')
+  let el2=document.querySelector('.astar_page .article')
+
+  el.onclick=()=>{
+    el2.style.display='none'
+  }
+})

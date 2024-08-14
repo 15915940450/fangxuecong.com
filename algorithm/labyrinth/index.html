@@ -132,15 +132,17 @@
       /*display: none;*/
     }
   </style>
-  <div class="page max_height" style="background:black;color:#FFF;position:relative;">
+  <div class="page max_height page_laby" style="background:black;color:#FFF;position:relative;">
     <h3 style="width:100%;text-align: center;position: absolute;left: 0;top:5px;">
       生成算法：已完成<span class="percent">0.000%</span>
       尋路算法：已完成<span class="percent">0.000%</span>
     </h3>
+    <canvas id="maze" class="maze" width="1" height="1" style="position: absolute;left: 0;top:0;"></canvas>
     <div class="container">
       <div class="row">
         <div class="col-md-12 tangram-article">
-          <article class="article" style="width: 44%;">
+          
+          <article class="article">
             <h1>
               <span>迷宫生成算法与迷宫寻路算法</span>
             </h1>
@@ -197,7 +199,7 @@
       </div>
 
     </div>
-    <canvas id="maze" width="1" height="1" style="position: absolute;left: 0;top:0;"></canvas>
+    
   </div>
   <!-- coming soon -->
   <section>

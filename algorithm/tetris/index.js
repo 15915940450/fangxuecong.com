@@ -33,6 +33,9 @@ class TETRIS{
     this.W=10;  //寬度：10
     this.H=20;  //高度：20
     this.cell=30; //每個格子大小
+    if(isMobile){
+      this.cell=~~(this.CW/10)
+    }
     this.randomRow=_.random(5,9);  //隨機格子,false(0),1,2,3,,,15(挑戰：已固定15行)
     this.lock=false; //鎖住遊戲
     this.gameOver=false; //遊戲結束
@@ -72,7 +75,10 @@ class TETRIS{
 
   init(){
     this.eleCanvas.width=this.CW;
-    this.eleCanvas.height=isMobile?this.CH4 - 200:920;
+    this.eleCanvas.height=920;
+    if(isMobile){
+      this.eleCanvas.height=this.cell*20+12
+    }
 
     this.initRule();
     this.initArrTetris();
@@ -461,7 +467,8 @@ class TETRIS{
     
 
     if(isMobile){
-      f.renderMobile(data,f.F2(f.next,f.nextForm))
+      f.renderMobileMain(data)
+      f.renderMobileNext(f.F2(f.next,f.nextForm))
     }else{
       // 渲染主區
       f.renderCanvas(data);
@@ -472,10 +479,77 @@ class TETRIS{
 
     return f;
   }
-  renderMobile(arrMain,arrNext){
-    if(gi++===1){
-      console.log('arrMain,arrNext',arrMain,arrNext)
+  renderMobileMain(arrMain){
+    let f=this
+    var ctx=f.eleCanvas.getContext('2d');
+    ctx.clearRect(0,0,1e4,1e4);
+    var perW=f.cell
+    var arrBCC=[1,4];
+    var yOffset=10
+    ctx.beginPath();
+    ctx.translate(0.5,yOffset+0.5);
+
+    for(var row=0;row<arrMain.length;row++){
+      for(var j=0;j<arrMain[0].length;j++){
+        if(arrMain[row][j].v){
+          ctx.fillStyle='dimgray';
+          ctx.fillRect(perW*j+arrBCC[0],perW*row+arrBCC[0],perW-2,perW-2);
+
+          //格子的顏色
+          ctx.fillStyle=arrMain[row][j].color;
+          ctx.fillRect(perW*j+arrBCC[1],perW*row+arrBCC[1],perW-2*arrBCC[1],perW-2*arrBCC[1]);
+        }
+      }
     }
+    ctx.translate(-0.5,-yOffset-0.5);
+    return f
+  }
+  renderMobileNext(arrNext){
+    let f=this
+
+    var arrBCC=[1,4];
+    var ctx=f.eleCanvas.getContext('2d');
+    var perW=22;
+    var yOffset=14
+    var xOffset=this.CW-100
+    ctx.translate(xOffset+0.5,yOffset+0.5);
+
+    
+    
+    ctx.save()
+    ctx.fillStyle='black';
+    ctx.strokeStyle='darkgray';
+    ctx.fillRect(-4,-4,88+4*2,88+4*2)
+    ctx.strokeRect(-4,-4,88+4*2,88+4*2)
+    ctx.restore()
+
+
+    ctx.beginPath();
+
+    if(f.gameOver){
+      ctx.fillStyle='crimson';
+      ctx.font='20px';
+      ctx.fillText('GAME OVER',0,-50);
+    }
+
+
+    for(var row=0;row<arrNext.length;row++){
+      for(var j=0;j<arrNext[0].length;j++){
+        if(arrNext[row][j].v){
+          ctx.fillStyle='dimgray';
+          ctx.fillRect(perW*j+arrBCC[0],perW*row+arrBCC[0],perW-2,perW-2);
+
+          //格子的顏色
+          ctx.fillStyle=arrNext[row][j].color;
+          ctx.fillRect(perW*j+arrBCC[1],perW*row+arrBCC[1],perW-2*arrBCC[1],perW-2*arrBCC[1]);
+        }
+      }
+    }
+
+
+    ctx.fill();
+    ctx.translate(-xOffset-0.5,-yOffset-0.5);
+    return f
   }
   //由二維數組繪製成canvas,index:(default_0,主区,1,下一个,2,算法区)
   renderCanvas(arr,index){

@@ -1303,9 +1303,14 @@ a.email{
   height: 920px;
 }
 .aite{
-  background: black;
   position: absolute;left: 0;top:0px;
   height: 920px;
+}
+.astar_title >a{
+  display: none;
+}
+.page_laby .article{
+  width: 44%;
 }
 
 @media (min-width:993px){
@@ -1413,11 +1418,34 @@ a.email{
     height: auto;
   }
   .aite{
-    background: #333;
+    background: #141414;
     position: relative;
     height: auto;
     /* border: 4px solid black; */
     box-sizing: border-box;
+    border-bottom: 4px solid black;
+  }
+  .astar_title{
+    display: flex;
+    padding: 10px 0;
+    background: black;
+    align-items: end;
+    gap: 20px;
+  }
+  .astar_title >a{
+    font-size: 14px;
+    text-decoration: underline;
+    color: #0078D7;
+    display: block;
+  }
+  .page_laby .article{
+    width: auto;
+    padding-top: 40px;
+    /* opacity: .8; */
+  }
+  .page_laby .maze{
+    position: relative !important;
+    left: -10px !important;
   }
 } /* end of phone */
 

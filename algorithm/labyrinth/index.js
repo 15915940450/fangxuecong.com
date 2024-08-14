@@ -1,6 +1,13 @@
+let isMobile=window.innerWidth<600
+
+
 class Maze{
   //basic要素
   constructor(){
+    var mp=[100,300]
+    if(isMobile){
+      mp=[100,20]
+    }
     this.eleMaze=document.querySelector('#maze');
     this.CW=document.documentElement.clientWidth || document.body.clientWidth;
     this.CH=document.documentElement.clientHeight || document.body.clientHeight;
@@ -8,8 +15,8 @@ class Maze{
 
     this.w=22;
     this.grid=[]; //網格(包含cell)
-    this.rows=(this.CH-100)/this.w>>0;
-    this.cols=(this.CW-300)/this.w>>0;
+    this.rows=(this.CH-mp[0])/this.w>>0;
+    this.cols=(this.CW-mp[1])/this.w>>0;
 
     this.adjacentFrontier=[]; //sure is visited(最重要的數據)
     this.complete=false;
@@ -301,14 +308,22 @@ class Maze{
 
   //根據grid繪製canvas
   draw(){
+    var color='darkgray';
+    var color1='#7b6af4'
+    var color2='rgba(0,0,0,.28)'
+    var color3='white'
     var f=this;
     var ctx=f.ctx;
-    ctx.translate(130.5,30.5);
+    let offset=[130,30]
+    if(isMobile){
+      offset=[20,40]
+    }
+    ctx.translate(offset[0]+.5,offset[1]+.5);
     ctx.clearRect(0,0,f.CW,f.CH);
     ctx.moveTo(0,0);
     ctx.strokeStyle='snow';
     
-    var color='dimgray';
+    
     
     for(var i=0;i<f.grid.length;i++){
       var cell=f.grid[i];
@@ -317,18 +332,18 @@ class Maze{
       
       //已訪問(生成)
       if(cell.visited){
-        ctx.fillStyle=color;
+        ctx.fillStyle=color1;
         ctx.fillRect(col*f.w,row*f.w,f.w+1,f.w+1);
       }
       //已訪問(馴鹿)
       if(cell.marked){
-        ctx.fillStyle='midnightblue';
+        ctx.fillStyle=color2;
         ctx.fillRect(col*f.w,row*f.w,f.w+1,f.w+1);
         ctx.fillStyle=color;
       }
       //是路徑
       if(cell.isPath){
-        ctx.fillStyle='crimson';
+        ctx.fillStyle=color3;
         ctx.fillRect(col*f.w+f.w/4,row*f.w+f.w/4,f.w-f.w/2,f.w-f.w/2);
         ctx.fillStyle=color;
       }
@@ -359,16 +374,16 @@ class Maze{
 
       // 尋路時繪製網格編號
       if(!f.completeSearch && f.complete){
-        ctx.font='9px serif';
-        ctx.fillStyle='dimgray';
-        ctx.textAlign='center';
-        ctx.textBaseline='middle';
-        ctx.fillText(cell.index,col*f.w+f.w/2,row*f.w+f.w/2);
-        ctx.fillStyle=color;
+        // ctx.font='9px serif';
+        // ctx.fillStyle=color;
+        // ctx.textAlign='center';
+        // ctx.textBaseline='middle';
+        // ctx.fillText(cell.index,col*f.w+f.w/2,row*f.w+f.w/2);
+        // ctx.fillStyle=color;
       }
     } //for
     // ctx.closePath();
-    ctx.translate(-130.5,-30.5);
+    ctx.translate(-offset[0]-.5,-offset[1]-0.5);
     return f;
   }
 
