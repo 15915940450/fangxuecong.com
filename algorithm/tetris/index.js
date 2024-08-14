@@ -10,6 +10,11 @@ import PD from './pierre_dellacherie.js';
 
 // import demoArrTetris from './demoarrtetris.js';
 
+
+
+
+let isMobile=window.innerWidth<600
+let gi=0
 class TETRIS{
   constructor(){
     this.dev=0; //啟用開發模式
@@ -67,7 +72,7 @@ class TETRIS{
 
   init(){
     this.eleCanvas.width=this.CW;
-    this.eleCanvas.height=920;
+    this.eleCanvas.height=isMobile?this.CH4 - 200:920;
 
     this.initRule();
     this.initArrTetris();
@@ -448,16 +453,29 @@ class TETRIS{
   }
   
   //渲染：繪製canvas
-  render(){
+  render(data){
     var f=this;
-
-    // 渲染主區
-    f.renderCanvas(f.arrTetrisAppendActive);
     
-    // 渲染下一個
-    f.renderCanvas(f.F2(f.next,f.nextForm),1);
+    data=data||f.arrTetrisAppendActive
+
+    
+
+    if(isMobile){
+      f.renderMobile(data,f.F2(f.next,f.nextForm))
+    }else{
+      // 渲染主區
+      f.renderCanvas(data);
+          
+      // 渲染下一個
+      f.renderCanvas(f.F2(f.next,f.nextForm),1);
+    }
 
     return f;
+  }
+  renderMobile(arrMain,arrNext){
+    if(gi++===1){
+      console.log('arrMain,arrNext',arrMain,arrNext)
+    }
   }
   //由二維數組繪製成canvas,index:(default_0,主区,1,下一个,2,算法区)
   renderCanvas(arr,index){
@@ -730,7 +748,9 @@ class TETRIS{
     // console.log(hint);
     // hint.row;
     if(hint){
-      dellacherie.drawFixed(hint.index);
+      if(!isMobile){
+        dellacherie.drawFixed(hint.index);
+      } 
 
       f.activePosition.row=0-f.f_f[f.active].form[f.activeForm].up;
       
@@ -803,6 +823,7 @@ class TETRIS{
   }
   // 500毫秒的動畫
   animate500ms(){
+    // return
     var f=this;
     //先鎖住
     f.lock=true;
@@ -821,18 +842,18 @@ class TETRIS{
       });*/
     }
     //立馬消失
-    f.renderCanvas(arrAnimate);
+    f.render(arrAnimate);
     // 出現
     window.setTimeout(function(){
-      f.renderCanvas(arrAnimate0);
+      f.render(arrAnimate0);
     },100);
     // 消失
     window.setTimeout(function(){
-      f.renderCanvas(arrAnimate);
+      f.render(arrAnimate);
     },300);
     // 出現
     window.setTimeout(function(){
-      f.renderCanvas(arrAnimate0);
+      f.render(arrAnimate0);
       //放開鎖定
       f.lock=false;
     },500);
@@ -861,7 +882,7 @@ class TETRIS{
   //得分等等界面
   htmlStatus(){
     var f=this;
-    console.log(this.score,this.level,this.lines,this.frame);
+    // console.log(this.score,this.level,this.lines,this.frame);
     return f;
   }
 
