@@ -83,6 +83,12 @@ $(function(){
     var numHead=0;
     var numTimeInterval=300;
     var Timer=window.setInterval(function(){
+      var el=document.querySelector('.comming_soon')
+      var elTop=el.getBoundingClientRect().top
+      if(elTop>1000){
+        return
+      }
+
       x1++;
       //三秒左右开始动
       if(x1>Math.floor(3000/numTimeInterval)){
@@ -186,7 +192,10 @@ $(function(){
   if($('#wave').length>0){
     //iPhone或者桌面,UCBrowser
     if(true){
-      var container=document.querySelector('#wave')
+      var container=document.querySelector('#wave');
+      
+
+
       var SW = new SiriWave({
   		  container:container,
   		  width: container.getBoundingClientRect().width,
@@ -195,16 +204,31 @@ $(function(){
       // console.log(SW)
 
   		SW.setSpeed(0.1);
-  		SW.setNoise(0.3);
+  		SW.setNoise(0.5);
   		SW.start();
+
+
+
+
+
+      // 交叉观察器 API
+      var __observer = new IntersectionObserver(function(theentries){
+          if(theentries[0].isIntersecting){
+            SW.start();
+          }else{
+            SW.stop();
+          }
+      }, {
+        threshold: 0,
+        root: null,
+        rootMargin: "100px"
+      });
+
+      __observer.observe(container);
     }
 
-    //weibo phone
-    if(numClientW<=992){
-      $('#wave a.weibo').attr({href:'https://m.weibo.cn/u/3841442461'});
-    }
     //首頁訪問log
-    (function(){
+    ;(function(){
       // ua,cw,ch,sw,sh,isInternetExplorer,objSohuC,ip
       var objSohuC=returnCitySN || {cname:'sohu-name',cid:'sohu-id',cip:'sohu-ip'};
       // var ip=objSohuC.cip;

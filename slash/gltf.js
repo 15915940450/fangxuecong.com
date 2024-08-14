@@ -440,6 +440,15 @@ function onPointerMove( event ) {
 
 function animate() {
 
+  const el=document.querySelector('#THREE')
+  const HEIGHT=window.innerHeight
+  if(el){
+    let elTop=el.getBoundingClientRect().top
+    if(-elTop>HEIGHT+100){
+      // console.log('kkkkkkks')
+      return
+    }
+  }
   render();
   // stats.update();
 
