@@ -431,11 +431,12 @@ obj.solve();
 
 
 
-$(document).ready(()=>{
-  let el=document.querySelector('.astar_title >a')
+window.onload=function(){
+  
+  let el=document.querySelector('#txt_enter')
   let el2=document.querySelector('.astar_page .article')
 
   el.onclick=()=>{
-    el2.style.display='none'
+    el2.style.opacity=0
   }
-})
+}
