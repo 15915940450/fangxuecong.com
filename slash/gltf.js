@@ -481,7 +481,7 @@ function render(iJuliet) {
 
   
   if(iJuliet<iDisturbPerMinute[0] && isMobile){
-    console.log('disturb',iJuliet,mouseX,mouseY)
+    // console.log('disturb',iJuliet,mouseX,mouseY)
     mouseX = 0;
     mouseY = 0;
   }else{

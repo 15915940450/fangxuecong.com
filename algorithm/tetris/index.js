@@ -14,6 +14,8 @@ import PD from './pierre_dellacherie.js';
 
 
 let isMobile=window.innerWidth<600
+let dpr=window.devicePixelRatio
+console.log(dpr,'dpr')
 let gi=0
 class TETRIS{
   constructor(){
@@ -34,7 +36,8 @@ class TETRIS{
     this.H=20;  //高度：20
     this.cell=30; //每個格子大小
     if(isMobile){
-      this.cell=~~(this.CW/10)
+      this.cell=~~(this.CW/(10+5))*dpr
+      // this.cell=40
     }
     this.randomRow=_.random(5,9);  //隨機格子,false(0),1,2,3,,,15(挑戰：已固定15行)
     this.lock=false; //鎖住遊戲
@@ -77,7 +80,11 @@ class TETRIS{
     this.eleCanvas.width=this.CW;
     this.eleCanvas.height=920;
     if(isMobile){
-      this.eleCanvas.height=this.cell*20+12
+      let __w=this.cell*(10+5);
+      let __h=this.cell*20+12
+      this.eleCanvas.width=__w
+      this.eleCanvas.height=__h
+      this.eleCanvas.style=`width:${__w/dpr}px;height:${__h/dpr}px;`
     }
 
     this.initRule();
@@ -507,21 +514,51 @@ class TETRIS{
   renderMobileNext(arrNext){
     let f=this
 
-    var arrBCC=[1,4];
-    var ctx=f.eleCanvas.getContext('2d');
-    var perW=22;
-    var yOffset=14
-    var xOffset=this.CW-100
-    ctx.translate(xOffset+0.5,yOffset+0.5);
 
     
+
+
+    // ||||||||||||||||||||||||||||||||||||||||||||||
+    var arrBCC=[1,4];
+    var ctx=f.eleCanvas.getContext('2d');
+    var perW=~~(f.cell*.8);
+    var yOffset=14
+    // 1个格子边距
+    var xOffset=f.cell*(11)
     
+
+
+    // 绘制横直线
+    // =============================================
+    let H=this.eleCanvas.height-perW/2
+    ctx.translate(xOffset+0.5,H)
+    // ctx.fillRect(0,0,40,40)
     ctx.save()
+    for(let i=20;i;i--){
+      ctx.fillStyle='white'
+      ctx.fillRect(-perW+4,(-i+1)*f.cell,perW*.8,1)
+      ctx.font='15px sans-serif';
+      ctx.textBaseline='middle'
+      ctx.fillText(i,4,(-i+1)*f.cell)
+    }
+    ctx.restore()
+
+
+    ctx.fill();
+    ctx.translate(-xOffset-0.5,-H)
+    // =============================================
+    
+    
+
+
+    ctx.save()
+    ctx.translate(xOffset+0.5,yOffset+0.5);
+    // 绘制矩形背景
     ctx.fillStyle='black';
     ctx.strokeStyle='darkgray';
-    ctx.fillRect(-4,-4,88+4*2,88+4*2)
-    ctx.strokeRect(-4,-4,88+4*2,88+4*2)
-    ctx.restore()
+    ctx.fillRect(-4,-4,perW*4+4*2,perW*4+4*2)
+    ctx.strokeRect(-4,-4,perW*4+4*2,perW*4+4*2)
+    
 
 
     ctx.beginPath();
@@ -533,6 +570,7 @@ class TETRIS{
     }
 
 
+    // 绘制格子里面的形状
     for(var row=0;row<arrNext.length;row++){
       for(var j=0;j<arrNext[0].length;j++){
         if(arrNext[row][j].v){
@@ -547,8 +585,19 @@ class TETRIS{
     }
 
 
+
+    
+
+
     ctx.fill();
     ctx.translate(-xOffset-0.5,-yOffset-0.5);
+    ctx.restore()
+    // ||||||||||||||||||||||||||||||||||||||||||||||
+
+
+    
+    
+
     return f
   }
   //由二維數組繪製成canvas,index:(default_0,主区,1,下一个,2,算法区)
@@ -557,7 +606,6 @@ class TETRIS{
     index=index || 0;
 
 
-    // (f.eleCanvas.width/2>>0)
     var numTranslate=(f.eleCanvas.width/2>>0),perW;
     
     
