@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html data-noisrev="2024/8/15 11:43">
 
 <head>
   <title>聪 | fangxuecong</title>
@@ -246,6 +246,22 @@
     .thr {
       position: relative;
       overflow: hidden;
+    }
+    .thr .c_over{
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: red;
+
+      opacity: 0;
+      z-index: 2;
+    }
+    @media screen and (min-width:600px) {
+      .thr .c_over{
+        display: none;
+      }
     }
 
     .thr>.container {
@@ -559,6 +575,8 @@
             </ul>
           </div>
         </div>
+
+        <div class="c_over"></div>
       </div>
     </section>
 

@@ -16,7 +16,7 @@ import { GPUComputationRenderer } from 'three/addons/misc/GPUComputationRenderer
 
 
 
-console.log('base',window.base)
+console.log('esab2024/8/15 11:43',window.base)
 let isMobile=window.innerWidth<600
 
 /* TEXTURE WIDTH FOR SIMULATION */
@@ -196,7 +196,7 @@ function init() {
   // stats = new Stats();
   // container.appendChild( stats.dom );
 
-  //container.style.touchAction = 'none';
+  container.style.touchAction = 'none';
   container.addEventListener( 'pointermove', onPointerMove );
 
   window.addEventListener( 'resize', onWindowResize );
@@ -438,23 +438,31 @@ function onPointerMove( event ) {
 
 //
 
-function animate() {
+function animate(iJuliet) {
 
   const el=document.querySelector('#THREE')
   const HEIGHT=window.innerHeight
   if(el){
     let elTop=el.getBoundingClientRect().top
     if(-elTop>HEIGHT+100){
-      // console.log('kkkkkkks')
       return
     }
   }
-  render();
+  render(iJuliet);
   // stats.update();
 
 }
 
-function render() {
+
+
+// 持续扰乱秒数
+let iDisturbPerMinute=[8,60]
+function render(iJuliet) {
+  // 转成秒
+  iJuliet=~~(iJuliet/1e3)+iDisturbPerMinute[0]
+
+  // 0-59循环
+  iJuliet=iJuliet%iDisturbPerMinute[1]
 
   const now = performance.now();
   let delta = ( now - last ) / 1000;
@@ -471,8 +479,15 @@ function render() {
 
   velocityUniforms[ 'predator' ].value.set( 0.5 * mouseX / windowHalfX, - 0.5 * mouseY / windowHalfY, 0 );
 
-  mouseX = 10000;
-  mouseY = 10000;
+  
+  if(iJuliet<iDisturbPerMinute[0] && isMobile){
+    console.log('disturb',iJuliet,mouseX,mouseY)
+    mouseX = 0;
+    mouseY = 0;
+  }else{
+    mouseX = 10000;
+    mouseY = 10000;
+  }
 
   gpuCompute.compute();
 
@@ -482,3 +497,9 @@ function render() {
   renderer.render( scene, camera );
 
 }
+
+
+
+
+
+
