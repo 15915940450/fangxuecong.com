@@ -16,7 +16,12 @@ import { GPUComputationRenderer } from 'three/addons/misc/GPUComputationRenderer
 
 
 
-console.log('esab2024/8/15 11:43',window.base)
+let afterInit=function(){
+  document.querySelector('.thr .loading').style.display='none'
+}
+
+
+console.log('esab2024/8/19 12:00',window.base)
 let isMobile=window.innerWidth<600
 
 /* TEXTURE WIDTH FOR SIMULATION */
@@ -245,7 +250,7 @@ function init() {
   
 
   initBirds( effectController );
-
+  afterInit()
 }
 
 function initComputeRenderer() {
